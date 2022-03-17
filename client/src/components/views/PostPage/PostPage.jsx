@@ -109,6 +109,7 @@ function PostPage() {
       alignItems: 'center',
       fontFamily: 'Noto Sans KR',
       flexDirection: 'column',
+      margin: '60px',
     }}
     >
     <div
