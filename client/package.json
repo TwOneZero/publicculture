@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/react": "^5.10.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "add": "^2.0.6",
     "axios": "^0.25.0",
     "http-proxy-middleware": "^2.0.2",
     "react": "^17.0.2",
@@ -16,10 +19,9 @@
     "redux": "^4.1.2",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.1",
-    "add": "^2.0.6",
     "styled-components": "^5.3.3",
-    "yarn": "^1.22.17",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.17"
   },
   "scripts": {
     "start": "react-scripts start",
