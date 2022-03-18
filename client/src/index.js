@@ -27,8 +27,8 @@ ReactDOM.render(
   >
     <BrowserRouter>
       <Header />
-      <Footer />
       <App />
+      <Footer />
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
