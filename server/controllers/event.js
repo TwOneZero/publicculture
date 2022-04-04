@@ -1,14 +1,15 @@
 const cultureEvent = require('../middlewares/cultureEvent');
 
 exports.getEvent = async (req, res, next) => {
-  await cultureEvent((err, { result } = {}) => {
+  //client 에서 searchInput 에 카테고리 검색을 담는다.
+  await cultureEvent(req.body.searchInput, (err, { result } = {}) => {
     if (err) {
       return res.send('callback Error!');
     }
     try {
+      //row 안에 배열 들어있음
       console.log(result.culturalEventInfo);
-      return res.send(result.culturalEventInfo);
-      //req.body.title 폼을 만들어서 리스트에서 검색가능 하게 만든다.
+      return res.json(result.culturalEventInfo.row);
     } catch (error) {
       next(error);
     }

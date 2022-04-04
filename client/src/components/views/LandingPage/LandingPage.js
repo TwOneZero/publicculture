@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
+import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ function LandingPage() {
       <h2>시작 페이지</h2>
       <button onClick={MoveToLogin}>로그인하기</button>
       <button onClick={onClick}>logout</button>
+      <EventPage />
     </div>
   );
 }

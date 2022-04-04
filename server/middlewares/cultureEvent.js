@@ -1,7 +1,7 @@
 const axios = require('axios');
 const SERVICE_KEY = require('../config/apiKeys/key');
 
-const cultureEvent = async (cb) => {
+const cultureEvent = async (searchInput = '', cb) => {
   const url = 'http://openapi.seoul.go.kr:8088/';
 
   let serviceKey = SERVICE_KEY.eventURI;
@@ -12,7 +12,7 @@ const cultureEvent = async (cb) => {
   pathVariables += '/' + encodeURIComponent('1');
   pathVariables += '/' + encodeURIComponent('100');
 
-  const fullUrl = url + pathVariables;
+  const fullUrl = url + pathVariables + '/' + encodeURIComponent(searchInput);
 
   try {
     const json = await axios.get(fullUrl); //api 주소 요청
