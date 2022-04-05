@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const config = require('./config/mongo/key');
+const config = require('./config/apiKeys/key');
 const cookieParser = require('cookie-parser');
 const app = express();
 
@@ -16,6 +16,7 @@ app.use(morgan('dev'));
 //router imports
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
+const eventRouter = require('./routes/event');
 
 //mongoDB cloud URI
 const uri = config.mongoURI;
@@ -27,6 +28,7 @@ mongoose
 //라우팅 url
 app.use('/', indexRouter);
 app.use('/api', userRouter);
+app.use('/api', eventRouter);
 
 //url 에러
 app.use((req, res, next) => {
@@ -37,7 +39,7 @@ app.use((req, res, next) => {
 
 //서버 에러
 app.use((err, req, res, next) => {
-  console.log('Server Error');
+  console.log('Server Error', err);
   res.status(err.status || 500).send(err);
 });
 

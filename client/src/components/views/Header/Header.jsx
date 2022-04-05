@@ -1,8 +1,9 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Menu_container = styled.div`
+//jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
+const MenuContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
@@ -10,7 +11,7 @@ const Menu_container = styled.div`
   margin-top: 10px;
 `;
 
-const Header_container = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   //justify-content: center;
@@ -19,7 +20,7 @@ const Header_container = styled.div`
   background-color: #ffcb6b;
 `;
 
-const Header_logo = styled.div`
+const HeaderLogo = styled.div`
   font-family: 'YUniverse-B';
   color: #faebd7;
   font-size: 60px;
@@ -28,7 +29,7 @@ const Header_logo = styled.div`
   text-shadow: 1px 1px 1px #000;
 `;
 
-const Login_btn = styled.div`
+const LoginBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +46,7 @@ const Login_btn = styled.div`
   cursor: pointer;
 `;
 
-const Mypage_btn = styled.div`
+const MypageBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +63,7 @@ const Mypage_btn = styled.div`
   cursor: pointer;
 `;
 
-const Newposting_btn = styled.div`
+const NewpostingBtn = styled.div`
   display: flex;
   align-items: center;
   color: #ffcb6b;
@@ -79,7 +80,7 @@ const Newposting_btn = styled.div`
   cursor: pointer;
 `;
 
-const Register_btn = styled.div`
+const RegisterBtn = styled.div`
   display: flex;
   align-items: center;
   color: #ffcb6b;
@@ -114,19 +115,19 @@ function Header() {
   };
 
   return (
-    <Header_container>
-      <Menu_container>
-        <Newposting_btn onClick={onPostClicked}>New Post</Newposting_btn>
-        <Mypage_btn>My page</Mypage_btn>
+    <HeaderContainer>
+      <MenuContainer>
+        <NewpostingBtn onClick={onPostClicked}>New Post</NewpostingBtn>
+        <MypageBtn>My page</MypageBtn>
 
-        <Login_btn onClick={onLoginbtnClicked}>Login</Login_btn>
-        <Register_btn onClick={onRegiterClicked}>Regiser</Register_btn>
-      </Menu_container>
+        <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
+        <RegisterBtn onClick={onRegiterClicked}>Regiser</RegisterBtn>
+      </MenuContainer>
 
-      <Header_logo type='button' onClick={onLogoClicked}>
+      <HeaderLogo type='button' onClick={onLogoClicked}>
         Public Culture
-      </Header_logo>
-    </Header_container>
+      </HeaderLogo>
+    </HeaderContainer>
   );
 }
 
