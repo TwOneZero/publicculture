@@ -97,6 +97,32 @@ const RegisterBtn = styled.div`
   cursor: pointer;
 `;
 
+const GenreBar = styled.div`
+  display: flex;
+  height: 55px;
+  //width: 100%;
+  padding: 10px 100px;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  //border-bottom: solid 1px lightgrey;
+  box-shadow: 5px 5px 5px lightgray;
+`;
+
+const GenreBtn = styled.button`
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  &:hover {
+    //background-color: #a9a9a9;
+    border-bottom: 4px solid #ffcb6b;;
+  }
+`;
+
+
 function Header() {
   const navigate = useNavigate();
   const onLogoClicked = () => {
@@ -115,6 +141,7 @@ function Header() {
   };
 
   return (
+  <>
     <HeaderContainer>
       <MenuContainer>
         <NewpostingBtn onClick={onPostClicked}>New Post</NewpostingBtn>
@@ -128,6 +155,15 @@ function Header() {
         Public Culture
       </HeaderLogo>
     </HeaderContainer>
+    <GenreBar>
+      <GenreBtn>뮤지컬/오페라</GenreBtn>
+      <GenreBtn>전시/미술</GenreBtn>
+      <GenreBtn>연극</GenreBtn>
+      <GenreBtn>콘서트</GenreBtn>
+      <GenreBtn>클래식</GenreBtn>
+      <GenreBtn>무용</GenreBtn>
+    </GenreBar>
+  </>
   );
 }
 
