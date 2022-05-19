@@ -12,6 +12,7 @@ const cultureEvent = async (searchInput = '', cb) => {
   pathVariables += '/' + encodeURIComponent('1');
   pathVariables += '/' + encodeURIComponent('100');
 
+  //최종 검색 url
   const fullUrl = url + pathVariables + '/' + encodeURIComponent(searchInput);
 
   try {
