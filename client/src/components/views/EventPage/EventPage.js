@@ -11,7 +11,7 @@ function EventPage() {
     e.preventDefault();
     //server 의 event 라우트를 통해 데이터를 가져옴
     axios
-      .get('/api/event', {
+      .post('/api/event', {
         //searchInput 을 key로 json 데이터를 전송
         searchInput: search,
       })
