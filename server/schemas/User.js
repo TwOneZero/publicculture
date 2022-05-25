@@ -29,14 +29,19 @@ const userSchema = new Schema(
       //0 은 일반유저
       default: 0,
     },
-    image: String,
-
     token: {
       type: String,
     },
     tokenExp: {
       type: Number,
     },
+    //저장한 Post
+    post: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
   },
   {
     //createdAt, updateAt

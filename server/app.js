@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const config = require('./config/apiKeys/key');
 const cookieParser = require('cookie-parser');
 const app = express();
-const dotenv = require('dotenv').config();
+// const dotenv = require('dotenv').config();
 
 app.set('port', process.env.PORT || 5000);
 
@@ -18,6 +18,7 @@ app.use(morgan('dev'));
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const eventRouter = require('./routes/event');
+const postRouter = require('./routes/post');
 
 //mongoDB cloud URI
 const uri = config.mongoURI;
@@ -31,6 +32,7 @@ mongoose
 app.use('/', indexRouter);
 app.use('/api', userRouter);
 app.use('/api', eventRouter);
+app.use('/api', postRouter);
 
 //url 에러
 app.use((req, res, next) => {

@@ -54,12 +54,12 @@ exports.checkAuth = async (req, res) => {
     isAuth: true,
     name: req.user.name,
     email: req.user.email,
+    post: req.user.post !== null ? true : false,
     role: req.user.role,
-    image: req.user.image,
   });
 };
 
-exports.logoutUser = async (req, res, next) => {
+exports.logoutUser = async (req, res) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
     { token: '' },

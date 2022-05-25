@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const SearchBarArea = styled.form`
   display: flex;
@@ -35,7 +35,7 @@ const Button = styled.button`
 
 function EventPage() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -43,7 +43,7 @@ function EventPage() {
     e.preventDefault();
     //server 의 event 라우트를 통해 데이터를 가져옴
     axios
-      .post("/api/event", {
+      .post('/api/event', {
         //searchInput 을 key로 json 데이터를 전송
         searchInput: search,
       })
@@ -53,9 +53,9 @@ function EventPage() {
         cultureInfo = res.data;
         if (cultureInfo) {
           //페이지 이동하면서 state(useNavigate 의 property) 에 배열 그대로 넘겨줌
-          return navigate("/showevent", { state: { infos: cultureInfo } });
+          return navigate('/showevent', { state: { infos: cultureInfo } });
         } else {
-          return new Response({ error: "error!" });
+          return new Response({ error: 'error!' });
         }
       });
   };
@@ -63,17 +63,17 @@ function EventPage() {
   return (
     <div>
       <SearchBarArea onSubmit={onSubmitHandler}>
-        <label htmlFor="searchInput"></label>
+        <label htmlFor='searchInput'></label>
         {/* <SearchBarArea> */}
         <SearchBar
           onChange={onChangeSearch}
-          name="searchInput"
+          name='searchInput'
           value={search}
-          type="text"
-          placeholder="검색어를 입력해주세요."
+          type='text'
+          placeholder='검색어를 입력해주세요.'
         ></SearchBar>
-        <Button type="submit">
-          <i class="fas fa-search"></i>
+        <Button type='submit'>
+          <i class='fas fa-search'></i>
         </Button>
         {/* </SearchBarArea> */}
         {/* <input

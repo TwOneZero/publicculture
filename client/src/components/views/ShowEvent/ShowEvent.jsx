@@ -44,7 +44,7 @@ function ShowEvent() {
   const location = useLocation();
   const infos = location.state.infos;
   //data 정보를 알 수 있음
-  console.log(location.state);
+  console.log(infos);
   return (
     <div>
       <SearchbarContainer>
