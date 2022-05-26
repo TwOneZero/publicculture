@@ -25,7 +25,7 @@ const postSchema = new Schema(
     comment: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
     likes: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const Post = mongoose.model('Post', postSchema);
