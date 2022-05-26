@@ -29,14 +29,19 @@ const userSchema = new Schema(
       //0 은 일반유저
       default: 0,
     },
-    image: String,
-
     token: {
       type: String,
     },
     tokenExp: {
       type: Number,
     },
+    //저장한 Post
+    post: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
   },
   {
     //createdAt, updateAt
@@ -86,7 +91,7 @@ userSchema.methods.generateToken = function (cb) {
   });
 };
 
-//인스턴스를 X, 객체를 바로 사용하기 위해 statics 사용
+//인스턴스 안 만들고 바로 사용하기 위해 statics 사용
 userSchema.statics.findByToken = function (token, cb) {
   let user = this;
   //토큰을 복호화
