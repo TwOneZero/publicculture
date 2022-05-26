@@ -4,6 +4,7 @@ const { User } = require('../schemas/User');
 exports.registerUser = async (req, res, next) => {
   try {
     //client form 에 입력된 정보로 user 인스턴스 생성
+    console.log(req.body);
     const user = new User(req.body);
     //user 저장
     await user.save((err, userInfo) => {

@@ -1,27 +1,27 @@
+const { post } = require('../routes/post');
 const { Post } = require('../schemas/Post');
 
-const cultureEvent = require('../middlewares/cultureEvent');
-
-// //모든 post 가져오기
-// exports.getAllPost = async (req, res, next) => {
-//   //client 에서 searchInput 에 카테고리 검색을 담는다.
-//   await cultureEvent(req.body.searchInput, (err, { result } = {}) => {
-//     if (err) {
-//       return res.send('callback Error!');
-//     }
-//     try {
-//       //row 안에 배열 들어있음
-//       console.log(result.culturalEventInfo);
-//       return res.json(result.culturalEventInfo.row);
-//     } catch (error) {
-//       next(error);
-//     }
-//   });
-// };
-
-//post 저장
-exports.storePost = async (req, res) => {
+//모든 post 가져오기
+exports.getAllPost = async (req, res) => {
   try {
-    const newPost = new Post(req.body);
-  } catch (error) {}
+    const posts = await Post.find();
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(404).json({ messege: error });
+  }
+};
+
+//검색으로 가져오기
+exports.getPostBySearch = async (req, res) => {
+  //req.query로 해야함
+  const { search } = req.query;
+  try {
+    //db에서 검색한 문자열이 포함된 title 이나 codename 가져오기
+    const posts = await Post.find({
+      codename: { $regex: search },
+    });
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+  }
 };

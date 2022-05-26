@@ -1,9 +1,10 @@
 const express = require('express');
-const { storePost } = require('../controllers/post');
+const { getAllPost, getPostBySearch } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
 
 const router = express.Router();
 
-router.post('/postRouter/:id', auth, storePost);
+router.get('/post', getAllPost);
+router.get('/searchPost', getPostBySearch);
 
 module.exports = router;

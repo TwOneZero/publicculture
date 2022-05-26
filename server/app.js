@@ -15,7 +15,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(morgan('dev'));
 
 //router imports
-const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const eventRouter = require('./routes/event');
 const postRouter = require('./routes/post');
@@ -29,7 +28,6 @@ mongoose
   .catch((error) => console.log(error));
 
 //라우팅 url
-app.use('/', indexRouter);
 app.use('/api', userRouter);
 app.use('/api', eventRouter);
 app.use('/api', postRouter);
