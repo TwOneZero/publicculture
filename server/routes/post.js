@@ -2,13 +2,21 @@ const express = require('express');
 const {
   getAllPost,
   getPostBySearch,
-  getPostById,
+  getPostDetails,
+  likePost,
 } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
 
 const router = express.Router();
 
-router.get('/post', getAllPost);
-router.get('/searchPost', getPostBySearch);
-router.get('/postById/:id', getPostById);
+//모든 post
+router.get('/posts', getAllPost);
+//검색하기
+router.post('/searchPost', getPostBySearch);
+//디테일페이지
+router.get('/posts/:id', getPostDetails);
+//좋아요 누르기
+router.patch('/:id/likePost', likePost);
+//comment 달기
+
 module.exports = router;

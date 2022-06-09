@@ -14,7 +14,8 @@ function App() {
         <Route exact path='/login' element={<LoginPage />} />
         <Route exact path='/register' element={<RegisterPage />} />
         <Route exact path='/post' element={<PostPage />} />
-        <Route exact path='/showevent' element={<ShowEvent />} />
+        <Route exact path='/showevent/' element={<ShowEvent />} />
+        <Route exact path='/showevent/:name' element={<ShowEvent />} />
       </Routes>
     </div>
   );

@@ -47,14 +47,11 @@ function ShowEvent() {
   console.log(infos);
   return (
     <div>
-      <SearchbarContainer>
-        <EventPage />
-      </SearchbarContainer>
       <PostingContainer>
-        {infos.map((info, index) => (
+        {infos.posts.map((info, index) => (
           <div key={index}>
             <PostingInfo>
-              <ImgContainer src={info.MAIN_IMG} alt='images' />
+              <ImgContainer src={info.main_img} alt='images' />
               <div
                 style={{
                   fontWeight: '700',
@@ -62,13 +59,13 @@ function ShowEvent() {
                   marginBottom: '5px',
                 }}
               >
-                {info.TITLE}
+                {info.title}
               </div>
               <div style={{ fontWeight: '500', marginBottom: '3px' }}>
-                {info.CODENAME}
+                {info.codename}
               </div>
-              <div style={{ fontSize: '14px' }}>{info.DATE}</div>
-              <div>{info.PLACE}</div>
+              <div style={{ fontSize: '14px' }}>{info.date}</div>
+              <div>{info.place}</div>
             </PostingInfo>
           </div>
         ))}

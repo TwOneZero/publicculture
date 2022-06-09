@@ -36,7 +36,7 @@ const userSchema = new Schema(
       type: Number,
     },
     //저장한 Post
-    post: [
+    posts: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Post',
