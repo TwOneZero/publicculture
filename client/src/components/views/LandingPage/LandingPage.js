@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router";
 import axios from "axios";
 import Auth from "../../../hoc/auth";
+import EventCard from "../EventCard/EventCard"
 //import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
+  const params = useParams();
+  const [postings, setPostings] = useState([]);
+  useEffect(() => {
+    axios.get(`/api/post`).then((res) => {
+      //setPostings(response);
+      console.log(res);
+    });
+  }, [params.id]);
+
   const navigate = useNavigate();
   const onClick = () => {
     axios.get("/api/users/logout").then((res) => {
@@ -36,6 +47,9 @@ function LandingPage() {
         width: "100%",
       }}
     >
+      {postings.map((posting, index) => {
+        return <EventCard {...posting} />;
+      })}
       {/* <h2>시작 페이지</h2>
       <button onClick={MoveToLogin}>로그인하기</button>
       <button onClick={onClick}>logout</button>
