@@ -22,8 +22,8 @@ const postSchema = new Schema(
     end_date: String,
     themecode: String,
 
-    comment: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
-    likes: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+    comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
+    likes: [String],
   },
   { timestamps: true }
 );

@@ -42,32 +42,24 @@ function EventPage() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     //server 의 event 라우트를 통해 데이터를 가져옴
-    axios
-      .post('/api/event', {
-        //searchInput 을 key로 json 데이터를 전송
-        searchInput: search,
-      })
-      .then((res) => {
-        let cultureInfo = [];
-        //event data 전부 배열로 들어감
-        cultureInfo = res.data;
-        if (cultureInfo) {
-          //페이지 이동하면서 state(useNavigate 의 property) 에 배열 그대로 넘겨줌
-          return navigate('/showevent', { state: { infos: cultureInfo } });
-        } else {
-          return new Response({ error: 'error!' });
-        }
-      });
+    axios.post(`/api/searchPost?search=${search}`).then((res) => {
+      //event data 전부 배열로 들어감
+      if (res.data) {
+        //페이지 이동하면서 state(useNavigate 의 property) 에 배열 그대로 넘겨줌
+        return navigate('/showevent', { state: { infos: res.data } });
+      } else {
+        return new Response({ error: 'error!' });
+      }
+    });
   };
 
   return (
     <div>
       <SearchBarArea onSubmit={onSubmitHandler}>
-        <label htmlFor='searchInput'></label>
-        {/* <SearchBarArea> */}
+        <label htmlFor='search'></label>
         <SearchBar
           onChange={onChangeSearch}
-          name='searchInput'
+          name='search'
           value={search}
           type='text'
           placeholder='검색어를 입력해주세요.'
@@ -75,14 +67,6 @@ function EventPage() {
         <Button type='submit'>
           <i class='fas fa-search'></i>
         </Button>
-        {/* </SearchBarArea> */}
-        {/* <input
-        type="text"
-        name="searchInput"
-        value={search}
-        onChange={onChangeSearch}
-        placeholder="검색어를 입력해주세요."
-      /> */}
       </SearchBarArea>
     </div>
   );
