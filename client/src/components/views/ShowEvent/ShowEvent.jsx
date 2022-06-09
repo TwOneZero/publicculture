@@ -47,9 +47,6 @@ function ShowEvent() {
   console.log(infos);
   return (
     <div>
-      <SearchbarContainer>
-        <EventPage />
-      </SearchbarContainer>
       <PostingContainer>
         {infos.posts.map((info, index) => (
           <div key={index}>

@@ -41,12 +41,12 @@ function EventPage() {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    //server 의 event 라우트를 통해 데이터를 가져옴
     axios.post(`/api/searchPost?search=${search}`).then((res) => {
-      //event data 전부 배열로 들어감
       if (res.data) {
         //페이지 이동하면서 state(useNavigate 의 property) 에 배열 그대로 넘겨줌
-        return navigate('/showevent', { state: { infos: res.data } });
+        return navigate(`/showevent?search=${search}`, {
+          state: { infos: res.data },
+        });
       } else {
         return new Response({ error: 'error!' });
       }
