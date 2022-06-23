@@ -42,12 +42,14 @@ const ImgContainer = styled.img`
 function ShowEvent() {
   //navigate 로 넘긴 데이터를 useLocation 으로 받는다.
   const location = useLocation();
+  //infos -> json 데이터임
   const infos = location.state.infos;
   //data 정보를 알 수 있음
   console.log(infos);
   return (
     <div>
       <PostingContainer>
+        {/* infos.posts -> array */}
         {infos.posts.map((info, index) => (
           <div key={index}>
             <PostingInfo>

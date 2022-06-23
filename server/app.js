@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const config = require('./config/apiKeys/key');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
 const app = express();
 // const dotenv = require('dotenv').config();
 
@@ -13,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(morgan('dev'));
+app.use(cors());
 
 //router imports
 const userRouter = require('./routes/user');

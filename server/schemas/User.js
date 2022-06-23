@@ -91,7 +91,7 @@ userSchema.methods.generateToken = function (cb) {
   });
 };
 
-//인스턴스 안 만들고 바로 사용하기 위해 statics 사용
+//인스턴스 안 만들고 바로 사용하기 위해 statics 사용, jsonwebtoken 사용
 userSchema.statics.findByToken = function (token, cb) {
   let user = this;
   //토큰을 복호화
