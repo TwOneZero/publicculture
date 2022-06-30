@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import EventPage from '../EventPage/EventPage';
-
-const SearchbarContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 150px;
-  //background-color: yellow;
-`;
+import axios from 'axios';
 
 const PostingContainer = styled.div`
   margin: 7%;
@@ -39,13 +31,21 @@ const ImgContainer = styled.img`
   margin: 10px;
 `;
 
-function ShowEvent() {
+const ShowEvent = (props) => {
+  const { title, genre, id, date, place, main_img } = props;
+
   //navigate 로 넘긴 데이터를 useLocation 으로 받는다.
   const location = useLocation();
-  //infos -> json 데이터임
+  const navigate = useNavigate();
   const infos = location.state.infos;
   //data 정보를 알 수 있음
   console.log(infos);
+  const onPostingClicked = () => {
+    axios.get(`/api/post`).then((res) => {
+      navigate(`/post/${id}`);
+    });
+  };
+
   return (
     <div>
       <PostingContainer>
@@ -53,7 +53,11 @@ function ShowEvent() {
         {infos.posts.map((info, index) => (
           <div key={index}>
             <PostingInfo>
-              <ImgContainer src={info.main_img} alt='images' />
+              <ImgContainer
+                src={info.main_img}
+                alt='images'
+                onClikck={onPostingClicked}
+              />
               <div
                 style={{
                   fontWeight: '700',
@@ -74,6 +78,6 @@ function ShowEvent() {
       </PostingContainer>
     </div>
   );
-}
+};
 
 export default ShowEvent;

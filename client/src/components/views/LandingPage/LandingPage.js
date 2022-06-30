@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
+import { useDispatch } from 'react-redux';
 //import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
