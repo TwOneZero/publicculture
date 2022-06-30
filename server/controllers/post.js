@@ -26,9 +26,9 @@ exports.getPostBySearch = async (req, res) => {
         { title: { $regex: searchRegex } },
       ],
     }).exec();
-    res.status(200).json({ message: 'success', posts });
+    res.status(200).json({ success : true, posts });
   } catch (error) {
-    res.status(404).json({ message: 'failed to find posts', error });
+    res.status(404).json({success : false, error });
   }
 };
 
