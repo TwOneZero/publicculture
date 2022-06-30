@@ -3,7 +3,93 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../../_actions/user_action';
+import styled from "styled-components"
 import Auth from '../../../hoc/auth';
+
+const Register_page_container = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: middle;
+  align-items: center;
+  padding: 20px 10px;
+  width: 500px;
+  height: 700px;
+`;
+
+const Register_text = styled.div`
+  margin: 70px 0;
+  font-size: 24px;
+  font-weight: 1000;
+`;
+
+const Register_form_container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 260px;
+`;
+
+const Input_Name= styled.input`
+  width: 400px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  outline: none;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  &:focus {
+    border: 1px solid grey;
+  }
+`;
+
+const Input_Email = styled.input`
+  width: 400px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  outline: none;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  &:focus {
+    border: 1px solid grey;
+  }
+`;
+
+const Input_PW = styled.input`
+  width: 400px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  outline: none;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  &:focus{
+    border: 1px solid grey;
+`;
+
+const Input_ConfirmPW = styled.input`
+  width: 400px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  outline: none;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  &:focus{
+    border: 1px solid grey;
+`;
+
+const Register_btn = styled.button`
+  width: 413px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+  margin-top: 5px;
+`;
 
 function RegisterPage() {
   const [Email, setEmail] = useState('');
@@ -61,21 +147,16 @@ function RegisterPage() {
         width: '100%',
       }}
     >
-      <form
-        style={{ display: 'flex', flexDirection: 'column' }}
-        onSubmit={onSubmitHandler}
-      >
-        <label>Email</label>
-        <input type='email' value={Email} onChange={onChangeEmail} />
-        <label>Name</label>
-        <input type='text' value={Name} onChange={onChangeName} />
-        <label>Password</label>
-        <input type='password' value={Password} onChange={onChangePassword} />
-        <label>Confirm Password</label>
-        <input type='password' value={ConfirmPW} onChange={onChangeConfirmPW} />
-        <br />
-        <button>Register</button>
-      </form>
+      <Register_page_container onSubmit={onSubmitHandler}>
+      <Register_text>Register</Register_text>
+      <Register_form_container>
+        <Input_Name type='text' value={Name} onChange={onChangeName} placeholder="이름"/>
+        <Input_Email type='email' value={Email} onChange={onChangeEmail} placeholder="이메일"/>
+        <Input_PW type='password' value={Password} onChange={onChangePassword} placeholder="비밀번호"/>
+        <Input_ConfirmPW type='password' value={ConfirmPW} onChange={onChangeConfirmPW} placeholder="비밀번호 확인"/>
+        <Register_btn>회원가입</Register_btn>
+      </Register_form_container>
+    </Register_page_container>
     </div>
   );
 }
