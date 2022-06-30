@@ -127,7 +127,7 @@ function RegisterPage() {
     };
 
     //리덕스 안쓰면 이렇게
-    // Axios.post('/api/users/register', body);
+    //Axios.post('/api/users/register', body);
 
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {

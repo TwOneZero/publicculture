@@ -1,6 +1,10 @@
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import EventPage from '../EventPage/EventPage';
+import { searchPost } from '../../../_actions/post_action';
 
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 const MenuContainer = styled.div`
@@ -14,7 +18,7 @@ const MenuContainer = styled.div`
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
+  justify-content: center;
   align-items: center;
   height: 200px;
   background-color: #ffcb6b;
@@ -63,23 +67,6 @@ const MypageBtn = styled.div`
   cursor: pointer;
 `;
 
-const NewpostingBtn = styled.div`
-  display: flex;
-  align-items: center;
-  color: #ffcb6b;
-  width: 70px;
-  height: 50px;
-  border-radius: 0px 0px 100px 100px;
-  border: 2px solid #faebd7;
-  background-color: #faebd7;
-  font-size: 17px;
-  font-family: 'YUniverse-B';
-  text-shadow: 1px 1px 1px gray;
-  margin-left: 2px;
-  text-align: center;
-  cursor: pointer;
-`;
-
 const RegisterBtn = styled.div`
   display: flex;
   align-items: center;
@@ -114,17 +101,18 @@ const GenreBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 500;
   &:hover {
     //background-color: #a9a9a9;
-    border-bottom: 4px solid #ffcb6b;;
+    border-bottom: 4px solid #ffcb6b;
   }
 `;
 
-
 function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const onLogoClicked = () => {
     navigate('/');
   };
@@ -140,30 +128,42 @@ function Header() {
     navigate('/post');
   };
 
+  //parameter 값 바뀔 때 작동 안됨
+  const onGenreClicked = (e) => {
+    e.preventDefault();
+    let name = e.target.name;
+    dispatch(searchPost(name)).then((res) => {
+      if (res.payload.success) {
+        console.log(res)
+        navigate(`showevent/${name}`, {state : {infos : res.payload}});
+      } 
+    });
+  };
+
   return (
-  <>
-    <HeaderContainer>
-      <MenuContainer>
-        <NewpostingBtn onClick={onPostClicked}>New Post</NewpostingBtn>
-        <MypageBtn>My page</MypageBtn>
+    <>
+      <HeaderContainer>
+        <MenuContainer>
+          <MypageBtn>My page</MypageBtn>
+          <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
+          <RegisterBtn onClick={onRegiterClicked}>Regiser</RegisterBtn>
+        </MenuContainer>
 
-        <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
-        <RegisterBtn onClick={onRegiterClicked}>Regiser</RegisterBtn>
-      </MenuContainer>
+        <HeaderLogo type='button' onClick={onLogoClicked}>
+          Public Culture
+        </HeaderLogo>
+        <EventPage />
+      </HeaderContainer>
 
-      <HeaderLogo type='button' onClick={onLogoClicked}>
-        Public Culture
-      </HeaderLogo>
-    </HeaderContainer>
-    <GenreBar>
-      <GenreBtn>뮤지컬/오페라</GenreBtn>
-      <GenreBtn>전시/미술</GenreBtn>
-      <GenreBtn>연극</GenreBtn>
-      <GenreBtn>콘서트</GenreBtn>
-      <GenreBtn>클래식</GenreBtn>
-      <GenreBtn>무용</GenreBtn>
-    </GenreBar>
-  </>
+      <GenreBar itemType='button' onClick={onGenreClicked}>
+        <GenreBtn name='뮤지컬'>뮤지컬/오페라</GenreBtn>
+        <GenreBtn name='전시'>전시/미술</GenreBtn>
+        <GenreBtn name='연극'>연극</GenreBtn>
+        <GenreBtn name='콘서트'>콘서트</GenreBtn>
+        <GenreBtn name='클래식'>클래식</GenreBtn>
+        <GenreBtn name='무용'>무용</GenreBtn>
+      </GenreBar>
+    </>
   );
 }
 

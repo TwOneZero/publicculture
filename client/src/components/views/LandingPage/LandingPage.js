@@ -2,10 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
-import EventPage from '../EventPage/EventPage';
+import { useDispatch } from 'react-redux';
+//import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
   const navigate = useNavigate();
+  const getPosts = () => {
+    axios.get('/api/posts').then((res) => {
+      console.log(res.data);
+    });
+  };
+
   const onClick = () => {
     axios.get('/api/users/logout').then((res) => {
       if (res.data.success) {
@@ -36,10 +43,7 @@ function LandingPage() {
         width: '100%',
       }}
     >
-      <h2>시작 페이지</h2>
-      <button onClick={MoveToLogin}>로그인하기</button>
-      <button onClick={onClick}>logout</button>
-      <EventPage />
+      <p>{getPosts()}</p>
     </div>
   );
 }
