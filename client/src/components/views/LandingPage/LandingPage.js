@@ -2,15 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
+import { useDispatch } from 'react-redux';
 //import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
   const navigate = useNavigate();
-  const getPosts = () => {
-    axios.get('/api/posts').then((res) => {
-      console.log(res.data);
-    });
-  };
+  // const getPosts = () => {
+  //   axios.get('/api/posts').then((res) => {
+  //     console.log(res.data);
+  //   });
+  // };
 
   const onClick = () => {
     axios.get('/api/users/logout').then((res) => {
@@ -42,7 +43,7 @@ function LandingPage() {
         width: '100%',
       }}
     >
-      <p>{getPosts()}</p>
+      {/* <p>{getPosts()}</p> */}
     </div>
   );
 }

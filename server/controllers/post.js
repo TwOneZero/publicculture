@@ -26,9 +26,9 @@ exports.getPostBySearch = async (req, res) => {
         { title: { $regex: searchRegex } },
       ],
     }).exec();
-    res.status(200).json({ message: 'success', posts });
+    res.status(200).json({ success: true, posts });
   } catch (error) {
-    res.status(404).json({ message: 'failed to find posts', error });
+    res.status(404).json({ success: false, error });
   }
 };
 
@@ -40,10 +40,10 @@ exports.getPostDetails = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).send('No post with that id');
     }
-    const post = Post.findById(id).exec();
-    return res.status(200).json({ message: 'success', post });
+    const post = await Post.findById(id).exec();
+    return res.status(200).json({ success: true, post });
   } catch (error) {
-    return res.status(404).json({ message: 'failed to find posts', error });
+    return res.status(404).json({ success: false, error });
   }
 };
 

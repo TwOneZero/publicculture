@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import EventPage from '../EventPage/EventPage';
+import { searchPost } from '../../../_actions/post_action';
 
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 const MenuContainer = styled.div`
@@ -109,6 +111,8 @@ const GenreBtn = styled.button`
 
 function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const onLogoClicked = () => {
     navigate('/');
   };
@@ -123,15 +127,14 @@ function Header() {
   const onPostClicked = () => {
     navigate('/post');
   };
-  //parameter 값 바뀔 때 작동 안됨
+
   const onGenreClicked = (e) => {
     e.preventDefault();
-    let name = encodeURIComponent(e.target.name);
-    axios.post(`api/searchPost?search=${name}`).then((res) => {
-      console.log(res.data);
-      return navigate(`/showevent/${name}`, {
-        state: { infos: res.data },
-      });
+    let name = e.target.name;
+    dispatch(searchPost(name)).then((res) => {
+      if (res.payload.success) {
+        navigate(`showevent/${name}`, { state: { infos: res.payload } });
+      }
     });
   };
 
