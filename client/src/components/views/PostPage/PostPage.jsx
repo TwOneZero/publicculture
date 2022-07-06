@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import FullCalendar from '@fullcalendar/react';
+import FullCalendar, { renderScrollShim } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { useLocation, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getPostDetails } from '../../../_actions/post_action';
 
 //행사 정보
 const Event_title = styled.div`
@@ -100,6 +104,19 @@ right: '11vw'
 `;
 
 function PostPage() {
+  let params = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPostDetails(params.postId)).then((res) => {
+      if (res.payload.post) {
+        console.log(res.payload);
+      } else {
+        console.log('error!!!!!!!!!!!!!!');
+      }
+    });
+  });
+
   return (
     <div
       style={{
