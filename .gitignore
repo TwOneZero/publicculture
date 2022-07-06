@@ -1,5 +1,6 @@
 #For storing event data to db
 server/routes/event.js
+server/controllers/event.js
 
 
 # dependencies

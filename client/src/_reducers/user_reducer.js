@@ -1,4 +1,9 @@
-import { LOGIN_USER, REGISTER_USER, AUTH_USER } from '../_actions/types';
+import {
+  LOGIN_USER,
+  REGISTER_USER,
+  AUTH_USER,
+  LOGOUT_USER,
+} from '../_actions/types';
 
 const initialState = null;
 
@@ -10,6 +15,8 @@ export default function getcompleteState(state = initialState, action) {
       return { ...state, register: action.payload };
     case AUTH_USER:
       return { ...state, userData: action.payload };
+    case LOGOUT_USER:
+      return { ...state, logoutSuccess: action.payload };
     default:
       return state;
   }
