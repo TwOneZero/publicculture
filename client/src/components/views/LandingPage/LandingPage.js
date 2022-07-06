@@ -7,11 +7,11 @@ import { useDispatch } from 'react-redux';
 
 function LandingPage() {
   const navigate = useNavigate();
-  const getPosts = () => {
-    axios.get('/api/posts').then((res) => {
-      console.log(res.data);
-    });
-  };
+  // const getPosts = () => {
+  //   axios.get('/api/posts').then((res) => {
+  //     console.log(res.data);
+  //   });
+  // };
 
   const onClick = () => {
     axios.get('/api/users/logout').then((res) => {
@@ -43,7 +43,7 @@ function LandingPage() {
         width: '100%',
       }}
     >
-      <p>{getPosts()}</p>
+      {/* <p>{getPosts()}</p> */}
     </div>
   );
 }

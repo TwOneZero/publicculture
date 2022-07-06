@@ -12,7 +12,10 @@ const commentSchema = new Schema(
       ref: 'Post',
     },
     //comment 내용
-    body: String,
+    body: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

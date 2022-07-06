@@ -65,8 +65,8 @@ function EventPage() {
           type="text"
           placeholder="검색어를 입력해주세요."
         ></SearchBar>
-        <Button onClick={onSearchClicked}>
-          <i class="fas fa-search"></i>
+        <Button type="submit">
+          <i className="fas fa-search"></i>
         </Button>
       </SearchBarArea>
     </div>

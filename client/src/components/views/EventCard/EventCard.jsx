@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useParams } from "react-router";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useParams } from 'react-router';
 
 const Content = styled.button`
   display: flex;
@@ -9,7 +9,7 @@ const Content = styled.button`
   background-color: white;
   border: 0;
   outline: 0;
-  font-family: "Noto Sans KR";
+  font-family: 'Noto Sans KR';
   &:hover {
     cursor: pointer;
   }
@@ -46,18 +46,11 @@ const Image_area = styled.img`
 `;
 
 const EventCard = (props) => {
-  const {
-    title,
-    genre,
-    id,
-    date,
-    place,
-    main_img,
-  } = props;
+  const { title, genre, id, date, place, main_img } = props;
   const onSubmit = () => {};
   const navigate = useNavigate();
   const onPostingClicked = () => {
-    axios.get(`/api/post`).then((res) => {
+    axios.get(`/api/post/:id`).then((res) => {
       navigate(`/post/${id}`);
     });
   };

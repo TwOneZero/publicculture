@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import EventPage from '../EventPage/EventPage';
 import { searchPost } from '../../../_actions/post_action';
+import { logout } from '../../../_actions/user_action';
 
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 const MenuContainer = styled.div`
@@ -84,6 +85,23 @@ const RegisterBtn = styled.div`
   cursor: pointer;
 `;
 
+const LogoutBtn = styled.div`
+  display: flex;
+  align-items: center;
+  color: #ffcb6b;
+  width: 70px;
+  height: 50px;
+  border-radius: 0px 0px 100px 100px;
+  border: 2px solid #faebd7;
+  background-color: #faebd7;
+  font-size: 17px;
+  font-family: 'YUniverse-B';
+  text-shadow: 1px 1px 1px gray;
+  margin-left: 2px;
+  text-align: center;
+  cursor: pointer;
+`;
+
 const GenreBar = styled.div`
   display: flex;
   height: 55px;
@@ -127,16 +145,19 @@ function Header() {
   const onPostClicked = () => {
     navigate('/post');
   };
+  const logOut = () => {
+    dispatch(logout()).then((res) => {
+      console.log(res);
+    });
+  };
 
-  //parameter 값 바뀔 때 작동 안됨
   const onGenreClicked = (e) => {
     e.preventDefault();
     let name = e.target.name;
     dispatch(searchPost(name)).then((res) => {
       if (res.payload.success) {
-        console.log(res)
-        navigate(`showevent/${name}`, {state : {infos : res.payload}});
-      } 
+        navigate(`showevent/${name}`, { state: { infos: res.payload } });
+      }
     });
   };
 
@@ -147,6 +168,7 @@ function Header() {
           <MypageBtn>My page</MypageBtn>
           <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
           <RegisterBtn onClick={onRegiterClicked}>Regiser</RegisterBtn>
+          <LogoutBtn onClick={logOut}>logout</LogoutBtn>
         </MenuContainer>
 
         <HeaderLogo type='button' onClick={onLogoClicked}>
