@@ -19,7 +19,7 @@ app.use(cors());
 
 //router imports
 const userRouter = require('./routes/user');
-const eventRouter = require('./routes/event');
+// const eventRouter = require('./routes/event');
 const postRouter = require('./routes/post');
 
 //mongoDB cloud URI
@@ -32,7 +32,7 @@ mongoose
 
 //라우팅 url
 app.use('/api', userRouter);
-app.use('/api', eventRouter);
+// app.use('/api', eventRouter);
 app.use('/api', postRouter);
 
 //url 에러

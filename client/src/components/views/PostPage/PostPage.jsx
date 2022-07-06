@@ -4,7 +4,7 @@ import FullCalendar, { renderScrollShim } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPostDetails } from '../../../_actions/post_action';
 
 //행사 정보
@@ -115,7 +115,7 @@ function PostPage() {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-  });
+  }, [dispatch, params.postId]);
 
   return (
     <div
