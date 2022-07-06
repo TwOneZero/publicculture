@@ -1,24 +1,27 @@
 {
-  "name": "publicculture",
+  "name": "todolist",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^14.3.2"
-  },
-  "devDependencies": {},
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/app.js",
+    "back": "nodemon server/app.js",
+    "dev": "concurrently \"npm run back\" \"npm run start --prefix client\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TwOneZero/publicculture.git"
+  "author": "twonezero",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "bcrypt": "^5.0.1",
+    "concurrently": "^7.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.6",
+    "morgan": "^1.10.0"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TwOneZero/publicculture/issues"
-  },
-  "homepage": "https://github.com/TwOneZero/publicculture#readme"
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
