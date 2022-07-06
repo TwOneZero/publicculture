@@ -13,7 +13,7 @@ function App() {
         <Route exact path='/' element={<LandingPage />} />
         <Route exact path='/login' element={<LoginPage />} />
         <Route exact path='/register' element={<RegisterPage />} />
-        <Route exact path='/post' element={<PostPage />} />
+        <Route exact path='/post/:postId' element={<PostPage />} />
         <Route exact path='/showevent/' element={<ShowEvent />} />
         <Route exact path='/showevent/:name' element={<ShowEvent />} />
       </Routes>

@@ -128,15 +128,13 @@ function Header() {
     navigate('/post');
   };
 
-  //parameter 값 바뀔 때 작동 안됨
   const onGenreClicked = (e) => {
     e.preventDefault();
     let name = e.target.name;
     dispatch(searchPost(name)).then((res) => {
       if (res.payload.success) {
-        console.log(res)
-        navigate(`showevent/${name}`, {state : {infos : res.payload}});
-      } 
+        navigate(`showevent/${name}`, { state: { infos: res.payload } });
+      }
     });
   };
 

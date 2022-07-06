@@ -3,9 +3,7 @@ import { GET_POST, SEARCH_POST, DETAIL_POST, LIKE_POST } from './types';
 
 //getAllpost
 export function getAllpost() {
-  const request = axios
-    .get('/api/posts')
-    .then((res) => res.data);
+  const request = axios.get('/api/posts').then((res) => res.data);
 
   return {
     type: GET_POST,
@@ -25,21 +23,18 @@ export function searchPost(search) {
 }
 
 //details
-export function getPostDetails() {
-    const request = axios
-      .get('/api/posts/:id')
-      .then((res) => res.data);
-  
-    return {
-      type: DETAIL_POST,
-      payload: request,
-    };
+export function getPostDetails(id) {
+  const request = axios.get(`/api/posts/${id}`).then((res) => res.data);
+
+  return {
+    type: DETAIL_POST,
+    payload: request,
+  };
 }
 
 //likepost
 export function likePost() {
-  const request = axios.patch('/api/:id/likePost')
-  .then((res) => res.data);
+  const request = axios.patch('/api/:id/likePost').then((res) => res.data);
 
   return {
     type: LIKE_POST,

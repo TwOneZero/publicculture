@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import EventPage from '../EventPage/EventPage';
-import axios from "axios";
+import axios from 'axios';
 
 const PostingContainer = styled.div`
   margin: 7%;
@@ -31,34 +31,29 @@ const ImgContainer = styled.img`
   margin: 10px;
 `;
 
-const ShowEvent = (props) => {
-  const {
-    title,
-    genre,
-    id,
-    date,
-    place,
-    main_img,
-  } = props;
+const ShowEvent = () => {
   //navigate 로 넘긴 데이터를 useLocation 으로 받는다.
   const location = useLocation();
   const navigate = useNavigate();
   const infos = location.state.infos;
-  //data 정보를 알 수 있음
-  console.log(infos);
-  const onPostingClicked = () => {
-    axios.get(`/api/post`).then((res) => {
-      navigate(`/post/${id}`);
-    });
-  };
+
+  const onPostingClicked = () => {};
 
   return (
     <div>
       <PostingContainer>
+        {/* infos.posts -> array */}
         {infos.posts.map((info, index) => (
           <div key={index}>
             <PostingInfo>
-              <ImgContainer src={info.main_img} alt='images' onClikck={onPostingClicked} />
+              <a href={`/post/${info._id}`}>
+                <ImgContainer
+                  src={info.main_img}
+                  alt='images'
+                  onClick={onPostingClicked}
+                />
+              </a>
+              <p>{info._id}</p>
               <div
                 style={{
                   fontWeight: '700',
@@ -79,6 +74,6 @@ const ShowEvent = (props) => {
       </PostingContainer>
     </div>
   );
-}
+};
 
 export default ShowEvent;

@@ -1,2 +1,6 @@
+#For storing event data to db
+server/routes/event.js
+
+
 # dependencies
 /node_modules
