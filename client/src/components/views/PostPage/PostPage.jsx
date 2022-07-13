@@ -110,7 +110,7 @@ function PostPage() {
   useEffect(() => {
     dispatch(getPostDetails(params.postId)).then((res) => {
       if (res.payload.post) {
-        console.log(res.payload);
+        console.log(res.payload.post);
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }

@@ -6,10 +6,10 @@ exports.addComment = async (req, res) => {
   try {
     const { id } = req.params;
     if (!req.user) {
-      return res.status(404).json({ message: 'Invaild credential' });
+      return res.status(404).json({ message: '유저 정보가 필요합니다' });
     }
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).send('No post with that id');
+      return res.status(404).send('post 가져오기 에러');
     }
     //comment 인스턴스
     const comment = new Comment({
@@ -21,7 +21,7 @@ exports.addComment = async (req, res) => {
     });
 
     //comment db에 저장
-    await comment.save((err, info) => {
+    comment.save((err, info) => {
       if (err) return res.json({ success: false, err });
       console.log('comment 저장 성공');
       return res.status(200).json({

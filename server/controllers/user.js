@@ -1,13 +1,13 @@
 const { User } = require('../schemas/User');
 
 //Register user
-exports.registerUser = async (req, res, next) => {
+exports.registerUser = async (req, res) => {
   try {
     //client form 에 입력된 정보로 user 인스턴스 생성
     console.log(req.body);
     const user = new User(req.body);
     //user 저장
-    await user.save((err, userInfo) => {
+    user.save((err, userInfo) => {
       if (err) return res.json({ success: false, err });
       console.log('user 정보 저장');
       return res.status(200).json({
@@ -16,7 +16,10 @@ exports.registerUser = async (req, res, next) => {
       });
     });
   } catch (error) {
-    next(error);
+    return res.status(500).json({
+      success: false,
+      error: error,
+    });
   }
 };
 
@@ -55,7 +58,7 @@ exports.checkAuth = async (req, res) => {
     isAuth: true,
     name: req.user.name,
     email: req.user.email,
-    post: req.user.post !== null ? true : false,
+    posts: req.user.posts !== null ? true : false,
     role: req.user.role,
   });
 };

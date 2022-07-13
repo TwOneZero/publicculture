@@ -23,7 +23,7 @@ const postSchema = new Schema(
     themecode: String,
 
     comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
-    likes: [String],
+    likes: { type: [String], default: [] },
   },
   { timestamps: true }
 );

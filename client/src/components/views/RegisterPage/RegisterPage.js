@@ -1,10 +1,10 @@
 // import { Axios } from 'axios';
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../../_actions/user_action";
-import styled from "styled-components";
-import Auth from "../../../hoc/auth";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../../_actions/user_action';
+import styled from 'styled-components';
+import Auth from '../../../hoc/auth';
 
 const Register_page_container = styled.form`
   display: flex;
@@ -132,11 +132,10 @@ const Register_btn = styled.button`
 `;
 
 function RegisterPage() {
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Nickname, setNickname] = useState("");
-  const [Name, setName] = useState("");
-  const [ConfirmPW, setConfirmPW] = useState("");
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const [Name, setName] = useState('');
+  const [ConfirmPW, setConfirmPW] = useState('');
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -158,7 +157,7 @@ function RegisterPage() {
     e.preventDefault(); //refresh 안 시킴
 
     if (Password !== ConfirmPW) {
-      return alert("비밀번호가 일치하지 않습니다.");
+      return alert('비밀번호가 일치하지 않습니다.');
     }
 
     let body = {
@@ -167,14 +166,13 @@ function RegisterPage() {
       password: Password,
     };
 
-    //리덕스 안쓰면 이렇게
-    //Axios.post('/api/users/register', body);
-
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
-        navigate("/login");
+        navigate('/login');
       } else {
-        alert("Failed to sign up!");
+        if (res.payload.err.keyValue.email === body.email) {
+          alert('이메일이 존재합니다.');
+        }
       }
     });
   };
@@ -182,48 +180,42 @@ function RegisterPage() {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
       }}
     >
       <Register_page_container onSubmit={onSubmitHandler}>
         <Register_text>Register</Register_text>
         <Register_form_container>
           <Input_Name
-            type="text"
+            type='text'
             value={Name}
             onChange={onChangeName}
-            placeholder="이름"
+            placeholder='이름'
           />
 
           <Input_Email
-            type="email"
+            type='email'
             value={Email}
             onChange={onChangeEmail}
-            placeholder="이메일"
+            placeholder='이메일'
           />
           <EmailCheckBtn>이메일 중복 확인</EmailCheckBtn>
           <Input_PW
-            type="password"
+            type='password'
             value={Password}
             onChange={onChangePassword}
-            placeholder="비밀번호"
+            placeholder='비밀번호'
           />
           <Input_ConfirmPW
-            type="password"
+            type='password'
             value={ConfirmPW}
             onChange={onChangeConfirmPW}
-            placeholder="비밀번호 확인"
+            placeholder='비밀번호 확인'
           />
-          <Input_Nickname
-            type="text"
-            value={Nickname}
-            onChange={onChangeName}
-            placeholder="닉네임"
-          />
-          <NicknameCheckBtn>닉네임 중복 확인</NicknameCheckBtn>
+
           <Register_btn>회원가입</Register_btn>
         </Register_form_container>
       </Register_page_container>
