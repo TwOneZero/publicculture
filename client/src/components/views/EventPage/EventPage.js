@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import { searchPost } from "../../../_actions/post_action";
 const SearchBarArea = styled.form`
   display: flex;
   justify-content: flex-end;
@@ -35,37 +36,37 @@ const Button = styled.button`
 
 function EventPage() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
+    console.log(e.target.value);
   };
-  const onSubmitHandler = (e) => {
+  const onSearchClicked = (e) => {
     e.preventDefault();
-    axios.post(`/api/searchPost?search=${search}`).then((res) => {
-      if (res.data) {
-        //페이지 이동하면서 state(useNavigate 의 property) 에 배열 그대로 넘겨줌
-        return navigate(`/showevent?search=${search}`, {
-          state: { infos: res.data },
-        });
+    dispatch(searchPost(search)).then((res) => {
+      if (res.payload.success) {
+        console.log(res);
+        navigate(`showevent/${search}`, { state: { infos: res.payload } });
       } else {
-        return new Response({ error: 'error!' });
+        return new Response({ error: "error!" });
       }
     });
   };
 
   return (
     <div>
-      <SearchBarArea onSubmit={onSubmitHandler}>
-        <label htmlFor='search'></label>
+      <SearchBarArea>
+        <label htmlFor="search"></label>
         <SearchBar
           onChange={onChangeSearch}
-          name='search'
+          name="search"
           value={search}
-          type='text'
-          placeholder='검색어를 입력해주세요.'
+          type="text"
+          placeholder="검색어를 입력해주세요."
         ></SearchBar>
-        <Button type='submit'>
-          <i className='fas fa-search'></i>
+        <Button type="submit">
+          <i className="fas fa-search"></i>
         </Button>
       </SearchBarArea>
     </div>

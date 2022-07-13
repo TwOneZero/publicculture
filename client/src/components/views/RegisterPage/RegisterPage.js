@@ -13,7 +13,7 @@ const Register_page_container = styled.form`
   align-items: center;
   padding: 20px 10px;
   width: 500px;
-  height: 700px;
+  height: 1000px;
 `;
 
 const Register_text = styled.div`
@@ -28,7 +28,7 @@ const Register_form_container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 260px;
+  height: 500px;
 `;
 
 const Input_Name = styled.input`
@@ -43,6 +43,32 @@ const Input_Name = styled.input`
   }
 `;
 
+const Input_Nickname = styled.input`
+  width: 400px;
+  height: 50px;
+  border: 1px solid lightgrey;
+  outline: none;
+  margin: 20px 0px 10px 0px;
+  padding-left: 10px;
+  &:focus {
+    border: 1px solid grey;
+  }
+`;
+
+const NicknameCheckBtn = styled.button`
+  width: 413px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+  margin: 5px 0px 20px 0px;
+`;
+
 const Input_Email = styled.input`
   width: 400px;
   height: 50px;
@@ -53,6 +79,20 @@ const Input_Email = styled.input`
   &:focus {
     border: 1px solid grey;
   }
+`;
+
+const EmailCheckBtn = styled.button`
+  width: 413px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+  margin: 5px 0px 20px 0px;
 `;
 
 const Input_PW = styled.input`
@@ -88,7 +128,7 @@ const Register_btn = styled.button`
   &:hover {
     cursor: pointer;
   }
-  margin-top: 5px;
+  margin-top: 20px;
 `;
 
 function RegisterPage() {
@@ -155,12 +195,14 @@ function RegisterPage() {
             onChange={onChangeName}
             placeholder='이름'
           />
+
           <Input_Email
             type='email'
             value={Email}
             onChange={onChangeEmail}
             placeholder='이메일'
           />
+          <EmailCheckBtn>이메일 중복 확인</EmailCheckBtn>
           <Input_PW
             type='password'
             value={Password}
@@ -173,6 +215,7 @@ function RegisterPage() {
             onChange={onChangeConfirmPW}
             placeholder='비밀번호 확인'
           />
+
           <Register_btn>회원가입</Register_btn>
         </Register_form_container>
       </Register_page_container>
