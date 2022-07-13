@@ -40,7 +40,7 @@ exports.getPostDetails = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).send('No post with that id');
     }
-    const post = await Post.findById(id).exec();
+    const post = await Post.findOne({ id }).populate('comments');
     return res.status(200).json({ success: true, post });
   } catch (error) {
     return res.status(404).json({ success: false, error });

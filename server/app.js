@@ -21,6 +21,7 @@ app.use(cors());
 const userRouter = require('./routes/user');
 // const eventRouter = require('./routes/event');
 const postRouter = require('./routes/post');
+const commentRouter = require('./routes/comment');
 
 //mongoDB cloud URI
 const uri = config.mongoURI;
@@ -34,6 +35,7 @@ mongoose
 app.use('/api', userRouter);
 // app.use('/api', eventRouter);
 app.use('/api', postRouter);
+app.use('/api', commentRouter);
 
 //url 에러
 app.use((req, res, next) => {

@@ -58,7 +58,7 @@ exports.checkAuth = async (req, res) => {
     isAuth: true,
     name: req.user.name,
     email: req.user.email,
-    post: req.user.post !== null ? true : false,
+    posts: req.user.posts !== null ? true : false,
     role: req.user.role,
   });
 };

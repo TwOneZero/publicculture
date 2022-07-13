@@ -36,12 +36,7 @@ const userSchema = new Schema(
       type: Number,
     },
     //저장한 Post
-    posts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Post',
-      },
-    ],
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   },
   {
     //createdAt, updateAt
