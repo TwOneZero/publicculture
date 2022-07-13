@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../../_actions/user_action';
-import styled from "styled-components"
+import styled from 'styled-components';
 import Auth from '../../../hoc/auth';
 
 const Register_page_container = styled.form`
@@ -31,7 +31,7 @@ const Register_form_container = styled.div`
   height: 260px;
 `;
 
-const Input_Name= styled.input`
+const Input_Name = styled.input`
   width: 400px;
   height: 50px;
   border: 1px solid lightgrey;
@@ -126,14 +126,13 @@ function RegisterPage() {
       password: Password,
     };
 
-    //리덕스 안쓰면 이렇게
-    //Axios.post('/api/users/register', body);
-
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
         navigate('/login');
       } else {
-        alert('Failed to sign up!');
+        if (res.payload.err.keyValue.email === body.email) {
+          alert('이메일이 존재합니다.');
+        }
       }
     });
   };
@@ -148,15 +147,35 @@ function RegisterPage() {
       }}
     >
       <Register_page_container onSubmit={onSubmitHandler}>
-      <Register_text>Register</Register_text>
-      <Register_form_container>
-        <Input_Name type='text' value={Name} onChange={onChangeName} placeholder="이름"/>
-        <Input_Email type='email' value={Email} onChange={onChangeEmail} placeholder="이메일"/>
-        <Input_PW type='password' value={Password} onChange={onChangePassword} placeholder="비밀번호"/>
-        <Input_ConfirmPW type='password' value={ConfirmPW} onChange={onChangeConfirmPW} placeholder="비밀번호 확인"/>
-        <Register_btn>회원가입</Register_btn>
-      </Register_form_container>
-    </Register_page_container>
+        <Register_text>Register</Register_text>
+        <Register_form_container>
+          <Input_Name
+            type='text'
+            value={Name}
+            onChange={onChangeName}
+            placeholder='이름'
+          />
+          <Input_Email
+            type='email'
+            value={Email}
+            onChange={onChangeEmail}
+            placeholder='이메일'
+          />
+          <Input_PW
+            type='password'
+            value={Password}
+            onChange={onChangePassword}
+            placeholder='비밀번호'
+          />
+          <Input_ConfirmPW
+            type='password'
+            value={ConfirmPW}
+            onChange={onChangeConfirmPW}
+            placeholder='비밀번호 확인'
+          />
+          <Register_btn>회원가입</Register_btn>
+        </Register_form_container>
+      </Register_page_container>
     </div>
   );
 }
