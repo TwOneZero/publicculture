@@ -43,17 +43,7 @@ const Input_Name = styled.input`
   }
 `;
 
-const Input_Nickname = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin: 20px 0px 10px 0px;
-  padding-left: 10px;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
+
 
 const NicknameCheckBtn = styled.button`
   width: 413px;
@@ -131,6 +121,14 @@ const Register_btn = styled.button`
   margin-top: 20px;
 `;
 
+const ErrMsg = styled.h3`
+  color: firebrick;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+let conditionErrMessage = null;
+
 function RegisterPage() {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
@@ -157,7 +155,7 @@ function RegisterPage() {
     e.preventDefault(); //refresh 안 시킴
 
     if (Password !== ConfirmPW) {
-      return alert('비밀번호가 일치하지 않습니다.');
+      return alert("비밀번호가 일치하지 않습니다.");
     }
 
     let body = {
@@ -166,16 +164,28 @@ function RegisterPage() {
       password: Password,
     };
 
+    //리덕스 안쓰면 이렇게
+    //Axios.post('/api/users/register', body);
+
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
-        navigate('/login');
+        navigate("/login");
       } else {
-        if (res.payload.err.keyValue.email === body.email) {
-          alert('이메일이 존재합니다.');
-        }
+        console.log(res.payload);
+        cleanInput();
       }
     });
   };
+
+  const cleanInput = () => {
+    conditionErrMessage = <ErrMsg>이미 존재하는 이메일입니다.</ErrMsg>
+    setEmail('');
+    setPassword('');
+    setConfirmPW('');
+    if (Email !== '') {
+      conditionErrMessage = <span></span>;
+    }
+  }
 
   return (
     <div
@@ -202,7 +212,7 @@ function RegisterPage() {
             onChange={onChangeEmail}
             placeholder='이메일'
           />
-          <EmailCheckBtn>이메일 중복 확인</EmailCheckBtn>
+          {conditionErrMessage}
           <Input_PW
             type='password'
             value={Password}
