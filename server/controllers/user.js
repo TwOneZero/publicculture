@@ -1,25 +1,31 @@
 const { User } = require('../schemas/User');
 
 //Register user
-exports.registerUser = async (req, res) => {
+exports.registerUser = async (req, res, next) => {
   try {
-    //client form 에 입력된 정보로 user 인스턴스 생성
-    console.log(req.body);
-    const user = new User(req.body);
-    //user 저장
-    user.save((err, userInfo) => {
-      if (err) return res.json({ success: false, err });
-      console.log('user 정보 저장');
-      return res.status(200).json({
-        success: true,
-        userInfo,
-      });
-    });
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if(user){
+        return res.json({
+          registerSuccess: false,
+          message: "이미 존재하는 이메일입니다",
+        });
+      }else{
+        //client form 에 입력된 정보로 user 인스턴스 생성
+        console.log(req.body);
+        const user = new User(req.body);
+        //user 저장
+        user.save((err, userInfo) => {
+          if (err) return res.json({ success: false, err });
+          console.log('user 정보 저장');
+          return res.status(200).json({
+            success: true,
+            userInfo,
+          });
+        });
+      }
+    })
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      error: error,
-    });
+    next(error);
   }
 };
 
