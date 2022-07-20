@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-pascal-case */
 // import { Axios } from 'axios';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../_actions/user_action';
+import { checkName, registerUser } from '../../../_actions/user_action';
 import styled from 'styled-components';
 import Auth from '../../../hoc/auth';
 import axios from 'axios';
@@ -44,7 +45,7 @@ const Input_Name = styled.input`
   }
 `;
 
-const NicknameCheckBtn = styled.button`
+const NameCheckBtn = styled.button`
   width: 413px;
   height: 50px;
   background-color: black;
@@ -68,20 +69,6 @@ const Input_Email = styled.input`
   &:focus {
     border: 1px solid grey;
   }
-`;
-
-const EmailCheckBtn = styled.button`
-  width: 413px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-  margin: 5px 0px 20px 0px;
 `;
 
 const Input_PW = styled.input`
@@ -150,12 +137,12 @@ function RegisterPage() {
     setConfirmPW(e.target.value);
   };
 
-  const onCheckEmail = async () => {
-    await axios.post('/api/users/checkEmail', { email: Email }).then((res) => {
-      if (res.data.success) {
-        alert('사용 가능한 이메일 입니다.');
+  const onCheckName = async () => {
+    dispatch(checkName({ name: Name })).then((res) => {
+      if (res.payload.success) {
+        alert('사용가능한 닉네임입니다.');
       } else {
-        alert('이미 존재하는 이메일 입니다.');
+        alert('이미 존재하는 닉네임입니다.');
       }
     });
   };
@@ -173,9 +160,6 @@ function RegisterPage() {
       password: Password,
     };
 
-    //리덕스 안쓰면 이렇게
-    //Axios.post('/api/users/register', body);
-
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
         navigate('/login');
@@ -184,8 +168,6 @@ function RegisterPage() {
       }
     });
   };
-
-  
 
   return (
     <div
@@ -203,17 +185,15 @@ function RegisterPage() {
             type='text'
             value={Name}
             onChange={onChangeName}
-            placeholder='이름'
+            placeholder='닉네임'
           />
-
+          <NameCheckBtn onClick={onCheckName}>닉네임 중복 확인</NameCheckBtn>
           <Input_Email
             type='email'
             value={Email}
             onChange={onChangeEmail}
             placeholder='이메일'
           />
-          <EmailCheckBtn onClick={onCheckEmail}>중복체크</EmailCheckBtn>
-          
           <Input_PW
             type='password'
             value={Password}

@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER } from './types';
+import {
+  LOGIN_USER,
+  REGISTER_USER,
+  AUTH_USER,
+  LOGOUT_USER,
+  CHECK_NAME,
+} from './types';
 
 //login
 export function loginUser(dataToSubmit) {
@@ -39,6 +45,17 @@ export function logout() {
 
   return {
     type: LOGOUT_USER,
+    payload: request,
+  };
+}
+
+export function checkName(name) {
+  const request = axios
+    .post('/api/users/checkName', name)
+    .then((res) => res.data);
+
+  return {
+    type: CHECK_NAME,
     payload: request,
   };
 }
