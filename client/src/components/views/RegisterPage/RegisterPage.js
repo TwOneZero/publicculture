@@ -181,20 +181,11 @@ function RegisterPage() {
         navigate('/login');
       } else {
         console.log(res.payload);
-        cleanInput();
       }
     });
   };
 
-  const cleanInput = () => {
-    conditionErrMessage = <ErrMsg>이미 존재하는 이메일입니다.</ErrMsg>;
-    setEmail('');
-    setPassword('');
-    setConfirmPW('');
-    if (Email !== '') {
-      conditionErrMessage = <span></span>;
-    }
-  };
+  
 
   return (
     <div
@@ -222,7 +213,7 @@ function RegisterPage() {
             placeholder='이메일'
           />
           <EmailCheckBtn onClick={onCheckEmail}>중복체크</EmailCheckBtn>
-          {conditionErrMessage}
+          
           <Input_PW
             type='password'
             value={Password}
