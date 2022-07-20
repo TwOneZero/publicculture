@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -30,6 +30,7 @@ const HeaderLogo = styled.div`
   color: #faebd7;
   font-size: 60px;
   margin: 15px 5px;
+  margin-left: 50px;
   cursor: pointer;
   text-shadow: 1px 1px 1px #000;
 `;
@@ -70,6 +71,7 @@ const MypageBtn = styled.div`
 
 const RegisterBtn = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   color: #ffcb6b;
   width: 70px;
@@ -87,6 +89,7 @@ const RegisterBtn = styled.div`
 
 const LogoutBtn = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   color: #ffcb6b;
   width: 70px;
@@ -127,9 +130,41 @@ const GenreBtn = styled.button`
   }
 `;
 
+const SearchBarArea = styled.form`
+  display: flex;
+  justify-content: center;
+  //position: relative;
+  margin-bottom: 10px;
+`;
+
+const SearchBar = styled.input`
+  height: 30px;
+  width: 200px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: black;
+  caret-color: white;
+  border-bottom: 2px solid white;
+  font-size: 15px;
+  //margin-left: 950px;
+  margin-bottom: 0px;
+`;
+
+const Button = styled.button`
+  background: transparent;
+  color: white;
+  //position: relative;
+  right: 30px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+`;
+
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
 
   const onLogoClicked = () => {
     navigate('/');
@@ -161,20 +196,52 @@ function Header() {
     });
   };
 
+  
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const onSearchClicked = (e) => {
+    e.preventDefault();
+    dispatch(searchPost(search)).then((res) => {
+      if (res.payload.success) {
+        console.log(res);
+        navigate(`showevent/${search}`, { state: { infos: res.payload } });
+      } else {
+        return new Response({ error: "error!" });
+      }
+    });
+  };
+
   return (
     <>
       <HeaderContainer>
         <MenuContainer>
           <MypageBtn>My page</MypageBtn>
           <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
-          <RegisterBtn onClick={onRegiterClicked}>Regiser</RegisterBtn>
-          <LogoutBtn onClick={logOut}>logout</LogoutBtn>
+          <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
+          <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
         </MenuContainer>
+        
 
         <HeaderLogo type='button' onClick={onLogoClicked}>
           Public Culture
+          
         </HeaderLogo>
-        <EventPage />
+        <SearchBarArea>
+          <label htmlFor="search"></label>
+          <SearchBar
+            onChange={onChangeSearch}
+            name="search"
+            value={search}
+            type="text"
+            placeholder="검색어를 입력해주세요."
+          ></SearchBar>
+          <Button type="submit">
+            <i className="fas fa-search"></i>
+          </Button>
+        </SearchBarArea>
       </HeaderContainer>
 
       <GenreBar itemType='button' onClick={onGenreClicked}>
