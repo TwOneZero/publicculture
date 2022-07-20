@@ -159,7 +159,7 @@ function RegisterPage() {
       if (res.data.success) {
         alert('사용 가능한 이메일 입니다.');
       } else {
-        alert('이미 존재하는 이메일 입니다.')
+        alert('이미 존재하는 이메일 입니다.');
       }
     });
   };
