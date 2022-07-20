@@ -53,7 +53,6 @@ const ShowEvent = () => {
                   onClick={onPostingClicked}
                 />
               </a>
-              <p>{info._id}</p>
               <div
                 style={{
                   fontWeight: '700',

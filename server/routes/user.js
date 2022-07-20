@@ -5,7 +5,6 @@ const {
   loginUser,
   checkAuth,
   logoutUser,
-  checkEmail,
 } = require('../controllers/user');
 
 const router = express.Router();
@@ -14,7 +13,6 @@ const router = express.Router();
 router.post('/users/register', registerUser);
 //로그인
 router.post('/users/login', loginUser);
-router.post('/users/checkEmail', checkEmail);
 //로그인 되어있나 체크하기
 router.get('/users/auth', auth, checkAuth);
 //로그아웃

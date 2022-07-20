@@ -5,14 +5,7 @@ import {
   LOGOUT_USER,
 } from '../_actions/types';
 
-const initialState = {
-  isAdmin: false,
-  isAuth: true,
-  name: '',
-  email: '',
-  post: null,
-  role: 0,
-};
+const initialState = null;
 
 export default function getcompleteState(state = initialState, action) {
   switch (action.type) {

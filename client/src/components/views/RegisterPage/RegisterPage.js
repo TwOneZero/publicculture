@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 // import { Axios } from 'axios';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -150,16 +151,6 @@ function RegisterPage() {
     setConfirmPW(e.target.value);
   };
 
-  const onCheckEmail = async () => {
-    await axios.post('/api/users/checkEmail', { email: Email }).then((res) => {
-      if (res.data.success) {
-        alert('사용 가능한 이메일 입니다.');
-      } else {
-        alert('이미 존재하는 이메일 입니다.');
-      }
-    });
-  };
-
   const onSubmitHandler = (e) => {
     e.preventDefault(); //refresh 안 시킴
 
@@ -173,9 +164,6 @@ function RegisterPage() {
       password: Password,
     };
 
-    //리덕스 안쓰면 이렇게
-    //Axios.post('/api/users/register', body);
-
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
         navigate('/login');
@@ -184,8 +172,6 @@ function RegisterPage() {
       }
     });
   };
-
-  
 
   return (
     <div
@@ -212,8 +198,7 @@ function RegisterPage() {
             onChange={onChangeEmail}
             placeholder='이메일'
           />
-          <EmailCheckBtn onClick={onCheckEmail}>중복체크</EmailCheckBtn>
-          
+
           <Input_PW
             type='password'
             value={Password}
