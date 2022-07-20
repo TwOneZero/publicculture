@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../../_actions/user_action';
 import styled from 'styled-components';
 import Auth from '../../../hoc/auth';
+import axios from 'axios';
 
 const Register_page_container = styled.form`
   display: flex;
@@ -42,8 +43,6 @@ const Input_Name = styled.input`
     border: 1px solid grey;
   }
 `;
-
-
 
 const NicknameCheckBtn = styled.button`
   width: 413px;
@@ -151,11 +150,21 @@ function RegisterPage() {
     setConfirmPW(e.target.value);
   };
 
+  const onCheckEmail = async () => {
+    await axios.post('/api/users/checkEmail', { email: Email }).then((res) => {
+      if (res.data.success) {
+        alert('사용 가능한 이메일 입니다.');
+      } else {
+        alert('이미 존재하는 이메일 입니다.');
+      }
+    });
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault(); //refresh 안 시킴
 
     if (Password !== ConfirmPW) {
-      return alert("비밀번호가 일치하지 않습니다.");
+      return alert('비밀번호가 일치하지 않습니다.');
     }
 
     let body = {
@@ -169,7 +178,7 @@ function RegisterPage() {
 
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
-        navigate("/login");
+        navigate('/login');
       } else {
         console.log(res.payload);
         cleanInput();
@@ -178,14 +187,14 @@ function RegisterPage() {
   };
 
   const cleanInput = () => {
-    conditionErrMessage = <ErrMsg>이미 존재하는 이메일입니다.</ErrMsg>
+    conditionErrMessage = <ErrMsg>이미 존재하는 이메일입니다.</ErrMsg>;
     setEmail('');
     setPassword('');
     setConfirmPW('');
     if (Email !== '') {
       conditionErrMessage = <span></span>;
     }
-  }
+  };
 
   return (
     <div

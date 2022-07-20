@@ -6,6 +6,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostDetails } from '../../../_actions/post_action';
+import Auth from '../../../hoc/auth';
 
 //행사 정보
 const Event_title = styled.div`
@@ -191,4 +192,4 @@ function PostPage() {
   );
 }
 
-export default PostPage;
+export default Auth(PostPage, null);

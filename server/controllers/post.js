@@ -2,12 +2,21 @@ const { Post } = require('../schemas/Post');
 const mongoose = require('mongoose');
 
 //모든 post 가져오기
-exports.getAllPost = async (req, res) => {
+exports.getRandomPost = async (req, res) => {
+  const limitrecords = 20;
+
+  //랜덤한 수
+  function getRandomArbitrary(min, max) {
+    return Math.ceil(Math.random() * (max - min) + min);
+  }
   try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
+    let count = await Post.estimatedDocumentCount();
+    let skipRecords = getRandomArbitrary(1, count - limitrecords);
+    const posts = await Post.find().skip(skipRecords);
+
+    return res.status(200).json({ posts });
   } catch (error) {
-    res.status(404).json({ messege: error });
+    return res.status(404).json({ messege: error });
   }
 };
 
@@ -26,9 +35,9 @@ exports.getPostBySearch = async (req, res) => {
         { title: { $regex: searchRegex } },
       ],
     }).exec();
-    res.status(200).json({ success: true, posts });
+    return res.status(200).json({ success: true, posts });
   } catch (error) {
-    res.status(404).json({ success: false, error });
+    return res.status(404).json({ success: false, error });
   }
 };
 
@@ -75,4 +84,9 @@ exports.likePost = async (req, res) => {
     //업데이트 된 post 와 likes 수 반환
     return res.status(200).json({ updatedPost, likes: post.likes.length });
   } catch (error) {}
+};
+
+exports.deleteAll = async (req, res) => {
+  await Post.deleteMany();
+  return res.status(200).json({ message: '데이터 삭제 성공' });
 };

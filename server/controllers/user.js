@@ -4,12 +4,12 @@ const { User } = require('../schemas/User');
 exports.registerUser = async (req, res, next) => {
   try {
     User.findOne({ email: req.body.email }, (err, user) => {
-      if(user){
+      if (user) {
         return res.json({
           registerSuccess: false,
-          message: "이미 존재하는 이메일입니다",
+          message: '이미 존재하는 이메일입니다',
         });
-      }else{
+      } else {
         //client form 에 입력된 정보로 user 인스턴스 생성
         console.log(req.body);
         const user = new User(req.body);
@@ -23,7 +23,7 @@ exports.registerUser = async (req, res, next) => {
           });
         });
       }
-    })
+    });
   } catch (error) {
     next(error);
   }
@@ -45,7 +45,7 @@ exports.loginUser = async (req, res, next) => {
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         // 로컬 쿠키에 토큰을 저장한다.
-        res.cookie('x_auth', user.token).status(200).json({
+        return res.cookie('x_auth', user.token).status(200).json({
           loginSuccess: true,
           userId: user._id,
         });
@@ -69,14 +69,31 @@ exports.checkAuth = async (req, res) => {
   });
 };
 
-exports.logoutUser = async (req, res) => {
-  User.findOneAndUpdate(
-    { _id: req.user._id },
-    { token: '' },
-    { new: true },
-    (err, user) => {
-      if (err) return res.json({ success: false, err });
-      return res.status(200).json({ success: true });
+exports.checkEmail = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
     }
-  );
+  } catch (error) {
+    return res.json({ err });
+  }
+};
+
+exports.logoutUser = async (req, res, next) => {
+  try {
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { token: '' },
+      { new: true },
+      (err, user) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).json({ success: true });
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
 };
