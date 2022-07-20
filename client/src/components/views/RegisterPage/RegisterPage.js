@@ -1,11 +1,11 @@
 // import { Axios } from 'axios';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../_actions/user_action';
-import styled from 'styled-components';
-import Auth from '../../../hoc/auth';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../../_actions/user_action";
+import styled from "styled-components";
+import Auth from "../../../hoc/auth";
+import axios from "axios";
 
 const Register_page_container = styled.form`
   display: flex;
@@ -129,10 +129,10 @@ const ErrMsg = styled.h3`
 let conditionErrMessage = null;
 
 function RegisterPage() {
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
-  const [Name, setName] = useState('');
-  const [ConfirmPW, setConfirmPW] = useState('');
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Name, setName] = useState("");
+  const [ConfirmPW, setConfirmPW] = useState("");
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -151,11 +151,11 @@ function RegisterPage() {
   };
 
   const onCheckEmail = async () => {
-    await axios.post('/api/users/checkEmail', { email: Email }).then((res) => {
+    await axios.post("/api/users/checkEmail", { email: Email }).then((res) => {
       if (res.data.success) {
-        alert('사용 가능한 이메일 입니다.');
+        alert("사용 가능한 이메일 입니다.");
       } else {
-        alert('이미 존재하는 이메일 입니다.');
+        alert("이미 존재하는 이메일 입니다.");
       }
     });
   };
@@ -164,7 +164,7 @@ function RegisterPage() {
     e.preventDefault(); //refresh 안 시킴
 
     if (Password !== ConfirmPW) {
-      return alert('비밀번호가 일치하지 않습니다.');
+      return alert("비밀번호가 일치하지 않습니다.");
     }
 
     let body = {
@@ -178,61 +178,51 @@ function RegisterPage() {
 
     dispatch(registerUser(body)).then((res) => {
       if (res.payload.success) {
-        navigate('/login');
+        navigate("/login");
       } else {
         console.log(res.payload);
-        cleanInput();
       }
     });
-  };
-
-  const cleanInput = () => {
-    conditionErrMessage = <ErrMsg>이미 존재하는 이메일입니다.</ErrMsg>;
-    setEmail('');
-    setPassword('');
-    setConfirmPW('');
-    if (Email !== '') {
-      conditionErrMessage = <span></span>;
-    }
   };
 
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
       }}
     >
       <Register_page_container onSubmit={onSubmitHandler}>
         <Register_text>Register</Register_text>
         <Register_form_container>
           <Input_Name
-            type='text'
+            type="text"
             value={Name}
             onChange={onChangeName}
-            placeholder='이름'
+            placeholder="이름"
           />
 
           <Input_Email
-            type='email'
+            type="email"
             value={Email}
             onChange={onChangeEmail}
-            placeholder='이메일'
+            placeholder="이메일"
           />
-          {conditionErrMessage}
+          <EmailCheckBtn onClick={onCheckEmail}>이메일 중복 체크</EmailCheckBtn>
+
           <Input_PW
-            type='password'
+            type="password"
             value={Password}
             onChange={onChangePassword}
-            placeholder='비밀번호'
+            placeholder="비밀번호"
           />
           <Input_ConfirmPW
-            type='password'
+            type="password"
             value={ConfirmPW}
             onChange={onChangeConfirmPW}
-            placeholder='비밀번호 확인'
+            placeholder="비밀번호 확인"
           />
 
           <Register_btn>회원가입</Register_btn>
