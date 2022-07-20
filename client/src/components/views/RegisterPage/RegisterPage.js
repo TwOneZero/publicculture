@@ -210,7 +210,7 @@ function RegisterPage() {
             onChange={onChangeEmail}
             placeholder="이메일"
           />
-          <EmailCheckBtn onClick={onCheckEmail}>이메일 중복 체크</EmailCheckBtn>
+          <EmailCheckBtn onClick={onCheckEmail}>중복체크</EmailCheckBtn>
 
           <Input_PW
             type="password"
