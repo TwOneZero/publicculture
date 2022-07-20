@@ -66,3 +66,16 @@ exports.logoutUser = async (req, res, next) => {
     }
   );
 };
+
+exports.checkName = async (req, res) => {
+  try {
+    const user = await User.findOne({ name: req.body.name });
+    if (!user) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false });
+    }
+  } catch (error) {
+    return res.json({ err });
+  }
+};

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../_actions/user_action';
+import { checkName, registerUser } from '../../../_actions/user_action';
 import styled from 'styled-components';
 import Auth from '../../../hoc/auth';
 import axios from 'axios';
@@ -45,7 +45,7 @@ const Input_Name = styled.input`
   }
 `;
 
-const NicknameCheckBtn = styled.button`
+const NameCheckBtn = styled.button`
   width: 413px;
   height: 50px;
   background-color: black;
@@ -69,20 +69,6 @@ const Input_Email = styled.input`
   &:focus {
     border: 1px solid grey;
   }
-`;
-
-const EmailCheckBtn = styled.button`
-  width: 413px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-  margin: 5px 0px 20px 0px;
 `;
 
 const Input_PW = styled.input`
@@ -151,6 +137,16 @@ function RegisterPage() {
     setConfirmPW(e.target.value);
   };
 
+  const onCheckName = async () => {
+    dispatch(checkName({ name: Name })).then((res) => {
+      if (res.payload.success) {
+        alert('사용가능한 닉네임입니다.');
+      } else {
+        alert('이미 존재하는 닉네임입니다.');
+      }
+    });
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault(); //refresh 안 시킴
 
@@ -189,16 +185,15 @@ function RegisterPage() {
             type='text'
             value={Name}
             onChange={onChangeName}
-            placeholder='이름'
+            placeholder='닉네임'
           />
-
+          <NameCheckBtn onClick={onCheckName}>닉네임 중복 확인</NameCheckBtn>
           <Input_Email
             type='email'
             value={Email}
             onChange={onChangeEmail}
             placeholder='이메일'
           />
-
           <Input_PW
             type='password'
             value={Password}

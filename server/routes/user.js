@@ -5,6 +5,7 @@ const {
   loginUser,
   checkAuth,
   logoutUser,
+  checkName,
 } = require('../controllers/user');
 
 const router = express.Router();
@@ -17,5 +18,7 @@ router.post('/users/login', loginUser);
 router.get('/users/auth', auth, checkAuth);
 //로그아웃
 router.get('/users/logout', auth, logoutUser);
+//이름체크
+router.post('/users/checkName', checkName);
 
 module.exports = router;
