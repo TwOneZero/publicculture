@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 exports.getAllPost = async (req, res) => {
   try {
     const posts = await Post.find();
-    res.status(200).json(posts);
+    return res.status(200).json(posts);
   } catch (error) {
-    res.status(404).json({ messege: error });
+    return res.status(404).json({ messege: error });
   }
 };
 
@@ -26,9 +26,9 @@ exports.getPostBySearch = async (req, res) => {
         { title: { $regex: searchRegex } },
       ],
     }).exec();
-    res.status(200).json({ success: true, posts });
+    return res.status(200).json({ success: true, posts });
   } catch (error) {
-    res.status(404).json({ success: false, error });
+    return res.status(404).json({ success: false, error });
   }
 };
 

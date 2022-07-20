@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../../_actions/user_action';
 import styled from 'styled-components';
 import Auth from '../../../hoc/auth';
+import axios from 'axios';
 
 const Register_page_container = styled.form`
   display: flex;
@@ -153,6 +154,16 @@ function RegisterPage() {
     setConfirmPW(e.target.value);
   };
 
+  const onCheckEmail = async () => {
+    await axios.post('/api/users/checkEmail', { email: Email }).then((res) => {
+      if (res.data.success) {
+        alert('사용 가능한 이메일 입니다.');
+      } else {
+        alert('이미 존재하는 이메일 입니다.')
+      }
+    });
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault(); //refresh 안 시킴
 
@@ -202,7 +213,9 @@ function RegisterPage() {
             onChange={onChangeEmail}
             placeholder='이메일'
           />
-          <EmailCheckBtn>이메일 중복 확인</EmailCheckBtn>
+          <EmailCheckBtn type='button' onClick={onCheckEmail}>
+            이메일 중복 확인
+          </EmailCheckBtn>
           <Input_PW
             type='password'
             value={Password}
