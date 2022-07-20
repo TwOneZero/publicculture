@@ -221,6 +221,7 @@ function RegisterPage() {
             onChange={onChangeEmail}
             placeholder='이메일'
           />
+          <EmailCheckBtn onClick={onCheckEmail}>중복체크</EmailCheckBtn>
           {conditionErrMessage}
           <Input_PW
             type='password'
