@@ -1,7 +1,8 @@
 const { Post } = require('../schemas/Post');
+const dayjs = require('dayjs');
 const mongoose = require('mongoose');
 
-//모든 post 가져오기
+//랜덤 post 가져오기
 exports.getRandomPost = async (req, res) => {
   const limitrecords = 20;
 
@@ -9,12 +10,18 @@ exports.getRandomPost = async (req, res) => {
   function getRandomArbitrary(min, max) {
     return Math.ceil(Math.random() * (max - min) + min);
   }
+  //날짜 포맷 설정
+  let today = dayjs();
+  let d_t = today.format('YYYY-MM-DD h:mm:ss');
+  //현재 날짜에서 종료일이 더 후인 행사 return
   try {
-    let count = await Post.estimatedDocumentCount();
-    let skipRecords = getRandomArbitrary(1, count - limitrecords);
-    const posts = await Post.find().skip(skipRecords);
+    // let count = await Post.estimatedDocumentCount();
+    const posts = await Post.find({ end_date: { $gte: d_t } });
+    let randPick = getRandomArbitrary(1, posts.length - limitrecords);
 
-    return res.status(200).json({ posts });
+    console.log(randPick);
+    const slicedPost = posts.slice(randPick, randPick + limitrecords);
+    return res.status(200).json({ len: slicedPost.length, posts: slicedPost });
   } catch (error) {
     return res.status(404).json({ messege: error });
   }
@@ -84,9 +91,4 @@ exports.likePost = async (req, res) => {
     //업데이트 된 post 와 likes 수 반환
     return res.status(200).json({ updatedPost, likes: post.likes.length });
   } catch (error) {}
-};
-
-exports.deleteAll = async (req, res) => {
-  await Post.deleteMany();
-  return res.status(200).json({ message: '데이터 삭제 성공' });
 };
