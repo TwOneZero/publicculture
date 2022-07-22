@@ -4,7 +4,6 @@ const {
   getPostBySearch,
   getPostDetails,
   likePost,
-  deleteAll,
 } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
 
@@ -18,7 +17,5 @@ router.post('/searchPost', getPostBySearch);
 router.get('/posts/:id', getPostDetails);
 //좋아요 누르기
 router.patch('/:id/likePost', likePost);
-//comment 달기
-router.get('/deleteAllPost', deleteAll);
 
 module.exports = router;

@@ -1,12 +1,12 @@
+const dotenv = require('dotenv');
+const path = require('path');
+dotenv.config({ path: path.join(__dirname, './.env') });
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const config = require('./config/apiKeys/key');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
 const app = express();
-// const dotenv = require('dotenv').config();
 
 app.set('port', process.env.PORT || 5000);
 
@@ -23,7 +23,7 @@ const postRouter = require('./routes/post');
 const commentRouter = require('./routes/comment');
 
 //mongoDB cloud URI
-const uri = config.mongoURI;
+const uri = process.env.MONGO_URI;
 mongoose
   .set('debug', true)
   .connect(uri)
