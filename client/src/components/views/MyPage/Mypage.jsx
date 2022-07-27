@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MypageEdit from "./MypageEdit";
 import MypageInfo from "./MypageInfo";
+import Auth from "../../../hoc/auth";
+
 
 const MypageBox = styled.div`
   padding: 0px;
@@ -149,8 +151,11 @@ const InfoBox = styled.div`
   height: 1000px;
 `;
 
+
+
 function Mypage() {
   const [mode, setMode] = useState("myProfile");
+
   const onMenuButtonClick = (e) => {
     if (e.target.id === "myProfile") {
       setMode("myProfile");
@@ -164,6 +169,7 @@ function Mypage() {
     }
   };
 
+  
   return (
     <MypageBox>
       <UserBox>
@@ -216,4 +222,4 @@ function Mypage() {
   );
 }
 
-export default Mypage;
+export default Auth(Mypage, true);
