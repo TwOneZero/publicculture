@@ -116,7 +116,7 @@ function PostPage() {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-  }, [dispatch, params.postId]);
+  }, [dispatch, params, params.postId]);
 
   return (
     <div
