@@ -226,17 +226,14 @@ function PostPage() {
       <TabBar itemType='button'>
         <TabBtn
         name='지도' 
-        className={tab === 0 ? "tabs active-tabs" : "tabs"}
         onClick={() => settingTab(0)}
         >지도</TabBtn>
         <TabBtn
         name='맛집'
-        className={tab === 1 ? "tabs active-tabs" : "tabs"}
         onClick={() => settingTab(1)}
         >맛집</TabBtn>
         <TabBtn
         name='주변 카페'
-        className={tab === 2 ? "tabs active-tabs" : "tabs"}
         onClick={() => settingTab(2)}
         >주변 카페</TabBtn>
       </TabBar>
