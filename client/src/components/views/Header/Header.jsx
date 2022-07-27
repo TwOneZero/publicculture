@@ -181,6 +181,10 @@ function Header() {
   const onPostClicked = () => {
     navigate('/post');
   };
+
+  const onMypageClicked = () => {
+    navigate('/mypage');
+  }
   const logOut = () => {
     dispatch(logout()).then((res) => {
       if (res.payload.isAuth === false) {
@@ -222,7 +226,7 @@ function Header() {
     <>
       <HeaderContainer>
         <MenuContainer>
-          <MypageBtn>My page</MypageBtn>
+          <MypageBtn onClick={onMypageClicked}>My page</MypageBtn>
           <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
           <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
           <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
