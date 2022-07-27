@@ -20,6 +20,12 @@ exports.loginUser = async (req, res, next) => {
   //요청된 이메일이 있는지 db 에서 확인
   try {
     const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.json({
+        loginSuccess: false,
+        message: '이메일이 존재하지 않습니다.',
+      });
+    }
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (err) return res.status(400).send(err);
       if (!isMatch) {

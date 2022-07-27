@@ -11,11 +11,11 @@ const router = express.Router();
 
 //모든 post
 router.get('/posts', getRandomPost);
-//검색하기
-router.post('/searchPost', getPostBySearch);
 //디테일페이지
 router.get('/posts/:id', getPostDetails);
+//검색하기
+router.post('/searchPost', getPostBySearch);
 //좋아요 누르기
-router.patch('/:id/likePost', likePost);
+router.patch('/likePost/:id', auth, likePost);
 
 module.exports = router;

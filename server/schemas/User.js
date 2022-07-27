@@ -91,14 +91,15 @@ userSchema.statics.findByToken = function (token, cb) {
   let user = this;
   //토큰을 복호화
   jwt.verify(token, 'myToken', function (err, decoded) {
+    errMessage = err;
     user.findOne(
       {
         _id: decoded,
         token: token,
       },
-      function (err, user) {
-        if (err) return cb(err);
-        cb(null, user);
+      function (errMessage, user) {
+        if (errMessage) return cb(errMessage);
+        cb(errMessage, user);
       }
     );
   });

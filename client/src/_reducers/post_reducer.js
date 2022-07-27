@@ -1,4 +1,9 @@
-import { GET_POST, SEARCH_POST, DETAIL_POST, LIKE_POST } from '../_actions/types';
+import {
+  GET_POST,
+  SEARCH_POST,
+  DETAIL_POST,
+  LIKE_POST,
+} from '../_actions/types';
 
 const initialState = null;
 
@@ -11,7 +16,7 @@ export default function getcompleteState(state = initialState, action) {
     case DETAIL_POST:
       return { ...state, getDetailSuccess: action.payload };
     case LIKE_POST:
-    return { ...state, like: action.payload };
+      return { ...state, likePost: action.payload };
     default:
       return state;
   }
