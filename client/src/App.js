@@ -5,6 +5,7 @@ import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import PostPage from './components/views/PostPage/PostPage';
 import ShowEvent from './components/views/ShowEvent/ShowEvent';
+import MyPage from './components/views/MyPage/Mypage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/post/:postId' element={<PostPage />} />
         <Route exact path='/showevent/' element={<ShowEvent />} />
         <Route exact path='/showevent/:name' element={<ShowEvent />} />
+        <Route exact path='/mypage' element={<MyPage />} />
       </Routes>
     </div>
   );
