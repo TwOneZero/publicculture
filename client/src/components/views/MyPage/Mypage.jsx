@@ -5,6 +5,7 @@ import styled from "styled-components";
 import MypageEdit from "./MypageEdit";
 import MypageInfo from "./MypageInfo";
 import Auth from "../../../hoc/auth";
+import { auth } from '../../../_actions/user_action';
 
 const MypageBox = styled.div`
   padding: 0px;
@@ -152,6 +153,14 @@ const InfoBox = styled.div`
 
 function Mypage() {
   const [mode, setMode] = useState("myProfile");
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    dispatch(auth()).then((res) => {
+      setUserData(res.payload);
+    });
+  }, [setUserData, dispatch]);
 
   const onMenuButtonClick = (e) => {
     if (e.target.id === "myProfile") {
@@ -180,7 +189,7 @@ function Mypage() {
             </MyinfoBtn>
           </UserBtnBox>
           <UserNamePreferBox>
-            <UserName>Mihee</UserName>
+            {userData ? <UserName>{userData.name}</UserName> : ''}
             <PreferenceBox>선호 장르 : 콘서트</PreferenceBox>
           </UserNamePreferBox>
 
