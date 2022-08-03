@@ -1,22 +1,12 @@
 /* eslint-disable react/jsx-pascal-case */
 // import { Axios } from 'axios';
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../../_actions/user_action";
+import { checkName, registerUser } from "../../../_actions/user_action";
 import styled from "styled-components";
 import Auth from "../../../hoc/auth";
 import axios from "axios";
-=======
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { checkName, registerUser } from '../../../_actions/user_action';
-import styled from 'styled-components';
-import Auth from '../../../hoc/auth';
-import axios from 'axios';
->>>>>>> upstream/main
 
 const Register_page_container = styled.form`
   display: flex;
@@ -147,21 +137,12 @@ function RegisterPage() {
     setConfirmPW(e.target.value);
   };
 
-<<<<<<< HEAD
-  const onCheckEmail = async () => {
-    await axios.post("/api/users/checkEmail", { email: Email }).then((res) => {
-      if (res.data.success) {
-        alert("사용 가능한 이메일 입니다.");
-      } else {
-        alert("이미 존재하는 이메일 입니다.");
-=======
   const onCheckName = async () => {
     dispatch(checkName({ name: Name })).then((res) => {
       if (res.payload.success) {
-        alert('사용가능한 닉네임입니다.');
+        alert("사용가능한 닉네임입니다.");
       } else {
-        alert('이미 존재하는 닉네임입니다.');
->>>>>>> upstream/main
+        alert("이미 존재하는 닉네임입니다.");
       }
     });
   };
@@ -204,11 +185,7 @@ function RegisterPage() {
             type="text"
             value={Name}
             onChange={onChangeName}
-<<<<<<< HEAD
-            placeholder="이름"
-=======
-            placeholder='닉네임'
->>>>>>> upstream/main
+            placeholder="닉네임"
           />
           <NameCheckBtn onClick={onCheckName}>닉네임 중복 확인</NameCheckBtn>
           <Input_Email
@@ -217,11 +194,6 @@ function RegisterPage() {
             onChange={onChangeEmail}
             placeholder="이메일"
           />
-<<<<<<< HEAD
-          <EmailCheckBtn onClick={onCheckEmail}>중복체크</EmailCheckBtn>
-
-=======
->>>>>>> upstream/main
           <Input_PW
             type="password"
             value={Password}

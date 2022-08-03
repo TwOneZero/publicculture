@@ -6,7 +6,6 @@ import MypageEdit from "./MypageEdit";
 import MypageInfo from "./MypageInfo";
 import Auth from "../../../hoc/auth";
 
-
 const MypageBox = styled.div`
   padding: 0px;
   margin: 0px;
@@ -151,8 +150,6 @@ const InfoBox = styled.div`
   height: 1000px;
 `;
 
-
-
 function Mypage() {
   const [mode, setMode] = useState("myProfile");
 
@@ -169,7 +166,6 @@ function Mypage() {
     }
   };
 
-  
   return (
     <MypageBox>
       <UserBox>
@@ -177,7 +173,7 @@ function Mypage() {
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i class="fa-solid fa-user"></i>
+              <i className="fa-solid fa-user"></i>
             </UserIcon>
             <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
               My Info
@@ -191,14 +187,14 @@ function Mypage() {
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
               <UserInfoEditIcon>
-                <i class="fa-solid fa-gear"></i>
+                <i className="fa-solid fa-gear"></i>
               </UserInfoEditIcon>
               <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
             </UserInfoEditBox>
 
             <LikedBox onClick={onMenuButtonClick} id="likedpostings">
               <LikeIcon>
-                <i class="fa-solid fa-heart"></i>
+                <i className="fa-solid fa-heart"></i>
               </LikeIcon>
               <LikeTitle>나의 관심 행사</LikeTitle>
             </LikedBox>
