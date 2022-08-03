@@ -1,50 +1,100 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { getRandompost } from '../../../_actions/post_action';
+
+const IMG = styled.img`
+  width: 100%;
+  height: 50vh;
+  padding: 10%;
+`;
+
+const Container = styled.div`
+  width: 50%;
+  //overflow: hidden;
+  display: flex;
+  flex-direction: center;
+`;
+const Button = styled.button`
+  all: unset;
+  border: 1px solid coral;
+  padding: 0.5em 2em;
+  color: coral;
+  border-radius: 10px;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: coral;
+    color: #fff;
+  }
+`;
+const SliderContainer = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
 //import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
-  const navigate = useNavigate();
-  // const getPosts = () => {
-  //   axios.get('/api/posts').then((res) => {
-  //     console.log(res.data);
-  //   });
-  // };
+  const dispatch = useDispatch();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideRef = useRef(null);
+  
+  const TOTAL_SLIDES = 19;
+  //const images = [];
+  //images.length = 20;
+  const [images, setImage] = useState([]);
 
-  const onClick = () => {
-    axios.get('/api/users/logout').then((res) => {
-      if (res.data.success) {
-        navigate('/login');
+  const nextSlide = () => {
+      if (currentSlide >= TOTAL_SLIDES) { 
+        setCurrentSlide(0);
       } else {
-        alert('이미 로그아웃 되어있습니다.');
+        setCurrentSlide(currentSlide + 1);
       }
-    });
+    };
+
+  const prevSlide = () => {
+    if (currentSlide === 0) {
+      setCurrentSlide(TOTAL_SLIDES);
+    } else {
+      setCurrentSlide(currentSlide - 1);
+    }
   };
 
-  const MoveToLogin = () => {
-    axios.get('api/users/auth').then((res) => {
-      if (res.data.isAuth) {
-        alert('이미 로그인 되어 있음');
+  useEffect(()=>{
+    dispatch(getRandompost()).then((res) => {
+      if (res.payload.posts) {
+          //console.log(res.payload.posts)
+          //console.log(res.payload.posts);
+          //images.push(res.payload.posts[i].main_img);
+          let imgSrc = res.payload.posts.map(post=>post.main_img)
+          setImage(imgSrc)
+          console.log(images);
       } else {
-        navigate('/login');
+        console.log('error!!!!!!!!!!!!!!');
       }
     });
-  };
+  },[])
 
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-      }}
-    >
-      {/* <p>{getPosts()}</p> */}
+  useEffect(() => {
+    slideRef.current.style.transition = "all 0.5s ease-in-out";
+    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; 
+  }, [currentSlide]);
+
+return (
+    <div>
+    <Container>
+      <SliderContainer ref={slideRef}>
+      {images.map(src=><IMG src ={src}/>)}
+      </SliderContainer>
+    </Container>
+    <div>
+      <Button onClick={prevSlide}>Previous Slide</Button>
+      <Button onClick={nextSlide}>Next Slide</Button>
     </div>
+  </div>  
   );
 }
 
