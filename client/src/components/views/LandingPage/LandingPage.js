@@ -6,28 +6,36 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { getRandompost } from '../../../_actions/post_action';
 
-const IMG = styled.img`
+const SliderDiv = styled.div`
+  display: flex;
   width: 100%;
-  height: 50vh;
-  padding: 10%;
+  //flex-direction: center;
+  justify-content: space-between;
+`;
+
+const IMG = styled.img`
+  width: 80%;
+  height: 60vh;
+  padding: 5% 2%;
 `;
 
 const Container = styled.div`
-  width: 50%;
-  //overflow: hidden;
+  width: 90%;
+  overflow: hidden;
   display: flex;
-  flex-direction: center;
+  //flex-direction: center;
 `;
 const Button = styled.button`
-  all: unset;
-  border: 1px solid coral;
-  padding: 0.5em 2em;
-  color: coral;
-  border-radius: 10px;
+  //all: unset;
+  border: none;
+  padding: 1%;
+  background-color: transparent;
+  //border-radius: 10px;
+  font-size: 30px;
   &:hover {
     transition: all 0.3s ease-in-out;
-    background-color: coral;
-    color: #fff;
+    //background-color: coral;
+    //color: #fff;
   }
 `;
 const SliderContainer = styled.div`
@@ -84,17 +92,15 @@ function LandingPage() {
   }, [currentSlide]);
 
 return (
-    <div>
+    <SliderDiv>
+    <Button onClick={prevSlide}>&#60;</Button>
     <Container>
       <SliderContainer ref={slideRef}>
       {images.map(src=><IMG src ={src}/>)}
       </SliderContainer>
     </Container>
-    <div>
-      <Button onClick={prevSlide}>Previous Slide</Button>
-      <Button onClick={nextSlide}>Next Slide</Button>
-    </div>
-  </div>  
+    <Button onClick={nextSlide}>&#62;</Button>
+  </SliderDiv>  
   );
 }
 
