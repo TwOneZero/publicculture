@@ -24,6 +24,11 @@ const userSchema = new Schema(
       required: true,
       minlength: [5, '비밀번호는 5자리 이상이어야 합니다.'],
     },
+    genre: {
+      type: String,
+      maxlength: 100,
+      required: true,
+    },
     role: {
       type: Number,
       //0 은 일반유저
