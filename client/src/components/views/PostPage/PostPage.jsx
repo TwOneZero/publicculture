@@ -55,6 +55,31 @@ const Like_container = styled.div`
   font-size: 28px; 
 `;
 
+const TabBar = styled.div`
+  display: flex;
+  height: 55px;
+  width: 70%;
+  padding: 10px 100px;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  border-bottom: solid 1px black;
+  // border: 1px solid black;
+`;
+
+const TabBtn = styled.button`
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  &:hover {
+    //background-color: #a9a9a9;
+    border-bottom: 4px solid #ffcb6b;
+  }
+`;
+
 function PostPage() {
   let params = useParams();
   const dispatch = useDispatch();
@@ -65,6 +90,12 @@ function PostPage() {
   const [date, setDate] = useState();
   const [use_trgt, setTarget] = useState();
   const [use_fee, setFee] =  useState();
+
+  const [tab, setTab] = useState(0);
+  const settingTab = (index) => {
+    setTab(index)
+  }
+
 
   
   useEffect(() => {
@@ -118,8 +149,29 @@ function PostPage() {
         <div>좋아요</div>
      </Like_container>
      <Comment props={params.postId}/>
+
+     <TabBar itemType='button'>
+        <TabBtn
+        name='지도'
+        onClick={() => settingTab(0)}
+        >지도</TabBtn>
+        <TabBtn
+        name='맛집'
+        onClick={() => settingTab(1)}
+        >맛집</TabBtn>
+        <TabBtn
+        name='주변 카페'
+        onClick={() => settingTab(2)}
+        >주변 카페</TabBtn>
+      </TabBar>
+      <TabContent tab={tab}/>
+
     </div>
   );  
+}
+
+function TabContent(props){
+  return [ <div>내용0</div>, <div>내용1</div>, <div>내용2</div> ][props.tab]
 }
 
 export default Auth(PostPage,null);
