@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MypageEdit from "./MypageEdit";
 import MypageInfo from "./MypageInfo";
 import Auth from "../../../hoc/auth";
-import { auth } from '../../../_actions/user_action';
+import { auth } from "../../../_actions/user_action";
 
 const MypageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //width: 1000px;
   padding: 0px;
   margin: 0px;
   width: 100%;
@@ -20,30 +24,36 @@ const UserBox = styled.div`
   display: flex;
   flex-direction: column;
   background-color: black;
+  align-items: center;
   height: 300px;
   color: white;
   padding-left: 100px;
 `;
 
+const UserBoxContainer = styled.div`
+  width: 1500px;
+`;
+
 const MypageTitle = styled.div`
   font-size: 35px;
-  margin: 40px 0px 0px 40px;
+  margin: 20px 0px 0px 40px;
   font-weight: 500;
 `;
 
 const UserInfoBox = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 const UserBtnBox = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0px 20px 0px 80px;
 `;
 
 const UserIcon = styled.div`
   color: white;
   font-size: 100px;
-  margin: 10px 0px 0px 100px;
 `;
 
 const MyinfoBtn = styled.button`
@@ -53,18 +63,18 @@ const MyinfoBtn = styled.button`
   background-color: White;
   cursor: pointer;
   font-size: 18px;
-  margin: 0px 0px 0px 100px;
 `;
 
 const UserNamePreferBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px 0px 0px 80px;
+  margin: 0px 80px 0px 20px;
 `;
 
 const UserName = styled.div`
   font-weight: 500;
   font-size: 70px;
+  margin-top: 20px;
 `;
 
 const PreferenceBox = styled.div`
@@ -74,11 +84,13 @@ const PreferenceBox = styled.div`
 
 const UserInfoMenuBtns = styled.div`
   display: flex;
+  margin-left: 100px;
   width: 1000px;
+  justify-content: space-around;
 `;
 
 const UserInfoEditBox = styled.button`
-  margin: 10px 0px 0px 300px;
+  margin: 10px 0px 0px 0px;
   width: 200px;
   height: 200px;
   font-weight: 400;
@@ -102,9 +114,11 @@ const UserInfoEditTitle = styled.div`
 `;
 
 const LikedBox = styled.button`
-  margin: 10px 0px 0px 100px;
+  margin: 10px 0px 0px 0px;
   font-weight: 400;
   font-size: 25px;
+  width: 200px;
+  height: 200px;
   color: white;
   background-color: black;
   border: none;
@@ -124,9 +138,11 @@ const LikeTitle = styled.div`
 `;
 
 const CommentBox = styled.button`
-  margin: 10px 0px 0px 100px;
+  margin: 10px 0px 0px 0px;
   font-weight: 400;
   font-size: 25px;
+  width: 200px;
+  height: 200px;
   color: white;
   background-color: black;
   border: none;
@@ -182,28 +198,29 @@ function Mypage() {
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i className="fa-solid fa-user"></i>
+              <i class="fa-solid fa-user"></i>
             </UserIcon>
             <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
               My Info
             </MyinfoBtn>
           </UserBtnBox>
           <UserNamePreferBox>
-            {userData ? <UserName>{userData.name}</UserName> : ''}
+            {userData ? <UserName>{userData.name}</UserName> : ""}
+
             <PreferenceBox>선호 장르 : 콘서트</PreferenceBox>
           </UserNamePreferBox>
 
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
               <UserInfoEditIcon>
-                <i className="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-gear"></i>
               </UserInfoEditIcon>
               <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
             </UserInfoEditBox>
 
             <LikedBox onClick={onMenuButtonClick} id="likedpostings">
               <LikeIcon>
-                <i className="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-heart"></i>
               </LikeIcon>
               <LikeTitle>나의 관심 행사</LikeTitle>
             </LikedBox>

@@ -10,7 +10,7 @@ const EditMypage_container = styled.div`
   margin: 0px;
   width: 100%;
   height: 100%;
-  margin-top: 30px;
+  margin-top: 10px;
   font-family: "Lato", sans-serif;
   font-weight: 1000;
   font-size: 24px;
