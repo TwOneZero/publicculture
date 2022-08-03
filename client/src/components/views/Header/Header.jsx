@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import EventPage from '../EventPage/EventPage';
 import { searchPost } from '../../../_actions/post_action';
 import { logout } from '../../../_actions/user_action';
+import { useSyncExternalStore } from 'react';
 
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 const MenuContainer = styled.div`
@@ -164,7 +165,7 @@ const Button = styled.button`
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const onLogoClicked = () => {
     navigate('/');
@@ -180,9 +181,18 @@ function Header() {
   const onPostClicked = () => {
     navigate('/post');
   };
+
+  const onMypageClicked = () => {
+    navigate('/mypage');
+  }
   const logOut = () => {
     dispatch(logout()).then((res) => {
-      console.log(res);
+      if (res.payload.isAuth === false) {
+        alert('이미 로그아웃 상태입니다.!');
+      } else {
+        alert('로그아웃 성공');
+        navigate('/');
+      }
     });
   };
 
@@ -196,10 +206,8 @@ function Header() {
     });
   };
 
-  
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   const onSearchClicked = (e) => {
@@ -209,7 +217,7 @@ function Header() {
         console.log(res);
         navigate(`showevent/${search}`, { state: { infos: res.payload } });
       } else {
-        return new Response({ error: "error!" });
+        return new Response({ error: 'error!' });
       }
     });
   };
@@ -218,28 +226,26 @@ function Header() {
     <>
       <HeaderContainer>
         <MenuContainer>
-          <MypageBtn>My page</MypageBtn>
+          <MypageBtn onClick={onMypageClicked}>My page</MypageBtn>
           <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
           <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
           <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
         </MenuContainer>
-        
 
         <HeaderLogo type='button' onClick={onLogoClicked}>
           Public Culture
-          
         </HeaderLogo>
-        <SearchBarArea>
-          <label htmlFor="search"></label>
+        <SearchBarArea onSubmit={onSearchClicked}>
+          <label htmlFor='search'></label>
           <SearchBar
             onChange={onChangeSearch}
-            name="search"
+            name='search'
             value={search}
-            type="text"
-            placeholder="검색어를 입력해주세요."
+            type='text'
+            placeholder='검색어를 입력해주세요.'
           ></SearchBar>
-          <Button type="submit">
-            <i className="fas fa-search"></i>
+          <Button type='submit'>
+            <i className='fas fa-search'></i>
           </Button>
         </SearchBarArea>
       </HeaderContainer>

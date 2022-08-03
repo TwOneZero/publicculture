@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../../_actions/user_action";
-import styled from "styled-components";
-import Auth from "../../../hoc/auth";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../../_actions/user_action';
+import styled from 'styled-components';
+import Auth from '../../../hoc/auth';
 
 const Login_page_container = styled.form`
   display: flex;
@@ -68,8 +68,8 @@ const Login_btn = styled.button`
 `;
 
 function LoginPage() {
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const onChangeEmail = (e) => {
@@ -90,9 +90,9 @@ function LoginPage() {
 
     dispatch(loginUser(body)).then((res) => {
       if (res.payload.loginSuccess) {
-        navigate("/");
+        navigate('/');
       } else {
-        alert("Error!");
+        alert(res.payload.message);
       }
     });
   };
@@ -100,10 +100,10 @@ function LoginPage() {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
       }}
     >
       <Login_page_container onSubmit={onSubmitHandler}>
@@ -111,17 +111,17 @@ function LoginPage() {
         <Login_form_container>
           <Input_Email
             onChange={onChangeEmail}
-            type="text"
-            id="id"
+            type='text'
+            id='id'
             value={Email}
-            placeholder="이메일 입력"
+            placeholder='이메일 입력'
           />
           <Input_PW
             onChange={onChangePassword}
-            type="password"
-            id="password"
+            type='password'
+            id='password'
             value={Password}
-            placeholder="패스워드 입력"
+            placeholder='패스워드 입력'
           />
           <Login_btn>로그인</Login_btn>
         </Login_form_container>

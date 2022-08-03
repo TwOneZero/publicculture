@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import EventPage from '../EventPage/EventPage';
 import axios from 'axios';
+import { likePost } from '../../../_actions/post_action';
+import { useDispatch } from 'react-redux';
 
 const PostingContainer = styled.div`
   margin: 7%;
@@ -35,9 +37,29 @@ const ShowEvent = () => {
   //navigate 로 넘긴 데이터를 useLocation 으로 받는다.
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const infos = location.state.infos;
 
   const onPostingClicked = () => {};
+
+  const likeButton = (id) => {
+    let postId = id;
+    console.log(postId);
+
+    dispatch(likePost(postId))
+      .then((res) => {
+        if (res.payload.isAuth === false) {
+          alert(res.payload.message);
+        }
+        if (res.payload) {
+          console.log(res.payload);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -53,7 +75,6 @@ const ShowEvent = () => {
                   onClick={onPostingClicked}
                 />
               </a>
-              <p>{info._id}</p>
               <div
                 style={{
                   fontWeight: '700',
@@ -68,6 +89,13 @@ const ShowEvent = () => {
               </div>
               <div style={{ fontSize: '14px' }}>{info.date}</div>
               <div>{info.place}</div>
+              <button
+                onClick={() => {
+                  likeButton(info._id);
+                }}
+              >
+                좋아요{info.likes.length}
+              </button>
             </PostingInfo>
           </div>
         ))}
