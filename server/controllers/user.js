@@ -49,7 +49,7 @@ exports.loginUser = async (req, res, next) => {
 };
 
 //User's Auth Checking
-exports.checkAuth = async (req, res) => {
+exports.checkAuth = (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -61,6 +61,7 @@ exports.checkAuth = async (req, res) => {
   });
 };
 
+//로그아웃
 exports.logoutUser = async (req, res, next) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
@@ -73,6 +74,10 @@ exports.logoutUser = async (req, res, next) => {
   );
 };
 
+//유저 업데이트
+exports.updateUser = async (req, res) => {};
+
+//닉네임 중복 체크
 exports.checkName = async (req, res) => {
   try {
     const user = await User.findOne({ name: req.body.name });
