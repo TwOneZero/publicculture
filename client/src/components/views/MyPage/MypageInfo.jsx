@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { auth } from '../../../_actions/user_action';
+import { auth } from "../../../_actions/user_action";
 import { useDispatch } from "react-redux";
-
 
 const Mypage_container = styled.div`
   display: flex;
@@ -101,12 +100,12 @@ const MypageInfo = ({ nickname, about_me, genres }) => {
           <Nickname_container>
             Nickname
             <Line></Line>
-            {userData ? <Nickname>{userData.name}</Nickname> : ''}
+            {userData ? <Nickname>{userData.name}</Nickname> : ""}
           </Nickname_container>
           <EmailContainer>
             E-mail
             <Line></Line>
-            {userData ? <Email>{userData.email}</Email> : ''}
+            {userData ? <Email>{userData.email}</Email> : ""}
           </EmailContainer>
           <Genre_container>
             Prefer Genre
