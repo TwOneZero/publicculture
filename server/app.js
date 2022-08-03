@@ -1,21 +1,11 @@
-<<<<<<< HEAD
+const dotenv = require("dotenv");
+const path = require("path");
+dotenv.config({ path: path.join(__dirname, "./.env") });
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const config = require("./config/apiKeys/key");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
-=======
-const dotenv = require('dotenv');
-const path = require('path');
-dotenv.config({ path: path.join(__dirname, './.env') });
-const express = require('express');
-const mongoose = require('mongoose');
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
->>>>>>> upstream/main
 const app = express();
 
 app.set("port", process.env.PORT || 5000);
@@ -28,16 +18,9 @@ app.use(morgan("dev"));
 app.use(cors());
 
 //router imports
-<<<<<<< HEAD
 const userRouter = require("./routes/user");
-// const eventRouter = require('./routes/event');
 const postRouter = require("./routes/post");
 const commentRouter = require("./routes/comment");
-=======
-const userRouter = require('./routes/user');
-const postRouter = require('./routes/post');
-const commentRouter = require('./routes/comment');
->>>>>>> upstream/main
 
 //mongoDB cloud URI
 const uri = process.env.MONGO_URI;
@@ -48,16 +31,9 @@ mongoose
   .catch((error) => console.log(error));
 
 //라우팅 url
-<<<<<<< HEAD
 app.use("/api", userRouter);
-// app.use('/api', eventRouter);
 app.use("/api", postRouter);
 app.use("/api", commentRouter);
-=======
-app.use('/api', userRouter);
-app.use('/api', postRouter);
-app.use('/api', commentRouter);
->>>>>>> upstream/main
 
 //url 에러
 app.use((req, res, next) => {
