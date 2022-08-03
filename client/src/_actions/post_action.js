@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_POST, SEARCH_POST, DETAIL_POST, LIKE_POST } from './types';
 
 //getAllpost
-export function getAllpost() {
+export function getRandompost() {
   const request = axios.get('/api/posts').then((res) => res.data);
 
   return {
