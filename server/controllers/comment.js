@@ -13,7 +13,7 @@ exports.addComment = async (req, res) => {
     }
     //comment 인스턴스
     const comment = new Comment({
-      userId: req.user,
+      userId: req.user._id,
       //post ObjectId
       post: id,
       //client form 에서 comment field 로 넘겨주기

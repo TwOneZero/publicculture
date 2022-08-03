@@ -33,8 +33,8 @@ export function getPostDetails(id) {
 }
 
 //likepost
-export function likePost() {
-  const request = axios.patch('/api/:id/likePost').then((res) => res.data);
+export function likePost(id) {
+  const request = axios.patch(`/api/likePost/${id}`).then((res) => res.data);
 
   return {
     type: LIKE_POST,
