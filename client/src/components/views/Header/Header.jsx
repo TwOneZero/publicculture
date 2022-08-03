@@ -1,12 +1,12 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import EventPage from '../EventPage/EventPage';
-import { searchPost } from '../../../_actions/post_action';
-import { logout } from '../../../_actions/user_action';
-import { useSyncExternalStore } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import EventPage from "../EventPage/EventPage";
+import { searchPost } from "../../../_actions/post_action";
+import { logout } from "../../../_actions/user_action";
+import { useSyncExternalStore } from "react";
 
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 const MenuContainer = styled.div`
@@ -27,7 +27,7 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderLogo = styled.div`
-  font-family: 'YUniverse-B';
+  font-family: "YUniverse-B";
   color: #faebd7;
   font-size: 60px;
   margin: 15px 5px;
@@ -47,7 +47,7 @@ const LoginBtn = styled.div`
   border: 2px solid #faebd7;
   background-color: #faebd7;
   font-size: 17px;
-  font-family: 'YUniverse-B';
+  font-family: "YUniverse-B";
   text-shadow: 1px 1px 1px gray;
   margin-left: 2px;
   cursor: pointer;
@@ -64,7 +64,7 @@ const MypageBtn = styled.div`
   border: 2px solid #faebd7;
   background-color: #faebd7;
   font-size: 17px;
-  font-family: 'YUniverse-B';
+  font-family: "YUniverse-B";
   text-shadow: 1px 1px 1px gray;
   margin-left: 2px;
   cursor: pointer;
@@ -81,7 +81,7 @@ const RegisterBtn = styled.div`
   border: 2px solid #faebd7;
   background-color: #faebd7;
   font-size: 17px;
-  font-family: 'YUniverse-B';
+  font-family: "YUniverse-B";
   text-shadow: 1px 1px 1px gray;
   margin-left: 2px;
   text-align: center;
@@ -99,7 +99,7 @@ const LogoutBtn = styled.div`
   border: 2px solid #faebd7;
   background-color: #faebd7;
   font-size: 17px;
-  font-family: 'YUniverse-B';
+  font-family: "YUniverse-B";
   text-shadow: 1px 1px 1px gray;
   margin-left: 2px;
   text-align: center;
@@ -123,7 +123,7 @@ const GenreBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
   &:hover {
     //background-color: #a9a9a9;
@@ -165,33 +165,33 @@ const Button = styled.button`
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const onLogoClicked = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const onLoginbtnClicked = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const onRegiterClicked = () => {
-    navigate('/register');
+    navigate("/register");
   };
   const onPostClicked = () => {
-    navigate('/post');
+    navigate("/post");
   };
 
   const onMypageClicked = () => {
-    navigate('/mypage');
-  }
+    navigate("/mypage");
+  };
   const logOut = () => {
     dispatch(logout()).then((res) => {
       if (res.payload.isAuth === false) {
-        alert('이미 로그아웃 상태입니다.!');
+        alert("이미 로그아웃 상태입니다.!");
       } else {
-        alert('로그아웃 성공');
-        navigate('/');
+        alert("로그아웃 성공");
+        navigate("/");
       }
     });
   };
@@ -217,7 +217,7 @@ function Header() {
         console.log(res);
         navigate(`showevent/${search}`, { state: { infos: res.payload } });
       } else {
-        return new Response({ error: 'error!' });
+        return new Response({ error: "error!" });
       }
     });
   };
@@ -232,31 +232,31 @@ function Header() {
           <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
         </MenuContainer>
 
-        <HeaderLogo type='button' onClick={onLogoClicked}>
+        <HeaderLogo type="button" onClick={onLogoClicked}>
           Public Culture
         </HeaderLogo>
         <SearchBarArea onSubmit={onSearchClicked}>
-          <label htmlFor='search'></label>
+          <label htmlFor="search"></label>
           <SearchBar
             onChange={onChangeSearch}
-            name='search'
+            name="search"
             value={search}
-            type='text'
-            placeholder='검색어를 입력해주세요.'
+            type="text"
+            placeholder="검색어를 입력해주세요."
           ></SearchBar>
-          <Button type='submit'>
-            <i className='fas fa-search'></i>
+          <Button type="submit">
+            <i className="fas fa-search"></i>
           </Button>
         </SearchBarArea>
       </HeaderContainer>
 
-      <GenreBar itemType='button' onClick={onGenreClicked}>
-        <GenreBtn name='뮤지컬'>뮤지컬/오페라</GenreBtn>
-        <GenreBtn name='전시'>전시/미술</GenreBtn>
-        <GenreBtn name='연극'>연극</GenreBtn>
-        <GenreBtn name='콘서트'>콘서트</GenreBtn>
-        <GenreBtn name='클래식'>클래식</GenreBtn>
-        <GenreBtn name='무용'>무용</GenreBtn>
+      <GenreBar itemType="button" onClick={onGenreClicked}>
+        <GenreBtn name="뮤지컬">뮤지컬/오페라</GenreBtn>
+        <GenreBtn name="전시">전시/미술</GenreBtn>
+        <GenreBtn name="연극">연극</GenreBtn>
+        <GenreBtn name="콘서트">콘서트</GenreBtn>
+        <GenreBtn name="클래식">클래식</GenreBtn>
+        <GenreBtn name="무용">무용</GenreBtn>
       </GenreBar>
     </>
   );
