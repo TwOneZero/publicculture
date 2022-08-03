@@ -110,7 +110,7 @@ const MypageInfo = ({ nickname, about_me, genres }) => {
           <Genre_container>
             Prefer Genre
             <Line></Line>
-            <Genre>콘서트</Genre>
+            {userData ? <Genre>{userData.genre}</Genre> : ""}
           </Genre_container>
         </Page_area>
       </Mypage_container>
