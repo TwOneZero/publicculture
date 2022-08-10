@@ -182,7 +182,7 @@ function Mypage() {
   const testGetFav = () => {
     axios.get('/api/likedPost').then((res) => console.log(res.data));
   };
-   
+
   const onMenuButtonClick = (e) => {
     if (e.target.id === 'myProfile') {
       setMode('myProfile');
@@ -221,6 +221,7 @@ function Mypage() {
                 <i class='fa-solid fa-gear'></i>
               </UserInfoEditIcon>
               <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
+              {testUpdate()}
             </UserInfoEditBox>
 
             <LikedBox onClick={onMenuButtonClick} id='likedpostings'>

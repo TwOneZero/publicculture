@@ -81,8 +81,10 @@ exports.logoutUser = async (req, res, next) => {
       const newUser = {
         //하드코딩으로 바꿈
         //프론트에서 바꿀 때는 req.body 에 담아서
+
         name: req.user.name,
         password: req.user.password,
+
       };
       const user = await User.findOne({ _id: req.user.id }).then((user) => {
         console.log(user);
@@ -106,6 +108,7 @@ exports.logoutUser = async (req, res, next) => {
     }
   };
 
+
 //닉네임 중복 체크
 exports.checkName = async (req, res) => {
   try {
@@ -116,7 +119,7 @@ exports.checkName = async (req, res) => {
       return res.json({ success: false });
     }
   } catch (error) {
-    return res.json({ err });
+    return res.json({ error });
   }
 };
 

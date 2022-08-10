@@ -24,4 +24,5 @@ router.post('/users/checkName', checkName);
 //업데이트
 router.post('/users/updateUser', auth, updateUser);
 
+router.get('/updateUser', auth, updateUser);
 module.exports = router;
