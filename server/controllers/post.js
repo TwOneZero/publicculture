@@ -92,3 +92,17 @@ exports.likePost = async (req, res) => {
     next(error);
   }
 };
+
+exports.getFavPost = async (req, res, next) => {
+  try {
+    //모든 포스트 가져오기
+    const posts = await Post.find({}).exec();
+    //user id 와 일치하는 배열 filtering
+    let likedPost = posts.filter((arr) => {
+      return arr.likes.find((id) => id === String(req.user._id));
+    });
+    return res.json({ myFavPost: likedPost });
+  } catch (error) {
+    next(error);
+  }
+};
