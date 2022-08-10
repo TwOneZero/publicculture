@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import MypageEdit from "./MypageEdit";
-import MypageInfo from "./MypageInfo";
-import Auth from "../../../hoc/auth";
-
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import MypageEdit from './MypageEdit';
+import MypageInfo from './MypageInfo';
+import Auth from '../../../hoc/auth';
+import axios from 'axios';
 
 const MypageBox = styled.div`
   padding: 0px;
@@ -13,7 +13,7 @@ const MypageBox = styled.div`
   width: 100%;
   height: 100%;
   font-size: 17px;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const UserBox = styled.div`
@@ -151,25 +151,26 @@ const InfoBox = styled.div`
   height: 1000px;
 `;
 
-
-
 function Mypage() {
-  const [mode, setMode] = useState("myProfile");
+  const [mode, setMode] = useState('myProfile');
+
+  const testGetFav = () => {
+    axios.get('/api/likedPost').then((res) => console.log(res.data));
+  };
 
   const onMenuButtonClick = (e) => {
-    if (e.target.id === "myProfile") {
-      setMode("myProfile");
+    if (e.target.id === 'myProfile') {
+      setMode('myProfile');
       console.log(e.target.id);
-    } else if (e.target.id === "editProfile") {
-      setMode("editProfile");
-    } else if (e.target.id === "likedpostings") {
-      setMode("likedpostings");
-    } else if (e.target.id === "mycomment") {
-      setMode("mycomment");
+    } else if (e.target.id === 'editProfile') {
+      setMode('editProfile');
+    } else if (e.target.id === 'likedpostings') {
+      setMode('likedpostings');
+    } else if (e.target.id === 'mycomment') {
+      setMode('mycomment');
     }
   };
 
-  
   return (
     <MypageBox>
       <UserBox>
@@ -177,9 +178,9 @@ function Mypage() {
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i class="fa-solid fa-user"></i>
+              <i class='fa-solid fa-user'></i>
             </UserIcon>
-            <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
+            <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
               My Info
             </MyinfoBtn>
           </UserBtnBox>
@@ -187,25 +188,25 @@ function Mypage() {
             <UserName>Mihee</UserName>
             <PreferenceBox>선호 장르 : 콘서트</PreferenceBox>
           </UserNamePreferBox>
-
+          {testGetFav()}
           <UserInfoMenuBtns>
-            <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
+            <UserInfoEditBox onClick={onMenuButtonClick} id='editProfile'>
               <UserInfoEditIcon>
-                <i class="fa-solid fa-gear"></i>
+                <i class='fa-solid fa-gear'></i>
               </UserInfoEditIcon>
               <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
             </UserInfoEditBox>
 
-            <LikedBox onClick={onMenuButtonClick} id="likedpostings">
+            <LikedBox onClick={onMenuButtonClick} id='likedpostings'>
               <LikeIcon>
-                <i class="fa-solid fa-heart"></i>
+                <i class='fa-solid fa-heart'></i>
               </LikeIcon>
               <LikeTitle>나의 관심 행사</LikeTitle>
             </LikedBox>
 
-            <CommentBox onClick={onMenuButtonClick} id="mycomment">
+            <CommentBox onClick={onMenuButtonClick} id='mycomment'>
               <CommentIcon>
-                <i class="fa-solid fa-comment"></i>
+                <i class='fa-solid fa-comment'></i>
               </CommentIcon>
               <CommentTitle> 내가 쓴 댓글 </CommentTitle>
             </CommentBox>
@@ -214,8 +215,8 @@ function Mypage() {
       </UserBox>
       <InfoBox>
         <div>
-          {mode === "myProfile" && <MypageInfo></MypageInfo>}
-          {mode === "editProfile" && <MypageEdit></MypageEdit>}
+          {mode === 'myProfile' && <MypageInfo></MypageInfo>}
+          {mode === 'editProfile' && <MypageEdit></MypageEdit>}
         </div>
       </InfoBox>
     </MypageBox>
