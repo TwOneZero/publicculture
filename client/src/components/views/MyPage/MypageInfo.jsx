@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Mypage from "./Mypage";
+import { auth } from "../../../_actions/user_action";
+import { useDispatch } from "react-redux";
 
 const Mypage_container = styled.div`
   display: flex;
@@ -83,6 +84,14 @@ const Page_area = styled.div`
 `;
 
 const MypageInfo = ({ nickname, about_me, genres }) => {
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    dispatch(auth()).then((res) => {
+      setUserData(res.payload);
+    });
+  }, [setUserData, dispatch]);
   return (
     <>
       <Mypage_container>
@@ -91,17 +100,17 @@ const MypageInfo = ({ nickname, about_me, genres }) => {
           <Nickname_container>
             Nickname
             <Line></Line>
-            <Nickname>Mihee</Nickname>
+            {userData ? <Nickname>{userData.name}</Nickname> : ""}
           </Nickname_container>
           <EmailContainer>
             E-mail
             <Line></Line>
-            <Email>chemh9738@gmail.com</Email>
+            {userData ? <Email>{userData.email}</Email> : ""}
           </EmailContainer>
           <Genre_container>
             Prefer Genre
             <Line></Line>
-            <Genre>콘서트</Genre>
+            {userData ? <Genre>{userData.genre}</Genre> : ""}
           </Genre_container>
         </Page_area>
       </Mypage_container>
