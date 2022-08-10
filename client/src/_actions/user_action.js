@@ -5,6 +5,7 @@ import {
   AUTH_USER,
   LOGOUT_USER,
   CHECK_NAME,
+  UPDATE_USER,
 } from './types';
 
 //login
@@ -56,6 +57,17 @@ export function checkName(name) {
 
   return {
     type: CHECK_NAME,
+    payload: request,
+  };
+}
+
+export function updateUser(){
+  const request = axios
+    .post('/api/users/updateuser')
+    .then((res) => res.data);
+
+  return {
+    type: UPDATE_USER,
     payload: request,
   };
 }

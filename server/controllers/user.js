@@ -75,7 +75,36 @@ exports.logoutUser = async (req, res, next) => {
 };
 
 //유저 업데이트
-exports.updateUser = async (req, res) => {};
+  exports.updateUser = async (req, res) => {
+    try {
+      //바꿀 패스워드
+      const newUser = {
+        //하드코딩으로 바꿈
+        //프론트에서 바꿀 때는 req.body 에 담아서
+        name: req.user.name,
+        password: req.user.password,
+      };
+      const user = await User.findOne({ _id: req.user.id }).then((user) => {
+        console.log(user);
+        user.name = newUser.name;
+        user.password = newUser.password;
+
+        user.markModified('name');
+        user.markModified('password');
+
+        user.save((err, userInfo) => {
+          if (err) return res.json({ success: false, err });
+          console.log('user 정보 업데이트');
+          return res.status(200).json({
+            success: true,
+            userInfo,
+          });
+        });
+      });
+    } catch (error) {
+      return res.json({ error });
+    }
+  };
 
 //닉네임 중복 체크
 exports.checkName = async (req, res) => {
@@ -90,3 +119,4 @@ exports.checkName = async (req, res) => {
     return res.json({ err });
   }
 };
+
