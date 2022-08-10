@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useDispatch} from "react-redux";
+import React, { useState } from "react";
+
 import styled from "styled-components";
 import axios from "axios";
+import { updateUser } from "../../../_actions/user_action";
+
+
 
 const EditMypage_container = styled.div`
   display: flex;
@@ -154,16 +159,35 @@ const Page_area = styled.div`
 `;
 
 const MypageEdit = () => {
+  const dispatch = useDispatch();
+  const [Name, setName] = useState("");
+  const onChangeName = (e) => {
+    setName(e.target.value);
+  }
+  const onNameConfirm = () => {
+    let body = {
+      name: Name,
+      password: "12345678",
+    }
+    dispatch(updateUser(body)).then((res) =>{
+      if(res.payload.success){
+        console.log("변경완료");
+      }else{
+        console.log(res.payload);
+      }
+    });
+  };
   return (
     <>
       <EditMypage_container>
         <Myprofile>내 정보 수정</Myprofile>
+        
         <Page_area>
           <Nickname_container>
             닉네임 변경
             <Line></Line>
-            <Nickname></Nickname>
-            <NicknameC_btn>confirm</NicknameC_btn>
+            <Nickname onChange={onChangeName}></Nickname>
+            <NicknameC_btn onClick={onNameConfirm}>confirm</NicknameC_btn>
           </Nickname_container>
           <PasswordContainer>
             비밀번호 변경

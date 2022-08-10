@@ -21,6 +21,8 @@ router.get('/users/auth', auth, checkAuth);
 router.get('/users/logout', auth, logoutUser);
 //이름체크
 router.post('/users/checkName', checkName);
+//업데이트
+router.post('/users/updateUser', auth, updateUser);
 
 router.get('/updateUser', auth, updateUser);
 module.exports = router;
