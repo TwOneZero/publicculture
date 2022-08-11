@@ -61,9 +61,9 @@ export function checkName(name) {
   };
 }
 
-export function updateUser(){
+export function updateUser(body) {
   const request = axios
-    .post('/api/users/updateuser')
+    .post('/api/users/updateuser', body)
     .then((res) => res.data);
 
   return {

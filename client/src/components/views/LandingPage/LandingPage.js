@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
@@ -49,19 +49,19 @@ function LandingPage() {
   const dispatch = useDispatch();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
-  
+
   const TOTAL_SLIDES = 19;
   //const images = [];
   //images.length = 20;
   const [images, setImage] = useState([]);
 
   const nextSlide = () => {
-      if (currentSlide >= TOTAL_SLIDES) { 
-        setCurrentSlide(0);
-      } else {
-        setCurrentSlide(currentSlide + 1);
-      }
-    };
+    if (currentSlide >= TOTAL_SLIDES) {
+      setCurrentSlide(0);
+    } else {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
 
   const prevSlide = () => {
     if (currentSlide === 0) {
@@ -71,36 +71,37 @@ function LandingPage() {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getRandompost()).then((res) => {
       if (res.payload.posts) {
-          //console.log(res.payload.posts)
-          //console.log(res.payload.posts);
-          //images.push(res.payload.posts[i].main_img);
-          let imgSrc = res.payload.posts.map(post=>post.main_img)
-          setImage(imgSrc)
-          console.log(images);
+        //console.log(res.payload.posts)
+        //console.log(res.payload.posts);
+        //images.push(res.payload.posts[i].main_img);
+        let imgSrc = res.payload.posts.map((post) => post.main_img);
+        setImage(imgSrc);
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-  },[])
+  }, [dispatch]);
 
   useEffect(() => {
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; 
+    slideRef.current.style.transition = 'all 0.5s ease-in-out';
+    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
 
-return (
+  return (
     <SliderDiv>
-    <Button onClick={prevSlide}>&#60;</Button>
-    <Container>
-      <SliderContainer ref={slideRef}>
-      {images.map(src=><IMG src ={src}/>)}
-      </SliderContainer>
-    </Container>
-    <Button onClick={nextSlide}>&#62;</Button>
-  </SliderDiv>  
+      <Button onClick={prevSlide}>&#60;</Button>
+      <Container>
+        <SliderContainer ref={slideRef}>
+          {images.map((src, idx) => (
+            <IMG key={idx} src={src} />
+          ))}
+        </SliderContainer>
+      </Container>
+      <Button onClick={nextSlide}>&#62;</Button>
+    </SliderDiv>
   );
 }
 

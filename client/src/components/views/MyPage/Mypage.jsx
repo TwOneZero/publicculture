@@ -170,13 +170,24 @@ const InfoBox = styled.div`
 function Mypage() {
   const [mode, setMode] = useState('myProfile');
   const dispatch = useDispatch();
+  const [resData, setResData] = useState(null);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    dispatch(auth()).then((res) => {
-      setUserData(res.payload);
-    });
-  }, [setUserData, dispatch]);
+    dispatch(auth())
+      .then((res) => {
+      setResData(res.payload);
+    })
+      .catch((error) => {
+        console.log(error);
+      })
+  },[dispatch]);
+
+  useEffect(() => {
+    if (resData) {
+      setUserData(resData);
+    }
+  },[resData])
 
   //관심행사 테스트
   const testGetFav = () => {
@@ -203,7 +214,7 @@ function Mypage() {
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i class='fa-solid fa-user'></i>
+              <i className='fa-solid fa-user'></i>
             </UserIcon>
             <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
               My Info
@@ -218,22 +229,21 @@ function Mypage() {
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id='editProfile'>
               <UserInfoEditIcon>
-                <i class='fa-solid fa-gear'></i>
+                <i className='fa-solid fa-gear'></i>
               </UserInfoEditIcon>
               <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
-              {testUpdate()}
             </UserInfoEditBox>
 
             <LikedBox onClick={onMenuButtonClick} id='likedpostings'>
               <LikeIcon>
-                <i class='fa-solid fa-heart'></i>
+                <i className='fa-solid fa-heart'></i>
               </LikeIcon>
               <LikeTitle>나의 관심 행사</LikeTitle>
             </LikedBox>
 
             <CommentBox onClick={onMenuButtonClick} id='mycomment'>
               <CommentIcon>
-                <i class='fa-solid fa-comment'></i>
+                <i className='fa-solid fa-comment'></i>
               </CommentIcon>
               <CommentTitle> 내가 쓴 댓글 </CommentTitle>
             </CommentBox>
