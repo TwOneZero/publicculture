@@ -203,7 +203,7 @@ function Mypage() {
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i class='fa-solid fa-user'></i>
+              <i className='fa-solid fa-user'></i>
             </UserIcon>
             <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
               My Info
@@ -218,22 +218,21 @@ function Mypage() {
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id='editProfile'>
               <UserInfoEditIcon>
-                <i class='fa-solid fa-gear'></i>
+                <i className='fa-solid fa-gear'></i>
               </UserInfoEditIcon>
               <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
-              {testUpdate()}
             </UserInfoEditBox>
 
             <LikedBox onClick={onMenuButtonClick} id='likedpostings'>
               <LikeIcon>
-                <i class='fa-solid fa-heart'></i>
+                <i className='fa-solid fa-heart'></i>
               </LikeIcon>
               <LikeTitle>나의 관심 행사</LikeTitle>
             </LikedBox>
 
             <CommentBox onClick={onMenuButtonClick} id='mycomment'>
               <CommentIcon>
-                <i class='fa-solid fa-comment'></i>
+                <i className='fa-solid fa-comment'></i>
               </CommentIcon>
               <CommentTitle> 내가 쓴 댓글 </CommentTitle>
             </CommentBox>
