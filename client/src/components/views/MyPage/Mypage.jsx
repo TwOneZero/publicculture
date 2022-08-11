@@ -170,13 +170,24 @@ const InfoBox = styled.div`
 function Mypage() {
   const [mode, setMode] = useState('myProfile');
   const dispatch = useDispatch();
+  const [resData, setResData] = useState(null);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    dispatch(auth()).then((res) => {
-      setUserData(res.payload);
-    });
-  }, [setUserData, dispatch]);
+    dispatch(auth())
+      .then((res) => {
+      setResData(res.payload);
+    })
+      .catch((error) => {
+        console.log(error);
+      })
+  },[dispatch]);
+
+  useEffect(() => {
+    if (resData) {
+      setUserData(resData);
+    }
+  },[resData])
 
   //관심행사 테스트
   const testGetFav = () => {
