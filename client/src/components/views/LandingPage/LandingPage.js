@@ -8,15 +8,13 @@ import { getRandompost } from '../../../_actions/post_action';
 
 const SliderDiv = styled.div`
   display: flex;
-  width: 100%;
-  //flex-direction: center;
   justify-content: space-between;
 `;
 
 const IMG = styled.img`
-  width: 80%;
-  height: 60vh;
-  padding: 5% 2%;
+  margin: 50px;
+  width: 25vw;
+  height : 48vh;
 `;
 
 const Container = styled.div`
@@ -50,14 +48,13 @@ function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
 
-  const TOTAL_SLIDES = 19;
-  //const images = [];
-  //images.length = 20;
-  const [images, setImage] = useState([]);
+  const TOTAL_SLIDES = 6;
+  //const [images, setImage] = useState([]);
+  const [posts, setPost] = useState([]);
 
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
-      setCurrentSlide(0);
+      setCurrentSlide(TOTAL_SLIDES - 1);
     } else {
       setCurrentSlide(currentSlide + 1);
     }
@@ -74,11 +71,8 @@ function LandingPage() {
   useEffect(() => {
     dispatch(getRandompost()).then((res) => {
       if (res.payload.posts) {
-        //console.log(res.payload.posts)
-        //console.log(res.payload.posts);
-        //images.push(res.payload.posts[i].main_img);
-        let imgSrc = res.payload.posts.map((post) => post.main_img);
-        setImage(imgSrc);
+        // let imgSrc = res.payload.posts.map((post) => post.main_img);
+        setPost(res.payload.posts.map((post) => post));
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }
@@ -95,9 +89,15 @@ function LandingPage() {
       <Button onClick={prevSlide}>&#60;</Button>
       <Container>
         <SliderContainer ref={slideRef}>
-          {images.map((src, idx) => (
-            <IMG key={idx} src={src} />
+          {posts.map((src, idx) => (
+            <a href={`/post/${src._id}`}>
+                <IMG
+                  key={idx}
+                  src={src.main_img}
+                />
+              </a>
           ))}
+          
         </SliderContainer>
       </Container>
       <Button onClick={nextSlide}>&#62;</Button>

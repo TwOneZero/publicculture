@@ -48,11 +48,6 @@ function Comment(props) {
     //post id 변수에 저장
     const [comment, setComment] = useState();
 
-    const onTestClicked = () => {
-        console.log(data);
-        console.log(props.postId);
-    }
-    
     const changeComment = (e) => {
         // console.log(e)
         setComment(e.target.value)
@@ -60,7 +55,6 @@ function Comment(props) {
     let body ={
         comment
     }
-
 
     // const onSubmitClicked = () => {
     //     axios.post(`/api/comment/${postId}`, body ).then((res) => {
@@ -71,7 +65,6 @@ function Comment(props) {
 
     return (
       <div>
-        <Comment_submit_btn onClick={onTestClicked}></Comment_submit_btn>
         <Comment_wContainer >
           <Commentbox onChange={changeComment} placeholder='여기에 댓글을 작성해주세요'></Commentbox>
           <Comment_submit_btn  type='submit'>등록</Comment_submit_btn>

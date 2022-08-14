@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostDetails } from '../../../_actions/post_action';
+import { getPostDetails, likePost } from '../../../_actions/post_action';
 import Comment from '../Comment/Comment';
 import Auth from '../../../hoc/auth'
 
@@ -51,10 +51,24 @@ const Like_container = styled.div`
   display:flex;
   flex-direction: column; 
   align-items: center;
-  margin: 20px;
-  font-size: 28px; 
+  margin: 80px 0 20px 0;
+  font-size: 22px; 
 `;
 
+const Likebtn = styled.button`
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(1);
+  }
+`;
+
+//정보탭
 const TabBar = styled.div`
   display: flex;
   height: 55px;
@@ -83,32 +97,32 @@ const TabBtn = styled.button`
 function PostPage() {
   let params = useParams();
   const dispatch = useDispatch();
-  //const [post, setPost] = useState([]);
+  const [post, setPost] = useState([]);
   const [title, setTitle] = useState();
   const [main_img, setImg] = useState();
   const [place, setPlace] = useState();
   const [date, setDate] = useState();
   const [use_trgt, setTarget] = useState();
   const [use_fee, setFee] =  useState();
+  const [likes, setLikes] = useState([]);
 
   const [tab, setTab] = useState(0);
   const settingTab = (index) => {
     setTab(index)
   }
-
-
   
   useEffect(() => {
     dispatch(getPostDetails(params.postId)).then((res) => {
       if (res.payload.post) {
         console.log(res.payload.post);
+        setPost(res.payload.post);
         setTitle(res.payload.post.title);
         setImg(res.payload.post.main_img);
         setPlace(res.payload.post.place);
         setDate(res.payload.post.date);
         setTarget(res.payload.post.use_trgt);
         setFee(res.payload.post.use_fee);
-
+        setLikes(res.payload.post.likes);
         //console.log(params.postId);
       } else {
         console.log('error!!!!!!!!!!!!!!');
@@ -116,6 +130,22 @@ function PostPage() {
     });
   }, [dispatch, params.postId]);
 
+  const onLikebtnClicked = () => {
+    dispatch(likePost(params.postId))
+    .then((res) => {
+      if (res.payload.isAuth === false) {
+        alert(res.payload.message);
+      }
+      if (res.payload) {
+        setLikes(res.payload.updatedPost.likes);
+        console.log(res.payload);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+    
   return (
     <div
       style={{
@@ -145,8 +175,9 @@ function PostPage() {
           </Event_info_container>
         </div>
       <Like_container>
-        💗
+        <Likebtn onClick={onLikebtnClicked}>❤️</Likebtn>
         <div>좋아요</div>
+        {likes.length}
      </Like_container>
      <Comment props={params.postId}/>
 
