@@ -11,7 +11,7 @@ import { useSyncExternalStore } from "react";
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 const MenuContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-left: auto;
   margin-right: 50px;
   margin-top: 10px;
@@ -19,16 +19,18 @@ const MenuContainer = styled.div`
 
 const HeaderContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: low;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  background-color: #ffcb6b;
+  height: 100px;
+  background-color: white;
 `;
 
 const HeaderLogo = styled.div`
-  font-family: "YUniverse-B";
-  color: #faebd7;
+  display: flex;
+  justify-content : flex-start;
+  font-family: 'NG','Malgun Gothic',Dotum,'돋움',AppleGothicNeoSD,'Apple SD 산돌고딕 Neo','굴림',arial,sans-serif;
+  color: black;
   font-size: 60px;
   margin: 15px 5px;
   margin-left: 50px;
@@ -40,15 +42,12 @@ const LoginBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffcb6b;
-  width: 70px;
+  color: black;
+  width: 80px;
   height: 50px;
-  border-radius: 0px 0px 100px 100px;
-  border: 2px solid #faebd7;
-  background-color: #faebd7;
   font-size: 17px;
-  font-family: "YUniverse-B";
-  text-shadow: 1px 1px 1px gray;
+  font-weight : 700;
+  font-family: 'NG','Malgun Gothic',Dotum,'돋움',AppleGothicNeoSD,'Apple SD 산돌고딕 Neo','굴림',arial,sans-serif;
   margin-left: 2px;
   cursor: pointer;
 `;
@@ -57,15 +56,12 @@ const MypageBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffcb6b;
-  width: 70px;
+  color: black;
+  width: 80px;
   height: 50px;
-  border-radius: 0px 0px 100px 100px;
-  border: 2px solid #faebd7;
-  background-color: #faebd7;
   font-size: 17px;
-  font-family: "YUniverse-B";
-  text-shadow: 1px 1px 1px gray;
+  font-weight : 700;
+  font-family: 'NG','Malgun Gothic',Dotum,'돋움',AppleGothicNeoSD,'Apple SD 산돌고딕 Neo','굴림',arial,sans-serif;
   margin-left: 2px;
   cursor: pointer;
 `;
@@ -74,15 +70,12 @@ const RegisterBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffcb6b;
-  width: 70px;
+  color: balck;
+  width: 80px;
   height: 50px;
-  border-radius: 0px 0px 100px 100px;
-  border: 2px solid #faebd7;
-  background-color: #faebd7;
   font-size: 17px;
-  font-family: "YUniverse-B";
-  text-shadow: 1px 1px 1px gray;
+  font-weight : 700;
+  font-family: 'NG','Malgun Gothic',Dotum,'돋움',AppleGothicNeoSD,'Apple SD 산돌고딕 Neo','굴림',arial,sans-serif;
   margin-left: 2px;
   text-align: center;
   cursor: pointer;
@@ -92,15 +85,12 @@ const LogoutBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffcb6b;
-  width: 70px;
+  color: black;
+  width: 80px;
   height: 50px;
-  border-radius: 0px 0px 100px 100px;
-  border: 2px solid #faebd7;
-  background-color: #faebd7;
   font-size: 17px;
-  font-family: "YUniverse-B";
-  text-shadow: 1px 1px 1px gray;
+  font-weight : 700;
+  font-family: 'NG','Malgun Gothic',Dotum,'돋움',AppleGothicNeoSD,'Apple SD 산돌고딕 Neo','굴림',arial,sans-serif;
   margin-left: 2px;
   text-align: center;
   cursor: pointer;
@@ -114,7 +104,6 @@ const GenreBar = styled.div`
   justify-content: space-between;
   background-color: white;
   align-items: center;
-  //border-bottom: solid 1px lightgrey;
   box-shadow: 5px 5px 5px lightgray;
 `;
 
@@ -124,10 +113,9 @@ const GenreBtn = styled.button`
   border: none;
   cursor: pointer;
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: 500;
+  font-weight: 700;
   &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid #ffcb6b;
+    border-bottom: 4px solid black;
   }
 `;
 
@@ -139,23 +127,21 @@ const SearchBarArea = styled.form`
 `;
 
 const SearchBar = styled.input`
-  height: 30px;
-  width: 200px;
+  height: 40px;
+  width: 400px;
   border: none;
   background: transparent;
   outline: none;
   color: black;
   caret-color: white;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid black;
   font-size: 15px;
-  //margin-left: 950px;
-  margin-bottom: 0px;
+  margin: 24px 0 0 20px;
 `;
 
 const Button = styled.button`
   background: transparent;
   color: white;
-  //position: relative;
   right: 30px;
   font-size: 18px;
   border: none;
@@ -177,9 +163,6 @@ function Header() {
 
   const onRegiterClicked = () => {
     navigate("/register");
-  };
-  const onPostClicked = () => {
-    navigate("/post");
   };
 
   const onMypageClicked = () => {
@@ -225,16 +208,10 @@ function Header() {
   return (
     <>
       <HeaderContainer>
-        <MenuContainer>
-          <MypageBtn onClick={onMypageClicked}>My page</MypageBtn>
-          <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
-          <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
-          <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
-        </MenuContainer>
-
-        <HeaderLogo type="button" onClick={onLogoClicked}>
-          Public Culture
+      <HeaderLogo type="button" onClick={onLogoClicked}>
+          public culture
         </HeaderLogo>
+
         <SearchBarArea onSubmit={onSearchClicked}>
           <label htmlFor="search"></label>
           <SearchBar
@@ -248,6 +225,13 @@ function Header() {
             <i className="fas fa-search"></i>
           </Button>
         </SearchBarArea>
+
+        <MenuContainer>
+          <MypageBtn onClick={onMypageClicked}>My page</MypageBtn>
+          <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
+          <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
+          <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
+        </MenuContainer>
       </HeaderContainer>
 
       <GenreBar itemType="button" onClick={onGenreClicked}>
