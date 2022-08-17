@@ -26,4 +26,5 @@ router.post('/users/checkName', checkName);
 router.post('/users/updateUser', auth, updateUser);
 //장르선택
 router.post('/users/selectGenre', auth, selectGenre);
+
 module.exports = router;
