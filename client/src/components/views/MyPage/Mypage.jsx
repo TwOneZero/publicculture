@@ -176,18 +176,18 @@ function Mypage() {
   useEffect(() => {
     dispatch(auth())
       .then((res) => {
-      setResData(res.payload);
-    })
+        setResData(res.payload);
+      })
       .catch((error) => {
         console.log(error);
       })
-  },[dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (resData) {
       setUserData(resData);
     }
-  },[resData])
+  }, [resData]);
 
   //관심행사 테스트
   const testGetFav = () => {

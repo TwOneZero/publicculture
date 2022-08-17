@@ -5,6 +5,7 @@ const {
   getPostDetails,
   likePost,
   getFavPost,
+  searchMap,
 } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
 
@@ -20,5 +21,7 @@ router.post('/searchPost', getPostBySearch);
 router.get('/likedPost', auth, getFavPost);
 //좋아요 누르기
 router.patch('/likePost/:id', auth, likePost);
+//검색 결과 (테스트)
+router.post('/googleSearch', searchMap);
 
 module.exports = router;

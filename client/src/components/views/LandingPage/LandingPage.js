@@ -14,7 +14,7 @@ const SliderDiv = styled.div`
 const IMG = styled.img`
   margin: 50px;
   width: 25vw;
-  height : 48vh;
+  height: 48vh;
 `;
 
 const Container = styled.div`
@@ -90,14 +90,10 @@ function LandingPage() {
       <Container>
         <SliderContainer ref={slideRef}>
           {posts.map((src, idx) => (
-            <a href={`/post/${src._id}`}>
-                <IMG
-                  key={idx}
-                  src={src.main_img}
-                />
-              </a>
+            <a key={idx} href={`/post/${src._id}`}>
+              <IMG src={src.main_img} />
+            </a>
           ))}
-          
         </SliderContainer>
       </Container>
       <Button onClick={nextSlide}>&#62;</Button>

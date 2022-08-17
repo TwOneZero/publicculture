@@ -26,7 +26,6 @@ const userSchema = new Schema(
     },
     genre: {
       type: String,
-      maxlength: 100,
     },
     role: {
       type: Number,
