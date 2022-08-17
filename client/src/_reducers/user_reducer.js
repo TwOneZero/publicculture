@@ -5,7 +5,6 @@ import {
   LOGOUT_USER,
   CHECK_NAME,
   UPDATE_USER,
-  SELECT_GENRE,
 } from '../_actions/types';
 
 const initialState = null;
@@ -24,8 +23,6 @@ export default function getcompleteState(state = initialState, action) {
       return { ...state, checkNameSuccess: action.payload };
     case UPDATE_USER:
       return { ...state, updateUserSuccess: action.payload };
-    case SELECT_GENRE:
-      return { ...state, selectGenreSuccess: action.payload };
     default:
       return state;
   }

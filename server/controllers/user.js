@@ -88,6 +88,7 @@ exports.updateUser = async (req, res) => {
     const newUser = {
       name: req.body.name,
       password: req.body.password,
+      genre: req.body.genre,
     };
     const user = await User.findOne({ _id: req.user.id });
     if (!user) {
@@ -95,13 +96,17 @@ exports.updateUser = async (req, res) => {
         .status(500)
         .json({ success: false, message: 'user 정보가 없습니다.' });
     }
+    //user 정보 테스트
     console.log(user);
     user.name = newUser.name;
     user.password = newUser.password;
+    user.genre = newUser.genre;
 
     user.markModified('name');
     user.markModified('password');
+    user.markModified('genre');
 
+    //바뀐 정보 저장
     user.save((err, userInfo) => {
       if (err) return res.json({ success: false, err });
       console.log('user 정보 업데이트');
@@ -111,27 +116,6 @@ exports.updateUser = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({ error });
-  }
-};
-
-//장르 업데이트
-exports.selectGenre = async (req, res) => {
-  try{
-    const user = await User.findOne({ _id: req.user._id }).then((user) =>{
-      user.genre = req.body.genre;
-      user.markModified('genre');
-
-      user.save((err, userInfo) => {
-        if (err) return res.json({ success: false, err });
-        console.log('user 정보 업데이트');
-        return res.status(200).json({
-          success: true,
-          userInfo,
-        });
-      });
-    });
-  } catch (error){
     return res.json({ error });
   }
 };
