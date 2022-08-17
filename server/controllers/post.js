@@ -109,17 +109,17 @@ exports.getFavPost = async (req, res, next) => {
   }
 };
 
-// 구글 search (테스트 중 )
+// 구글 search
 exports.searchMap = async (req, res, next) => {
   try {
-    const { q, ll } = req.body;
+    const { q, locationName } = req.body;
     let parameter = {
       q,
-      ll,
+      locationName,
     };
     googleSearch(parameter, (err, data) => {
       if (err) {
-        console.log(err);
+        res.json({ err });
       }
       return res.json(data);
     });
