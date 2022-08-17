@@ -67,6 +67,7 @@ const ShowEvent = () => {
               </div>
               <div style={{ fontSize: '14px' }}>{info.date}</div>
               <div>{info.place}</div>
+              <div style={{ marginTop: '10px' }}>❤️ {info.likes.length}</div>
             </PostingInfo>
           </div>
         ))}

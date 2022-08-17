@@ -73,6 +73,7 @@ function LandingPage() {
       if (res.payload.posts) {
         // let imgSrc = res.payload.posts.map((post) => post.main_img);
         setPost(res.payload.posts.map((post) => post));
+        console.log(res.payload)
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }
