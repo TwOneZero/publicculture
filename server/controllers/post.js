@@ -1,6 +1,7 @@
 const { Post } = require('../schemas/Post');
 const dayjs = require('dayjs');
 const mongoose = require('mongoose');
+const { googleSearch } = require('../utils/googleSearch');
 
 //랜덤 post 가져오기
 exports.getRandomPost = async (req, res) => {
@@ -93,6 +94,7 @@ exports.likePost = async (req, res) => {
   }
 };
 
+//관심행사 가져오기
 exports.getFavPost = async (req, res, next) => {
   try {
     //모든 포스트 가져오기
@@ -104,5 +106,24 @@ exports.getFavPost = async (req, res, next) => {
     return res.json({ myFavPost: likedPost });
   } catch (error) {
     next(error);
+  }
+};
+
+// 구글 search (테스트 중 )
+exports.searchMap = async (req, res, next) => {
+  try {
+    const { q, ll } = req.body;
+    let parameter = {
+      q,
+      ll,
+    };
+    googleSearch(parameter, (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      return res.json(data);
+    });
+  } catch (error) {
+    return res.json({ error });
   }
 };
