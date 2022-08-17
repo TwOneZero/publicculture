@@ -7,7 +7,7 @@ import { mypageLiked, likePost } from "../../../_actions/post_action";
 import axios from "axios";
 
 const PostingContainer = styled.div`
-  margin: 7%;
+  margin: 4% 5%;
   width: 90%;
   display: flex;
   flex-wrap: wrap;
@@ -15,10 +15,10 @@ const PostingContainer = styled.div`
 `;
 
 const PostingInfo = styled.div`
-  width: 500px;
-  //height: 600px;
   display: flex;
   flex-direction: column;
+  width: 500px;
+  //height: 600px;
   padding: 50px;
   //background-color: yellow;
   align-items: center;
@@ -33,8 +33,10 @@ const IMG = styled.img`
   margin: 10px;
 `;
 
-const Temp01 = styled.div`
-  color: black;
+const Title = styled.div`
+  font-weight: 700;
+  font-size: 19px;
+  margin-bottom: 5px;
 `;
 
 function MyLikedPost() {
@@ -44,36 +46,47 @@ function MyLikedPost() {
 
   useEffect(() => {
     dispatch(mypageLiked()).then((res) => {
-    setPostings(res.payload.myFavPost.map((post) => post));
+      setPostings(res.payload.myFavPost.map((post) => post));
       console.log(res.payload);
     });
   }, [dispatch]);
 
-  // const likeButton = (id) => {
-  //   let postId = id;
-  //   console.log(postId);
+  const likeButton = (id) => {
+    let postId = id;
+    console.log(postId);
 
-  //   dispatch(likePost(postId))
-  //     .then((res) => {
-  //       if (res.payload.isAuth === false) {
-  //         alert(res.payload.message);
-  //       }
-  //       if (res.payload) {
-  //         console.log(res.data.payload);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+    dispatch(likePost(postId))
+      .then((res) => {
+        if (res.payload.isAuth === false) {
+          alert(res.payload.message);
+        }
+        if (res.payload) {
+          console.log(res.data.payload);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
       <PostingContainer>
         {postings.map((src, idx) => (
-          <a href={`/post/${src._id}`}>
-            <IMG key={idx} src={src.main_img} />
-          </a>
+          <div key={idx}>
+            <PostingInfo>
+              <a href={`/post/${src._id}`}>
+                <IMG key={idx} src={src.main_img} />
+              </a>
+              <Title>{src.title}</Title>
+              <div style={{ fontWeight: "500", marginBottom: "3px" }}>
+                {src.codename}
+              </div>
+              <div style={{ fontSize: "14px" }}>{src.date}</div>
+              <div>{src.place}</div>
+              <div style={{ marginTop: "10px" }}>❤️ {src.likes.length}</div>
+            </PostingInfo>
+          </div>
         ))}
 
         {/* {resData.map((posting, index) => (

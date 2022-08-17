@@ -35,7 +35,7 @@ const UserBoxContainer = styled.div`
   width: 1500px;
 `;
 
-const MypageTitle = styled.div`
+const MypageTitleBtn = styled.div`
   font-size: 35px;
   margin: 20px 0px 0px 40px;
   font-weight: 500;
@@ -163,11 +163,7 @@ const CommentTitle = styled.div`
   font-weight: 400;
 `;
 
-const InfoBox = styled.div`
-  color: black;
-  background-color: white;
-  height: 1000px;
-`;
+const InfoBox = styled.div``;
 
 function Mypage() {
   const [mode, setMode] = useState("myProfile");
@@ -209,7 +205,9 @@ function Mypage() {
   return (
     <MypageBox>
       <UserBox>
-        <MypageTitle>My Page</MypageTitle>
+        <MypageTitleBtn onClick={onMenuButtonClick} id="myProfile">
+          My Page
+        </MypageTitleBtn>
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
@@ -227,23 +225,42 @@ function Mypage() {
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
               <UserInfoEditIcon>
-                <i className="fa-solid fa-gear"></i>
+                <i
+                  onClick={onMenuButtonClick}
+                  id="editProfile"
+                  className="fa-solid fa-gear"
+                ></i>
               </UserInfoEditIcon>
-              <UserInfoEditTitle>내 정보 수정</UserInfoEditTitle>
+              <UserInfoEditTitle onClick={onMenuButtonClick} id="editProfile">
+                내 정보 수정
+              </UserInfoEditTitle>
             </UserInfoEditBox>
 
             <LikedBox onClick={onMenuButtonClick} id="myLikedPost">
               <LikeIcon>
-                <i className="fa-solid fa-heart"></i>
+                <i
+                  className="fa-solid fa-heart"
+                  onClick={onMenuButtonClick}
+                  id="myLikedPost"
+                ></i>
               </LikeIcon>
-              <LikeTitle>나의 관심 행사</LikeTitle>
+              <LikeTitle onClick={onMenuButtonClick} id="myLikedPost">
+                나의 관심 행사
+              </LikeTitle>
             </LikedBox>
 
             <CommentBox onClick={onMenuButtonClick} id="mycomment">
               <CommentIcon>
-                <i className="fa-solid fa-comment"></i>
+                <i
+                  className="fa-solid fa-comment"
+                  onClick={onMenuButtonClick}
+                  id="myLikedPost"
+                ></i>
               </CommentIcon>
-              <CommentTitle> 내가 쓴 댓글 </CommentTitle>
+              <CommentTitle onClick={onMenuButtonClick} id="myLikedPost">
+                {" "}
+                내가 쓴 댓글{" "}
+              </CommentTitle>
             </CommentBox>
           </UserInfoMenuBtns>
         </UserInfoBox>
