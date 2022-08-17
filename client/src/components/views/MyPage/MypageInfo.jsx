@@ -7,7 +7,6 @@ const Mypage_container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   margin-top: 30px;
 `;
 const Myprofile = styled.div`
