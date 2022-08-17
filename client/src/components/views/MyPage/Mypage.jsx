@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MypageEdit from "./MypageEdit";
 import MypageInfo from "./MypageInfo";
-import MyLikedPost from "./MyLikedPost";
 import Auth from "../../../hoc/auth";
 import { auth } from "../../../_actions/user_action";
 import axios from "axios";
@@ -28,7 +27,7 @@ const UserBox = styled.div`
   align-items: center;
   height: 300px;
   color: white;
-  //padding-left: 100px;
+  padding-left: 100px;
 `;
 
 const UserBoxContainer = styled.div`
@@ -43,8 +42,7 @@ const MypageTitleBtn = styled.div`
 
 const UserInfoBox = styled.div`
   display: flex;
-  //width: 100%;
-  //width로 가운데 정렬이 되는지 왼쪽 정렬되는지 가운데 정렬되는지 바뀜
+  width: 100%;
 `;
 
 const UserBtnBox = styled.div`
@@ -175,7 +173,6 @@ function Mypage() {
     dispatch(auth())
       .then((res) => {
         setResData(res.payload);
-        //console.log(res.payload);
       })
       .catch((error) => {
         console.log(error);
@@ -185,9 +182,13 @@ function Mypage() {
   useEffect(() => {
     if (resData) {
       setUserData(resData);
-      //console.log(resData);
     }
   }, [resData]);
+
+  //관심행사 테스트
+  const testGetFav = () => {
+    axios.get("/api/likedPost").then((res) => console.log(res.data));
+  };
 
   const onMenuButtonClick = (e) => {
     if (e.target.id === "myProfile") {
@@ -195,8 +196,8 @@ function Mypage() {
       console.log(e.target.id);
     } else if (e.target.id === "editProfile") {
       setMode("editProfile");
-    } else if (e.target.id === "myLikedPost") {
-      setMode("myLikedPost");
+    } else if (e.target.id === "likedpostings") {
+      setMode("likedpostings");
     } else if (e.target.id === "mycomment") {
       setMode("mycomment");
     }
@@ -220,7 +221,9 @@ function Mypage() {
           <UserNamePreferBox>
             {userData ? <UserName>{userData.name}</UserName> : ""}
 
-            <PreferenceBox>선호 장르 : 콘서트</PreferenceBox>
+            <PreferenceBox>
+              선호 장르 : {userData ? userData.genre : ""}
+            </PreferenceBox>
           </UserNamePreferBox>
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
@@ -236,7 +239,7 @@ function Mypage() {
               </UserInfoEditTitle>
             </UserInfoEditBox>
 
-            <LikedBox onClick={onMenuButtonClick} id="myLikedPost">
+            <LikedBox onClick={onMenuButtonClick} id="likedpostings">
               <LikeIcon>
                 <i
                   className="fa-solid fa-heart"
@@ -269,7 +272,6 @@ function Mypage() {
         <div>
           {mode === "myProfile" && <MypageInfo></MypageInfo>}
           {mode === "editProfile" && <MypageEdit></MypageEdit>}
-          {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
         </div>
       </InfoBox>
     </MypageBox>
