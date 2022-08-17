@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import MypageEdit from "./MypageEdit";
 import MypageInfo from "./MypageInfo";
+import MyLikedPost from "./MyLikedPost";
 import Auth from "../../../hoc/auth";
 import { auth } from "../../../_actions/user_action";
 import axios from "axios";
+
 const MypageBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -196,8 +198,8 @@ function Mypage() {
       console.log(e.target.id);
     } else if (e.target.id === "editProfile") {
       setMode("editProfile");
-    } else if (e.target.id === "likedpostings") {
-      setMode("likedpostings");
+    } else if (e.target.id === "myLikedPost") {
+      setMode("myLikedPost");
     } else if (e.target.id === "mycomment") {
       setMode("mycomment");
     }
@@ -239,7 +241,7 @@ function Mypage() {
               </UserInfoEditTitle>
             </UserInfoEditBox>
 
-            <LikedBox onClick={onMenuButtonClick} id="likedpostings">
+            <LikedBox onClick={onMenuButtonClick} id="myLikedPost">
               <LikeIcon>
                 <i
                   className="fa-solid fa-heart"
@@ -260,7 +262,7 @@ function Mypage() {
                   id="myLikedPost"
                 ></i>
               </CommentIcon>
-              <CommentTitle onClick={onMenuButtonClick} id="myLikedPost">
+              <CommentTitle onClick={onMenuButtonClick} id="mycomment">
                 {" "}
                 내가 쓴 댓글{" "}
               </CommentTitle>
@@ -272,6 +274,7 @@ function Mypage() {
         <div>
           {mode === "myProfile" && <MypageInfo></MypageInfo>}
           {mode === "editProfile" && <MypageEdit></MypageEdit>}
+          {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
         </div>
       </InfoBox>
     </MypageBox>
