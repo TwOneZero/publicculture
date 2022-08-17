@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import EventPage from "../EventPage/EventPage";
 import { searchPost } from "../../../_actions/post_action";
-import { logout } from "../../../_actions/user_action";
+import { logout, auth } from "../../../_actions/user_action";
 import { useSyncExternalStore } from "react";
 
 //jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
@@ -96,6 +96,21 @@ const LogoutBtn = styled.div`
   cursor: pointer;
 `;
 
+const TestBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 80px;
+  height: 50px;
+  font-size: 17px;
+  font-weight : 700;
+  font-family: 'NG','Malgun Gothic',Dotum,'돋움',AppleGothicNeoSD,'Apple SD 산돌고딕 Neo','굴림',arial,sans-serif;
+  margin-left: 2px;
+  text-align: center;
+  cursor: pointer;
+`;
+
 const GenreBar = styled.div`
   display: flex;
   height: 55px;
@@ -152,6 +167,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [Login, setLogin] = useState(true);
 
   const onLogoClicked = () => {
     navigate("/");
@@ -178,6 +194,16 @@ function Header() {
       }
     });
   };
+
+  const CheckLogin = () => {
+    dispatch(auth()).then((res) => {
+      if(res.payload.isAuth === false){
+        setLogin(false);
+      }else{
+        setLogin(true);
+      }
+    })
+  }
 
   const onGenreClicked = (e) => {
     e.preventDefault();
@@ -207,6 +233,7 @@ function Header() {
 
   return (
     <>
+      {CheckLogin()}
       <HeaderContainer>
       <HeaderLogo type="button" onClick={onLogoClicked}>
           public culture
@@ -228,9 +255,16 @@ function Header() {
 
         <MenuContainer>
           <MypageBtn onClick={onMypageClicked}>My page</MypageBtn>
-          <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
-          <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
-          <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
+          {
+            Login 
+            ? 
+            <LogoutBtn onClick={logOut}>Logout</LogoutBtn>
+            :
+            <>
+            <LoginBtn onClick={onLoginbtnClicked}>Login</LoginBtn>
+            <RegisterBtn onClick={onRegiterClicked}>Register</RegisterBtn>
+            </>  
+          }         
         </MenuContainer>
       </HeaderContainer>
 
