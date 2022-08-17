@@ -73,11 +73,9 @@ function LoginPage() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const onChangeEmail = (e) => {
-    console.log(e);
     setEmail(e.target.value);
   };
   const onChangePassword = (e) => {
-    console.log(e);
     setPassword(e.target.value);
   };
   const onSubmitHandler = (e) => {

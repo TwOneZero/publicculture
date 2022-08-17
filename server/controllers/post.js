@@ -54,7 +54,7 @@ exports.getPostDetails = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).send('No post with that id');
     }
-    const post = await Post.findOne({ id }).populate('comments');
+    const post = await Post.findById(id).populate('comments');
     return res.status(200).json({ success: true, post });
   } catch (error) {
     return res.status(404).json({ success: false, error });
@@ -88,6 +88,20 @@ exports.likePost = async (req, res) => {
     });
     //업데이트 된 post 와 likes 수 반환
     return res.status(200).json({ updatedPost, likes: post.likes.length });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getFavPost = async (req, res, next) => {
+  try {
+    //모든 포스트 가져오기
+    const posts = await Post.find({}).exec();
+    //user id 와 일치하는 배열 filtering
+    let likedPost = posts.filter((arr) => {
+      return arr.likes.find((id) => id === String(req.user._id));
+    });
+    return res.json({ myFavPost: likedPost });
   } catch (error) {
     next(error);
   }

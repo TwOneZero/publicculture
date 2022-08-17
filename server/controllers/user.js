@@ -49,7 +49,7 @@ exports.loginUser = async (req, res, next) => {
 };
 
 //User's Auth Checking
-exports.checkAuth = async (req, res) => {
+exports.checkAuth = (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -58,9 +58,11 @@ exports.checkAuth = async (req, res) => {
     email: req.user.email,
     posts: req.user.posts.length > 0 ? true : false,
     role: req.user.role,
+    genre: req.user.genre,
   });
 };
 
+//로그아웃
 exports.logoutUser = async (req, res, next) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
@@ -73,6 +75,61 @@ exports.logoutUser = async (req, res, next) => {
   );
 };
 
+//유저 업데이트
+exports.updateUser = async (req, res) => {
+  try {
+    //바꿀 패스워드
+    const newUser = {
+      //하드코딩으로 바꿈
+      //프론트에서 바꿀 때는 req.body 에 담아서
+
+      name: req.body.name,
+      password: req.body.password,
+    };
+    const user = await User.findOne({ _id: req.user.id }).then((user) => {
+      console.log(user);
+      user.name = newUser.name;
+      user.password = newUser.password;
+
+      user.markModified('name');
+      user.markModified('password');
+
+      user.save((err, userInfo) => {
+        if (err) return res.json({ success: false, err });
+        console.log('user 정보 업데이트');
+        return res.status(200).json({
+          success: true,
+          userInfo,
+        });
+      });
+    });
+  } catch (error) {
+    return res.json({ error });
+  }
+};
+
+//장르 업데이트
+exports.selectGenre = async (req, res) => {
+  try{
+    const user = await User.findOne({ _id: req.user._id }).then((user) =>{
+      user.genre = req.body.genre;
+      user.markModified('genre');
+
+      user.save((err, userInfo) => {
+        if (err) return res.json({ success: false, err });
+        console.log('user 정보 업데이트');
+        return res.status(200).json({
+          success: true,
+          userInfo,
+        });
+      });
+    });
+  } catch (error){
+    return res.json({ error });
+  }
+};
+
+//닉네임 중복 체크
 exports.checkName = async (req, res) => {
   try {
     const user = await User.findOne({ name: req.body.name });
@@ -82,6 +139,6 @@ exports.checkName = async (req, res) => {
       return res.json({ success: false });
     }
   } catch (error) {
-    return res.json({ err });
+    return res.json({ error });
   }
 };

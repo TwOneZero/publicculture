@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../../hoc/auth';
@@ -8,15 +8,13 @@ import { getRandompost } from '../../../_actions/post_action';
 
 const SliderDiv = styled.div`
   display: flex;
-  width: 100%;
-  //flex-direction: center;
   justify-content: space-between;
 `;
 
 const IMG = styled.img`
-  width: 80%;
-  height: 60vh;
-  padding: 5% 2%;
+  margin: 50px;
+  width: 25vw;
+  height : 48vh;
 `;
 
 const Container = styled.div`
@@ -49,19 +47,18 @@ function LandingPage() {
   const dispatch = useDispatch();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
-  
-  const TOTAL_SLIDES = 19;
-  //const images = [];
-  //images.length = 20;
-  const [images, setImage] = useState([]);
+
+  const TOTAL_SLIDES = 6;
+  //const [images, setImage] = useState([]);
+  const [posts, setPost] = useState([]);
 
   const nextSlide = () => {
-      if (currentSlide >= TOTAL_SLIDES) { 
-        setCurrentSlide(0);
-      } else {
-        setCurrentSlide(currentSlide + 1);
-      }
-    };
+    if (currentSlide >= TOTAL_SLIDES) {
+      setCurrentSlide(TOTAL_SLIDES - 1);
+    } else {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
 
   const prevSlide = () => {
     if (currentSlide === 0) {
@@ -71,36 +68,41 @@ function LandingPage() {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getRandompost()).then((res) => {
       if (res.payload.posts) {
-          //console.log(res.payload.posts)
-          //console.log(res.payload.posts);
-          //images.push(res.payload.posts[i].main_img);
-          let imgSrc = res.payload.posts.map(post=>post.main_img)
-          setImage(imgSrc)
-          console.log(images);
+        // let imgSrc = res.payload.posts.map((post) => post.main_img);
+        setPost(res.payload.posts.map((post) => post));
+        console.log(res.payload)
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-  },[])
+  }, [dispatch]);
 
   useEffect(() => {
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; 
+    slideRef.current.style.transition = 'all 0.5s ease-in-out';
+    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
 
-return (
+  return (
     <SliderDiv>
-    <Button onClick={prevSlide}>&#60;</Button>
-    <Container>
-      <SliderContainer ref={slideRef}>
-      {images.map(src=><IMG src ={src}/>)}
-      </SliderContainer>
-    </Container>
-    <Button onClick={nextSlide}>&#62;</Button>
-  </SliderDiv>  
+      <Button onClick={prevSlide}>&#60;</Button>
+      <Container>
+        <SliderContainer ref={slideRef}>
+          {posts.map((src, idx) => (
+            <a href={`/post/${src._id}`}>
+                <IMG
+                  key={idx}
+                  src={src.main_img}
+                />
+              </a>
+          ))}
+          
+        </SliderContainer>
+      </Container>
+      <Button onClick={nextSlide}>&#62;</Button>
+    </SliderDiv>
   );
 }
 

@@ -7,7 +7,7 @@ import { likePost } from '../../../_actions/post_action';
 import { useDispatch } from 'react-redux';
 
 const PostingContainer = styled.div`
-  margin: 7%;
+  margin: 4% 5%;
   width: 90%;
   display: flex;
   flex-wrap: wrap;
@@ -36,30 +36,9 @@ const ImgContainer = styled.img`
 const ShowEvent = () => {
   //navigate 로 넘긴 데이터를 useLocation 으로 받는다.
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const infos = location.state.infos;
-
-  const onPostingClicked = () => {};
-
-  const likeButton = (id) => {
-    let postId = id;
-    console.log(postId);
-
-    dispatch(likePost(postId))
-      .then((res) => {
-        if (res.payload.isAuth === false) {
-          alert(res.payload.message);
-        }
-        if (res.payload) {
-          console.log(res.payload);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <div>
@@ -72,7 +51,6 @@ const ShowEvent = () => {
                 <ImgContainer
                   src={info.main_img}
                   alt='images'
-                  onClick={onPostingClicked}
                 />
               </a>
               <div
@@ -89,13 +67,7 @@ const ShowEvent = () => {
               </div>
               <div style={{ fontSize: '14px' }}>{info.date}</div>
               <div>{info.place}</div>
-              <button
-                onClick={() => {
-                  likeButton(info._id);
-                }}
-              >
-                좋아요{info.likes.length}
-              </button>
+              <div style={{ marginTop: '10px' }}>❤️ {info.likes.length}</div>
             </PostingInfo>
           </div>
         ))}

@@ -5,6 +5,8 @@ import {
   AUTH_USER,
   LOGOUT_USER,
   CHECK_NAME,
+  UPDATE_USER,
+  SELECT_GENRE,
 } from './types';
 
 //login
@@ -56,6 +58,28 @@ export function checkName(name) {
 
   return {
     type: CHECK_NAME,
+    payload: request,
+  };
+}
+
+export function updateUser(body) {
+  const request = axios
+    .post('/api/users/updateuser', body)
+    .then((res) => res.data);
+
+  return {
+    type: UPDATE_USER,
+    payload: request,
+  };
+}
+
+export function selectGenre(body){
+  const request = axios
+    .post('/api/users/selectgenre', body)
+    .then((res) => res.data);
+
+  return {
+    type: SELECT_GENRE,
     payload: request,
   };
 }

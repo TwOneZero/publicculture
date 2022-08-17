@@ -33,3 +33,9 @@ exports.addComment = async (req, res) => {
     return res.status(500).json({ message: 'addcomment Error', error });
   }
 };
+
+//댓글 조회
+exports.getCommets = async (req, res) => {
+  try {
+  } catch (error) {}
+};

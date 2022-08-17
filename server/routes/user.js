@@ -6,6 +6,8 @@ const {
   checkAuth,
   logoutUser,
   checkName,
+  updateUser,
+  selectGenre,
 } = require('../controllers/user');
 
 const router = express.Router();
@@ -20,5 +22,9 @@ router.get('/users/auth', auth, checkAuth);
 router.get('/users/logout', auth, logoutUser);
 //이름체크
 router.post('/users/checkName', checkName);
+//업데이트
+router.post('/users/updateUser', auth, updateUser);
+//장르선택
+router.post('/users/selectGenre', auth, selectGenre);
 
 module.exports = router;
