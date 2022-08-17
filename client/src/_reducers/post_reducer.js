@@ -3,6 +3,7 @@ import {
   SEARCH_POST,
   DETAIL_POST,
   LIKE_POST,
+  MY_LIKED,
 } from '../_actions/types';
 
 const initialState = null;
@@ -17,6 +18,8 @@ export default function getcompleteState(state = initialState, action) {
       return { ...state, getDetailSuccess: action.payload };
     case LIKE_POST:
       return { ...state, likePost: action.payload };
+    case MY_LIKED:
+      return { ...state, myLikedPost: action.payload };
     default:
       return state;
   }

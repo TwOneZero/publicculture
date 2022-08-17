@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { updateUser, checkName } from '../../../_actions/user_action';
+import { updateUser, checkName, selectGenre } from '../../../_actions/user_action';
 const EditMypage_container = styled.div`
   display: flex;
   flex-direction: column;
@@ -158,6 +158,7 @@ const MypageEdit = () => {
   const [Name, setName] = useState('');
   const [Password, setPassword] = useState('');
   const [PasswordConfirm, setPasswordConfirm] = useState('');
+  const [Genres, setGenre] = useState('');
   const onChangeName = (e) => {
     setName(e.target.value);
   };
@@ -201,6 +202,34 @@ const MypageEdit = () => {
     setPasswordConfirm('');
     window.location.reload();
   };
+
+  const onCheckElement = (checked, item) => {
+    if(checked){
+      setGenre(item);
+    }else if(!checked){
+      setGenre(Genres.filter(el => el !== item));
+    }
+  }
+
+  const onGenreConfirm = () => {
+    let body = {
+      genre: Genres,
+    }
+    dispatch(selectGenre(body)).then((res) => {
+      if(res.payload.sucess){
+        console.log(res.payload);
+        console.log("abc")
+      }else{
+        console.log(res.payload);
+      }
+    });
+    
+    setGenre('');
+    window.location.reload();
+  };
+
+
+  
   return (
     <>
       <EditMypage_container>
@@ -238,42 +267,56 @@ const MypageEdit = () => {
             <Line></Line>
             <Checkbox>
               <CheckboxContainer>
-                <Genre
-                  type='checkbox'
-                  id='cb1'
-                  value='musicalopera'
-                  name='musicalopera'
+                <Genre type='checkbox' id='cb1' value='뮤지컬/오페라' name='뮤지컬/오페라' 
+                  onChange={e => {
+                    onCheckElement(e.target.checked, e.target.value);
+                  }}
                 />
                 뮤지컬/오페라
               </CheckboxContainer>
               <CheckboxContainer>
-                <Genre
-                  type='checkbox'
-                  id='cb2'
-                  value='exhibitionart'
-                  name='전시/미술'
+                <Genre type='checkbox' id='cb2' value='전시/미술' name='전시/미술' 
+                  onChange={e => {
+                    onCheckElement(e.target.checked, e.target.value);
+                  }}
                 />
                 전시/미술
               </CheckboxContainer>
               <CheckboxContainer>
-                <Genre type='checkbox' id='cb3' value='theater' name='연극' />
+                <Genre type='checkbox' id='cb3' value='연극' name='연극' 
+                  onChange={e => {
+                    onCheckElement(e.target.checked, e.target.value);
+                  }}
+                />
                 연극
               </CheckboxContainer>
               <CheckboxContainer>
-                <Genre type='checkbox' id='cb4' value='concert' name='콘서트' />
+                <Genre type='checkbox' id='cb4' value='콘서트' name='콘서트' 
+                  onChange={e => {
+                    onCheckElement(e.target.checked, e.target.value);
+                  }}
+                />
                 콘서트
               </CheckboxContainer>
               <CheckboxContainer>
-                <Genre type='checkbox' id='cb5' value='classic' name='클래식' />
+                <Genre type='checkbox' id='cb5' value='클래식' name='클래식' 
+                  onChange={e => {
+                    onCheckElement(e.target.checked, e.target.value);
+                  }}
+                />
                 클래식
               </CheckboxContainer>
               <CheckboxContainer>
-                <Genre type='checkbox' id='cb6' value='dancing' name='무용' />
+                <Genre type='checkbox' id='cb6' value='무용' name='무용' 
+                  onChange={e => {
+                    onCheckElement(e.target.checked, e.target.value);
+                  }}
+                />
                 무용
               </CheckboxContainer>
             </Checkbox>
           </Genre_container>
-          <Modify_btn>Modify</Modify_btn>
+          <Modify_btn onClick={onGenreConfirm}>장르용테스트</Modify_btn>
         </Page_area>
       </EditMypage_container>
     </>

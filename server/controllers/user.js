@@ -64,6 +64,7 @@ exports.checkAuth = (req, res) => {
     email: req.user.email,
     posts: req.user.posts.length > 0 ? true : false,
     role: req.user.role,
+    genre: req.user.genre,
   });
 };
 
@@ -110,6 +111,27 @@ exports.updateUser = async (req, res) => {
       });
     });
   } catch (error) {
+    return res.json({ error });
+  }
+};
+
+//장르 업데이트
+exports.selectGenre = async (req, res) => {
+  try{
+    const user = await User.findOne({ _id: req.user._id }).then((user) =>{
+      user.genre = req.body.genre;
+      user.markModified('genre');
+
+      user.save((err, userInfo) => {
+        if (err) return res.json({ success: false, err });
+        console.log('user 정보 업데이트');
+        return res.status(200).json({
+          success: true,
+          userInfo,
+        });
+      });
+    });
+  } catch (error){
     return res.json({ error });
   }
 };

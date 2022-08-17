@@ -223,9 +223,8 @@ function Mypage() {
           <UserNamePreferBox>
             {userData ? <UserName>{userData.name}</UserName> : ''}
 
-            <PreferenceBox>선호 장르 : 콘서트</PreferenceBox>
+            <PreferenceBox>선호 장르 : {userData ? userData.genre : ""}</PreferenceBox>
           </UserNamePreferBox>
-          {testGetFav()}
           <UserInfoMenuBtns>
             <UserInfoEditBox onClick={onMenuButtonClick} id='editProfile'>
               <UserInfoEditIcon>
