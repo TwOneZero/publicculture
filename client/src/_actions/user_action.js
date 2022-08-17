@@ -6,7 +6,6 @@ import {
   LOGOUT_USER,
   CHECK_NAME,
   UPDATE_USER,
-  SELECT_GENRE,
 } from './types';
 
 //login
@@ -69,17 +68,6 @@ export function updateUser(body) {
 
   return {
     type: UPDATE_USER,
-    payload: request,
-  };
-}
-
-export function selectGenre(body){
-  const request = axios
-    .post('/api/users/selectgenre', body)
-    .then((res) => res.data);
-
-  return {
-    type: SELECT_GENRE,
     payload: request,
   };
 }
