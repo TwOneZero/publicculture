@@ -8,3 +8,4 @@ export const DETAIL_POST = 'detail_post';
 export const LIKE_POST = 'like_post';
 export const CHECK_NAME = 'check_name';
 export const UPDATE_USER = 'update_user';
+export const SELECT_GENRE = 'select_genre';
