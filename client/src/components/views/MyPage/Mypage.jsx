@@ -9,161 +9,31 @@ import Auth from '../../../hoc/auth';
 import { auth } from '../../../_actions/user_action';
 import axios from 'axios';
 
-const MypageBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  //width: 1000px;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-  height: 100%;
-  font-size: 17px;
-  font-family: 'Noto Sans KR', sans-serif;
-`;
+import {
+  MypageBox,
+  UserBox,
+  MypageTitleBtn,
+  UserInfoBox,
+  UserBtnBox,
+  UserIcon,
+  MyinfoBtn,
+  UserNamePreferBox,
+  UserName,
+  PreferenceBox,
+  UserInfoMenuBtns,
+  UserInfoEditBox,
+  UserInfoEditIcon,
+  UserInfoEditTitle,
+  LikedBox,
+  LikeIcon,
+  LikeTitle,
+  CommentBox,
+  CommentIcon,
+  CommentTitle,
+  InfoBox,
+} from './MypageElements';
 
-const UserBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: black;
-  align-items: center;
-  height: 300px;
-  color: white;
-  padding-left: 100px;
-`;
 
-const UserBoxContainer = styled.div`
-  width: 1500px;
-`;
-
-const MypageTitleBtn = styled.div`
-  font-size: 35px;
-  margin: 20px 0px 0px 40px;
-  font-weight: 500;
-`;
-
-const UserInfoBox = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const UserBtnBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0px 20px 0px 80px;
-`;
-
-const UserIcon = styled.div`
-  color: white;
-  font-size: 100px;
-`;
-
-const MyinfoBtn = styled.button`
-  border: none;
-  color: black;
-  width: 80px;
-  background-color: White;
-  cursor: pointer;
-  font-size: 18px;
-`;
-
-const UserNamePreferBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0px 80px 0px 20px;
-`;
-
-const UserName = styled.div`
-  font-weight: 500;
-  font-size: 70px;
-  margin-top: 20px;
-`;
-
-const PreferenceBox = styled.div`
-  font-weight: 500;
-  font-size: 25px;
-`;
-
-const UserInfoMenuBtns = styled.div`
-  display: flex;
-  margin-left: 100px;
-  width: 1000px;
-  justify-content: space-around;
-`;
-
-const UserInfoEditBox = styled.button`
-  margin: 10px 0px 0px 0px;
-  width: 200px;
-  height: 200px;
-  font-weight: 400;
-  font-size: 25px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-const UserInfoEditIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-const UserInfoEditTitle = styled.div`
-  font-weight: 400;
-`;
-
-const LikedBox = styled.button`
-  margin: 10px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 200px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-const LikeIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-const LikeTitle = styled.div`
-  font-weight: 400;
-`;
-
-const CommentBox = styled.button`
-  margin: 10px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 200px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-const CommentIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-const CommentTitle = styled.div`
-  font-weight: 400;
-`;
-
-const InfoBox = styled.div``;
 
 function Mypage() {
   const [mode, setMode] = useState('myProfile');

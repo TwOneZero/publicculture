@@ -1,47 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Auth from '../../../hoc/auth';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import { getRandompost } from '../../../_actions/post_action';
 
-const SliderDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+import{
+  SliderDiv,
+  Button,
+  Container,
+  SliderContainer,
+  IMG,
+} from './LandingElements';
 
-const IMG = styled.img`
-  margin: 50px;
-  width: 25vw;
-  height: 48vh;
-`;
 
-const Container = styled.div`
-  width: 90%;
-  overflow: hidden;
-  display: flex;
-  //flex-direction: center;
-`;
-const Button = styled.button`
-  //all: unset;
-  border: none;
-  padding: 1%;
-  background-color: transparent;
-  //border-radius: 10px;
-  font-size: 30px;
-  &:hover {
-    transition: all 0.3s ease-in-out;
-    //background-color: coral;
-    //color: #fff;
-  }
-`;
-const SliderContainer = styled.div`
-  width: 100%;
-  display: flex;
-`;
 
-//import EventPage from '../EventPage/EventPage';
 
 function LandingPage() {
   const dispatch = useDispatch();

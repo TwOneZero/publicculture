@@ -1,86 +1,19 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { auth } from "../../../_actions/user_action";
 import { useDispatch } from "react-redux";
+import {
+  Mypage_container,
+  Myprofile_info,
+  Page_area_info,
+  Nickname_container_info,
+  Line_info,
+  Nickname_info,
+  EmailContainer,
+  Email,
+  Genre_container_info,
+  Genre,
+} from './MypageElements';
 
-const Mypage_container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
-`;
-const Myprofile = styled.div`
-  display: flex;
-  font-size: 36px;
-  margin-bottom: 60px;
-  margin-top: 120px;
-  background-color: black;
-  color: white;
-  padding: 5px;
-`;
-
-const Nickname_container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  //background-color: green;
-`;
-
-const Nickname = styled.div`
-  padding: 12px;
-  font-size: 23px;
-  font-weight: 500;
-`;
-
-const EmailContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  //background-color: green;
-  margin-top: 50px;
-`;
-
-const Email = styled.div`
-  padding: 12px;
-  font-size: 20px;
-  font-weight: 500;
-  //width: 50vw;
-`;
-
-const Genre_container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  //background-color: green;
-  margin-top: 50px;
-`;
-
-const Genre = styled.div`
-  padding: 12px;
-  font-size: 23px;
-  font-weight: 500;
-  display: flex;
-`;
-
-const Line = styled.div`
-  border-bottom: 1px solid grey;
-  width: 12vw;
-`;
-
-const Page_area = styled.div`
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 300px;
-  // left: 50%
-  // top: 50%
-  padding: 5px;
-`;
 
 const MypageInfo = ({ nickname, about_me, genres }) => {
   const dispatch = useDispatch();
@@ -94,24 +27,24 @@ const MypageInfo = ({ nickname, about_me, genres }) => {
   return (
     <>
       <Mypage_container>
-        <Myprofile>My Profile</Myprofile>
-        <Page_area>
-          <Nickname_container>
+        <Myprofile_info>My Profile</Myprofile_info>
+        <Page_area_info>
+          <Nickname_container_info>
             Nickname
-            <Line></Line>
-            {userData ? <Nickname>{userData.name}</Nickname> : ""}
-          </Nickname_container>
+            <Line_info></Line_info>
+            {userData ? <Nickname_info>{userData.name}</Nickname_info> : ""}
+          </Nickname_container_info>
           <EmailContainer>
             E-mail
-            <Line></Line>
+            <Line_info></Line_info>
             {userData ? <Email>{userData.email}</Email> : ""}
           </EmailContainer>
-          <Genre_container>
+          <Genre_container_info>
             Prefer Genre
-            <Line></Line>
+            <Line_info></Line_info>
             {userData ? <Genre>{userData.genre}</Genre> : ""}
-          </Genre_container>
-        </Page_area>
+          </Genre_container_info>
+        </Page_area_info>
       </Mypage_container>
     </>
   );

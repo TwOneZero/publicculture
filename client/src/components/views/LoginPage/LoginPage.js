@@ -2,70 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../../_actions/user_action';
-import styled from 'styled-components';
 import Auth from '../../../hoc/auth';
 
-const Login_page_container = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: middle;
-  align-items: center;
-  padding: 20px 10px;
-  width: 500px;
-  height: 700px;
-`;
-
-const Login_text = styled.div`
-  margin: 70px 0;
-  font-size: 24px;
-  font-weight: 1000;
-`;
-
-const Login_form_container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 260px;
-`;
-
-const Input_Email = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
-
-const Input_PW = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  &:focus{
-    border: 1px solid grey;
-`;
-
-const Login_btn = styled.button`
-  width: 413px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-  margin-top: 5px;
-`;
+import {
+  Login_page_container,
+  Login_text,
+  Login_form_container,
+  Input_Email,
+  Input_PW,
+  Login_btn,
+} from './LoginElements';
 
 function LoginPage() {
   const [Email, setEmail] = useState('');
