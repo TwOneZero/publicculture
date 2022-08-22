@@ -6,38 +6,12 @@ import Auth from "../../../hoc/auth";
 import { mypageLiked, likePost } from "../../../_actions/post_action";
 import axios from "axios";
 
-const PostingContainer = styled.div`
-  margin: 4% 5%;
-  width: 90%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-const PostingInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  //height: 600px;
-  padding: 50px;
-  //background-color: yellow;
-  align-items: center;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 16px;
-`;
-
-const IMG = styled.img`
-  width: 300px;
-  height: 400px;
-  object-fit: fill;
-  margin: 10px;
-`;
-
-const Title = styled.div`
-  font-weight: 700;
-  font-size: 19px;
-  margin-bottom: 5px;
-`;
+import{
+  PostingContainer,
+  PostingInfo,
+  IMG,
+  Title,
+} from './MypageElements';
 
 function MyLikedPost() {
   const dispatch = useDispatch();
