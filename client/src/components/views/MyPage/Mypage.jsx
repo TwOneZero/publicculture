@@ -1,172 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import MypageEdit from "./MypageEdit";
-import MypageInfo from "./MypageInfo";
-import MyLikedPost from "./MyLikedPost";
-import Auth from "../../../hoc/auth";
-import { auth } from "../../../_actions/user_action";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import MypageEdit from './MypageEdit';
+import MypageInfo from './MypageInfo';
+import MyLikedPost from './MyLikedPost';
+import Auth from '../../../hoc/auth';
+import { auth } from '../../../_actions/user_action';
+import axios from 'axios';
 
-const MypageBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  //width: 1000px;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-  height: 100%;
-  font-size: 17px;
-  font-family: "Noto Sans KR", sans-serif;
-`;
+import {
+  MypageBox,
+  UserBox,
+  MypageTitleBtn,
+  UserInfoBox,
+  UserBtnBox,
+  UserIcon,
+  MyinfoBtn,
+  UserNamePreferBox,
+  UserName,
+  PreferenceBox,
+  UserInfoMenuBtns,
+  UserInfoEditBox,
+  UserInfoEditIcon,
+  UserInfoEditTitle,
+  LikedBox,
+  LikeIcon,
+  LikeTitle,
+  CommentBox,
+  CommentIcon,
+  CommentTitle,
+  InfoBox,
+} from './MypageElements';
 
-const UserBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: black;
-  align-items: center;
-  height: 300px;
-  color: white;
-  padding-left: 100px;
-`;
 
-const UserBoxContainer = styled.div`
-  width: 1500px;
-`;
-
-const MypageTitleBtn = styled.div`
-  font-size: 35px;
-  margin: 20px 0px 0px 40px;
-  font-weight: 500;
-`;
-
-const UserInfoBox = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const UserBtnBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0px 20px 0px 80px;
-`;
-
-const UserIcon = styled.div`
-  color: white;
-  font-size: 100px;
-`;
-
-const MyinfoBtn = styled.button`
-  border: none;
-  color: black;
-  width: 80px;
-  background-color: White;
-  cursor: pointer;
-  font-size: 18px;
-`;
-
-const UserNamePreferBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0px 80px 0px 20px;
-`;
-
-const UserName = styled.div`
-  font-weight: 500;
-  font-size: 70px;
-  margin-top: 20px;
-`;
-
-const PreferenceBox = styled.div`
-  font-weight: 500;
-  font-size: 25px;
-`;
-
-const UserInfoMenuBtns = styled.div`
-  display: flex;
-  margin-left: 100px;
-  width: 1000px;
-  justify-content: space-around;
-`;
-
-const UserInfoEditBox = styled.button`
-  margin: 10px 0px 0px 0px;
-  width: 200px;
-  height: 200px;
-  font-weight: 400;
-  font-size: 25px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-const UserInfoEditIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-const UserInfoEditTitle = styled.div`
-  font-weight: 400;
-`;
-
-const LikedBox = styled.button`
-  margin: 10px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 200px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-const LikeIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-const LikeTitle = styled.div`
-  font-weight: 400;
-`;
-
-const CommentBox = styled.button`
-  margin: 10px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 200px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-const CommentIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-const CommentTitle = styled.div`
-  font-weight: 400;
-`;
-
-const InfoBox = styled.div``;
 
 function Mypage() {
-  const [mode, setMode] = useState("myProfile");
+  const [mode, setMode] = useState('myProfile');
   const dispatch = useDispatch();
   const [resData, setResData] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -189,82 +59,82 @@ function Mypage() {
 
   //관심행사 테스트
   const testGetFav = () => {
-    axios.get("/api/likedPost").then((res) => console.log(res.data));
+    axios.get('/api/likedPost').then((res) => console.log(res.data));
   };
 
   const onMenuButtonClick = (e) => {
-    if (e.target.id === "myProfile") {
-      setMode("myProfile");
+    if (e.target.id === 'myProfile') {
+      setMode('myProfile');
       console.log(e.target.id);
-    } else if (e.target.id === "editProfile") {
-      setMode("editProfile");
-    } else if (e.target.id === "myLikedPost") {
-      setMode("myLikedPost");
-    } else if (e.target.id === "mycomment") {
-      setMode("mycomment");
+    } else if (e.target.id === 'editProfile') {
+      setMode('editProfile');
+    } else if (e.target.id === 'myLikedPost') {
+      setMode('myLikedPost');
+    } else if (e.target.id === 'mycomment') {
+      setMode('mycomment');
     }
   };
 
   return (
     <MypageBox>
       <UserBox>
-        <MypageTitleBtn onClick={onMenuButtonClick} id="myProfile">
+        <MypageTitleBtn onClick={onMenuButtonClick} id='myProfile'>
           My Page
         </MypageTitleBtn>
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i className="fa-solid fa-user"></i>
+              <i className='fa-solid fa-user'></i>
             </UserIcon>
-            <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
+            <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
               My Info
             </MyinfoBtn>
           </UserBtnBox>
           <UserNamePreferBox>
-            {userData ? <UserName>{userData.name}</UserName> : ""}
+            {userData ? <UserName>{userData.name}</UserName> : ''}
 
             <PreferenceBox>
-              선호 장르 : {userData ? userData.genre : ""}
+              선호 장르 : {userData ? userData.genre : ''}
             </PreferenceBox>
           </UserNamePreferBox>
           <UserInfoMenuBtns>
-            <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
+            <UserInfoEditBox onClick={onMenuButtonClick} id='editProfile'>
               <UserInfoEditIcon>
                 <i
                   onClick={onMenuButtonClick}
-                  id="editProfile"
-                  className="fa-solid fa-gear"
+                  id='editProfile'
+                  className='fa-solid fa-gear'
                 ></i>
               </UserInfoEditIcon>
-              <UserInfoEditTitle onClick={onMenuButtonClick} id="editProfile">
+              <UserInfoEditTitle onClick={onMenuButtonClick} id='editProfile'>
                 내 정보 수정
               </UserInfoEditTitle>
             </UserInfoEditBox>
 
-            <LikedBox onClick={onMenuButtonClick} id="myLikedPost">
+            <LikedBox onClick={onMenuButtonClick} id='myLikedPost'>
               <LikeIcon>
                 <i
-                  className="fa-solid fa-heart"
+                  className='fa-solid fa-heart'
                   onClick={onMenuButtonClick}
-                  id="myLikedPost"
+                  id='myLikedPost'
                 ></i>
               </LikeIcon>
-              <LikeTitle onClick={onMenuButtonClick} id="myLikedPost">
+              <LikeTitle onClick={onMenuButtonClick} id='myLikedPost'>
                 나의 관심 행사
               </LikeTitle>
             </LikedBox>
 
-            <CommentBox onClick={onMenuButtonClick} id="mycomment">
+            <CommentBox onClick={onMenuButtonClick} id='mycomment'>
               <CommentIcon>
                 <i
-                  className="fa-solid fa-comment"
+                  className='fa-solid fa-comment'
                   onClick={onMenuButtonClick}
-                  id="myLikedPost"
+                  id='myLikedPost'
                 ></i>
               </CommentIcon>
-              <CommentTitle onClick={onMenuButtonClick} id="mycomment">
-                {" "}
-                내가 쓴 댓글{" "}
+              <CommentTitle onClick={onMenuButtonClick} id='mycomment'>
+                {' '}
+                내가 쓴 댓글{' '}
               </CommentTitle>
             </CommentBox>
           </UserInfoMenuBtns>
@@ -272,9 +142,9 @@ function Mypage() {
       </UserBox>
       <InfoBox>
         <div>
-          {mode === "myProfile" && <MypageInfo></MypageInfo>}
-          {mode === "editProfile" && <MypageEdit></MypageEdit>}
-          {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
+          {mode === 'myProfile' && <MypageInfo></MypageInfo>}
+          {mode === 'editProfile' && <MypageEdit></MypageEdit>}
+          {mode === 'myLikedPost' && <MyLikedPost></MyLikedPost>}
         </div>
       </InfoBox>
     </MypageBox>

@@ -37,10 +37,16 @@ exports.loginUser = async (req, res, next) => {
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         // 로컬 쿠키에 토큰을 저장한다.
-        return res.cookie('x_auth', user.token).status(200).json({
-          loginSuccess: true,
-          userId: user._id,
-        });
+        let expiryDate = new Date();
+        //쿠키 만료 시간 -> 5분
+        expiryDate.setMinutes(expiryDate.getMinutes() + 5);
+        return res
+          .cookie('x_auth', user.token, { expires: expiryDate, httpOnly: true })
+          .status(200)
+          .json({
+            loginSuccess: true,
+            userId: user._id,
+          });
       });
     });
   } catch (error) {
@@ -80,51 +86,36 @@ exports.updateUser = async (req, res) => {
   try {
     //바꿀 패스워드
     const newUser = {
-      //하드코딩으로 바꿈
-      //프론트에서 바꿀 때는 req.body 에 담아서
-
       name: req.body.name,
       password: req.body.password,
+      genre: req.body.genre,
     };
-    const user = await User.findOne({ _id: req.user.id }).then((user) => {
-      console.log(user);
-      user.name = newUser.name;
-      user.password = newUser.password;
+    const user = await User.findOne({ _id: req.user.id });
+    if (!user) {
+      res
+        .status(500)
+        .json({ success: false, message: 'user 정보가 없습니다.' });
+    }
+    //user 정보 테스트
+    console.log(user);
+    user.name = newUser.name;
+    user.password = newUser.password;
+    user.genre = newUser.genre;
 
-      user.markModified('name');
-      user.markModified('password');
+    user.markModified('name');
+    user.markModified('password');
+    user.markModified('genre');
 
-      user.save((err, userInfo) => {
-        if (err) return res.json({ success: false, err });
-        console.log('user 정보 업데이트');
-        return res.status(200).json({
-          success: true,
-          userInfo,
-        });
+    //바뀐 정보 저장
+    user.save((err, userInfo) => {
+      if (err) return res.json({ success: false, err });
+      console.log('user 정보 업데이트');
+      return res.status(200).json({
+        success: true,
+        userInfo,
       });
     });
   } catch (error) {
-    return res.json({ error });
-  }
-};
-
-//장르 업데이트
-exports.selectGenre = async (req, res) => {
-  try{
-    const user = await User.findOne({ _id: req.user._id }).then((user) =>{
-      user.genre = req.body.genre;
-      user.markModified('genre');
-
-      user.save((err, userInfo) => {
-        if (err) return res.json({ success: false, err });
-        console.log('user 정보 업데이트');
-        return res.status(200).json({
-          success: true,
-          userInfo,
-        });
-      });
-    });
-  } catch (error){
     return res.json({ error });
   }
 };

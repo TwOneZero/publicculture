@@ -8,112 +8,17 @@ import styled from "styled-components";
 import Auth from "../../../hoc/auth";
 import axios from "axios";
 
-const Register_page_container = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: middle;
-  align-items: center;
-  padding: 20px 10px;
-  width: 500px;
-  height: 1000px;
-`;
-
-const Register_text = styled.div`
-  margin: 70px 0;
-  font-size: 24px;
-  font-weight: 1000;
-`;
-
-const Register_form_container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 500px;
-`;
-
-const Input_Name = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
-
-const NameCheckBtn = styled.button`
-  width: 413px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-  margin: 5px 0px 20px 0px;
-`;
-
-const Input_Email = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
-
-const Input_PW = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  &:focus{
-    border: 1px solid grey;
-`;
-
-const Input_ConfirmPW = styled.input`
-  width: 400px;
-  height: 50px;
-  border: 1px solid lightgrey;
-  outline: none;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  &:focus{
-    border: 1px solid grey;
-`;
-
-const Register_btn = styled.button`
-  width: 413px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-  margin-top: 20px;
-`;
-
-const ErrMsg = styled.h3`
-  color: firebrick;
-  font-size: 14px;
-  font-weight: 400;
-`;
-
-let conditionErrMessage = null;
+import {
+  Register_page_container,
+  Register_text,
+  Register_form_container,
+  Input_Name,
+  NameCheckBtn,
+  Input_Email,
+  Input_PW,
+  Input_ConfirmPW,
+  Register_btn,
+} from './RegisterElements';
 
 function RegisterPage() {
   const [Email, setEmail] = useState("");

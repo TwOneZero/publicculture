@@ -24,7 +24,5 @@ router.get('/users/logout', auth, logoutUser);
 router.post('/users/checkName', checkName);
 //업데이트
 router.post('/users/updateUser', auth, updateUser);
-//장르선택
-router.post('/users/selectGenre', auth, selectGenre);
 
 module.exports = router;
