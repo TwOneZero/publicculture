@@ -45,8 +45,13 @@ exports.addComment = async (req, res) => {
 //댓글 가져오기
 exports.getComments = async (req, res, next) => {
   try {
-    const postId = req.params;
-    const comments = await Comment.findOne(postId).populate('userId');
+    const { postId } = req.params;
+    let comments = await Comment.find()
+      .populate('post')
+      .populate('userId')
+      .then((data) => {
+        return data.filter((d) => String(d.post?._id) === postId);
+      });
     return res.json({ comments });
   } catch (error) {
     next(error);
