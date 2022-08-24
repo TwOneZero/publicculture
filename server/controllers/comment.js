@@ -21,12 +21,10 @@ exports.addComment = async (req, res) => {
       body: req.body.comment,
     });
 
-    const post = await Post.findOneAndUpdate(
-      postId,
-      { comment: comment },
-      { new: true }
-    ).then(() => {
-      console.log('post저장 성공');
+    const post = await Post.findById(postId);
+    post.comments.push(comment);
+    const updatedPost = await Post.findByIdAndUpdate(postId, post, {
+      new: true,
     });
 
     //comment db에 저장
@@ -36,6 +34,7 @@ exports.addComment = async (req, res) => {
       return res.status(200).json({
         success: true,
         info,
+        updatedPost,
       });
     });
   } catch (error) {
@@ -43,8 +42,13 @@ exports.addComment = async (req, res) => {
   }
 };
 
-//댓글 조회
-exports.getCommets = async (req, res) => {
+//댓글 가져오기
+exports.getComments = async (req, res, next) => {
   try {
-  } catch (error) {}
+    const postId = req.params;
+    const comments = await Comment.findOne(postId).populate('userId');
+    return res.json({ comments });
+  } catch (error) {
+    next(error);
+  }
 };
