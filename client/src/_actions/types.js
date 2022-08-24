@@ -8,5 +8,6 @@ export const DETAIL_POST = 'detail_post';
 export const LIKE_POST = 'like_post';
 export const CHECK_NAME = 'check_name';
 export const UPDATE_USER = 'update_user';
+export const UPDATE_USER_PASSWORD = 'update_user_password';
 export const MY_LIKED = 'my_liked';
 export const GET_COUNT = 'get_count';

@@ -78,7 +78,13 @@ export const Day_week = styled.div`
     border: 1px solid #000;
 `
 
-export const Day = styled.div`
+export const TopContainer = styled.a`
+    display: block;
+    position: relative;
+
+`
+
+export const SubContainer = styled.div`
     width: 14%;
     height: 177px;
     display: flex;
@@ -87,26 +93,64 @@ export const Day = styled.div`
     cursor: pointer;
     font-size: 16px;
     border: 1px solid #000;
-
     ${props =>
         props.isToday &&
         css`
-          border: 1px solid #eee;
-          `};
-    
-      ${props =>
+        border: 1px solid #eee;
+        `};
+
+    ${props =>
         props.isSelected &&
         css`
-          background-color: #eee;
+        background-color: #eee;
         `};
 `
 
-// export const TopContainer = styled.a`
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// `
+export const Day = styled.span`
+    position: absolute;
+    top: -73px;
+    
+    
+    font-size: 30px;
+    line-height: 1;
+`
 
-export const AllEvent = styled.p`
-    color: #000;
+
+export const AllEvent = styled.span`
+position: absolute;
+width: 100px;
+left: 85px;
+top: -70px;
+font-size: 24px;
+text-align: center;
+line-height: 1;
+-webkit-transform: translate(-50%, 0);
+transform: translate(-50%, 0);
+`
+
+export const BottomContainer = styled.ul`
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    word-break: keep-all;
+    text-decoration: none;
+    font-weight: normal;
+    text-indent: inital;
+    word-wrap: break-word;
+    line-height: 1.3;
+    font-size: 14px;
+`
+
+export const Events = styled.li`
+float: left;
+width: 50%;
+color: #666;
+font-size: 14px;
+padding: 0;
+
+
+    &:nth-child(2n+1){
+        clear: left;
+    }
 `

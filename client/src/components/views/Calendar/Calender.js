@@ -16,6 +16,10 @@ import {
   Day_container,
   Day_week_container,
   AllEvent,
+  TopContainer,
+  SubContainer,
+  BottomContainer,
+  Events,
   // TopContainer,
 } from './CalenderElements';
 
@@ -35,11 +39,14 @@ function Calender() {
   const [year, setYear] = useState(date.getFullYear());
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
 
+  const [a, setA] = useState(0);
+  const c = a+'건';
+  const [b] = useState('공연전시 174');
+
   const testClick = () => {
     dispatch(getPostDateCount()).then((res) => {
-
-      let count = getPostDateCount();
-      console.log(count);
+      console.log(res.payload.count);
+      setA(res.payload.count);
     })
 
   }
@@ -71,6 +78,9 @@ function Calender() {
       <TextContainer>
         <Text>다양한 문화정보를 요일별, 월별로 한눈에 확인하세요</Text>
       </TextContainer>
+
+
+
       <Frame>
         <Header>
           <Button onClick={() => setDate(new Date(year, month - 1, day))}>Prev</Button>
@@ -93,16 +103,44 @@ function Calender() {
               .map((_, index) => {
                 const d = index - (startDay - 1);
                 return (
+                  <SubContainer>
+                    <TopContainer>
+                      <Day
+                        key={index}
+                        isToday={d === today.getDate()}
+                        isSelected={d === day}
+                        onClick={() => setDate(new Date(year, month, d))}
+                      >
+                        {d > 0 ? d : ''}
 
-                  <Day
-                    key={index}
-                    isToday={d === today.getDate()}
-                    isSelected={d === day}
-                    onClick={() => setDate(new Date(year, month, d))}
-                  >
-                    {d > 0 ? d : ''}
-                    <AllEvent>abcd</AllEvent>
-                  </Day>
+                      </Day>
+                      <AllEvent>{d > 0 ? c : ''}</AllEvent>
+                    </TopContainer>
+                    <BottomContainer>
+                      <Events>
+                        {
+                          d > 0 ? b : ''
+                        }
+                      </Events>
+                      <Events>
+                        {
+                          d > 0 ? b : ''
+                        }
+                      </Events>
+                      <Events>
+                        {
+                          d > 0 ? b : ''
+                        }
+                      </Events>
+                      <Events>
+                        {
+                          d > 0 ? b : ''
+                        }
+                      </Events>
+                    </BottomContainer>
+
+                  </SubContainer>
+
                 );
               })}
           </Day_container>
