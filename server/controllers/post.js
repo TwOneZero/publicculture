@@ -39,6 +39,7 @@ exports.getPostBySearch = async (req, res) => {
       $or: [
         { codename: { $regex: searchRegex } },
         { title: { $regex: searchRegex } },
+        { guname: { $regex: searchRegex } },
       ],
     }).exec();
     return res.status(200).json({ success: true, posts });
@@ -109,18 +110,22 @@ exports.getFavPost = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD
 
 // 구글 search (테스트 중 )
+=======
+// 구글 search
+>>>>>>> upstream/main
 exports.searchMap = async (req, res, next) => {
   try {
-    const { q, ll } = req.body;
+    const { q, locationName } = req.body;
     let parameter = {
       q,
-      ll,
+      locationName,
     };
     googleSearch(parameter, (err, data) => {
       if (err) {
-        console.log(err);
+        res.json({ err });
       }
       return res.json(data);
     });
