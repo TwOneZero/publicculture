@@ -110,12 +110,7 @@ exports.getFavPost = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
-
 // 구글 search (테스트 중 )
-=======
-// 구글 search
->>>>>>> upstream/main
 exports.searchMap = async (req, res, next) => {
   try {
     const { q, locationName } = req.body;
