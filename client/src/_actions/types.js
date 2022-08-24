@@ -9,3 +9,4 @@ export const LIKE_POST = 'like_post';
 export const CHECK_NAME = 'check_name';
 export const UPDATE_USER = 'update_user';
 export const MY_LIKED = 'my_liked';
+export const GET_COUNT = 'get_count';
