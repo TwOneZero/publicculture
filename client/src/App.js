@@ -6,6 +6,7 @@ import RegisterPage from "./components/views/RegisterPage/RegisterPage";
 import PostPage from "./components/views/PostPage/PostPage";
 import ShowEvent from "./components/views/ShowEvent/ShowEvent";
 import MyPage from "./components/views/MyPage/Mypage";
+import Calender from "./components/views/Calendar/Calender"
 
 function App() {
   return (

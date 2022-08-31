@@ -6,6 +6,7 @@ const {
   likePost,
   getFavPost,
   searchMap,
+  getPostDateCount,
 } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
 
@@ -23,5 +24,7 @@ router.get('/likedPost', auth, getFavPost);
 router.patch('/likePost/:id', auth, likePost);
 //검색 결과 (테스트)
 router.post('/googleSearch', searchMap);
+
+router.post('/getCount', getPostDateCount);
 
 module.exports = router;

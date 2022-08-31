@@ -5,6 +5,7 @@ import {
   LOGOUT_USER,
   CHECK_NAME,
   UPDATE_USER,
+  UPDATE_USER_PASSWORD,
 } from '../_actions/types';
 
 const initialState = null;
@@ -23,6 +24,8 @@ export default function getcompleteState(state = initialState, action) {
       return { ...state, checkNameSuccess: action.payload };
     case UPDATE_USER:
       return { ...state, updateUserSuccess: action.payload };
+    case UPDATE_USER_PASSWORD:
+      return { ...state, updateUserPasswordSuccess: action.payload };
     default:
       return state;
   }
