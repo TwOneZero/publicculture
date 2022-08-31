@@ -16,9 +16,8 @@ import {
   Likebtn,
   TabBar,
   TabBtn,
+  Comentlike_container,
 } from './PostElements';
-
-
 
 function PostPage() {
   let params = useParams();
@@ -31,7 +30,6 @@ function PostPage() {
   const [use_trgt, setTarget] = useState();
   const [use_fee, setFee] =  useState();
   const [likes, setLikes] = useState([]);
-
   const [tab, setTab] = useState(0);
   const settingTab = (index) => {
     setTab(index)
@@ -93,20 +91,20 @@ function PostPage() {
           <Event_info_container>
             <Photo_container src={main_img} alt='images'></Photo_container>
             <Event_info>
-              <Event_info_content>장소: {place}</Event_info_content>
-              <Event_info_content>일시: {date}</Event_info_content>
-              <Event_info_content>관람연령: {use_trgt}</Event_info_content>
-              <Event_info_content>요금: {use_fee}</Event_info_content>
+              <Event_info_content>장소 : {place}</Event_info_content>
+              <Event_info_content>일시 : {date}</Event_info_content>
+              <Event_info_content>관람연령 : {use_trgt}</Event_info_content>
+              <Event_info_content>요금 : {use_fee}</Event_info_content>
+              {/* <div>좋아요</div> */}
             </Event_info>
           </Event_info_container>
         </div>
-      <Like_container>
-        <Likebtn onClick={onLikebtnClicked}>❤️</Likebtn>
-        <div>좋아요</div>
-        {likes.length}
-     </Like_container>
-     <Comment props={params.postId}/>
-
+        <Likebtn onClick={onLikebtnClicked}> ❤️ {likes.length}</Likebtn>
+        <Comentlike_container>
+          <Comment props={params.postId}/>
+        </Comentlike_container>
+        
+    
      <TabBar itemType='button'>
         <TabBtn
         name='지도'
@@ -122,9 +120,8 @@ function PostPage() {
         >주변 카페</TabBtn>
       </TabBar>
       <TabContent tab={tab}/>
-
     </div>
-  );  
+  ); 
 }
 
 function TabContent(props){
