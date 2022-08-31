@@ -47,13 +47,54 @@ exports.getComments = async (req, res, next) => {
   try {
     const { postId } = req.params;
     let comments = await Comment.find()
-      .populate('post')
       .populate('userId')
       .then((data) => {
-        return data.filter((d) => String(d.post?._id) === postId);
+        return data.filter((d) => String(d.post) === postId);
       });
     return res.json({ comments });
   } catch (error) {
     next(error);
+  }
+};
+
+//댓글 삭제
+exports.deleteComment = async (req, res, next) => {
+  try {
+    /**
+     * Post 에서 코멘트 정보 삭제후 Comment data 삭제
+     */
+    // Auth - 유저 정보 가져오기
+    const userId = req.user._id;
+    if (!userId) {
+      return res
+        .status(500)
+        .json({ success: false, message: '유저 정보가 없습니다.' });
+    }
+    //해당 코멘트 정보
+    const { commentId } = req.params;
+    //코멘트의 유저 정보랑 일치하는 지 확인
+    const checkUser = await Comment.findById({ _id: commentId }).populate(
+      'userId'
+    );
+    console.log(checkUser); //콘솔테스트
+    if (checkUser.userId._id !== userId) {
+      return res
+        .status(400)
+        .json({ message: 'user 정보가 일치하지 않습니다. 댓글 삭제 실패' });
+    }
+
+    // 해당 포스트에서 코멘트 삭제 후 업데이트
+    const postId = checkUser.post;
+    const post = await Post.findById({ _id: postId }).exec();
+    post.comments = post.comments.filter((id) => String(id) !== String(postId));
+    console.log(post); //콘솔테스트
+    await Post.findByIdAndUpdate(postId, post, { new: true }).exec();
+    
+    // 코멘트 삭제
+    const updatedComment = await Comment.findByIdAndDelete({ _id: commentId });
+    console.log(updatedComment); //콘솔테스트
+    return res.status(200).json({ updatedComment });
+  } catch (err) {
+    return res.json({ success: false, err });
   }
 };
