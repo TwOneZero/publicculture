@@ -27,6 +27,7 @@ export const Text = styled.h3`
 
 `
 
+//캘린더 전체
 
 export const Frame = styled.div`
     width: 1500px;
@@ -35,41 +36,7 @@ export const Frame = styled.div`
     // box-shadow: 2px 2px 2px #eee;
 `
 
-
-export const Body = styled.div`
-    width: 100%;
-    // padding: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    // border: 1px solid #000;
-    box-sizing: border-box;
-`
-
-export const Day_week_container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`
-
-export const Day_container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-
-`
-
-export const Day_week = styled.div`
-    width: 14%;
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
-    border: 1px solid #ccc;
-`
-
-
-
-
+//캘린더 헤더 부분
 
 export const Header = styled.div`
     font-size: 18px;
@@ -109,6 +76,39 @@ export const RightArrows = styled(RightArrow)`
     margin: 25px 0 0 0;
 `
 
+//캘린더 body부분
+
+export const Body = styled.div`
+    width: 100%;
+    // padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid #000;
+    box-sizing: border-box;
+`
+
+export const Day_week_container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+
+export const Day_container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+
+`
+
+export const Day_week = styled.div`
+    width: 14%;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid #ccc;
+`
+
 export const SubContainer = styled.div`
     width: 14%;
     height: 177px;
@@ -130,6 +130,8 @@ export const SubContainer = styled.div`
     };
 `
 
+//캘린더 날짜, 행사수 부분
+
 export const TopContainer = styled.div`
     margin: 1rem;
 `
@@ -138,6 +140,7 @@ export const Day = styled.span`
     font-size: 30px;
     line-height: 1;
 `
+// 캘린더 장르 부분
 
 export const AllEvent = styled.span`
     width: 100px;
@@ -153,7 +156,6 @@ export const BottomContainer = styled.ul`
     list-style: none;
 
 `
-
 export const Events = styled.li`
     float: left;
     width: 50%;
