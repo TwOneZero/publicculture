@@ -26,6 +26,22 @@ exports.getRandomPost = async (req, res) => {
   }
 };
 
+exports.getPostDateCount = async (req, res) => {
+  let today = dayjs();
+  let d_t = today.format('YYYY-mm-dd h:mm:ss');
+  try{
+    const postAll = await Post.find({}).exec();
+    // const posts = await Post.find({ end_date: {$gte: d_t }});
+    return res.status(200).json({count: postAll.length});
+    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
+    //   return res.status(200).json({ count: post.length});
+    // });
+  }catch(error){
+    return res.status(404).json({ message: error});
+  }
+}
+
+
 //검색으로 가져오기 ( title  or  codename  다 됨)
 exports.getPostBySearch = async (req, res) => {
   //req.query로 해야함
@@ -110,7 +126,7 @@ exports.getFavPost = async (req, res, next) => {
   }
 };
 
-// 구글 search (테스트 중 )
+// 구글 search
 exports.searchMap = async (req, res, next) => {
   try {
     const { q, locationName } = req.body;
@@ -130,14 +146,4 @@ exports.searchMap = async (req, res, next) => {
 };
 
 
-exports.getPostDateCount = async (req, res) => {
-  let today = dayjs();
-  let d_t = today.format('YYYY-mm-dd h:mm:ss');
-  try{
-    await Post.find({ end_date: {$gte: d_t }}).then((post) => {
-      return res.status(200).json({ count: post.length});
-    });
-  }catch(error){
-    return res.status(404).json({ message: error});
-  }
-}
+
