@@ -4,7 +4,8 @@ import { getPostDateCount } from '../../../_actions/post_action';
 import {
   Frame,
   Header,
-  Button,
+  RightArrows,
+  LeftArrows,
   Body,
   Day,
   Container,
@@ -20,7 +21,9 @@ import {
   SubContainer,
   BottomContainer,
   Events,
-  // TopContainer,
+  Month,
+  Month_sub,
+  Month_container,
 } from './CalenderElements';
 
 
@@ -29,8 +32,9 @@ function Calender() {
   const dispatch = useDispatch();
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평소 매달의 일수
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 윤년 매달의 일수
-  const DAYS_OF_THE_WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']; // 일주일 구성
-  const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']; // 월 구성
+  const DAYS_OF_THE_WEEK = ['일', '월', '화', '수', '목', '금', '토']; // 일주일 구성
+  const MONTHS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']; // 월 구성
+
 
   const today = new Date();
   const [date, setDate] = useState(today);
@@ -40,22 +44,19 @@ function Calender() {
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
 
   const [a, setA] = useState(0);
-  const c = a+'건';
-  const [b] = useState('공연전시 174');
+  const c = a + '건';
+  const [b] = useState('1');
 
-  const testClick = () => {
-    dispatch(getPostDateCount()).then((res) => {
-      console.log(res.payload.count);
-      setA(res.payload.count);
-    })
-
-  }
 
   useEffect(() => {
     setDay(date.getDate());
     setMonth(date.getMonth());
     setYear(date.getFullYear());
     setStartDay(getStartDayOfMonth(date));
+    dispatch(getPostDateCount()).then((res) => {
+      // console.log(res.payload.count);
+      setA(res.payload.count);
+    })
   }, [date]);
 
   function getStartDayOfMonth(date) { // 한달의 시작일 받는 함수
@@ -70,7 +71,8 @@ function Calender() {
 
   return (
     <>
-      <button onClick={testClick}>클릭</button>
+      {/* <button onClick={testClick}>클릭</button> */}
+
       <Container>
         <ContainerH1>문화캘린더</ContainerH1>
         <Line></Line>
@@ -79,15 +81,16 @@ function Calender() {
         <Text>다양한 문화정보를 요일별, 월별로 한눈에 확인하세요</Text>
       </TextContainer>
 
-
-
       <Frame>
         <Header>
-          <Button onClick={() => setDate(new Date(year, month - 1, day))}>Prev</Button>
-          <div>
-            {MONTHS[month]} {year} {/* Aug 2022 표현 부분 */}
-          </div>
-          <Button onClick={() => setDate(new Date(year, month + 1, day))}>Next</Button>
+          <Month_container>
+            <LeftArrows onClick={() => setDate(new Date(year, month - 1, day))}>Prev</LeftArrows>
+            <Month> {/* Aug 2022 표현 부분 */}
+              {MONTHS[month]}<Month_sub>월</Month_sub>
+            </Month>
+            <RightArrows onClick={() => setDate(new Date(year, month + 1, day))}>Next</RightArrows>
+          </Month_container>
+
         </Header>
         <Body>
           <Day_week_container>
@@ -118,24 +121,22 @@ function Calender() {
                     </TopContainer>
                     <BottomContainer>
                       <Events>
-                        {
-                          d > 0 ? b : ''
-                        }
+                        {d > 0 ? "뮤지컬" + b : ''}
                       </Events>
                       <Events>
-                        {
-                          d > 0 ? b : ''
-                        }
+                        {d > 0 ? "연극" + b : ''}
                       </Events>
                       <Events>
-                        {
-                          d > 0 ? b : ''
-                        }
+                        {d > 0 ? "전시/미술" + b : ''}
                       </Events>
                       <Events>
-                        {
-                          d > 0 ? b : ''
-                        }
+                        {d > 0 ? "무용" + b : ''}
+                      </Events>
+                      <Events>
+                        {d > 0 ? "클래식" + b : ''}
+                      </Events>
+                      <Events>
+                        {d > 0 ? "콘서트" + b : ''}
                       </Events>
                     </BottomContainer>
 
