@@ -134,6 +134,7 @@ export const SubContainer = styled.div`
 
 export const TopContainer = styled.div`
     margin: 1rem;
+    
 `
 
 export const Day = styled.span`
@@ -144,8 +145,8 @@ export const Day = styled.span`
 
 export const AllEvent = styled.span`
     width: 100px;
+    margin: 0 auto;
     font-size: 24px;
-    text-align: center;
     line-height: 1;
     -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
