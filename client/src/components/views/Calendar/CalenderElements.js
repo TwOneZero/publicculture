@@ -114,7 +114,7 @@ export const SubContainer = styled.div`
     height: 177px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
     cursor: pointer;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -134,23 +134,27 @@ export const SubContainer = styled.div`
 
 export const TopContainer = styled.div`
     margin: 1rem;
-    
 `
 
 export const Day = styled.span`
     font-size: 30px;
     line-height: 1;
+    margin: 0 40px 0 10px;
+    width: 50px;
+    height: 50px;
+    border-radius : ${({ isSelected}) => (isSelected ? '100%' : '0')};
+    background: ${({ isSelected}) => (isSelected ? '#000' : '#fff')};
+    color: ${({ isSelected}) => (isSelected ? 'red' : '#000')};
 `
-// 캘린더 장르 부분
 
 export const AllEvent = styled.span`
     width: 100px;
-    margin: 0 auto;
     font-size: 24px;
     line-height: 1;
     -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
 `
+// 캘린더 장르 부분
 
 export const BottomContainer = styled.ul`
     padding-left: 1.8rem;

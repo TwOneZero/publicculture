@@ -28,7 +28,7 @@ import {
 
 
 
-function Calender() {
+const Calender = (isSelected) => {
   const dispatch = useDispatch();
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평소 매달의 일수
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 윤년 매달의 일수
@@ -42,6 +42,8 @@ function Calender() {
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
+
+  const [test, setTest] = useState(false);
 
   const [a, setA] = useState(0);
   const c = a + '건';
@@ -115,7 +117,6 @@ function Calender() {
                         onClick={() => setDate(new Date(year, month, d))}
                       >
                         {d > 0 ? d : ''}
-
                       </Day>
                       <AllEvent>{d > 0 ? c : ''}</AllEvent>
                     </TopContainer>
