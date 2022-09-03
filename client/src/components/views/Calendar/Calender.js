@@ -24,7 +24,6 @@ import {
   Month,
   Month_sub,
   Month_container,
-  // TopContainer,
 } from './CalenderElements';
 
 
@@ -48,13 +47,6 @@ function Calender() {
   const c = a + '건';
   const [b] = useState('1');
 
-  // const testClick = () => {
-  //   dispatch(getPostDateCount()).then((res) => {
-  //     console.log(res.payload.count);
-  //     setA(res.payload.count);
-  //   })
-
-  // }
 
   useEffect(() => {
     setDay(date.getDate());

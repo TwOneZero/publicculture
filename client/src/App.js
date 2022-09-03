@@ -19,6 +19,7 @@ function App() {
         <Route exact path="/showevent/" element={<ShowEvent />} />
         <Route exact path="/showevent/:name" element={<ShowEvent />} />
         <Route exact path="/mypage" element={<MyPage />} />
+        <Route exact path="/calendar" element={<Calender />} />
       </Routes>
     </div>
   );
