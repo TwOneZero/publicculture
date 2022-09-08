@@ -21,7 +21,6 @@ import {
 } from './CommentElements';
 
 function Comment() {
-  //const data = useSelector((store)=>store);
   const nowState = useSelector((state) => state);
   const dispatch = useDispatch();
   const params = useParams();
@@ -38,7 +37,6 @@ function Comment() {
   const onSubmitClicked = () => {
     let body = {
       comment,
-      name: nowState.user.userData?.name,
     };
     dispatch(addComment(postId, body))
       .then((res) => {
@@ -53,6 +51,7 @@ function Comment() {
           };
           //기존 state 에 새 댓글 저장
           setComments((prev) => [...prev, updatedComment]);
+          setComment('');
         }
       })
       .catch((err) => {
