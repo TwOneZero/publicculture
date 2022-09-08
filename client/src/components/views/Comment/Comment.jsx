@@ -7,126 +7,52 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addComment, getComments } from '../../../_actions/comment_action';
 import { useParams } from 'react-router-dom';
 
-//댓글
-const Comment_wContainer = styled.div`
-  width: 900px;
-  height: 180px;
-  display: flex;
-  border-bottom: 2px solid black;
-  align-items: center;
-  margin: 40 0px;
-  //background-color: yellow;
-`;
+import {
+  Comment_wContainer,
+  Commentbox,
+  Comment_submit_btn,
+  Comments_container,
+  Comment_username,
+  Comment_content,
+  Comment_date,
+  Comment_func,
+  Modify,
+  Delete,
+} from './CommentElements';
 
-const Commentbox = styled.textarea`
-  height: 100px;
-  width: 85%;
-  border: 1px solid grey;
-  outline: none;
-  resize: none;
-  padding: 10px;
-  font-size: 20px;
-  font-family: 'Lato', sans-serif;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
-
-const Comment_submit_btn = styled.button`
-  width: 15%;
-  height: 122px;
-  border: none;
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  &:active {
-    border: 1px solid grey;
-  }
-`;
-
-//댓글 조회
-const Comments_container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 95%;
-  font-size: 14pt;
-  font-family: 'Lato', sans-serif;
-  margin: 10px;
-  padding: 10px;
-`;
-
-//read comments screen
-const Comment_username = styled.div`
-  font-size: 14pt;
-  margin-bottom: 15px;
-`;
-
-const Comment_content = styled.div`
-  font-size: 15pt;
-`;
-
-const Comment_date = styled.div`
-  padding: 5px;
-  display: flex;
-  font-size: 10pt;
-  justify-content: right;
-`;
-
-const Comment_func = styled.div`
-  display: flex;
-  justify-content: right;
-`;
-
-const Modify = styled.button`
-  padding: 5px;
-  font-size: 15pt;
-  display: flex;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-`;
-
-const Delete = styled.button`
-  padding: 5px;
-  font-size: 15pt;
-  display: flex;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-`;
-
-function Comment(props) {
+function Comment() {
   //const data = useSelector((store)=>store);
-  const testComment = useSelector((state) => state);
-  console.log(testComment);
+  const nowState = useSelector((state) => state);
   const dispatch = useDispatch();
   const params = useParams();
-  let postId = params.postId;
+  const postId = params.postId;
 
-  //post id 변수에 저장
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
-
-  // const [nickname, setNickname] = useState("");
-  // const [date, setDate] = useState("");
-  // const [body, setBody] = useState("");
-
-  const { userId, body, comment_num, date } = props;
 
   const changeComment = (e) => {
     setComment(e.target.value);
   };
 
+  //댓글 추가
   const onSubmitClicked = () => {
     let body = {
       comment,
+      name: nowState.user.userData?.name,
     };
     dispatch(addComment(postId, body))
       .then((res) => {
         if (res.payload.success === false) {
           alert(res.payload.message);
         } else {
-          console.log(res.payload);
+          // console.log(res.payload);
+          let updatedComment = {
+            name: res.payload.name,
+            body: res.payload.info.body,
+            createdAt: res.payload.info.createdAt,
+          };
+          //기존 state 에 새 댓글 저장
+          setComments((prev) => [...prev, updatedComment]);
         }
       })
       .catch((err) => {
@@ -134,12 +60,19 @@ function Comment(props) {
       });
   };
 
+  //post detail 페이지 들어가면 실행됨
   useEffect(() => {
     dispatch(getComments(postId)).then((res) => {
       if (res.payload) {
-        // let imgSrc = res.payload.posts.map((post) => post.main_img);
-        console.log(res.payload.comments);
-        setComments(res.payload.comments);
+        //server에서 allComments 배열로 넘겨줌
+        let ans = res.payload.allComments.map((data) => {
+          return {
+            name: data.name,
+            body: data.body,
+            createdAt: data.createdAt,
+          };
+        });
+        setComments(ans);
       } else {
         console.log('error');
       }
@@ -163,8 +96,8 @@ function Comment(props) {
           ? comments.map((comment, index) => {
               return (
                 <div key={index}>
-                  <Comment_username>닉네임</Comment_username>
-                  <Comment_date>2022.08</Comment_date>
+                  <Comment_username>{comment.name}</Comment_username>
+                  <Comment_date>{comment.createdAt}</Comment_date>
                   <Comment_content>{comment.body}</Comment_content>
                 </div>
               );

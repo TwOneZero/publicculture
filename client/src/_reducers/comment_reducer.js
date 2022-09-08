@@ -5,9 +5,14 @@ const initialState = [];
 export default function getcompleteState(state = initialState, action) {
   switch (action.type) {
     case ADD_COMMENT:
-      return { ...state, addComment: action.payload };
+      const newComment = {
+        name: action.payload.name,
+        body: action.payload.info.body,
+        createdAt: action.payload.info.createdAt,
+      };
+      return [...state, newComment];
     case GET_COMMENTS:
-      return { ...state, getComments: action.payload };
+      return [...state, action.payload.allComments];
     default:
       return state;
   }

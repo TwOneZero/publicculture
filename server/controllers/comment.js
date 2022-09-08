@@ -28,6 +28,7 @@ exports.addComment = async (req, res) => {
       return res.status(200).json({
         success: true,
         info,
+        name: req.user.name,
       });
     });
   } catch (error) {
@@ -39,12 +40,19 @@ exports.addComment = async (req, res) => {
 exports.getComments = async (req, res, next) => {
   try {
     const { postId } = req.params;
-    let comments = await Comment.find()
+    const comments = await Comment.find()
       .populate('userId')
       .then((data) => {
         return data.filter((d) => String(d.post) === postId);
       });
-    return res.json({ comments });
+    const allComments = comments.map((comment) => {
+      return {
+        name: comment.userId.name,
+        body: comment.body,
+        createdAt: comment.createdAt,
+      };
+    });
+    return res.json({ allComments });
   } catch (error) {
     next(error);
   }
