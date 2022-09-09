@@ -31,9 +31,7 @@ export const Text = styled.h3`
 
 export const Frame = styled.div`
     width: 1500px;
-    // border: 1px solid lightgrey;
-    margin: 0 auto 0;
-    // box-shadow: 2px 2px 2px #eee;
+    margin: 0 auto 100px;
 `
 
 //캘린더 헤더 부분
@@ -42,8 +40,6 @@ export const Header = styled.div`
     font-size: 18px;
     font-weight: bold;
     padding: 10px 10px 5px 10px;
-    // display: flex;
-    // justify-content: space-between;
     background-color: #fff;
 `
 
@@ -80,10 +76,8 @@ export const RightArrows = styled(RightArrow)`
 
 export const Body = styled.div`
     width: 100%;
-    // padding: 0 1rem;
     display: flex;
     flex-direction: column;
-    // border: 1px solid #000;
     box-sizing: border-box;
 `
 
@@ -114,7 +108,6 @@ export const SubContainer = styled.div`
     height: 177px;
     display: flex;
     flex-direction: column;
-    // align-items: center;
     cursor: pointer;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -142,9 +135,9 @@ export const Day = styled.span`
     margin: 0 40px 0 10px;
     width: 50px;
     height: 50px;
-    border-radius : ${({ isSelected}) => (isSelected ? '100%' : '0')};
-    background: ${({ isSelected}) => (isSelected ? '#000' : '#fff')};
-    color: ${({ isSelected}) => (isSelected ? 'red' : '#000')};
+    border-radius : ${({ isToday}) => (isToday ? '100%' : '0')};
+    background: ${({ isToday}) => (isToday ? '#000' : '#fff')};
+    color: ${({ isToday}) => (isToday ? 'red' : '#000')};
 `
 
 export const AllEvent = styled.span`

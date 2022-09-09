@@ -49,6 +49,8 @@ const Calender = (isSelected) => {
   const c = a + '건';
   const [b] = useState('1');
 
+  const [todayEvent, setTodayEvent] = useState(0);
+
 
   useEffect(() => {
     setDay(date.getDate());
@@ -70,9 +72,12 @@ const Calender = (isSelected) => {
   }
 
   const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS; // 윤년과 아닌년의 days 설정
-
+  console.log(today.getFullYear())
+  console.log(today.getMonth() + 1)
+  console.log(today.getDate())
   return (
     <>
+    
       {/* <button onClick={testClick}>클릭</button> */}
 
       <Container>
@@ -108,11 +113,16 @@ const Calender = (isSelected) => {
               .map((_, index) => {
                 const d = index - (startDay - 1);
                 return (
+                  
                   <SubContainer>
                     <TopContainer>
                       <Day
                         key={index}
-                        isToday={d === today.getDate()}
+                        isToday={
+                          year === today.getFullYear() &&
+                          month === today.getMonth() &&
+                          d === today.getDate()
+                        }
                         isSelected={d === day}
                         onClick={() => setDate(new Date(year, month, d))}
                       >
@@ -140,20 +150,13 @@ const Calender = (isSelected) => {
                         {d > 0 ? "콘서트" + b : ''}
                       </Events>
                     </BottomContainer>
-
                   </SubContainer>
-
                 );
               })}
           </Day_container>
-
-
         </Body>
       </Frame>
     </>
-
-
-
   );
 
 }
