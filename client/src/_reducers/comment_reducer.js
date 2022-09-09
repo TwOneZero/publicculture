@@ -12,7 +12,7 @@ export default function getcompleteState(state = initialState, action) {
       };
       return [...state, newComment];
     case GET_COMMENTS:
-      return [...state, action.payload.allComments];
+      return action.payload.allComments;
     default:
       return state;
   }

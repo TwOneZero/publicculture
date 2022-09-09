@@ -19,9 +19,10 @@ import {
   Modify,
   Delete,
 } from './CommentElements';
+import { TestComment } from './TestComment';
 
 function Comment() {
-  const nowState = useSelector((state) => state);
+  const commentState = useSelector((state) => state.comment);
   const dispatch = useDispatch();
   const params = useParams();
   const postId = params.postId;
@@ -91,7 +92,16 @@ function Comment() {
         </Comment_submit_btn>
       </Comment_wContainer>
       <Comments_container>
-        {comments
+        {/* 리덕스 store 이용 */}
+        <ul>
+          {commentState
+            ? commentState.map((comment, id) => {
+                return <TestComment {...comment} key={id} />;
+              })
+            : []}
+        </ul>
+        {/* 리액트 useState 이용*/}
+        {/* {comments
           ? comments.map((comment, index) => {
               return (
                 <div key={index}>
@@ -101,7 +111,7 @@ function Comment() {
                 </div>
               );
             })
-          : []}
+          : []} */}
         <Comment_func>
           <Modify type='submit'>수정</Modify>
           <Delete type='submit'>삭제</Delete>
