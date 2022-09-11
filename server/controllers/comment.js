@@ -7,10 +7,14 @@ exports.addComment = async (req, res) => {
   try {
     const { postId } = req.params;
     if (!req.user) {
-      return res.status(404).json({ message: '유저 정보가 필요합니다' });
+      return res
+        .status(404)
+        .json({ success: false, message: '유저 정보가 필요합니다' });
     }
     if (!mongoose.Types.ObjectId.isValid(postId)) {
-      return res.status(404).send('post 가져오기 에러');
+      return res
+        .status(404)
+        .json({ success: false, message: 'post 가져오기 에러' });
     }
     //comment 인스턴스
     const comment = new Comment({
@@ -32,12 +36,12 @@ exports.addComment = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).json({ message: 'addcomment Error', error });
+    return res.status(500).json({ success: false, message: error });
   }
 };
 
 //댓글 가져오기
-exports.getComments = async (req, res, next) => {
+exports.getComments = async (req, res) => {
   try {
     const { postId } = req.params;
     const comments = await Comment.find()
@@ -47,45 +51,41 @@ exports.getComments = async (req, res, next) => {
       });
     const allComments = comments.map((comment) => {
       return {
+        commentId: comment._id,
         name: comment.userId.name,
         body: comment.body,
         createdAt: comment.createdAt,
       };
     });
-    return res.json({ allComments });
+    return res.status(200).json({ success: true, allComments });
   } catch (error) {
-    next(error);
+    return res.status(400).json({ success: false, message: error });
   }
 };
 
 //댓글 삭제
-exports.deleteComment = async (req, res, next) => {
+exports.deleteComment = async (req, res) => {
   try {
     // Auth - 유저 정보 가져오기
     const userId = req.user._id;
     if (!userId) {
       return res
-        .status(500)
+        .status(400)
         .json({ success: false, message: '유저 정보가 없습니다.' });
     }
     //해당 코멘트 정보
     const { commentId } = req.params;
     //코멘트의 유저 정보랑 일치하는 지 확인
-    const checkUser = await Comment.findById({ _id: commentId }).populate(
-      'userId'
-    );
-    console.log(checkUser); //콘솔테스트
-    if (checkUser.userId._id !== userId) {
-      return res
-        .status(400)
-        .json({ message: 'user 정보가 일치하지 않습니다. 댓글 삭제 실패' });
+    if (!mongoose.Types.ObjectId.isValid(commentId)) {
+      return res.status(404).json({
+        success: false,
+        message: 'comment id에 해당하는 정보가 없습니다.',
+      });
     }
-
     // 코멘트 삭제
     const updatedComment = await Comment.findByIdAndDelete({ _id: commentId });
-    console.log(updatedComment); //콘솔테스트
-    return res.status(200).json({ success: false, updatedComment });
+    return res.status(200).json({ success: true, updatedComment });
   } catch (err) {
-    return res.status(400).json({ success: false, err });
+    return res.status(400).json({ success: false, message: err });
   }
 };

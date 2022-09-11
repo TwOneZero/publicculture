@@ -11,3 +11,4 @@ export const UPDATE_USER = 'update_user';
 export const MY_LIKED = 'my_liked';
 export const ADD_COMMENT = 'add_comment';
 export const GET_COMMENTS = 'get_comments';
+export const DELETE_COMMENT = 'delete_comment';

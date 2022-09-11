@@ -13,6 +13,6 @@ router.post('/comment/:postId', auth, addComment);
 //comment 가져오기
 router.get('/getComment/:postId', getComments);
 //comment 삭제
-router.post('/deleteComment/:commentId', deleteComment);
+router.post('/deleteComment/:commentId', auth, deleteComment);
 
 module.exports = router;

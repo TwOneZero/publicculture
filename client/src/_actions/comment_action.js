@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_COMMENT, GET_COMMENTS } from './types';
+import { ADD_COMMENT, DELETE_COMMENT, GET_COMMENTS } from './types';
 
 //addcomment
 export function addComment(postId, body) {
@@ -20,6 +20,16 @@ export function getComments(postId) {
 
   return {
     type: GET_COMMENTS,
+    payload: request,
+  };
+}
+
+export function deleteComment(commentId) {
+  const request = axios
+    .post(`/api/deleteComment/${commentId}`)
+    .then((res) => res.data);
+  return {
+    type: DELETE_COMMENT,
     payload: request,
   };
 }

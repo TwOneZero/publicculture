@@ -4,7 +4,11 @@ import axios from 'axios';
 import Auth from '../../../hoc/auth';
 import { auth } from '../../../_actions/user_action';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComment, getComments } from '../../../_actions/comment_action';
+import {
+  addComment,
+  deleteComment,
+  getComments,
+} from '../../../_actions/comment_action';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -41,17 +45,18 @@ function Comment() {
     };
     dispatch(addComment(postId, body))
       .then((res) => {
-        if (res.payload.success === false) {
+        if (!res.payload.success) {
           alert(res.payload.message);
         } else {
-          // console.log(res.payload);
-          let updatedComment = {
-            name: res.payload.name,
-            body: res.payload.info.body,
-            createdAt: res.payload.info.createdAt,
-          };
-          //기존 state 에 새 댓글 저장
-          setComments((prev) => [...prev, updatedComment]);
+          console.log(res.payload);
+          //기존 state 에 새 댓글 저장 , 리덕스 쓰면 이렇게 안해도 됨
+          // let updatedComment = {
+          //   commentId: res.payload.info._id,
+          //   name: res.payload.name,
+          //   body: res.payload.info.body,
+          //   createdAt: res.payload.info.createdAt,
+          // };
+          // setComments((prev) => [...prev, updatedComment]);
           setComment('');
         }
       })
@@ -60,21 +65,35 @@ function Comment() {
       });
   };
 
+  //댓글 삭제
+  const onDeleteClicked = (e) => {
+    e.preventDefault();
+    const commentId = e.target.parentNode.id;
+    dispatch(deleteComment(commentId)).then((res) => {
+      if (!res.payload.success) {
+        alert(res.payload.message);
+      } else {
+        console.log(res.payload);
+      }
+    });
+  };
+
   //post detail 페이지 들어가면 실행됨
   useEffect(() => {
     dispatch(getComments(postId)).then((res) => {
-      if (res.payload) {
-        //server에서 allComments 배열로 넘겨줌
-        let ans = res.payload.allComments.map((data) => {
-          return {
-            name: data.name,
-            body: data.body,
-            createdAt: data.createdAt,
-          };
-        });
-        setComments(ans);
+      if (res.payload.success) {
+        console.log(res.payload);
+        // let ans = res.payload.allComments.map((data) => {
+        //   return {
+        //     commentId: data.commentId,
+        //     name: data.name,
+        //     body: data.body,
+        //     createdAt: data.createdAt,
+        //   };
+        // });
+        // setComments(ans);
       } else {
-        console.log('error');
+        console.log(res.payload);
       }
     });
   }, [dispatch, postId]);
@@ -95,8 +114,14 @@ function Comment() {
         {/* 리덕스 store 이용 */}
         <ul>
           {commentState
-            ? commentState.map((comment, id) => {
-                return <TestComment {...comment} key={id} />;
+            ? commentState.map((comment) => {
+                return (
+                  <TestComment
+                    key={comment.commentId}
+                    {...comment}
+                    clickFunc={onDeleteClicked}
+                  />
+                );
               })
             : []}
         </ul>
