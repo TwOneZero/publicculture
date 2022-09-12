@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SliderDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 100px 0;
 `;
 
 export const IMG = styled.img`
