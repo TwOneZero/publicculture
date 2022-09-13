@@ -14,7 +14,7 @@ export const HeaderContainer = styled.div`
   flex-direction: low;
   justify-content: center;
   align-items: center;
-  width: 1500px;
+  width: 1400px;
   margin: 0 auto;
   height: 100px;
   background-color: white;
@@ -55,7 +55,7 @@ export const GenreContainer = styled.div`
 export const GenreBar = styled.div`
   display: flex;
   height: 60px;
-  width: 1500px;
+  width: 1400px;
   margin: 0 auto;
   //width: 100%;
   padding: 20px 50px;

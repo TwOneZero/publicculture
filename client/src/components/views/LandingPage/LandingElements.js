@@ -4,7 +4,7 @@ export const SliderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1500px;
+  width: 1400px;
   /* margin: 100px 0; */
   margin: 100px auto;
 `;
