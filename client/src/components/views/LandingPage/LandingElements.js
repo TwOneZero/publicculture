@@ -3,17 +3,20 @@ import styled from 'styled-components';
 export const SliderDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 100px 0;
+  align-items: center;
+  width: 1500px;
+  /* margin: 100px 0; */
+  margin: 100px auto;
 `;
 
 export const IMG = styled.img`
   margin: 50px;
-  width: 25vw;
-  height: 48vh;
+  width: 15vw;
+  height: 36vh;
 `;
 
 export const Container = styled.div`
-  width: 90%;
+  width: 100%;
   overflow: hidden;
   display: flex;
   //flex-direction: center;
@@ -25,6 +28,7 @@ export const Button = styled.button`
   background-color: transparent;
   //border-radius: 10px;
   font-size: 30px;
+  cursor: pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
     //background-color: coral;

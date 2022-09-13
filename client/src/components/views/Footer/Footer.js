@@ -1,11 +1,11 @@
 import React from 'react';
 // import { animateScroll as scroll } from 'react-scroll';
-import { 
+import {
   FaFacebook,
   FaInstagram,
   FaYoutube,
   FaTwitter,
-  FaLinkedin 
+  FaLinkedin
 } from 'react-icons/fa';
 
 import {
@@ -24,7 +24,7 @@ function Footer() {
     <>
       <FooterContainer>
         <FooterWrap>
-        <SocialMedia>
+          <SocialMedia>
             <SocialMediaWrap>
               <SocialLogo to='/'>Public</SocialLogo>
               <WebsiteRights>Public ⓒ {new Date().getFullYear()} All rights  reserved.</WebsiteRights>
@@ -50,15 +50,6 @@ function Footer() {
         </FooterWrap>
       </FooterContainer>
     </>
-    // <div
-    //   style={{
-    //     color: '#1275d1',
-    //     borderTop: '1px solid #333333',
-    //     padding: '5px 0',
-    //   }}
-    // >
-    //   <p>public data api bolierPlate</p>
-    // </div>
   );
 }
 
