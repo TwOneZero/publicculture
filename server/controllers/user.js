@@ -39,7 +39,7 @@ exports.loginUser = async (req, res, next) => {
         // 로컬 쿠키에 토큰을 저장한다.
         let expiryDate = new Date();
         //쿠키 만료 시간 -> 5분
-        expiryDate.setMinutes(expiryDate.getMinutes() + 5);
+        expiryDate.setMinutes(expiryDate.getMinutes() + 120);
         return res
           .cookie('x_auth', user.token, { expires: expiryDate, httpOnly: true })
           .status(200)

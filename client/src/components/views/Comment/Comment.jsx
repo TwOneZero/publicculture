@@ -1,77 +1,149 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import Auth from '../../../hoc/auth'
+import Auth from '../../../hoc/auth';
+import { auth } from '../../../_actions/user_action';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  addComment,
+  deleteComment,
+  getComments,
+} from '../../../_actions/comment_action';
+import { useParams } from 'react-router-dom';
 
-//댓글
-const Comment_wContainer = styled.div`
-  width: 800px;
-  height: 180px;
-  display: flex;
-  border-bottom: 2px solid black;
-  position: relative;
-  margin: 40px;
-  //background-color: yellow;
-`;
+import {
+  Comment_wContainer,
+  Commentbox,
+  Comment_submit_btn,
+  Comments_container,
+  Comment_username,
+  Comment_content,
+  Comment_date,
+  Comment_func,
+  Modify,
+  Delete,
+} from './CommentElements';
+import { TestComment } from './TestComment';
 
-const Commentbox = styled.textarea`
-  height: 100px;
-  width: 85%;
-  border: 1px solid grey;
-  outline: none;
-  resize: none;
-  padding: 10px;
-  font-size: 20px;
-  font-family: 'Lato', sans-serif;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
+function Comment() {
+  const commentState = useSelector((state) => state.comment);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const postId = params.postId;
 
-const Comment_submit_btn = styled.button`
-  width: 15%;
-  height: 122px;
-  border: none;
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  &:active {
-    border: 1px solid grey;
-  }
-`;
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState('');
 
-function Comment(props) {
-    const data = useSelector((store)=>store);
+  const changeComment = (e) => {
+    setComment(e.target.value);
+  };
 
-    
-    //post id 변수에 저장
-    const [comment, setComment] = useState();
+  //댓글 추가
+  const onSubmitClicked = () => {
+    let body = {
+      comment,
+    };
+    dispatch(addComment(postId, body))
+      .then((res) => {
+        if (!res.payload.success) {
+          alert(res.payload.message);
+        } else {
+          console.log(res.payload);
+          //기존 state 에 새 댓글 저장 , 리덕스 쓰면 이렇게 안해도 됨
+          // let updatedComment = {
+          //   commentId: res.payload.info._id,
+          //   name: res.payload.name,
+          //   body: res.payload.info.body,
+          //   createdAt: res.payload.info.createdAt,
+          // };
+          // setComments((prev) => [...prev, updatedComment]);
+          setComment('');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    const changeComment = (e) => {
-        // console.log(e)
-        setComment(e.target.value)
-    }
-    let body ={
-        comment
-    }
+  //댓글 삭제
+  const onDeleteClicked = (e) => {
+    e.preventDefault();
+    const commentId = e.target.parentNode.id;
+    dispatch(deleteComment(commentId)).then((res) => {
+      if (!res.payload.success) {
+        alert(res.payload.message);
+      } else {
+        console.log(res.payload);
+      }
+    });
+  };
 
-    // const onSubmitClicked = () => {
-    //     axios.post(`/api/comment/${postId}`, body ).then((res) => {
+  //post detail 페이지 들어가면 실행됨
+  useEffect(() => {
+    dispatch(getComments(postId)).then((res) => {
+      if (res.payload.success) {
+        console.log(res.payload);
+        // let ans = res.payload.allComments.map((data) => {
+        //   return {
+        //     commentId: data.commentId,
+        //     name: data.name,
+        //     body: data.body,
+        //     createdAt: data.createdAt,
+        //   };
+        // });
+        // setComments(ans);
+      } else {
+        console.log(res.payload);
+      }
+    });
+  }, [dispatch, postId]);
 
-    //     });
-    // }
+  return (
+    <div>
+      <Comment_wContainer>
+        <Commentbox
+          onChange={changeComment}
+          placeholder='여기에 댓글을 작성해주세요'
+          value={comment}
+        ></Commentbox>
+        <Comment_submit_btn type='submit' onClick={onSubmitClicked}>
+          등록
+        </Comment_submit_btn>
+      </Comment_wContainer>
+      <Comments_container>
+        {/* 리덕스 store 이용 */}
+        <ul>
+          {commentState
+            ? commentState.map((comment) => {
+                return (
+                  <TestComment
+                    key={comment.commentId}
+                    {...comment}
+                    clickFunc={onDeleteClicked}
+                  />
+                );
+              })
+            : []}
+        </ul>
+        {/* 리액트 useState 이용*/}
+        {/* {comments
+          ? comments.map((comment, index) => {
+              return (
+                <div key={index}>
+                  <Comment_username>{comment.name}</Comment_username>
+                  <Comment_date>{comment.createdAt}</Comment_date>
+                  <Comment_content>{comment.body}</Comment_content>
+                </div>
+              );
+            })
+          : []} */}
+        <Comment_func>
+          <Modify type='submit'>수정</Modify>
+          <Delete type='submit'>삭제</Delete>
+        </Comment_func>
+      </Comments_container>
+    </div>
+  );
+}
 
-
-    return (
-      <div>
-        <Comment_wContainer >
-          <Commentbox onChange={changeComment} placeholder='여기에 댓글을 작성해주세요'></Commentbox>
-          <Comment_submit_btn  type='submit'>등록</Comment_submit_btn>
-        </Comment_wContainer>
-      </div>
-    );  
-  }
-  
-  export default Auth(Comment, null);
-  
+export default Auth(Comment, null);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_POST,
   SEARCH_POST,
@@ -10,7 +10,7 @@ import {
 
 //getAllpost
 export function getRandompost() {
-  const request = axios.get("/api/posts").then((res) => res.data);
+  const request = axios.get('/api/posts').then((res) => res.data);
 
   return {
     type: GET_POST,
@@ -51,7 +51,7 @@ export function likePost(id) {
 
 // mypageLiked
 export function mypageLiked() {
-  const request = axios.get("/api/likedPost").then((res) => res.data);
+  const request = axios.get('/api/likedPost').then((res) => res.data);
 
   return {
     type: MY_LIKED,
