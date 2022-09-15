@@ -15,13 +15,7 @@ import {
   Comment_wContainer,
   Commentbox,
   Comment_submit_btn,
-  Comments_container,
-  Comment_username,
-  Comment_content,
-  Comment_date,
-  Comment_func,
-  Modify,
-  Delete,
+
 } from './CommentElements';
 import { TestComment } from './TestComment';
 
@@ -69,13 +63,16 @@ function Comment() {
   const onDeleteClicked = (e) => {
     e.preventDefault();
     const commentId = e.target.parentNode.id;
+    if(window.confirm('삭제할거임?')){
     dispatch(deleteComment(commentId)).then((res) => {
       if (!res.payload.success) {
         alert(res.payload.message);
       } else {
         console.log(res.payload);
       }
-    });
+    });  
+    }
+    
   };
 
   //post detail 페이지 들어가면 실행됨
@@ -110,9 +107,8 @@ function Comment() {
           등록
         </Comment_submit_btn>
       </Comment_wContainer>
-      <Comments_container>
         {/* 리덕스 store 이용 */}
-        <ul>
+        <div>
           {commentState
             ? commentState.map((comment) => {
                 return (
@@ -124,7 +120,7 @@ function Comment() {
                 );
               })
             : []}
-        </ul>
+        </div>
         {/* 리액트 useState 이용*/}
         {/* {comments
           ? comments.map((comment, index) => {
@@ -137,11 +133,6 @@ function Comment() {
               );
             })
           : []} */}
-        <Comment_func>
-          <Modify type='submit'>수정</Modify>
-          <Delete type='submit'>삭제</Delete>
-        </Comment_func>
-      </Comments_container>
     </div>
   );
 }
