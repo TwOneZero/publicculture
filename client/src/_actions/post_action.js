@@ -1,16 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_POST,
   SEARCH_POST,
   DETAIL_POST,
   LIKE_POST,
   MY_LIKED,
+<<<<<<< HEAD
   GET_COUNT,
 } from "./types";
+=======
+} from './types';
+>>>>>>> b947748327ddf259597bcc7fe9a3e6962da330ad
 
 //getAllpost
 export function getRandompost() {
-  const request = axios.get("/api/posts").then((res) => res.data);
+  const request = axios.get('/api/posts').then((res) => res.data);
 
   return {
     type: GET_POST,
@@ -51,13 +55,14 @@ export function likePost(id) {
 
 // mypageLiked
 export function mypageLiked() {
-  const request = axios.get("/api/likedPost").then((res) => res.data);
+  const request = axios.get('/api/likedPost').then((res) => res.data);
 
   return {
     type: MY_LIKED,
     payload: request,
   };
 }
+<<<<<<< HEAD
 
 export function getPostDateCount(){
   const request = axios.post("/api/getCount").then((res) => res.data);
@@ -67,3 +72,5 @@ export function getPostDateCount(){
     payload: request,
   };
 }
+=======
+>>>>>>> b947748327ddf259597bcc7fe9a3e6962da330ad
