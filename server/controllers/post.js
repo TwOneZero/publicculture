@@ -26,6 +26,21 @@ exports.getRandomPost = async (req, res) => {
   }
 };
 
+exports.getPostDateCount = async (req, res) => {
+  let today = dayjs();
+  let d_t = today.format('YYYY-MM-DD h:mm:ss');
+  try{
+    const postAll = await Post.find({ end_date: {$gte: d_t }}).exec();
+    return res.status(200).json({count: postAll.length});
+    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
+    //   return res.status(200).json({ count: post.length});
+    // });
+  }catch(error){
+    return res.status(404).json({ message: error});
+  }
+}
+
+
 //검색으로 가져오기 ( title  or  codename  다 됨)
 exports.getPostBySearch = async (req, res) => {
   //req.query로 해야함
@@ -128,3 +143,6 @@ exports.searchMap = async (req, res, next) => {
     return res.json({ error });
   }
 };
+
+
+

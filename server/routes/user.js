@@ -7,7 +7,7 @@ const {
   logoutUser,
   checkName,
   updateUser,
-  selectGenre,
+  updateUser_Password,
 } = require('../controllers/user');
 
 const router = express.Router();
@@ -24,5 +24,7 @@ router.get('/users/logout', auth, logoutUser);
 router.post('/users/checkName', checkName);
 //업데이트
 router.post('/users/updateUser', auth, updateUser);
+//업데이트 비밀번호
+router.post('/users/updateUser_Password', auth, updateUser_Password);
 
 module.exports = router;
