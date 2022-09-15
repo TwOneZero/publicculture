@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
-import { updateUser, checkName } from '../../../_actions/user_action';
+import { updateUser, updateUser_Password, checkName } from '../../../_actions/user_action';
 
 import{
   EditMypage_container,
@@ -55,7 +55,6 @@ const MypageEdit = () => {
   const onUpdateConfirm = () => {
     let body = {
       name: Name,
-      password: Password,
       genre: Genre,
     };
     dispatch(updateUser(body)).then((res) => {
@@ -67,9 +66,22 @@ const MypageEdit = () => {
     });
 
     setName('');
-    setPassword('');
-    setPasswordConfirm('');
     setGenre('');
+    window.location.reload();
+  };
+  const onUpdatePasswordConfirm = () => {
+    let body = {
+      password: Password,
+    };
+    dispatch(updateUser_Password(body)).then((res) => {
+      if (res.payload.success) {
+        console.log(res.payload);
+      } else {
+        console.log(res.payload);
+      }
+    });
+
+    setPassword('');
     window.location.reload();
   };
 
@@ -93,19 +105,7 @@ const MypageEdit = () => {
             <Nickname_edit onChange={onChangeName}></Nickname_edit>
             <NicknameC_btn onClick={onCheckName}>confirm</NicknameC_btn>
           </Nickname_container_edit>
-          <PasswordContainer>
-            비밀번호 변경
-            <Line_edit></Line_edit>
-            <PasswordCheck onChange={onChangePassword}></PasswordCheck>
-          </PasswordContainer>
-          <PasswordContainer>
-            비밀번호 변경 확인
-            <Line_edit></Line_edit>
-            <PasswordCheck onChange={onChangePasswordConfirm}></PasswordCheck>
-            <PasswordCheckBtn onClick={onCheckPassword}>
-              confirm
-            </PasswordCheckBtn>
-          </PasswordContainer>
+          
           <Genre_container_edit>
             선호 장르
             <Line_edit></Line_edit>
@@ -189,6 +189,25 @@ const MypageEdit = () => {
             onClick={onUpdateConfirm}
           >
             유저업데이트 해보셈
+          </button>
+          <PasswordContainer>
+            비밀번호 변경
+            <Line_edit></Line_edit>
+            <PasswordCheck onChange={onChangePassword}></PasswordCheck>
+          </PasswordContainer>
+          <PasswordContainer>
+            비밀번호 변경 확인
+            <Line_edit></Line_edit>
+            <PasswordCheck onChange={onChangePasswordConfirm}></PasswordCheck>
+            <PasswordCheckBtn onClick={onCheckPassword}>
+              confirm
+            </PasswordCheckBtn>
+          </PasswordContainer>
+          <button
+            style={{ height: '50px', width: '100px' }}
+            onClick={onUpdatePasswordConfirm}
+          >
+           비밀번호업데이트 따로
           </button>
         </Page_area_edit>
       </EditMypage_container>

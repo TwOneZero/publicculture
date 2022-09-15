@@ -20,6 +20,7 @@ const ShowEvent = () => {
   const dispatch = useDispatch();
 
   const infos = location.state.infos;
+  console.log(infos)
 
   return (
     <div>

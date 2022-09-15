@@ -10,6 +10,7 @@ import {
   SearchBar,
   Button,
   MenuContainer,
+  GenreContainer,
   GenreBar,
   GenreBtn,
   HeaderBtn,
@@ -122,15 +123,16 @@ function Header() {
           }
         </MenuContainer>
       </HeaderContainer>
-
-      <GenreBar itemType="button" onClick={onGenreClicked}>
-        <GenreBtn name="뮤지컬">뮤지컬/오페라</GenreBtn>
-        <GenreBtn name="전시">전시/미술</GenreBtn>
-        <GenreBtn name="연극">연극</GenreBtn>
-        <GenreBtn name="콘서트">콘서트</GenreBtn>
-        <GenreBtn name="클래식">클래식</GenreBtn>
-        <GenreBtn name="무용">무용</GenreBtn>
-      </GenreBar>
+      <GenreContainer>
+        <GenreBar itemType="button" onClick={onGenreClicked}>
+          <GenreBtn name="뮤지컬">뮤지컬/오페라</GenreBtn>
+          <GenreBtn name="전시">전시/미술</GenreBtn>
+          <GenreBtn name="연극">연극</GenreBtn>
+          <GenreBtn name="콘서트">콘서트</GenreBtn>
+          <GenreBtn name="클래식">클래식</GenreBtn>
+          <GenreBtn name="무용">무용</GenreBtn>
+        </GenreBar>
+      </GenreContainer>
     </>
   );
 }

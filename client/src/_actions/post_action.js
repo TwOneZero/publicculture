@@ -5,7 +5,8 @@ import {
   DETAIL_POST,
   LIKE_POST,
   MY_LIKED,
-} from './types';
+  GET_COUNT,
+} from "./types";
 
 //getAllpost
 export function getRandompost() {
@@ -54,6 +55,15 @@ export function mypageLiked() {
 
   return {
     type: MY_LIKED,
+    payload: request,
+  };
+}
+
+export function getPostDateCount(){
+  const request = axios.post("/api/getCount").then((res) => res.data);
+
+  return{
+    type: GET_COUNT,
     payload: request,
   };
 }

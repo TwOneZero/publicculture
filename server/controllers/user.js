@@ -81,13 +81,12 @@ exports.logoutUser = async (req, res) => {
   );
 };
 
-//유저 업데이트
+//유저 닉네임, 장르업데이트
 exports.updateUser = async (req, res) => {
   try {
     //바꿀 패스워드
     const newUser = {
       name: req.body.name,
-      password: req.body.password,
       genre: req.body.genre,
     };
     const user = await User.findOne({ _id: req.user.id });
@@ -99,11 +98,9 @@ exports.updateUser = async (req, res) => {
     //user 정보 테스트
     console.log(user);
     user.name = newUser.name;
-    user.password = newUser.password;
     user.genre = newUser.genre;
 
     user.markModified('name');
-    user.markModified('password');
     user.markModified('genre');
 
     //바뀐 정보 저장
@@ -117,6 +114,39 @@ exports.updateUser = async (req, res) => {
     });
   } catch (error) {
     return res.json({ message: error });
+  }
+};
+
+//유저 비밀번호업데이트
+exports.updateUser_Password = async (req, res) => {
+  try {
+    //바꿀 패스워드
+    const newUser = {
+      password: req.body.password,
+    };
+    const user = await User.findOne({ _id: req.user.id });
+    if (!user) {
+      res
+        .status(500)
+        .json({ success: false, message: 'user 정보가 없습니다.' });
+    }
+    //user 정보 테스트
+    console.log(user);
+    user.password = newUser.password;
+
+    user.markModified('password');
+
+    //바뀐 정보 저장
+    user.save((err, userInfo) => {
+      if (err) return res.json({ success: false, err });
+      console.log('user 정보 업데이트');
+      return res.status(200).json({
+        success: true,
+        userInfo,
+      });
+    });
+  } catch (error) {
+    return res.json({ error });
   }
 };
 
