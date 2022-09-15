@@ -36,7 +36,7 @@ exports.addComment = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -59,7 +59,7 @@ exports.getComments = async (req, res) => {
     });
     return res.status(200).json({ success: true, allComments });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error });
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -86,6 +86,6 @@ exports.deleteComment = async (req, res) => {
     const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
     return res.status(200).json({ success: true, deletedComment });
   } catch (err) {
-    return res.status(500).json({ success: false, message: err });
+    return res.status(500).json({ message: err });
   }
 };

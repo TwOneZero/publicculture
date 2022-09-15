@@ -146,7 +146,7 @@ exports.updateUser_Password = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({ error });
+    return res.json({ message: error });
   }
 };
 

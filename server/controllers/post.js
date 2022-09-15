@@ -65,11 +65,12 @@ exports.getPostBySearch = async (req, res) => {
         { codename: { $regex: searchRegex } },
         { title: { $regex: searchRegex } },
         { guname: { $regex: searchRegex } },
+        { place: { $regex: searchRegex } },
       ],
     }).exec();
     return res.status(200).json({ success: true, posts });
   } catch (error) {
-    return res.status(404).json({ success: false, message: error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -84,7 +85,7 @@ exports.getPostDetails = async (req, res) => {
     const post = await Post.findById(id);
     return res.status(200).json({ success: true, post });
   } catch (error) {
-    return res.status(404).json({ success: false, message: error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -116,7 +117,7 @@ exports.likePost = async (req, res) => {
     //업데이트 된 post 와 likes 수 반환
     return res.status(200).json({ updatedPost, likes: post.likes.length });
   } catch (error) {
-    return res.status(404).json({ success: false, message: error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -131,7 +132,7 @@ exports.getFavPost = async (req, res) => {
     });
     return res.json({ success: true, myFavPost: likedPost });
   } catch (error) {
-    return res.status(404).json({ success: false, message: error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -149,6 +150,6 @@ exports.searchMap = async (req, res) => {
       return res.json({ success: true, data });
     });
   } catch (error) {
-    return res.json({ success: false, message: error });
+    return res.json({ message: error });
   }
 };

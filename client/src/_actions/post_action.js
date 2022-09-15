@@ -6,7 +6,7 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
-} from "./types";
+} from './types';
 
 //getAllpost
 export function getRandompost() {
@@ -21,7 +21,7 @@ export function getRandompost() {
 //search
 export function searchPost(search) {
   const request = axios
-    .post(`/api/searchPost?search=${search}`)
+    .post(`/api/posts/search?search=${search}`)
     .then((res) => res.data);
   return {
     type: SEARCH_POST,
@@ -41,7 +41,7 @@ export function getPostDetails(id) {
 
 //likepost
 export function likePost(id) {
-  const request = axios.patch(`/api/likePost/${id}`).then((res) => res.data);
+  const request = axios.patch(`/api/posts/like/${id}`).then((res) => res.data);
 
   return {
     type: LIKE_POST,
@@ -51,7 +51,7 @@ export function likePost(id) {
 
 // mypageLiked
 export function mypageLiked() {
-  const request = axios.get('/api/likedPost').then((res) => res.data);
+  const request = axios.get('/api/posts/like').then((res) => res.data);
 
   return {
     type: MY_LIKED,
@@ -59,10 +59,10 @@ export function mypageLiked() {
   };
 }
 
-export function getPostDateCount(){
-  const request = axios.post("/api/getCount").then((res) => res.data);
+export function getPostDateCount() {
+  const request = axios.post('/api/getCount').then((res) => res.data);
 
-  return{
+  return {
     type: GET_COUNT,
     payload: request,
   };
