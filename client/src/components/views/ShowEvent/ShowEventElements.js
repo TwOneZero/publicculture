@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const PostingContainer = styled.div`
-  margin: 4% 5%;
+  /* margin: 4% 5%; */
+  margin: 1% 5%;
   width: 90%;
   display: flex;
   flex-wrap: wrap;
@@ -9,7 +10,8 @@ export const PostingContainer = styled.div`
 `;
 
 export const PostingInfo = styled.div`
-  width: 500px;
+  width: 300px;
+  margin: 10px;
   //height: 600px;
   display: flex;
   flex-direction: column;
@@ -23,6 +25,6 @@ export const PostingInfo = styled.div`
 export const ImgContainer = styled.img`
   width: 300px;
   height: 400px;
-  object-fit: fill;
+  object-fit: contain;
   margin: 10px;
 `;
