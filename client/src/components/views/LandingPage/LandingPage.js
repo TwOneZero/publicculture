@@ -3,18 +3,24 @@ import Auth from '../../../hoc/auth';
 import { useDispatch } from 'react-redux';
 import { getRandompost } from '../../../_actions/post_action';
 
-import{
+import {
   SliderDiv,
   Button,
   Container,
   SliderContainer,
   IMG,
 } from './LandingElements';
+import InfoSection from '../InfoSection/InfoSection';
+import { homeObjOne, homeObjTwo, homeObjThree } from '../InfoSection/Data.js';
 
 
 
 
-function LandingPage() {
+
+
+
+
+const LandingPage = () => {
   const dispatch = useDispatch();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
@@ -57,19 +63,23 @@ function LandingPage() {
   }, [currentSlide]);
 
   return (
-    <SliderDiv>
-      <Button onClick={prevSlide}>&#60;</Button>
-      <Container>
-        <SliderContainer ref={slideRef}>
-          {posts.map((src, idx) => (
-            <a key={idx} href={`/post/${src._id}`}>
-              <IMG src={src.main_img} />
-            </a>
-          ))}
-        </SliderContainer>
-      </Container>
-      <Button onClick={nextSlide}>&#62;</Button>
-    </SliderDiv>
+    <>
+      <SliderDiv>
+        <Button onClick={prevSlide}>&#60;</Button>
+        <Container>
+          <SliderContainer ref={slideRef}>
+            {posts.map((src, idx) => (
+              <a key={idx} href={`/post/${src._id}`}>
+                <IMG src={src.main_img} />
+              </a>
+            ))}
+          </SliderContainer>
+        </Container>
+        <Button onClick={nextSlide}>&#62;</Button>
+      </SliderDiv>
+
+      <InfoSection {...homeObjOne}/>
+    </>
   );
 }
 

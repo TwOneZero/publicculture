@@ -23,7 +23,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.6",
     "morgan": "^1.10.0",
-    "node-geocoder": "^4.2.0"
+    "node-geocoder": "^4.2.0",
+    "react-scroll": "^1.8.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
