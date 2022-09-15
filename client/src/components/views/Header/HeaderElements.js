@@ -102,6 +102,7 @@ export const SearchBar = styled.input`
 export const Button = styled.button`
   background: transparent;
   margin-top: 35px;
+  margin-left: 10px;
   color: #000;
   right: 30px;
   font-size: 18px;
