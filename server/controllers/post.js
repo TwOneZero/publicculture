@@ -22,7 +22,7 @@ exports.getRandomPost = async (req, res) => {
     const slicedPost = posts.slice(randPick, randPick + limitrecords);
     return res.status(200).json({ len: slicedPost.length, posts: slicedPost });
   } catch (error) {
-    return res.status(404).json({ messege: error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -44,7 +44,7 @@ exports.getPostBySearch = async (req, res) => {
     }).exec();
     return res.status(200).json({ success: true, posts });
   } catch (error) {
-    return res.status(404).json({ success: false, error });
+    return res.status(404).json({ success: false, message: error });
   }
 };
 
@@ -54,12 +54,12 @@ exports.getPostDetails = async (req, res) => {
   try {
     //db id 로 가져옴
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).send('No post with that id');
+      return res.status(404).json({ message: 'No post with that id' });
     }
     const post = await Post.findById(id);
     return res.status(200).json({ success: true, post });
   } catch (error) {
-    return res.status(404).json({ success: false, error });
+    return res.status(404).json({ success: false, message: error });
   }
 };
 
@@ -91,12 +91,12 @@ exports.likePost = async (req, res) => {
     //업데이트 된 post 와 likes 수 반환
     return res.status(200).json({ updatedPost, likes: post.likes.length });
   } catch (error) {
-    next(error);
+    return res.status(404).json({ success: false, message: error });
   }
 };
 
 //관심행사 가져오기
-exports.getFavPost = async (req, res, next) => {
+exports.getFavPost = async (req, res) => {
   try {
     //모든 포스트 가져오기
     const posts = await Post.find({}).exec();
@@ -104,27 +104,26 @@ exports.getFavPost = async (req, res, next) => {
     let likedPost = posts.filter((arr) => {
       return arr.likes.find((id) => id === String(req.user._id));
     });
-    return res.json({ myFavPost: likedPost });
+    return res.json({ success: true, myFavPost: likedPost });
   } catch (error) {
-    next(error);
+    return res.status(404).json({ success: false, message: error });
   }
 };
 
 // 구글 search
-exports.searchMap = async (req, res, next) => {
+exports.searchMap = async (req, res) => {
   try {
-    const { q, locationName } = req.body;
+    const { q } = req.body;
     let parameter = {
       q,
-      locationName,
     };
     googleSearch(parameter, (err, data) => {
       if (err) {
         res.json({ err });
       }
-      return res.json(data);
+      return res.json({ success: true, data });
     });
   } catch (error) {
-    return res.json({ error });
+    return res.json({ success: false, message: error });
   }
 };

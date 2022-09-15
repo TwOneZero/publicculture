@@ -6,7 +6,7 @@ exports.registerUser = async (req, res) => {
   const user = new User(req.body);
   //user 저장
   user.save((err, userInfo) => {
-    if (err) return res.json({ success: false, err });
+    if (err) return res.json({ success: false, message: err });
     console.log('user 정보 저장');
     return res.status(200).json({
       success: true,
@@ -16,7 +16,7 @@ exports.registerUser = async (req, res) => {
 };
 
 //Login user
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = async (req, res) => {
   //요청된 이메일이 있는지 db 에서 확인
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -27,7 +27,7 @@ exports.loginUser = async (req, res, next) => {
       });
     }
     user.comparePassword(req.body.password, (err, isMatch) => {
-      if (err) return res.status(400).send(err);
+      if (err) return res.status(400).json({ message: err });
       if (!isMatch) {
         return res.json({
           loginSuccess: false,
@@ -35,7 +35,7 @@ exports.loginUser = async (req, res, next) => {
         });
       }
       user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
+        if (err) return res.status(400).json({ message: err });
         // 로컬 쿠키에 토큰을 저장한다.
         let expiryDate = new Date();
         //쿠키 만료 시간 -> 5분
@@ -50,7 +50,7 @@ exports.loginUser = async (req, res, next) => {
       });
     });
   } catch (error) {
-    next(error);
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -69,13 +69,13 @@ exports.checkAuth = (req, res) => {
 };
 
 //로그아웃
-exports.logoutUser = async (req, res, next) => {
+exports.logoutUser = async (req, res) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
     { token: '' },
     { new: true },
     (err, user) => {
-      if (err) return res.json({ success: false, err });
+      if (err) return res.json({ success: false, message: err });
       return res.status(200).json({ success: true });
     }
   );
@@ -116,7 +116,7 @@ exports.updateUser = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({ error });
+    return res.json({ message: error });
   }
 };
 
@@ -130,6 +130,6 @@ exports.checkName = async (req, res) => {
       return res.json({ success: false });
     }
   } catch (error) {
-    return res.json({ error });
+    return res.json({ message: error });
   }
 };

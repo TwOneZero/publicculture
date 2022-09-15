@@ -27,7 +27,7 @@ exports.addComment = async (req, res) => {
 
     //comment db에 저장
     comment.save((err, info) => {
-      if (err) return res.json({ success: false, err });
+      if (err) return res.json({ success: false, message: err });
       console.log('comment 저장 성공');
       return res.status(200).json({
         success: true,
@@ -59,7 +59,7 @@ exports.getComments = async (req, res) => {
     });
     return res.status(200).json({ success: true, allComments });
   } catch (error) {
-    return res.status(400).json({ success: false, message: error });
+    return res.status(500).json({ success: false, message: error });
   }
 };
 
@@ -83,9 +83,9 @@ exports.deleteComment = async (req, res) => {
       });
     }
     // 코멘트 삭제
-    const updatedComment = await Comment.findByIdAndDelete({ _id: commentId });
-    return res.status(200).json({ success: true, updatedComment });
+    const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
+    return res.status(200).json({ success: true, deletedComment });
   } catch (err) {
-    return res.status(400).json({ success: false, message: err });
+    return res.status(500).json({ success: false, message: err });
   }
 };
