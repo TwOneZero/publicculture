@@ -1,5 +1,4 @@
 const { User } = require('../schemas/User');
-
 //Register user
 exports.registerUser = async (req, res) => {
   //client form 에 입력된 정보로 user 인스턴스 생성
@@ -41,7 +40,10 @@ exports.loginUser = async (req, res) => {
         //쿠키 만료 시간 -> 5분
         expiryDate.setMinutes(expiryDate.getMinutes() + 120);
         return res
-          .cookie('x_auth', user.token, { expires: expiryDate, httpOnly: true })
+          .cookie(process.env.COOKIE_SECRET, user.token, {
+            expires: expiryDate,
+            httpOnly: true,
+          })
           .status(200)
           .json({
             loginSuccess: true,
