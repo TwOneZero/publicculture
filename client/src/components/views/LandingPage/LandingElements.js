@@ -6,7 +6,7 @@ export const SliderDiv = styled.div`
   align-items: center;
   width: 1400px;
   /* margin: 100px 0; */
-  margin: 100px auto;
+  margin: 150px auto;
 `;
 
 export const IMG = styled.img`

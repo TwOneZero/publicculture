@@ -6,7 +6,7 @@ import RegisterPage from "./components/views/RegisterPage/RegisterPage";
 import PostPage from "./components/views/PostPage/PostPage";
 import ShowEvent from "./components/views/ShowEvent/ShowEvent";
 import MyPage from "./components/views/MyPage/Mypage";
-import Calender from "./components/views/Calendar/Calender"
+import Calendar from "./components/views/Calendar/Calendar"
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/showevent/" element={<ShowEvent />} />
         <Route exact path="/showevent/:name" element={<ShowEvent />} />
         <Route exact path="/mypage" element={<MyPage />} />
-        <Route exact path="/calendar" element={<Calender />} />
+        <Route exact path="/calendar" element={<Calendar />} />
       </Routes>
     </div>
   );

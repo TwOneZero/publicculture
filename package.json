@@ -24,7 +24,8 @@
     "mongoose": "^6.1.6",
     "morgan": "^1.10.0",
     "node-geocoder": "^4.2.0",
-    "react-scroll": "^1.8.7"
+    "react-scroll": "^1.8.7",
+    "smooth-scrollbar": "^8.8.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
