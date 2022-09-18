@@ -93,6 +93,11 @@ export const Line = styled.div`
     border-bottom: 1px solid #000;
 `
 
+export const Test = styled.div`
+  width: 300px;
+  height: 300px;
+  color: #000;
+`
 
 
 

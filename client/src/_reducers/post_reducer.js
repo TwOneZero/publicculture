@@ -20,7 +20,7 @@ export default function postState(state = initialState, action) {
     case SEARCH_POST:
       return { posts: action.payload.posts };
     case DETAIL_POST:
-      return { post: action.payload.post };
+      return { ...state, post: action.payload.post };
     case DETIAL_RANDOM_POST:
       return { posts: action.paylod.posts };
     case LIKE_POST:
@@ -30,7 +30,7 @@ export default function postState(state = initialState, action) {
         return { post: action.payload.updatedPost };
       }
     case MY_LIKED:
-      return { ...state, myLikedPost: action.payload };
+      return { posts: action.payload.myFavPost };
     case GET_COUNT:
       return { ...state, getCount: action.payload };
     default:

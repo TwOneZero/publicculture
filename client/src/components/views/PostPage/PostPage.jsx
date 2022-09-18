@@ -34,6 +34,7 @@ import {
   RcImage,
   RcH2,
   RcP,
+  Test
 } from './PostElements';
 import Loading from '../Loading/Loading';
 
@@ -58,6 +59,9 @@ function PostPage() {
     setTab(index);
   };
 
+  const [random, setRandom] = useState('');
+  const [random2, setRandom2] = useState('');
+
   useEffect(() => {
     dispatch(getPostDetails(params.postId)).then((res) => {
       if (res.payload.post) {
@@ -76,13 +80,23 @@ function PostPage() {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-    dispatch(getRandomCodeNamePost(params.postId)).then((res) => {
-      if (res.payload.post) {
-        console.log(res.payload.post);
-      } else {
-        console.log('error!!!!!!!!!!!!!!');
-      }
-    });
+    // dispatch(getRandomCodeNamePost(params.postId)).then((res) => {
+    //   if (res.payload.post) {
+    //     console.log(res.payload.post);
+    //   } else {
+    //     console.log('error!!!!!!!!!!!!!!');
+    //   }
+    // });
+    if(postState.posts){
+      let test;
+      console.log(random)
+      test = Math.floor(Math.random() * 50);
+      console.log(test);
+      postState.posts.map((post) =>{
+        setRandom(post.title[test]);
+      });
+      console.log(random);
+    }
   }, [dispatch, params.postId]);
 
 
@@ -104,6 +118,8 @@ function PostPage() {
 
   return (
     <PostContainer>
+      
+        
       <PostContent>
         {postState.post ? (
           <>
@@ -190,10 +206,7 @@ function PostPage() {
                       </Likebtn>
                     </Event_info_last_content>
                   </Event_info>
-
                 </Event_info_container>
-
-
               </EventLContainer>
 
               <EventRContainer>
@@ -202,8 +215,17 @@ function PostPage() {
                   <RecommendContent>
                     <RecommendList>
                       <RcImage src={TestImage} />
-                      <RcH2>Abcaaaaaaaaaaaaaaaaaaaaa</RcH2>
+                      {/* {postState.posts ? 
+                        <>
+                        <RcH2>{postState.posts.title}</RcH2>
                       <RcP>qwrasfasfsadasdassfsa</RcP>
+                        </>
+                        : <></>  
+                    } */}
+                    { postState.posts ? <RcH2>{postState.posts[1].title}</RcH2> : null}
+                      {/* <RcH2>Abcaaaaaaaaaaaaaaaaaaaaa</RcH2>
+                      <RcP>qwrasfasfsfsaasfasfasfasfasf</RcP> */}
+
                     </RecommendList>
                     <RecommendList>
                       <RcImage src={TestImage} />
@@ -220,6 +242,22 @@ function PostPage() {
         ) : (
           <Loading />
         )}
+        <Test>
+        {/* {postState.posts ?  
+        postState.posts.map((post) => {
+          <ContainerH1>{post.title}</ContainerH1>
+          return console.log(post);
+        }) : null} */}
+
+        {/* {
+          postState.posts
+            ?
+            console.log(post[1].title)
+            : null
+        } */}
+
+        {/* { postState.posts ? <ContainerH1>{postState.posts[1].title}</ContainerH1> : null} */}
+        </Test>
 
         <Comment props={params.postId} />
 
