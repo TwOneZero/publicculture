@@ -5,13 +5,14 @@ export const InfoContainer = styled.div`
     color: #fff;
     /* background: ${({ lightBg }) => (lightBg ? '#f9f9f9' : '#010606')}; */
     /* background: #010606; */
-    background: #f9f9f9;
+    background: red;
 
     * {
         box-sizing: border-box;
         margin: 0 auto;
         padding: 0;
     }
+    margin: 200px auto;
 
 
     @media screen and (max-width: 768px){
@@ -25,7 +26,7 @@ export const InfoWrapper = styled.div`
     /* height: 860px; */
     width: 100%;
     max-width: 1100px;
-    margin: 200px auto;
+    
     /* margin-top: 200px;
     margin-right: auto;
     margin-left: auto; */

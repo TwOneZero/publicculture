@@ -5,7 +5,6 @@ export const SliderDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 1400px;
-  /* margin: 100px 0; */
   margin: 150px auto;
 `;
 
