@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+export const PostContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: 'Noto Sans KR';
+  flex-direction: column;
+  margin: 60px;
+`
+
+export const PostContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 //행사 정보
 export const Event_title = styled.div`
   font-family: 'Noto Sans KR', sans-serif;

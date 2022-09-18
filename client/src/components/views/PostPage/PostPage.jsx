@@ -7,6 +7,8 @@ import Comment from '../Comment/Comment';
 import Auth from '../../../hoc/auth';
 
 import {
+  PostContainer,
+  PostContent,
   Event_title,
   Event_info_container,
   Photo_container,
@@ -72,22 +74,11 @@ function PostPage() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        //justifyContent: 'center',
-        alignItems: 'center',
-        fontFamily: 'Noto Sans KR',
-        flexDirection: 'column',
-        margin: '60px',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+    <PostContainer>
+      <PostContent>
+
+
+
         {postState.post ? (
           <>
             <Event_title>{postState.post.title}</Event_title>
@@ -119,7 +110,9 @@ function PostPage() {
         ) : (
           <Loading />
         )}
-      </div>
+
+      </PostContent>
+
 
       <Comment props={params.postId} />
 
@@ -135,7 +128,7 @@ function PostPage() {
         </TabBtn>
       </TabBar>
       <TabContent tab={tab} />
-    </div>
+    </PostContainer>
   );
 }
 
