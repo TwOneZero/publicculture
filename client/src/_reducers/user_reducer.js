@@ -10,7 +10,7 @@ import {
 
 const initialState = null;
 
-export default function getcompleteState(state = initialState, action) {
+export default function userState(state = initialState, action) {
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, loginSuccess: action.payload };

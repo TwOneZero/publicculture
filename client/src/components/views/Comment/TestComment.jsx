@@ -1,5 +1,14 @@
 import React from 'react';
 
+import {
+  Comments_container,
+  Comment_username,
+  Comment_content,
+  Comment_date,
+  Comment_func,
+  Delete,
+} from './TestCommentElements';
+
 export const TestComment = ({
   name,
   body,
@@ -8,11 +17,11 @@ export const TestComment = ({
   commentId,
 }) => {
   return (
-    <li id={commentId}>
-      <p>{name}</p>
+    <Comments_container id={commentId}>
+      <Comment_username>{name}</Comment_username>
       <p>{body}</p>
-      <p>{createdAt}</p>
-      <button onClick={clickFunc}>DEL</button>
-    </li>
+      <Comment_date>{createdAt}</Comment_date>
+      <Delete onClick={clickFunc}>삭제</Delete>
+    </Comments_container>
   );
 };
