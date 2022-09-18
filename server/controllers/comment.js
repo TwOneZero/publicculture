@@ -41,7 +41,7 @@ exports.addComment = async (req, res) => {
 };
 
 //댓글 가져오기
-exports.getComments = async (req, res) => {
+exports.getPostComments = async (req, res) => {
   try {
     const { postId } = req.params;
     const comments = await Comment.find()
@@ -63,6 +63,22 @@ exports.getComments = async (req, res) => {
   }
 };
 
+//나의 모든 댓글 가져오기
+exports.getMyComments = async (req, res) => {
+  try {
+    const myComments = await Comment.find({ userId: req.user._id })
+      .exec()
+      .catch(() => {
+        return res
+          .status(500)
+          .json({ success: false, message: '내 comment 가져오기 실패' });
+      });
+    return res.status(200).json({ success: true, myComments });
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
 //댓글 삭제
 exports.deleteComment = async (req, res) => {
   try {
@@ -76,12 +92,9 @@ exports.deleteComment = async (req, res) => {
     //해당 코멘트 정보
     const { commentId } = req.params;
     //코멘트의 유저 정보랑 일치하는 지 확인
-    if (!mongoose.Types.ObjectId.isValid(commentId)) {
-      return res.status(404).json({
-        success: false,
-        message: 'comment id에 해당하는 정보가 없습니다.',
-      });
-    }
+    /**TODO
+     *
+     */
     // 코멘트 삭제
     const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
     return res.status(200).json({ success: true, deletedComment });
