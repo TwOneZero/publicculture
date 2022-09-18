@@ -5,7 +5,6 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
-  DETIAL_RANDOM_POST,
 } from '../_actions/types';
 
 const initialState = {
@@ -21,8 +20,6 @@ export default function postState(state = initialState, action) {
       return { posts: action.payload.posts };
     case DETAIL_POST:
       return { ...state, post: action.payload.post };
-    case DETIAL_RANDOM_POST:
-      return { posts: action.paylod.posts };
     case LIKE_POST:
       if (action.payload.isAuth === false) {
         return { ...state };

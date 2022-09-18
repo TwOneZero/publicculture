@@ -65,18 +65,19 @@ export const RcImage = styled.img`
 `
 
 export const RcH2 = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1rem;
   width: 150px;
   margin: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: start;
 `
 
 export const RcP = styled.p`
   font-size: 1rem;
   width: 150px;
-  text-align: center;
+  text-align: start;
   margin: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -91,12 +92,6 @@ export const ContainerH1 = styled.h1`
 
 export const Line = styled.div`
     border-bottom: 1px solid #000;
-`
-
-export const Test = styled.div`
-  width: 300px;
-  height: 300px;
-  color: #000;
 `
 
 
