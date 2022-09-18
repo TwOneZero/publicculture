@@ -32,6 +32,7 @@ import {
   CommentTitle,
   InfoBox,
 } from './MypageElements';
+import MyComment from './MyComment';
 
 function Mypage() {
   const navigate = useNavigate();
@@ -130,8 +131,7 @@ function Mypage() {
                 ></i>
               </CommentIcon>
               <CommentTitle onClick={onMenuButtonClick} id='mycomment'>
-                {' '}
-                내가 쓴 댓글{' '}
+                내가 쓴 댓글
               </CommentTitle>
             </CommentBox>
           </UserInfoMenuBtns>
@@ -142,6 +142,7 @@ function Mypage() {
           {mode === 'myProfile' && <MypageInfo></MypageInfo>}
           {mode === 'editProfile' && <MypageEdit></MypageEdit>}
           {mode === 'myLikedPost' && <MyLikedPost></MyLikedPost>}
+          {mode === 'mycomment' && <MyComment />}
         </div>
       </InfoBox>
     </MypageBox>

@@ -3,9 +3,7 @@ import React from 'react';
 import {
   Comments_container,
   Comment_username,
-  Comment_content,
   Comment_date,
-  Comment_func,
   Delete,
 } from './TestCommentElements';
 
