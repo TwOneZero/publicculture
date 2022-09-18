@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { searchPost } from '../../../_actions/post_action';
 import { logout, auth } from '../../../_actions/user_action';
+import Auth from '../../../hoc/auth';
 import {
   HeaderContainer,
   HeaderLogo,
@@ -19,6 +20,7 @@ import {
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const [search, setSearch] = useState('');
   const [Login, setLogin] = useState(true);
 
@@ -48,15 +50,15 @@ function Header() {
     });
   };
 
-  const CheckLogin = () => {
-    dispatch(auth()).then((res) => {
-      if (res.payload.isAuth === false) {
-        setLogin(false);
-      } else {
-        setLogin(true);
-      }
-    });
-  };
+  // const CheckLogin = () => {
+  //   dispatch(auth()).then((res) => {
+  //     if (res.payload.isAuth === false) {
+  //       setLogin(false);
+  //     } else {
+  //       setLogin(true);
+  //     }
+  //   });
+  // };
 
   const onGenreClicked = (e) => {
     e.preventDefault();
@@ -86,7 +88,7 @@ function Header() {
 
   return (
     <>
-      {CheckLogin()}
+      {/* {CheckLogin()} */}
       <HeaderContainer>
         <HeaderLogo type='button' onClick={onLogoClicked}>
           public culture
@@ -106,17 +108,19 @@ function Header() {
           </Button>
         </SearchBarArea>
         <MenuContainer>
-          {Login ? (
-            <>
-              <HeaderBtn onClick={onMypageClicked}>My page</HeaderBtn>
-              <HeaderBtn onClick={logOut}>Logout</HeaderBtn>
-            </>
-          ) : (
-            <>
-              <HeaderBtn onClick={onLoginbtnClicked}>Login</HeaderBtn>
-              <HeaderBtn onClick={onRegiterClicked}>Register</HeaderBtn>
-            </>
-          )}
+          {userState ? (
+            userState.userData.isAuth === true ? (
+              <>
+                <HeaderBtn onClick={onMypageClicked}>My page</HeaderBtn>
+                <HeaderBtn onClick={logOut}>Logout</HeaderBtn>
+              </>
+            ) : (
+              <>
+                <HeaderBtn onClick={onLoginbtnClicked}>Login</HeaderBtn>
+                <HeaderBtn onClick={onRegiterClicked}>Register</HeaderBtn>
+              </>
+            )
+          ) : null}
         </MenuContainer>
       </HeaderContainer>
       <GenreContainer>
@@ -133,4 +137,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Auth(Header, null);

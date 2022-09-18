@@ -20,32 +20,9 @@ exports.getRandomPost = async (req, res) => {
     let randPick = getRandomArbitrary(1, posts.length - limitrecords);
     //slicedPost 길이 => 랜덤수 ~ 랜덤수 + 20 (최대 : posts.length)
     const slicedPost = posts.slice(randPick, randPick + limitrecords);
-    return res.status(200).json({ len: slicedPost.length, posts: slicedPost });
-  } catch (error) {
-    return res.status(404).json({ message: error });
-  }
-};
-
-exports.getPostDateCount = async (req, res) => {
-  let today = dayjs()
-    .startOf('month')
-    .set('month', 9)
-    .set('year', 2022)
-    .format('YYYY-MM-DD HH:mm:ss');
-  let prevMonth = dayjs()
-    .startOf('month')
-    .set('month', 8)
-    .set('year', 2022)
-    .format('YYYY-MM-DD HH:mm:ss');
-  console.log(today);
-  try {
-    const postAll = await Post.find({
-      end_date: { $lte: today, $gte: prevMonth },
-    }).exec();
-    return res.status(200).json({ postAll, count: postAll.length });
-    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
-    //   return res.status(200).json({ count: post.length});
-    // });
+    return res
+      .status(200)
+      .json({ success: true, len: slicedPost.length, posts: slicedPost });
   } catch (error) {
     return res.status(404).json({ message: error });
   }
@@ -115,7 +92,9 @@ exports.likePost = async (req, res) => {
       new: true,
     });
     //업데이트 된 post 와 likes 수 반환
-    return res.status(200).json({ updatedPost, likes: post.likes.length });
+    return res
+      .status(200)
+      .json({ success: true, updatedPost, likes: post.likes.length });
   } catch (error) {
     return res.status(404).json({ message: error });
   }
@@ -131,6 +110,31 @@ exports.getFavPost = async (req, res) => {
       return arr.likes.find((id) => id === String(req.user._id));
     });
     return res.json({ success: true, myFavPost: likedPost });
+  } catch (error) {
+    return res.status(404).json({ message: error });
+  }
+};
+
+exports.getPostDateCount = async (req, res) => {
+  let today = dayjs()
+    .startOf('month')
+    .set('month', 9)
+    .set('year', 2022)
+    .format('YYYY-MM-DD HH:mm:ss');
+  let prevMonth = dayjs()
+    .startOf('month')
+    .set('month', 8)
+    .set('year', 2022)
+    .format('YYYY-MM-DD HH:mm:ss');
+  console.log(today);
+  try {
+    const postAll = await Post.find({
+      end_date: { $lte: today, $gte: prevMonth },
+    }).exec();
+    return res.status(200).json({ postAll, count: postAll.length });
+    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
+    //   return res.status(200).json({ count: post.length});
+    // });
   } catch (error) {
     return res.status(404).json({ message: error });
   }
