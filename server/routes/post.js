@@ -28,6 +28,5 @@ router.post('/googleSearch', searchMap);
 
 router.post('/getCount', getPostDateCount);
 
-router.post('/getRandomCodePost', getRandomCodeNamePost);
 
 module.exports = router;

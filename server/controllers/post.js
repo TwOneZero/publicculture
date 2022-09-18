@@ -3,29 +3,6 @@ const dayjs = require('dayjs');
 const mongoose = require('mongoose');
 const { googleSearch } = require('../utils/googleSearch');
 
-exports.getRandomCodeNamePost = async (req, res) => {
-  const limitrecords2 = 2;
-  function getRandomArbitrary(min, max){
-    return Math.ceil(Math.random() * (max - min) + min);
-  }
-  const { id } = req.params;
-  try {
-    //db id 로 가져옴
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ message: 'No post with that id' });
-    }
-    const posts = await Post.findById(id);
-    let randPick = getRandomArbitrary(1, posts.length - limitrecords2);
-    //slicedPost 길이 => 랜덤수 ~ 랜덤수 + 20 (최대 : posts.length)
-    const slicedPost = posts.slice(randPick, randPick + limitrecords2);
-    return res
-      .status(200)
-      .json({ success: true, len: slicedPost.length, posts: slicedPost });
-  } catch (error) {
-    return res.status(404).json({ message: error });
-  }
-}
-
 //랜덤 post 가져오기
 exports.getRandomPost = async (req, res) => {
   const limitrecords = 20;

@@ -32,17 +32,6 @@ export function searchPost(search) {
   };
 }
 
-export function getRandomCodeNamePost(id){
-  const request = axios
-    .get(`/api/posts/${id}`, { withCredenttials: true})
-    .then((res) => res.data);
-
-    return{
-      type: DETIAL_RANDOM_POST,
-      payload: request,
-    };
-}
-
 //details
 export function getPostDetails(id) {
   const request = axios
