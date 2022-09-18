@@ -17,18 +17,20 @@ import {
   TabBar,
   TabBtn,
 } from './PostElements';
+import Loading from '../Loading/Loading';
 
 function PostPage() {
   let params = useParams();
+  const postState = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  const [post, setPost] = useState([]);
-  const [title, setTitle] = useState();
-  const [main_img, setImg] = useState();
-  const [place, setPlace] = useState();
-  const [date, setDate] = useState();
-  const [use_trgt, setTarget] = useState();
-  const [use_fee, setFee] = useState();
-  const [likes, setLikes] = useState([]);
+  // const [post, setPost] = useState([]);
+  // const [title, setTitle] = useState();
+  // const [main_img, setImg] = useState();
+  // const [place, setPlace] = useState();
+  // const [date, setDate] = useState();
+  // const [use_trgt, setTarget] = useState();
+  // const [use_fee, setFee] = useState();
+  const [likes, setLikes] = useState(0);
   const [tab, setTab] = useState(0);
   const settingTab = (index) => {
     setTab(index);
@@ -38,14 +40,14 @@ function PostPage() {
     dispatch(getPostDetails(params.postId)).then((res) => {
       if (res.payload.post) {
         console.log(res.payload.post);
-        setPost(res.payload.post);
-        setTitle(res.payload.post.title);
-        setImg(res.payload.post.main_img);
-        setPlace(res.payload.post.place);
-        setDate(res.payload.post.date);
-        setTarget(res.payload.post.use_trgt);
-        setFee(res.payload.post.use_fee);
-        setLikes(res.payload.post.likes);
+        // setPost(res.payload.post);
+        // setTitle(res.payload.post.title);
+        // setImg(res.payload.post.main_img);
+        // setPlace(res.payload.post.place);
+        // setDate(res.payload.post.date);
+        // setTarget(res.payload.post.use_trgt);
+        // setFee(res.payload.post.use_fee);
+        // setLikes(res.payload.post.likes.length);
         //console.log(params.postId);
       } else {
         console.log('error!!!!!!!!!!!!!!');
@@ -60,7 +62,7 @@ function PostPage() {
           alert(res.payload.message);
         }
         if (res.payload) {
-          setLikes(res.payload.updatedPost.likes);
+          // setLikes(res.payload.likes);
           console.log(res.payload);
         }
       })
@@ -86,19 +88,39 @@ function PostPage() {
           flexDirection: 'column',
         }}
       >
-        <Event_title>{title}</Event_title>
-        <Event_info_container>
-          <Photo_container src={main_img} alt='images'></Photo_container>
-          <Event_info>
-            <Event_info_content>장소 : {place}</Event_info_content>
-            <Event_info_content>일시 : {date}</Event_info_content>
-            <Event_info_content>관람연령 : {use_trgt}</Event_info_content>
-            <Event_info_content>요금 : {use_fee}</Event_info_content>
-            {/* <div>좋아요</div> */}
-          </Event_info>
-        </Event_info_container>
+        {postState.post ? (
+          <>
+            <Event_title>{postState.post.title}</Event_title>
+            <Event_info_container>
+              <Photo_container
+                src={postState.post.main_img}
+                alt='images'
+              ></Photo_container>
+              <Event_info>
+                <Event_info_content>
+                  장소 : {postState.post.place}
+                </Event_info_content>
+                <Event_info_content>
+                  일시 : {postState.post.date}
+                </Event_info_content>
+                <Event_info_content>
+                  관람연령 : {postState.post.use_trgt}
+                </Event_info_content>
+                <Event_info_content>
+                  요금 : {postState.post.use_fee}
+                </Event_info_content>
+              </Event_info>
+            </Event_info_container>
+            <Likebtn onClick={onLikebtnClicked}>
+              {' '}
+              ❤️ {postState.post.likes.length}
+            </Likebtn>
+          </>
+        ) : (
+          <Loading />
+        )}
       </div>
-      <Likebtn onClick={onLikebtnClicked}> ❤️ {likes.length}</Likebtn>
+
       <Comment props={params.postId} />
 
       <TabBar itemType='button'>

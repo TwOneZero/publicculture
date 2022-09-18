@@ -102,4 +102,4 @@ function Comment() {
   );
 }
 
-export default Auth(Comment, null);
+export default Comment;
