@@ -6,6 +6,7 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
+  DETIAL_RANDOM_POST,
 } from './types';
 
 //getAllpost
@@ -29,6 +30,17 @@ export function searchPost(search) {
     type: SEARCH_POST,
     payload: request,
   };
+}
+
+export function getRandomCodeNamePost(id){
+  const request = axios
+    .get(`/api/posts/${id}`, { withCredenttials: true})
+    .then((res) => res.data);
+
+    return{
+      type: DETIAL_RANDOM_POST,
+      payload: request,
+    };
 }
 
 //details

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostDetails, likePost } from '../../../_actions/post_action';
+import { getPostDetails, likePost, getRandomCodeNamePost } from '../../../_actions/post_action';
 import Comment from '../Comment/Comment';
 import Auth from '../../../hoc/auth';
 
@@ -16,8 +16,11 @@ import {
   Photo_container,
   Event_info,
   Event_info_content,
+  Event_info_last_content,
   Event_Button,
-  Like_container,
+  Event_detail_container,
+  Event_detail_title,
+  Event_detail_content,
   Likebtn,
   TabBar,
   TabBtn,
@@ -73,11 +76,15 @@ function PostPage() {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
+    dispatch(getRandomCodeNamePost(params.postId)).then((res) => {
+      if (res.payload.post) {
+        console.log(res.payload.post);
+      } else {
+        console.log('error!!!!!!!!!!!!!!');
+      }
+    });
   }, [dispatch, params.postId]);
 
-  const onEventBtnClicked = () => {
-    navigate(link);
-  }
 
   const onLikebtnClicked = () => {
     dispatch(likePost(params.postId))
@@ -112,27 +119,81 @@ function PostPage() {
                   ></Photo_container>
                   <Event_info>
                     <Event_info_content>
-                      장소 : {postState.post.place}
+                      <Event_detail_container>
+                        <Event_detail_title>
+                          장소
+                        </Event_detail_title>
+                        <Event_detail_content>
+                          {postState.post.place}
+                        </Event_detail_content>
+                      </Event_detail_container>
                     </Event_info_content>
                     <Event_info_content>
-                      일시 : {postState.post.date}
+                      <Event_detail_container>
+                        <Event_detail_title>
+                          지역
+                        </Event_detail_title>
+                        <Event_detail_content>
+                          {postState.post.guname}
+                        </Event_detail_content>
+                      </Event_detail_container>
                     </Event_info_content>
                     <Event_info_content>
-                      관람연령 : {postState.post.use_trgt}
+                      <Event_detail_container>
+                        <Event_detail_title>
+                          일시
+                        </Event_detail_title>
+                        <Event_detail_content>
+                          {postState.post.date}
+                        </Event_detail_content>
+                      </Event_detail_container>
                     </Event_info_content>
                     <Event_info_content>
-                      요금 : {postState.post.use_fee}
+                      <Event_detail_container>
+                        <Event_detail_title>
+                          요금
+                        </Event_detail_title>
+                        <Event_detail_content>
+                          {
+                            postState.post.use_fee === "" ? "무료" : postState.post.use_fee
+                          }
+                        </Event_detail_content>
+                      </Event_detail_container>
                     </Event_info_content>
                     <Event_info_content>
+                      <Event_detail_container>
+                        <Event_detail_title>
+                          관람연령
+                        </Event_detail_title>
+                        <Event_detail_content>
+                          {postState.post.use_trgt}
+                        </Event_detail_content>
+                      </Event_detail_container>
+                    </Event_info_content>
+                    <Event_info_content>
+                      <Event_detail_container>
+                        <Event_detail_title>
+                          주최
+                        </Event_detail_title>
+                        <Event_detail_content>
+                          {
+                            postState.post.org_name === "" ? "서울시" : postState.post.org_name
+                          }
+                        </Event_detail_content>
+                      </Event_detail_container>
+                    </Event_info_content>
+                    <Event_info_last_content>
                       <Event_Button href={postState.post.org_link}>공식홈페이지</Event_Button>
-                    </Event_info_content>
+                      <Likebtn onClick={onLikebtnClicked}>
+                        {' '}
+                        ❤️ {postState.post.likes.length}
+                      </Likebtn>
+                    </Event_info_last_content>
                   </Event_info>
+
                 </Event_info_container>
 
-                <Likebtn onClick={onLikebtnClicked}>
-                  {' '}
-                  ❤️ {postState.post.likes.length}
-                </Likebtn>
+
               </EventLContainer>
 
               <EventRContainer>
@@ -149,7 +210,7 @@ function PostPage() {
                       <RcH2>Abcaaaaaaaaaaaaaaaaaaaaa</RcH2>
                       <RcP>qwrasfasfsfsaasfasfasfasfasf</RcP>
                     </RecommendList>
-                    
+
                   </RecommendContent>
                 </RecommendContainer>
               </EventRContainer>
