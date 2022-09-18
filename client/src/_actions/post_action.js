@@ -43,6 +43,17 @@ export function getPostDetails(id) {
   };
 }
 
+// mypageLiked
+export function mypageLiked() {
+  const request = axios
+    .get('/api/posts/liked', { withCredentials: true })
+    .then((res) => res.data);
+
+  return {
+    type: MY_LIKED,
+    payload: request,
+  };
+}
 //likepost
 export function likePost(id) {
   const request = axios
@@ -51,18 +62,6 @@ export function likePost(id) {
 
   return {
     type: LIKE_POST,
-    payload: request,
-  };
-}
-
-// mypageLiked
-export function mypageLiked() {
-  const request = axios
-    .get('/api/posts/like', { withCredentials: true })
-    .then((res) => res.data);
-
-  return {
-    type: MY_LIKED,
     payload: request,
   };
 }
