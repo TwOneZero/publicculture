@@ -14,7 +14,7 @@ import {
     ImgWrap,
     Img,
 } from './InfoElements';
-import svgImg from '../../../assets/image/3.svg';
+import svgImg from '../../../assets/image/calendar.svg';
 import { useNavigate } from "react-router-dom";
 
 const InfoSection = ({ lightBg, id, imgStart, topLine, lightText, headline, darkText, description, buttonLabel, alt, primary, dark, dark2 }) => {
