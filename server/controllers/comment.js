@@ -82,19 +82,9 @@ exports.getMyComments = async (req, res) => {
 //댓글 삭제
 exports.deleteComment = async (req, res) => {
   try {
-    // Auth - 유저 정보 가져오기
-    const userId = req.user._id;
-    if (!userId) {
-      return res
-        .status(400)
-        .json({ success: false, message: '유저 정보가 없습니다.' });
-    }
     //해당 코멘트 정보
     const { commentId } = req.params;
-    //코멘트의 유저 정보랑 일치하는 지 확인
-    /**TODO
-     *
-     */
+
     // 코멘트 삭제
     const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
     return res.status(200).json({ success: true, deletedComment });

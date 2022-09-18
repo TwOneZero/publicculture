@@ -17,6 +17,7 @@ import { TestComment } from './TestComment';
 
 function Comment() {
   const commentState = useSelector((state) => state.comment);
+  const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const params = useParams();
   const postId = params.postId;
@@ -32,6 +33,9 @@ function Comment() {
     let body = {
       comment,
     };
+    if (userState.userData?.isAuth === false) {
+      return alert('로그인이 필요한 기능입니다.');
+    }
     dispatch(addComment(postId, body))
       .then((res) => {
         if (!res.payload.success) {
@@ -92,6 +96,7 @@ function Comment() {
                 <TestComment
                   key={comment.commentId}
                   {...comment}
+                  user={userState.userData}
                   clickFunc={onDeleteClicked}
                 />
               );

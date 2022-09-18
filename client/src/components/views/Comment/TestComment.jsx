@@ -13,13 +13,24 @@ export const TestComment = ({
   createdAt,
   clickFunc,
   commentId,
+  user,
 }) => {
-  return (
-    <Comments_container id={commentId}>
-      <Comment_username>{name}</Comment_username>
-      <p>{body}</p>
-      <Comment_date>{createdAt}</Comment_date>
-      <Delete onClick={clickFunc}>삭제</Delete>
-    </Comments_container>
-  );
+  if (user.name === name) {
+    return (
+      <Comments_container id={commentId}>
+        <Comment_username>{name}</Comment_username>
+        <p>{body}</p>
+        <Comment_date>{createdAt}</Comment_date>
+        <Delete onClick={clickFunc}>삭제</Delete>
+      </Comments_container>
+    );
+  } else {
+    return (
+      <Comments_container id={commentId}>
+        <Comment_username>{name}</Comment_username>
+        <p>{body}</p>
+        <Comment_date>{createdAt}</Comment_date>
+      </Comments_container>
+    );
+  }
 };
