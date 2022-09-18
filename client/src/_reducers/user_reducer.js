@@ -17,7 +17,7 @@ export default function userState(state = initialState, action) {
     case REGISTER_USER:
       return { ...state, register: action.payload };
     case AUTH_USER:
-      return { ...state, userData: action.payload };
+      return { userData: action.payload };
     case LOGOUT_USER:
       return { ...state, logoutSuccess: action.payload };
     case CHECK_NAME:
