@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Auth from "../../../hoc/auth";
-import { mypageLiked, likePost } from "../../../_actions/post_action";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Auth from '../../../hoc/auth';
+import { mypageLiked, likePost } from '../../../_actions/post_action';
+import axios from 'axios';
 
-import{
-  PostingContainer,
-  PostingInfo,
-  IMG,
-  Title,
-} from './MypageElements';
+import { PostingContainer, PostingInfo, IMG, Title } from './MypageElements';
+import Loading from '../Loading/Loading';
 
 function MyLikedPost() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [postings, setPostings] = useState([]);
   const onPostingClicked = () => {};
 
   useEffect(() => {
     dispatch(mypageLiked()).then((res) => {
+      setLoading(true);
       setPostings(res.payload.myFavPost.map((post) => post));
       console.log(res.payload);
     });
+    setLoading(false);
   }, [dispatch]);
 
   const likeButton = (id) => {
@@ -46,22 +45,26 @@ function MyLikedPost() {
   return (
     <div>
       <PostingContainer>
-        {postings.map((src, idx) => (
-          <div key={idx}>
-            <PostingInfo>
-              <a href={`/post/${src._id}`}>
-                <IMG key={idx} src={src.main_img} />
-              </a>
-              <Title>{src.title}</Title>
-              <div style={{ fontWeight: "500", marginBottom: "3px" }}>
-                {src.codename}
-              </div>
-              <div style={{ fontSize: "14px" }}>{src.date}</div>
-              <div>{src.place}</div>
-              <div style={{ marginTop: "10px" }}>❤️ {src.likes.length}</div>
-            </PostingInfo>
-          </div>
-        ))}
+        {loading ? (
+          postings.map((src, idx) => (
+            <div key={idx}>
+              <PostingInfo>
+                <a href={`/post/${src._id}`}>
+                  <IMG key={idx} src={src.main_img} />
+                </a>
+                <Title>{src.title}</Title>
+                <div style={{ fontWeight: '500', marginBottom: '3px' }}>
+                  {src.codename}
+                </div>
+                <div style={{ fontSize: '14px' }}>{src.date}</div>
+                <div>{src.place}</div>
+                <div style={{ marginTop: '10px' }}>❤️ {src.likes.length}</div>
+              </PostingInfo>
+            </div>
+          ))
+        ) : (
+          <Loading />
+        )}
 
         {/* {resData.map((posting, index) => (
           <div key={index}>
