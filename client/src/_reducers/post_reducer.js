@@ -30,7 +30,7 @@ export default function postState(state = initialState, action) {
         return { post: action.payload.updatedPost };
       }
     case MY_LIKED:
-      return { ...state, myLikedPost: action.payload };
+      return { posts: action.payload.myFavPost };
     case GET_COUNT:
       return { ...state, getCount: action.payload };
     default:
