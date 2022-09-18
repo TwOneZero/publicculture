@@ -6,6 +6,7 @@ export const GET_POST = 'get_post';
 export const SEARCH_POST = 'search_post';
 export const DETAIL_POST = 'detail_post';
 export const LIKE_POST = 'like_post';
+export const DETIAL_RANDOM_POST = 'detail_random_post';
 export const CHECK_NAME = 'check_name';
 export const UPDATE_USER = 'update_user';
 export const UPDATE_USER_PASSWORD = 'update_user_password';

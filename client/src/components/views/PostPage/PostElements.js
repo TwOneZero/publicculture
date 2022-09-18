@@ -126,15 +126,40 @@ export const Photo_container = styled.img`
 export const Event_info = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin-top: -10px;
+  margin-left: 20px;
+  margin: -10px 20px 20px;
 `;
 
 export const Event_info_content = styled.div`
   margin: 15px 0;
   font-size: 22px;
   font-weight: 400;
-  //background-color: yellow;
 `;
+
+export const Event_info_last_content = styled.div`
+  margin: 50px 0 15px;
+  font-size: 22px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Event_detail_container = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 24px;
+`
+
+export const Event_detail_title = styled.p`
+  width: 100px;
+  font-size: 20px;
+`
+
+export const Event_detail_content = styled.p`
+  width: 400px;
+  font-size: 20px;
+`
 
 export const Event_Button = styled.a`
   display: flex;
@@ -152,15 +177,10 @@ export const Event_Button = styled.a`
 `
 
 //좋아요
-export const Like_container = styled.div`
-  display:flex;
-  flex-direction: column; 
-  align-items: center;
-  margin: 80px 0 20px 0;
-  font-size: 22px; 
-`;
+
 
 export const Likebtn = styled.button`
+  margin-left: 50px;
   font-size: 30px;
   background-color: transparent;
   border: none;

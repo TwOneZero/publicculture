@@ -7,6 +7,7 @@ const {
   getFavPost,
   searchMap,
   getPostDateCount,
+  getRandomCodeNamePost,
 } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
 
@@ -26,5 +27,7 @@ router.patch('/posts/like/:id', auth, likePost);
 router.post('/googleSearch', searchMap);
 
 router.post('/getCount', getPostDateCount);
+
+router.post('/getRandomCodePost', getRandomCodeNamePost);
 
 module.exports = router;
