@@ -6,11 +6,13 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
-} from "./types";
+} from './types';
 
 //getAllpost
 export function getRandompost() {
-  const request = axios.get('/api/posts').then((res) => res.data);
+  const request = axios
+    .get('/api/posts', { withCredentials: true })
+    .then((res) => res.data);
 
   return {
     type: GET_POST,
@@ -21,7 +23,7 @@ export function getRandompost() {
 //search
 export function searchPost(search) {
   const request = axios
-    .post(`/api/searchPost?search=${search}`)
+    .post(`/api/posts/search?search=${search}`, null, { withCredentials: true })
     .then((res) => res.data);
   return {
     type: SEARCH_POST,
@@ -31,7 +33,9 @@ export function searchPost(search) {
 
 //details
 export function getPostDetails(id) {
-  const request = axios.get(`/api/posts/${id}`).then((res) => res.data);
+  const request = axios
+    .get(`/api/posts/${id}`, { withCredentials: true })
+    .then((res) => res.data);
 
   return {
     type: DETAIL_POST,
@@ -39,9 +43,22 @@ export function getPostDetails(id) {
   };
 }
 
+// mypageLiked
+export function mypageLiked() {
+  const request = axios
+    .get('/api/posts/liked', { withCredentials: true })
+    .then((res) => res.data);
+
+  return {
+    type: MY_LIKED,
+    payload: request,
+  };
+}
 //likepost
 export function likePost(id) {
-  const request = axios.patch(`/api/likePost/${id}`).then((res) => res.data);
+  const request = axios
+    .patch(`/api/posts/like/${id}`, null, { withCredentials: true })
+    .then((res) => res.data);
 
   return {
     type: LIKE_POST,
@@ -49,20 +66,10 @@ export function likePost(id) {
   };
 }
 
-// mypageLiked
-export function mypageLiked() {
-  const request = axios.get('/api/likedPost').then((res) => res.data);
+export function getPostDateCount() {
+  const request = axios.post('/api/getCount').then((res) => res.data);
 
   return {
-    type: MY_LIKED,
-    payload: request,
-  };
-}
-
-export function getPostDateCount(){
-  const request = axios.post("/api/getCount").then((res) => res.data);
-
-  return{
     type: GET_COUNT,
     payload: request,
   };

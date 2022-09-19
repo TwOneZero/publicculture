@@ -32,35 +32,31 @@ import {
   CommentTitle,
   InfoBox,
 } from './MypageElements';
-
-
+import MyComment from './MyComment';
 
 function Mypage() {
+  const navigate = useNavigate();
   const [mode, setMode] = useState('myProfile');
+  const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [resData, setResData] = useState(null);
   const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    dispatch(auth())
-      .then((res) => {
-        setResData(res.payload);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(auth())
+  //     .then((res) => {
+  //       setResData(res.payload);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [dispatch]);
 
-  useEffect(() => {
-    if (resData) {
-      setUserData(resData);
-    }
-  }, [resData]);
-
-  //관심행사 테스트
-  const testGetFav = () => {
-    axios.get('/api/likedPost').then((res) => console.log(res.data));
-  };
+  // useEffect(() => {
+  //   if (resData) {
+  //     setUserData(resData);
+  //   }
+  // }, [resData]);
 
   const onMenuButtonClick = (e) => {
     if (e.target.id === 'myProfile') {
@@ -91,10 +87,12 @@ function Mypage() {
             </MyinfoBtn>
           </UserBtnBox>
           <UserNamePreferBox>
-            {userData ? <UserName>{userData.name}</UserName> : ''}
+            {/* {userData ? <UserName>{userData.name}</UserName> : ''} */}
+            <UserName>{userState.userData.name}</UserName>
 
             <PreferenceBox>
-              선호 장르 : {userData ? userData.genre : ''}
+              {/* 선호 장르 : {userData ? userData.genre : ''} */}
+              선호 장르 : {userState.userData.genre}
             </PreferenceBox>
           </UserNamePreferBox>
           <UserInfoMenuBtns>
@@ -133,8 +131,7 @@ function Mypage() {
                 ></i>
               </CommentIcon>
               <CommentTitle onClick={onMenuButtonClick} id='mycomment'>
-                {' '}
-                내가 쓴 댓글{' '}
+                내가 쓴 댓글
               </CommentTitle>
             </CommentBox>
           </UserInfoMenuBtns>
@@ -145,6 +142,7 @@ function Mypage() {
           {mode === 'myProfile' && <MypageInfo></MypageInfo>}
           {mode === 'editProfile' && <MypageEdit></MypageEdit>}
           {mode === 'myLikedPost' && <MyLikedPost></MyLikedPost>}
+          {mode === 'mycomment' && <MyComment />}
         </div>
       </InfoBox>
     </MypageBox>

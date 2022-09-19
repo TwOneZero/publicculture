@@ -20,26 +20,13 @@ exports.getRandomPost = async (req, res) => {
     let randPick = getRandomArbitrary(1, posts.length - limitrecords);
     //slicedPost 길이 => 랜덤수 ~ 랜덤수 + 20 (최대 : posts.length)
     const slicedPost = posts.slice(randPick, randPick + limitrecords);
-    return res.status(200).json({ len: slicedPost.length, posts: slicedPost });
+    return res
+      .status(200)
+      .json({ success: true, len: slicedPost.length, posts: slicedPost });
   } catch (error) {
-    return res.status(404).json({ messege: error });
+    return res.status(404).json({ message: error });
   }
 };
-
-exports.getPostDateCount = async (req, res) => {
-  let today = dayjs();
-  let d_t = today.format('YYYY-MM-DD h:mm:ss');
-  try{
-    const postAll = await Post.find({ end_date: {$gte: d_t }}).exec();
-    return res.status(200).json({count: postAll.length});
-    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
-    //   return res.status(200).json({ count: post.length});
-    // });
-  }catch(error){
-    return res.status(404).json({ message: error});
-  }
-}
-
 
 //검색으로 가져오기 ( title  or  codename  다 됨)
 exports.getPostBySearch = async (req, res) => {
@@ -55,11 +42,12 @@ exports.getPostBySearch = async (req, res) => {
         { codename: { $regex: searchRegex } },
         { title: { $regex: searchRegex } },
         { guname: { $regex: searchRegex } },
+        { place: { $regex: searchRegex } },
       ],
     }).exec();
     return res.status(200).json({ success: true, posts });
   } catch (error) {
-    return res.status(404).json({ success: false, error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -69,12 +57,12 @@ exports.getPostDetails = async (req, res) => {
   try {
     //db id 로 가져옴
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).send('No post with that id');
+      return res.status(404).json({ message: 'No post with that id' });
     }
     const post = await Post.findById(id);
     return res.status(200).json({ success: true, post });
   } catch (error) {
-    return res.status(404).json({ success: false, error });
+    return res.status(404).json({ message: error });
   }
 };
 
@@ -104,45 +92,68 @@ exports.likePost = async (req, res) => {
       new: true,
     });
     //업데이트 된 post 와 likes 수 반환
-    return res.status(200).json({ updatedPost, likes: post.likes.length });
+    return res
+      .status(200)
+      .json({ success: true, updatedPost, likes: post.likes.length });
   } catch (error) {
-    next(error);
+    return res.status(404).json({ message: error });
   }
 };
 
 //관심행사 가져오기
-exports.getFavPost = async (req, res, next) => {
+exports.getFavPost = async (req, res) => {
   try {
     //모든 포스트 가져오기
     const posts = await Post.find({}).exec();
     //user id 와 일치하는 배열 filtering
-    let likedPost = posts.filter((arr) => {
-      return arr.likes.find((id) => id === String(req.user._id));
+    const likedPost = posts.filter((arr) => {
+      return arr.likes.find((id) => String(id) === String(req.user._id));
     });
-    return res.json({ myFavPost: likedPost });
+    return res.json({ success: true, myFavPost: likedPost });
   } catch (error) {
-    next(error);
+    return res.status(404).json({ message: error });
+  }
+};
+
+exports.getPostDateCount = async (req, res) => {
+  let today = dayjs()
+    .startOf('month')
+    .set('month', 9)
+    .set('year', 2022)
+    .format('YYYY-MM-DD HH:mm:ss');
+  let prevMonth = dayjs()
+    .startOf('month')
+    .set('month', 8)
+    .set('year', 2022)
+    .format('YYYY-MM-DD HH:mm:ss');
+  console.log(today);
+  try {
+    const postAll = await Post.find({
+      end_date: { $lte: today, $gte: prevMonth },
+    }).exec();
+    return res.status(200).json({ postAll, count: postAll.length });
+    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
+    //   return res.status(200).json({ count: post.length});
+    // });
+  } catch (error) {
+    return res.status(404).json({ message: error });
   }
 };
 
 // 구글 search
-exports.searchMap = async (req, res, next) => {
+exports.searchMap = async (req, res) => {
   try {
-    const { q, locationName } = req.body;
+    const { q } = req.body;
     let parameter = {
       q,
-      locationName,
     };
     googleSearch(parameter, (err, data) => {
       if (err) {
         res.json({ err });
       }
-      return res.json(data);
+      return res.json({ success: true, data });
     });
   } catch (error) {
-    return res.json({ error });
+    return res.json({ message: error });
   }
 };
-
-
-

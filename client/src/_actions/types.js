@@ -12,5 +12,6 @@ export const UPDATE_USER_PASSWORD = 'update_user_password';
 export const MY_LIKED = 'my_liked';
 export const GET_COUNT = 'get_count';
 export const ADD_COMMENT = 'add_comment';
+export const GET_MY_COMMENTS = 'get_my_comments';
 export const GET_COMMENTS = 'get_comments';
 export const DELETE_COMMENT = 'delete_comment';

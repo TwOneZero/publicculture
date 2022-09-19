@@ -12,7 +12,7 @@ import {
 //login
 export function loginUser(dataToSubmit) {
   const request = axios
-    .post('/api/users/login', dataToSubmit)
+    .post('/api/users/login', dataToSubmit, { withCredentials: true })
     .then((res) => res.data);
 
   return {
@@ -24,7 +24,7 @@ export function loginUser(dataToSubmit) {
 //register
 export function registerUser(dataToSubmit) {
   const request = axios
-    .post('/api/users/register', dataToSubmit)
+    .post('/api/users/register', dataToSubmit, { withCredentials: true })
     .then((res) => res.data);
 
   return {
@@ -34,7 +34,9 @@ export function registerUser(dataToSubmit) {
 }
 
 export function auth() {
-  const request = axios.get('/api/users/auth').then((res) => res.data);
+  const request = axios
+    .get('/api/users/auth', { withCredentials: true })
+    .then((res) => res.data);
 
   return {
     type: AUTH_USER,
@@ -43,7 +45,9 @@ export function auth() {
 }
 
 export function logout() {
-  const request = axios.get('/api/users/logout').then((res) => res.data);
+  const request = axios
+    .get('/api/users/logout', { withCredentials: true })
+    .then((res) => res.data);
 
   return {
     type: LOGOUT_USER,
@@ -53,7 +57,7 @@ export function logout() {
 
 export function checkName(name) {
   const request = axios
-    .post('/api/users/checkName', name)
+    .post('/api/users/checkName', name, { withCredentials: true })
     .then((res) => res.data);
 
   return {
@@ -64,7 +68,7 @@ export function checkName(name) {
 
 export function updateUser(body) {
   const request = axios
-    .post('/api/users/updateuser', body)
+    .post('/api/users/updateuser', body, { withCredentials: true })
     .then((res) => res.data);
 
   return {
@@ -73,13 +77,13 @@ export function updateUser(body) {
   };
 }
 
-export function updateUser_Password(body){
+export function updateUser_Password(body) {
   const request = axios
-    .post('/api/users/updateuser_password', body)
+    .post('/api/users/updateuser_password', body, { withCredentials: true })
     .then((res) => res.data);
 
-    return{
-      type: UPDATE_USER_PASSWORD,
-      payload: request,
-    }
+  return {
+    type: UPDATE_USER_PASSWORD,
+    payload: request,
+  };
 }

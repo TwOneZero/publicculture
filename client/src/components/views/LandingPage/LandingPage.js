@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Auth from '../../../hoc/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getRandompost } from '../../../_actions/post_action';
 
 import {
@@ -12,22 +12,17 @@ import {
 } from './LandingElements';
 import InfoSection from '../InfoSection/InfoSection';
 import { homeObjOne, homeObjTwo, homeObjThree } from '../InfoSection/Data.js';
-
-
-
-
-
-
-
+import Loading from '../Loading/Loading';
 
 const LandingPage = () => {
   const dispatch = useDispatch();
+  const postState = useSelector((state) => state.post);
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
 
   const TOTAL_SLIDES = 6;
   //const [images, setImage] = useState([]);
-  const [posts, setPost] = useState([]);
+  // const [posts, setPost] = useState([]);
 
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
@@ -47,12 +42,11 @@ const LandingPage = () => {
 
   useEffect(() => {
     dispatch(getRandompost()).then((res) => {
-      if (res.payload.posts) {
-        // let imgSrc = res.payload.posts.map((post) => post.main_img);
-        setPost(res.payload.posts.map((post) => post));
-        console.log(res.payload)
+      if (res.payload.success) {
+        // setPost(res.payload.posts);
+        console.log(res.payload);
       } else {
-        console.log('error!!!!!!!!!!!!!!');
+        console.log('post가 없습니다. 서버 에러');
       }
     });
   }, [dispatch]);
@@ -68,19 +62,23 @@ const LandingPage = () => {
         <Button onClick={prevSlide}>&#60;</Button>
         <Container>
           <SliderContainer ref={slideRef}>
-            {posts.map((src, idx) => (
-              <a key={idx} href={`/post/${src._id}`}>
-                <IMG src={src.main_img} />
-              </a>
-            ))}
+            {postState.posts ? (
+              postState.posts.map((src, idx) => (
+                <a key={idx} href={`/post/${src._id}`}>
+                  <IMG src={src.main_img} />
+                </a>
+              ))
+            ) : (
+              <Loading />
+            )}
           </SliderContainer>
         </Container>
         <Button onClick={nextSlide}>&#62;</Button>
       </SliderDiv>
 
-      <InfoSection {...homeObjOne}/>
+      <InfoSection {...homeObjOne} />
     </>
   );
-}
+};
 
-export default Auth(LandingPage, null);
+export default LandingPage;

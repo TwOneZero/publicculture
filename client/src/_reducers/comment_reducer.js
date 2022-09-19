@@ -1,8 +1,13 @@
-import { ADD_COMMENT, GET_COMMENTS, DELETE_COMMENT } from '../_actions/types';
+import {
+  ADD_COMMENT,
+  GET_COMMENTS,
+  DELETE_COMMENT,
+  GET_MY_COMMENTS,
+} from '../_actions/types';
 
 const initialState = [];
 
-export default function getcompleteState(state = initialState, action) {
+export default function commentState(state = initialState, action) {
   switch (action.type) {
     case ADD_COMMENT:
       const newComment = {
@@ -14,8 +19,10 @@ export default function getcompleteState(state = initialState, action) {
       return [...state, newComment];
     case GET_COMMENTS:
       return action.payload.allComments;
+    case GET_MY_COMMENTS:
+      return action.payload.myComments;
     case DELETE_COMMENT:
-      const commentId = action.payload.updatedComment._id;
+      const commentId = action.payload.deletedComment._id;
       return state.filter(
         (comment) => String(comment.commentId) !== String(commentId)
       );
