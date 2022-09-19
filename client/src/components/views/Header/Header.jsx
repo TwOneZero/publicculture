@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { searchPost } from '../../../_actions/post_action';
-import { logout, auth } from '../../../_actions/user_action';
-import Auth from '../../../hoc/auth';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { searchPost } from "../../../_actions/post_action";
+import { logout, auth } from "../../../_actions/user_action";
+import Auth from "../../../hoc/auth";
+import Sidebar from "./Sidebar";
 import {
   HeaderContainer,
   HeaderLogo,
@@ -15,37 +16,43 @@ import {
   GenreBar,
   GenreBtn,
   HeaderBtn,
-} from './HeaderElements';
+  SidebarButtonToggle,
+  SidebarGenreBox,
+} from "./HeaderElements";
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [Login, setLogin] = useState(true);
+  const [isSidebarOpened, setIsSidebarOpened] = useState(false);
+  const onSidebarToggleButtonClicked = () => {
+    setIsSidebarOpened(!isSidebarOpened);
+  };
 
   const onLogoClicked = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const onLoginbtnClicked = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const onRegiterClicked = () => {
-    navigate('/register');
+    navigate("/register");
   };
 
   const onMypageClicked = () => {
-    navigate('/mypage');
+    navigate("/mypage");
   };
   const logOut = () => {
     dispatch(logout()).then((res) => {
       if (res.payload.isAuth === false) {
-        alert('이미 로그아웃 상태입니다.!');
+        alert("이미 로그아웃 상태입니다.!");
       } else {
-        alert('로그아웃 성공');
-        navigate('/');
+        alert("로그아웃 성공");
+        navigate("/");
       }
     });
   };
@@ -81,7 +88,7 @@ function Header() {
         console.log(res);
         navigate(`showevent/${search}`, { state: { infos: res.payload } });
       } else {
-        return new Response({ error: 'error!' });
+        return new Response({ error: "error!" });
       }
     });
   };
@@ -89,22 +96,28 @@ function Header() {
   return (
     <>
       {/* {CheckLogin()} */}
+      {isSidebarOpened && (
+        <Sidebar
+          isSidebarOpened={isSidebarOpened}
+          onSidebarToggleButtonClicked={onSidebarToggleButtonClicked}
+        />
+      )}
       <HeaderContainer>
-        <HeaderLogo type='button' onClick={onLogoClicked}>
+        <HeaderLogo type="button" onClick={onLogoClicked}>
           public culture
         </HeaderLogo>
 
         <SearchBarArea onSubmit={onSearchClicked}>
-          <label htmlFor='search'></label>
+          <label htmlFor="search"></label>
           <SearchBar
             onChange={onChangeSearch}
-            name='search'
+            name="search"
             value={search}
-            type='text'
-            placeholder='장르 / 제목 / 장소'
+            type="text"
+            placeholder="장르 / 제목 / 장소"
           ></SearchBar>
-          <Button type='submit'>
-            <i className='fas fa-search'></i>
+          <Button type="submit">
+            <i className="fas fa-search"></i>
           </Button>
         </SearchBarArea>
         <MenuContainer>
@@ -123,16 +136,42 @@ function Header() {
           ) : null}
         </MenuContainer>
       </HeaderContainer>
-      <GenreContainer>
-        <GenreBar itemType='button' onClick={onGenreClicked}>
-          <GenreBtn name='뮤지컬'>뮤지컬/오페라</GenreBtn>
-          <GenreBtn name='전시'>전시/미술</GenreBtn>
-          <GenreBtn name='연극'>연극</GenreBtn>
-          <GenreBtn name='콘서트'>콘서트</GenreBtn>
-          <GenreBtn name='클래식'>클래식</GenreBtn>
-          <GenreBtn name='무용'>무용</GenreBtn>
-        </GenreBar>
-      </GenreContainer>
+      <SidebarGenreBox>
+        <SidebarButtonToggle>
+          <i
+            style={{
+              color: "black",
+              cursor: "pointer",
+              paddingLeft: "20px",
+              paddingTop: "15px",
+            }}
+            class="fa-solid fa-bars fa-2x"
+            onClick={onSidebarToggleButtonClicked}
+          ></i>
+        </SidebarButtonToggle>
+        <GenreContainer>
+          <GenreBar>
+            <GenreBtn itemType="button" onClick={onGenreClicked} name="뮤지컬">
+              뮤지컬/오페라
+            </GenreBtn>
+            <GenreBtn itemType="button" onClick={onGenreClicked} name="전시">
+              전시/미술
+            </GenreBtn>
+            <GenreBtn itemType="button" onClick={onGenreClicked} name="연극">
+              연극
+            </GenreBtn>
+            <GenreBtn itemType="button" onClick={onGenreClicked} name="콘서트">
+              콘서트
+            </GenreBtn>
+            <GenreBtn itemType="button" onClick={onGenreClicked} name="클래식">
+              클래식
+            </GenreBtn>
+            <GenreBtn itemType="button" onClick={onGenreClicked} name="무용">
+              무용
+            </GenreBtn>
+          </GenreBar>
+        </GenreContainer>
+      </SidebarGenreBox>
     </>
   );
 }
