@@ -1,6 +1,7 @@
 const { Comment } = require('../schemas/Comment');
 const { Post } = require('../schemas/Post');
 const mongoose = require('mongoose');
+const { getCurrentTime } = require('../middlewares/time');
 
 //댓글 달기
 exports.addComment = async (req, res) => {
@@ -16,6 +17,7 @@ exports.addComment = async (req, res) => {
         .status(404)
         .json({ success: false, message: 'post 가져오기 에러' });
     }
+    let createdTime = getCurrentTime();
     //comment 인스턴스
     const comment = new Comment({
       userId: req.user._id,
@@ -23,6 +25,7 @@ exports.addComment = async (req, res) => {
       post: postId,
       //client form 에서 comment field 로 넘겨주기
       body: req.body.comment,
+      createdAt: createdTime,
     });
 
     //comment db에 저장
@@ -50,6 +53,7 @@ exports.getPostComments = async (req, res) => {
         return data.filter((d) => String(d.post) === postId);
       });
     const allComments = comments.map((comment) => {
+      console.log(getCurrentTime());
       return {
         commentId: comment._id,
         name: comment.userId.name,
