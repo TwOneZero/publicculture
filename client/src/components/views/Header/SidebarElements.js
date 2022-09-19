@@ -21,7 +21,7 @@ export const SidebarMain = styled.div`
   font-weight: bold;
   animation: ${SidebarOpen} 0.2s ease-in-out;
   width: 265px;
-  //height: 100%;
+  height: 100%;
   height: 1000px;
   background: rgb(0, 0, 0);
 `;

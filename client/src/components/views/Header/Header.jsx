@@ -143,7 +143,7 @@ function Header() {
               color: "black",
               cursor: "pointer",
               paddingLeft: "20px",
-              paddingTop: "30px",
+              paddingTop: "15px",
             }}
             class="fa-solid fa-bars fa-2x"
             onClick={onSidebarToggleButtonClicked}

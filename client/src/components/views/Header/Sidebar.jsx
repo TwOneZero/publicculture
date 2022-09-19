@@ -34,7 +34,11 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
         <SidebarButtonContainer>
           <i
             className="fas fa-times"
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              marginRight: "40px",
+              marginTop: "10px",
+            }}
             onClick={onSidebarToggleButtonClicked}
           ></i>
         </SidebarButtonContainer>
