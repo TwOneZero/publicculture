@@ -4,22 +4,32 @@ import {
   DETAIL_POST,
   LIKE_POST,
   MY_LIKED,
+  GET_COUNT,
 } from '../_actions/types';
 
-const initialState = null;
+const initialState = {
+  posts: [],
+  post: {},
+};
 
-export default function getcompleteState(state = initialState, action) {
+export default function postState(state = initialState, action) {
   switch (action.type) {
     case GET_POST:
-      return { ...state, getallSuccess: action.payload };
+      return { posts: action.payload.posts };
     case SEARCH_POST:
-      return { ...state, search: action.payload };
+      return { posts: action.payload.posts };
     case DETAIL_POST:
-      return { ...state, getDetailSuccess: action.payload };
+      return { post: action.payload.post };
     case LIKE_POST:
-      return { ...state, likePost: action.payload };
+      if (action.payload.isAuth === false) {
+        return { ...state };
+      } else {
+        return { post: action.payload.updatedPost };
+      }
     case MY_LIKED:
-      return { ...state, myLikedPost: action.payload };
+      return { posts: action.payload.myFavPost };
+    case GET_COUNT:
+      return { ...state, getCount: action.payload };
     default:
       return state;
   }

@@ -1,12 +1,11 @@
 const { User } = require('../schemas/User');
-
 //Register user
 exports.registerUser = async (req, res) => {
   //client form 에 입력된 정보로 user 인스턴스 생성
   const user = new User(req.body);
   //user 저장
   user.save((err, userInfo) => {
-    if (err) return res.json({ success: false, err });
+    if (err) return res.json({ success: false, message: err });
     console.log('user 정보 저장');
     return res.status(200).json({
       success: true,
@@ -16,7 +15,7 @@ exports.registerUser = async (req, res) => {
 };
 
 //Login user
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = async (req, res) => {
   //요청된 이메일이 있는지 db 에서 확인
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -27,7 +26,7 @@ exports.loginUser = async (req, res, next) => {
       });
     }
     user.comparePassword(req.body.password, (err, isMatch) => {
-      if (err) return res.status(400).send(err);
+      if (err) return res.status(400).json({ message: err });
       if (!isMatch) {
         return res.json({
           loginSuccess: false,
@@ -35,13 +34,16 @@ exports.loginUser = async (req, res, next) => {
         });
       }
       user.generateToken((err, user) => {
-        if (err) return res.status(400).send(err);
+        if (err) return res.status(400).json({ message: err });
         // 로컬 쿠키에 토큰을 저장한다.
         let expiryDate = new Date();
         //쿠키 만료 시간 -> 5분
-        expiryDate.setMinutes(expiryDate.getMinutes() + 5);
+        expiryDate.setMinutes(expiryDate.getMinutes() + 120);
         return res
-          .cookie('x_auth', user.token, { expires: expiryDate, httpOnly: true })
+          .cookie(process.env.COOKIE_SECRET, user.token, {
+            expires: expiryDate,
+            httpOnly: true,
+          })
           .status(200)
           .json({
             loginSuccess: true,
@@ -50,7 +52,7 @@ exports.loginUser = async (req, res, next) => {
       });
     });
   } catch (error) {
-    next(error);
+    return res.status(500).json({ message: error });
   }
 };
 
@@ -69,25 +71,24 @@ exports.checkAuth = (req, res) => {
 };
 
 //로그아웃
-exports.logoutUser = async (req, res, next) => {
+exports.logoutUser = async (req, res) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
     { token: '' },
     { new: true },
     (err, user) => {
-      if (err) return res.json({ success: false, err });
+      if (err) return res.json({ success: false, message: err });
       return res.status(200).json({ success: true });
     }
   );
 };
 
-//유저 업데이트
+//유저 닉네임, 장르업데이트
 exports.updateUser = async (req, res) => {
   try {
     //바꿀 패스워드
     const newUser = {
       name: req.body.name,
-      password: req.body.password,
       genre: req.body.genre,
     };
     const user = await User.findOne({ _id: req.user.id });
@@ -99,11 +100,9 @@ exports.updateUser = async (req, res) => {
     //user 정보 테스트
     console.log(user);
     user.name = newUser.name;
-    user.password = newUser.password;
     user.genre = newUser.genre;
 
     user.markModified('name');
-    user.markModified('password');
     user.markModified('genre');
 
     //바뀐 정보 저장
@@ -116,7 +115,40 @@ exports.updateUser = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({ error });
+    return res.json({ message: error });
+  }
+};
+
+//유저 비밀번호업데이트
+exports.updateUser_Password = async (req, res) => {
+  try {
+    //바꿀 패스워드
+    const newUser = {
+      password: req.body.password,
+    };
+    const user = await User.findOne({ _id: req.user.id });
+    if (!user) {
+      res
+        .status(500)
+        .json({ success: false, message: 'user 정보가 없습니다.' });
+    }
+    //user 정보 테스트
+    console.log(user);
+    user.password = newUser.password;
+
+    user.markModified('password');
+
+    //바뀐 정보 저장
+    user.save((err, userInfo) => {
+      if (err) return res.json({ success: false, err });
+      console.log('user 정보 업데이트');
+      return res.status(200).json({
+        success: true,
+        userInfo,
+      });
+    });
+  } catch (error) {
+    return res.json({ message: error });
   }
 };
 
@@ -130,6 +162,6 @@ exports.checkName = async (req, res) => {
       return res.json({ success: false });
     }
   } catch (error) {
-    return res.json({ error });
+    return res.json({ message: error });
   }
 };

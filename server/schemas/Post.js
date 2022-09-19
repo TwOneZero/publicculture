@@ -22,7 +22,6 @@ const postSchema = new Schema(
     end_date: String,
     themecode: String,
 
-    comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
     likes: { type: [String], default: [] },
   },
   { timestamps: true }

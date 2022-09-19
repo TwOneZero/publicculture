@@ -1,77 +1,110 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import Auth from '../../../hoc/auth'
+import React, { useState, useEffect } from 'react';
+import Auth from '../../../hoc/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  addComment,
+  deleteComment,
+  getComments,
+} from '../../../_actions/comment_action';
+import { useParams } from 'react-router-dom';
 
-//댓글
-const Comment_wContainer = styled.div`
-  width: 800px;
-  height: 180px;
-  display: flex;
-  border-bottom: 2px solid black;
-  position: relative;
-  margin: 40px;
-  //background-color: yellow;
-`;
+import {
+  Comment_wContainer,
+  Commentbox,
+  Comment_submit_btn,
+} from './CommentElements';
+import { TestComment } from './TestComment';
 
-const Commentbox = styled.textarea`
-  height: 100px;
-  width: 85%;
-  border: 1px solid grey;
-  outline: none;
-  resize: none;
-  padding: 10px;
-  font-size: 20px;
-  font-family: 'Lato', sans-serif;
-  &:focus {
-    border: 1px solid grey;
-  }
-`;
+function Comment() {
+  const commentState = useSelector((state) => state.comment);
+  const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const postId = params.postId;
 
-const Comment_submit_btn = styled.button`
-  width: 15%;
-  height: 122px;
-  border: none;
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  &:active {
-    border: 1px solid grey;
-  }
-`;
+  const [comment, setComment] = useState('');
 
-function Comment(props) {
-    const data = useSelector((store)=>store);
+  const changeComment = (e) => {
+    setComment(e.target.value);
+  };
 
-    
-    //post id 변수에 저장
-    const [comment, setComment] = useState();
-
-    const changeComment = (e) => {
-        // console.log(e)
-        setComment(e.target.value)
+  //댓글 추가
+  const onSubmitClicked = () => {
+    let body = {
+      comment,
+    };
+    if (userState.userData?.isAuth === false) {
+      return alert('로그인이 필요한 기능입니다.');
     }
-    let body ={
-        comment
+    dispatch(addComment(postId, body))
+      .then((res) => {
+        if (!res.payload.success) {
+          alert(res.payload.message);
+        } else {
+          console.log(res.payload);
+          setComment('');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //댓글 삭제
+  const onDeleteClicked = (e) => {
+    e.preventDefault();
+    const commentId = e.target.parentNode.id;
+    if (window.confirm('삭제할거임?')) {
+      dispatch(deleteComment(commentId)).then((res) => {
+        if (!res.payload.success) {
+          alert(res.payload.message);
+        } else {
+          console.log(res.payload);
+        }
+      });
     }
+  };
 
-    // const onSubmitClicked = () => {
-    //     axios.post(`/api/comment/${postId}`, body ).then((res) => {
+  //post detail 페이지 들어가면 실행됨
+  useEffect(() => {
+    dispatch(getComments(postId)).then((res) => {
+      if (res.payload.success) {
+        console.log(res.payload);
+      } else {
+        console.log(res.payload);
+      }
+    });
+  }, [dispatch, postId]);
 
-    //     });
-    // }
-
-
-    return (
+  return (
+    <div>
+      <Comment_wContainer>
+        <Commentbox
+          onChange={changeComment}
+          placeholder='여기에 댓글을 작성해주세요'
+          value={comment}
+        ></Commentbox>
+        <Comment_submit_btn type='submit' onClick={onSubmitClicked}>
+          등록
+        </Comment_submit_btn>
+      </Comment_wContainer>
+      {/* 리덕스 store 이용 */}
       <div>
-        <Comment_wContainer >
-          <Commentbox onChange={changeComment} placeholder='여기에 댓글을 작성해주세요'></Commentbox>
-          <Comment_submit_btn  type='submit'>등록</Comment_submit_btn>
-        </Comment_wContainer>
+        {commentState
+          ? commentState.map((comment) => {
+              return (
+                <TestComment
+                  key={comment.commentId}
+                  {...comment}
+                  user={userState.userData}
+                  clickFunc={onDeleteClicked}
+                />
+              );
+            })
+          : []}
       </div>
-    );  
-  }
-  
-  export default Auth(Comment, null);
-  
+    </div>
+  );
+}
+
+export default Comment;
