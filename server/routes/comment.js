@@ -1,15 +1,18 @@
 const express = require('express');
 const {
   addComment,
-  getComments,
+  getPostComments,
   deleteComment,
+  getMyComments,
 } = require('../controllers/comment');
 const { auth } = require('../middlewares/auth');
 
 const router = express.Router();
 
-//comment 가져오기
-router.get('/comments/:postId', getComments);
+//내 comment 가져오기
+router.get('/comments', auth, getMyComments);
+//post에 해당하는comment 가져오기
+router.get('/comments/:postId', getPostComments);
 //comment 달기
 router.post('/comment/:postId', auth, addComment);
 //comment 삭제
