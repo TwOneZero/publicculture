@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import MypageEdit from './MypageEdit';
-import MypageInfo from './MypageInfo';
-import MyLikedPost from './MyLikedPost';
-import MyComment from './MyComment';
-import Auth from '../../../hoc/auth';
-import { auth } from '../../../_actions/user_action';
-import axios from 'axios';
-=======
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
 import { useNavigate } from "react-router-dom";
@@ -22,7 +9,6 @@ import PasswordChange from "./PasswordChange";
 import Auth from "../../../hoc/auth";
 import { auth } from "../../../_actions/user_action";
 import axios from "axios";
->>>>>>> c8615a91d5559a5e270bda720f301baaf00a4828
 
 import {
   MypageBox,
@@ -49,12 +35,8 @@ import {
   PasswordIcon,
   PasswordTitle,
   InfoBox,
-<<<<<<< HEAD
-} from './MypageElements';
-=======
 } from "./MypageElements";
 import MyComment from "./MyComment";
->>>>>>> c8615a91d5559a5e270bda720f301baaf00a4828
 
 function Mypage() {
   const navigate = useNavigate();
