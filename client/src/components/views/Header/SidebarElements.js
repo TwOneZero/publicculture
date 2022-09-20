@@ -45,9 +45,6 @@ export const LocationList = styled.ul`
 
 export const LocationDiv = styled.div`
   padding-left: 30px;
-  &:hover {
-    background-color: rgb(50, 50, 50);
-  }
 `;
 
 export const LocationItem = styled.button`
@@ -59,4 +56,8 @@ export const LocationItem = styled.button`
   font-size: 1.1em;
   font-weight: bold;
   border: none;
+
+  &:hover {
+    background-color: rgb(50, 50, 50);
+  }
 `;
