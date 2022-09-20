@@ -24,9 +24,9 @@ import {
   Month,
   Month_sub,
   Month_container,
-} from './CalenderElements';
+} from './CalendarElements';
 
-const Calender = (isSelected) => {
+const Calendar = (isSelected) => {
   const dispatch = useDispatch();
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평소 매달의 일수
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 윤년 매달의 일수
@@ -93,7 +93,7 @@ const Calender = (isSelected) => {
       <Container>
         <ContainerH1>문화캘린더</ContainerH1>
         <Line></Line>
-      </Container>
+      
       <TextContainer>
         <Text>다양한 문화정보를 요일별, 월별로 한눈에 확인하세요</Text>
       </TextContainer>
@@ -159,8 +159,9 @@ const Calender = (isSelected) => {
           </Day_container>
         </Body>
       </Frame>
+      </Container>
     </>
   );
 };
 
-export default Calender;
+export default Calendar;
