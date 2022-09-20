@@ -228,6 +228,9 @@ function PostPage() {
           <TabBtn name="주변 카페" onClick={() => settingTab(2)}>
             주변 카페
           </TabBtn>
+          <TabBtn name="주변 카페" onClick={() => settingTab(2)}>
+            주변 카페
+          </TabBtn>
         </TabBar>
         <Map
           tab={tab}
