@@ -229,7 +229,14 @@ function PostPage() {
             주변 카페
           </TabBtn>
         </TabBar>
-        <TabContent tab={tab} />
+        <Map
+          tab={tab}
+          //place 로 하면 이상한 극장 이름 같은건 인식 못해서 일단 guname 으로 넣음
+          //넣을 때 좀 여러 field 넣을 수 있는 거 찾아봐야함
+          place={postState.post?.guname}
+        />
+        {/* </PostContainer> */}
+        {/* <TabContent tab={tab} /> */}
       </PostContainer>
     </>
   );

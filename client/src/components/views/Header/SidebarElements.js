@@ -45,7 +45,6 @@ export const LocationList = styled.ul`
 
 export const LocationDiv = styled.div`
   padding-left: 30px;
-  \
 `;
 
 export const LocationItem = styled.button`
