@@ -1,7 +1,7 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 export const SidebarContainer = styled.div`
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   display: flex;
   z-index: 2;
   width: 100%;
@@ -45,9 +45,7 @@ export const LocationList = styled.ul`
 
 export const LocationDiv = styled.div`
   padding-left: 30px;
-  &:hover {
-    background-color: rgb(50, 50, 50);
-  }
+  \
 `;
 
 export const LocationItem = styled.button`
@@ -59,4 +57,9 @@ export const LocationItem = styled.button`
   font-size: 1.1em;
   font-weight: bold;
   border: none;
+  &:hover {
+    background-color: white;
+    color: rgb(50, 50, 50);
+  }
+  width: 70%;
 `;
