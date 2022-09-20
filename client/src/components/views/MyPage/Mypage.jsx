@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,19 @@ import MyComment from './MyComment';
 import Auth from '../../../hoc/auth';
 import { auth } from '../../../_actions/user_action';
 import axios from 'axios';
+=======
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import MypageEdit from "./MypageEdit";
+import MypageInfo from "./MypageInfo";
+import MyLikedPost from "./MyLikedPost";
+import PasswordChange from "./PasswordChange";
+import Auth from "../../../hoc/auth";
+import { auth } from "../../../_actions/user_action";
+import axios from "axios";
+>>>>>>> c8615a91d5559a5e270bda720f301baaf00a4828
 
 import {
   MypageBox,
@@ -31,12 +45,20 @@ import {
   CommentBox,
   CommentIcon,
   CommentTitle,
+  PasswordBox,
+  PasswordIcon,
+  PasswordTitle,
   InfoBox,
+<<<<<<< HEAD
 } from './MypageElements';
+=======
+} from "./MypageElements";
+import MyComment from "./MyComment";
+>>>>>>> c8615a91d5559a5e270bda720f301baaf00a4828
 
 function Mypage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState('myProfile');
+  const [mode, setMode] = useState("myProfile");
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [resData, setResData] = useState(null);
@@ -59,30 +81,32 @@ function Mypage() {
   // }, [resData]);
 
   const onMenuButtonClick = (e) => {
-    if (e.target.id === 'myProfile') {
-      setMode('myProfile');
+    if (e.target.id === "myProfile") {
+      setMode("myProfile");
       console.log(e.target.id);
-    } else if (e.target.id === 'editProfile') {
-      setMode('editProfile');
-    } else if (e.target.id === 'myLikedPost') {
-      setMode('myLikedPost');
-    } else if (e.target.id === 'mycomment') {
-      setMode('mycomment');
+    } else if (e.target.id === "editProfile") {
+      setMode("editProfile");
+    } else if (e.target.id === "myLikedPost") {
+      setMode("myLikedPost");
+    } else if (e.target.id === "passwordChange") {
+      setMode("passwordChange");
+    } else if (e.target.id === "mycomment") {
+      setMode("mycomment");
     }
   };
 
   return (
     <MypageBox>
       <UserBox>
-        <MypageTitleBtn onClick={onMenuButtonClick} id='myProfile'>
+        <MypageTitleBtn onClick={onMenuButtonClick} id="myProfile">
           My Page
         </MypageTitleBtn>
         <UserInfoBox>
           <UserBtnBox>
             <UserIcon>
-              <i className='fa-solid fa-user'></i>
+              <i className="fa-solid fa-user"></i>
             </UserIcon>
-            <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
+            <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
               My Info
             </MyinfoBtn>
           </UserBtnBox>
@@ -96,41 +120,54 @@ function Mypage() {
             </PreferenceBox>
           </UserNamePreferBox>
           <UserInfoMenuBtns>
-            <UserInfoEditBox onClick={onMenuButtonClick} id='editProfile'>
+            <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
               <UserInfoEditIcon>
                 <i
                   onClick={onMenuButtonClick}
-                  id='editProfile'
-                  className='fa-solid fa-gear'
+                  id="editProfile"
+                  className="fa-solid fa-gear"
                 ></i>
               </UserInfoEditIcon>
-              <UserInfoEditTitle onClick={onMenuButtonClick} id='editProfile'>
+              <UserInfoEditTitle onClick={onMenuButtonClick} id="editProfile">
                 내 정보 수정
               </UserInfoEditTitle>
             </UserInfoEditBox>
+            <PasswordBox onClick={onMenuButtonClick} id="passwordChange">
+              <PasswordIcon>
+                <i
+                  className="fa-solid fa-lock"
+                  onClick={onMenuButtonClick}
+                  id="passwordChange"
+                ></i>
+              </PasswordIcon>
+              <PasswordTitle onClick={onMenuButtonClick} id="passwordChange">
+                {" "}
+                비밀번호 변경{" "}
+              </PasswordTitle>
+            </PasswordBox>
 
-            <LikedBox onClick={onMenuButtonClick} id='myLikedPost'>
+            <LikedBox onClick={onMenuButtonClick} id="myLikedPost">
               <LikeIcon>
                 <i
-                  className='fa-solid fa-heart'
+                  className="fa-solid fa-heart"
                   onClick={onMenuButtonClick}
-                  id='myLikedPost'
+                  id="myLikedPost"
                 ></i>
               </LikeIcon>
-              <LikeTitle onClick={onMenuButtonClick} id='myLikedPost'>
+              <LikeTitle onClick={onMenuButtonClick} id="myLikedPost">
                 나의 관심 행사
               </LikeTitle>
             </LikedBox>
 
-            <CommentBox onClick={onMenuButtonClick} id='mycomment'>
+            <CommentBox onClick={onMenuButtonClick} id="mycomment">
               <CommentIcon>
                 <i
-                  className='fa-solid fa-comment'
+                  className="fa-solid fa-comment"
                   onClick={onMenuButtonClick}
-                  id='myLikedPost'
+                  id="myLikedPost"
                 ></i>
               </CommentIcon>
-              <CommentTitle onClick={onMenuButtonClick} id='mycomment'>
+              <CommentTitle onClick={onMenuButtonClick} id="mycomment">
                 내가 쓴 댓글
               </CommentTitle>
             </CommentBox>
@@ -139,10 +176,11 @@ function Mypage() {
       </UserBox>
       <InfoBox>
         <div>
-          {mode === 'myProfile' && <MypageInfo></MypageInfo>}
-          {mode === 'editProfile' && <MypageEdit></MypageEdit>}
-          {mode === 'myLikedPost' && <MyLikedPost></MyLikedPost>}
-          {mode === 'mycomment' && <MyComment />}
+          {mode === "myProfile" && <MypageInfo></MypageInfo>}
+          {mode === "editProfile" && <MypageEdit></MypageEdit>}
+          {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
+          {mode === "passwordChange" && <PasswordChange></PasswordChange>}
+          {mode === "mycomment" && <MyComment />}
         </div>
       </InfoBox>
     </MypageBox>

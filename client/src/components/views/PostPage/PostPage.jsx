@@ -36,6 +36,7 @@ import {
   RcP,
 } from './PostElements';
 import Loading from '../Loading/Loading';
+import Map from '../Map/Map';
 
 function PostPage() {
   let params = useParams();
@@ -102,6 +103,7 @@ function PostPage() {
   };
 
   return (
+<<<<<<< HEAD
     <>
       <PostContainer>
         <PostContent>
@@ -244,11 +246,75 @@ function PostPage() {
         <TabContent tab={tab} />
       </PostContainer>
     </>
-  );
-}
+=======
+    <div
+      style={{
+        display: 'flex',
+        //justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'Noto Sans KR',
+        flexDirection: 'column',
+        margin: '60px',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {postState.post ? (
+          <>
+            <Event_title>{postState.post.title}</Event_title>
+            <Event_info_container>
+              <Photo_container
+                src={postState.post.main_img}
+                alt='images'
+              ></Photo_container>
+              <Event_info>
+                <Event_info_content>
+                  장소 : {postState.post.place}
+                </Event_info_content>
+                <Event_info_content>
+                  일시 : {postState.post.date}
+                </Event_info_content>
+                <Event_info_content>
+                  관람연령 : {postState.post.use_trgt}
+                </Event_info_content>
+                <Event_info_content>
+                  요금 : {postState.post.use_fee}
+                </Event_info_content>
+              </Event_info>
+            </Event_info_container>
+            <Likebtn onClick={onLikebtnClicked}>
+              {' '}
+              ❤️ {postState.post.likes.length}
+            </Likebtn>
+          </>
+        ) : (
+          <Loading />
+        )}
+      </div>
 
-function TabContent(props) {
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][props.tab];
+      <Comment props={params.postId} />
+
+      <TabBar itemType='button'>
+        <TabBtn name='맛집' onClick={() => settingTab(0)}>
+          맛집
+        </TabBtn>
+        <TabBtn name='주변 카페' onClick={() => settingTab(1)}>
+          주변 카페
+        </TabBtn>
+      </TabBar>
+      <Map
+        tab={tab}
+        //place 로 하면 이상한 극장 이름 같은건 인식 못해서 일단 guname 으로 넣음
+        //넣을 때 좀 여러 field 넣을 수 있는 거 찾아봐야함
+        place={postState.post?.guname}
+      />
+    </div>
+>>>>>>> c8615a91d5559a5e270bda720f301baaf00a4828
+  );
 }
 
 export default Auth(PostPage, null);
