@@ -75,7 +75,6 @@ const LandingPage = () => {
         </Container>
         <Button onClick={nextSlide}>&#62;</Button>
       </SliderDiv>
-
       <InfoSection {...homeObjOne} />
     </>
   );
