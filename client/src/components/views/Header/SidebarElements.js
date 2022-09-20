@@ -56,9 +56,16 @@ export const LocationItem = styled.button`
   font-size: 1.1em;
   font-weight: bold;
   border: none;
+<<<<<<< HEAD
+
+  &:hover {
+    background-color: rgb(50, 50, 50);
+  }
+=======
   &:hover {
     background-color: white;
     color: rgb(50, 50, 50);
   }
   width: 70%;
+>>>>>>> upstream/main
 `;

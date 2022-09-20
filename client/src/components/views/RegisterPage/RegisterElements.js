@@ -72,6 +72,7 @@ export const Input_PW = styled.input`
   padding-left: 10px;
   &:focus{
     border: 1px solid grey;
+  }
 `;
 
 export const Input_ConfirmPW = styled.input`
@@ -83,6 +84,7 @@ export const Input_ConfirmPW = styled.input`
   padding-left: 10px;
   &:focus{
     border: 1px solid grey;
+  }
 `;
 
 export const Register_btn = styled.button`

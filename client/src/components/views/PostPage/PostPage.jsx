@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getPostDetails,
-  likePost,
-  getRandomCodeNamePost,
-} from "../../../_actions/post_action";
-import Comment from "../Comment/Comment";
-import Auth from "../../../hoc/auth";
+import React, { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPostDetails, likePost, getRandomCodeNamePost } from '../../../_actions/post_action';
+import Comment from '../Comment/Comment';
+import Auth from '../../../hoc/auth';
 
 import {
   PostContainer,
@@ -38,9 +34,9 @@ import {
   RcImage,
   RcH2,
   RcP,
-} from "./PostElements";
-import Loading from "../Loading/Loading";
-import Map from "../Map/Map";
+} from './PostElements';
+import Loading from '../Loading/Loading';
+import Map from '../Map/Map';
 
 function PostPage() {
   let params = useParams();
@@ -56,13 +52,14 @@ function PostPage() {
   // const [use_fee, setFee] = useState();
   const [likes, setLikes] = useState(0);
   const [tab, setTab] = useState(0);
-  const [link, setLink] = useState("");
+  const [link, setLink] = useState('');
   const settingTab = (index) => {
     setTab(index);
   };
 
   const [randoms, setRandoms] = useState(0);
   const [randoms2, setRandoms2] = useState(0);
+
 
   useEffect(() => {
     dispatch(getPostDetails(params.postId)).then((res) => {
@@ -79,14 +76,14 @@ function PostPage() {
         //console.log(params.postId);
         setLink(res.payload.post.org_link);
       } else {
-        console.log("error!!!!!!!!!!!!!!");
+        console.log('error!!!!!!!!!!!!!!');
       }
     });
     let Randoms, Randoms2;
     Randoms = Math.floor(Math.random() * 100) + 1;
     Randoms2 = Math.floor(Math.random() * 100) + 1;
-    setRandoms(Randoms);
-    setRandoms2(Randoms2);
+    setRandoms(Randoms)
+    setRandoms2(Randoms2)
   }, [dispatch, params.postId]);
 
   const onLikebtnClicked = () => {
