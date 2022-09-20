@@ -83,8 +83,6 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
                   </LocationItem>
                 </div>
               ))}
-<<<<<<< HEAD
-=======
 
               {/* <LocationItem onClick={onLocationClicked} name="강남구">
                 강남구
@@ -209,7 +207,6 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
               <LocationItem onClick={onLocationClicked} name="중랑구">
                 중랑구
               </LocationItem> */}
->>>>>>> upstream/main
             </LocationDiv>
           </LocationList>
         </div>
