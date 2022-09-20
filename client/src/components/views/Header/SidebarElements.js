@@ -1,14 +1,13 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 export const SidebarContainer = styled.div`
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   display: flex;
   z-index: 2;
   width: 100%;
-  //height: 100%;
-  height: 1000px;
+  height: 100%;
   color: white;
-  position: absolute;
+  position: fixed;
   background: rgba(0, 0, 0, 0.3);
 `;
 
@@ -18,17 +17,12 @@ export const SidebarOpen = keyframes`
 `;
 
 export const SidebarMain = styled.div`
+  position: absolute;
   font-weight: bold;
   animation: ${SidebarOpen} 0.2s ease-in-out;
   width: 265px;
   height: 100%;
-  height: 1000px;
   background: rgb(0, 0, 0);
-`;
-
-export const SidebarBlank = styled.div`
-  width: 100%;
-  height: 100%;
 `;
 
 export const SidebarButtonContainer = styled.div`
