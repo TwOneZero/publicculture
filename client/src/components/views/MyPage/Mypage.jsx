@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MypageEdit from './MypageEdit';
 import MypageInfo from './MypageInfo';
 import MyLikedPost from './MyLikedPost';
+import MyComment from './MyComment';
 import Auth from '../../../hoc/auth';
 import { auth } from '../../../_actions/user_action';
 import axios from 'axios';
@@ -32,7 +33,6 @@ import {
   CommentTitle,
   InfoBox,
 } from './MypageElements';
-import MyComment from './MyComment';
 
 function Mypage() {
   const navigate = useNavigate();
