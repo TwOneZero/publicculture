@@ -71,13 +71,13 @@ export const RcH2 = styled.h2`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: start;
+  text-align: center;
 `
 
 export const RcP = styled.p`
   font-size: 1rem;
   width: 150px;
-  text-align: start;
+  text-align: center;
   margin: 0;
   overflow: hidden;
   white-space: nowrap;

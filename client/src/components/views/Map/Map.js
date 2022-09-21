@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import KakaoMapScript from './KakaoMapScript';
 import MapContainer from './MapContainer';
 
-export default function Map({ place, tab }) {
-  const keyword = tab ? ` ${place} 카페` : ` ${place} 맛집`;
-  console.log(place);
+export default function Map({ place, tab, xpos, ypos }) {
+  const keyword = tab ? ` ${place} 카페` : ` ${place} 맛집`
   useEffect(() => {
-    KakaoMapScript(keyword);
-  }, [keyword]);
+    KakaoMapScript(place, xpos, ypos);
+  }, [ypos]);
 
   return (
     <>
