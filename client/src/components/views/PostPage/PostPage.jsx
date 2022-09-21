@@ -216,17 +216,11 @@ function PostPage() {
           <Comment props={params.postId} />
         </PostContent>
         <TabBar itemType="button">
-          <TabBtn name="지도" onClick={() => settingTab(0)}>
-            지도
-          </TabBtn>
-          <TabBtn name="맛집" onClick={() => settingTab(1)}>
+          <TabBtn name="맛집" onClick={() => settingTab(0)}>
             맛집
           </TabBtn>
-          <TabBtn name="주변 카페" onClick={() => settingTab(2)}>
-            주변 카페
-          </TabBtn>
-          <TabBtn name="주변 카페" onClick={() => settingTab(2)}>
-            주변 카페
+          <TabBtn name="주변카페" onClick={() => settingTab(1)}>
+            주변카페
           </TabBtn>
         </TabBar>
         <Map
@@ -235,8 +229,6 @@ function PostPage() {
           //넣을 때 좀 여러 field 넣을 수 있는 거 찾아봐야함
           place={postState.post?.guname}
         />
-        {/* </PostContainer> */}
-        {/* <TabContent tab={tab} /> */}
       </PostContainer>
     </>
   );

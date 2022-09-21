@@ -67,7 +67,7 @@ const Calendar = (isSelected) => {
     setYear(date.getFullYear());
     setStartDay(getStartDayOfMonth(date));
     dispatch(getPostDateCount()).then((res) => {
-      console.log(res.payload.postAll);
+      console.log(res.payload.posts);
       setA(res.payload.count);
     });
   }, [date]);
