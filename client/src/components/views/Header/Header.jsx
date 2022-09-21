@@ -147,7 +147,7 @@ function Header() {
                 paddingLeft: "20px",
                 paddingTop: "15px",
               }}
-              class="fa-solid fa-bars fa-2x"
+              className="fa-solid fa-bars fa-2x"
               onClick={onSidebarToggleButtonClicked}
             ></i>
           </SidebarButtonToggle>

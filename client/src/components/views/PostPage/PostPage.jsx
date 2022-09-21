@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostDetails, likePost, getRandomCodeNamePost } from '../../../_actions/post_action';
+import {
+  getPostDetails,
+  likePost,
+  getRandomCodeNamePost,
+} from '../../../_actions/post_action';
 import Comment from '../Comment/Comment';
 import Auth from '../../../hoc/auth';
 
@@ -43,47 +47,20 @@ function PostPage() {
   const postState = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [post, setPost] = useState([]);
-  // const [title, setTitle] = useState();
-  // const [main_img, setImg] = useState();
-  // const [place, setPlace] = useState();
-  // const [date, setDate] = useState();
-  // const [use_trgt, setTarget] = useState();
-  // const [use_fee, setFee] = useState();
-  const [likes, setLikes] = useState(0);
+
   const [tab, setTab] = useState(0);
-  const [link, setLink] = useState('');
   const settingTab = (index) => {
     setTab(index);
   };
-
-  const [randoms, setRandoms] = useState(0);
-  const [randoms2, setRandoms2] = useState(0);
-
 
   useEffect(() => {
     dispatch(getPostDetails(params.postId)).then((res) => {
       if (res.payload.post) {
         console.log(res.payload.post);
-        // setPost(res.payload.post);
-        // setTitle(res.payload.post.title);
-        // setImg(res.payload.post.main_img);
-        // setPlace(res.payload.post.place);
-        // setDate(res.payload.post.date);
-        // setTarget(res.payload.post.use_trgt);
-        // setFee(res.payload.post.use_fee);
-        // setLikes(res.payload.post.likes.length);
-        //console.log(params.postId);
-        setLink(res.payload.post.org_link);
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-    let Randoms, Randoms2;
-    Randoms = Math.floor(Math.random() * 100) + 1;
-    Randoms2 = Math.floor(Math.random() * 100) + 1;
-    setRandoms(Randoms)
-    setRandoms2(Randoms2)
   }, [dispatch, params.postId]);
 
   const onLikebtnClicked = () => {
@@ -102,6 +79,10 @@ function PostPage() {
       });
   };
 
+  const getRandomIndex = (len) => {
+    return Math.floor(Math.random() * len);
+  };
+
   return (
     <>
       <PostContainer>
@@ -116,7 +97,7 @@ function PostPage() {
                   <Event_info_container>
                     <Photo_container
                       src={postState.post.main_img}
-                      alt="images"
+                      alt='images'
                     ></Photo_container>
                     <Event_info>
                       <Event_info_content>
@@ -147,8 +128,8 @@ function PostPage() {
                         <Event_detail_container>
                           <Event_detail_title>요금</Event_detail_title>
                           <Event_detail_content>
-                            {postState.post.use_fee === ""
-                              ? "무료"
+                            {postState.post.use_fee === ''
+                              ? '무료'
                               : postState.post.use_fee}
                           </Event_detail_content>
                         </Event_detail_container>
@@ -165,8 +146,8 @@ function PostPage() {
                         <Event_detail_container>
                           <Event_detail_title>주최</Event_detail_title>
                           <Event_detail_content>
-                            {postState.post.org_name === ""
-                              ? "서울시"
+                            {postState.post.org_name === ''
+                              ? '서울시'
                               : postState.post.org_name}
                           </Event_detail_content>
                         </Event_detail_container>
@@ -176,7 +157,7 @@ function PostPage() {
                           공식홈페이지
                         </Event_Button>
                         <Likebtn onClick={onLikebtnClicked}>
-                          {" "}
+                          {' '}
                           ❤️ {postState.post.likes.length}
                         </Likebtn>
                       </Event_info_last_content>
@@ -190,18 +171,54 @@ function PostPage() {
                       <RecommendList>
                         {postState.posts ? (
                           <>
-                            <RcImage src={postState.posts[randoms].main_img} />
-                            <RcH2>{postState.posts[randoms].title}</RcH2>
-                            <RcP>{postState.posts[randoms].place}</RcP>
+                            <RcImage
+                              src={
+                                postState.posts[
+                                  getRandomIndex(postState.posts.length)
+                                ].main_img
+                              }
+                            />
+                            <RcH2>
+                              {
+                                postState.posts[
+                                  getRandomIndex(postState.posts.length)
+                                ].title
+                              }
+                            </RcH2>
+                            <RcP>
+                              {
+                                postState.posts[
+                                  getRandomIndex(postState.posts.length)
+                                ].place
+                              }
+                            </RcP>
                           </>
                         ) : null}
                       </RecommendList>
                       <RecommendList>
                         {postState.posts ? (
                           <>
-                            <RcImage src={postState.posts[randoms2].main_img} />
-                            <RcH2>{postState.posts[randoms2].title}</RcH2>
-                            <RcP>{postState.posts[randoms2].place}</RcP>
+                            <RcImage
+                              src={
+                                postState.posts[
+                                  getRandomIndex(postState.posts.length)
+                                ].main_img
+                              }
+                            />
+                            <RcH2>
+                              {
+                                postState.posts[
+                                  getRandomIndex(postState.posts.length)
+                                ].title
+                              }
+                            </RcH2>
+                            <RcP>
+                              {
+                                postState.posts[
+                                  getRandomIndex(postState.posts.length)
+                                ].place
+                              }
+                            </RcP>
                           </>
                         ) : null}
                       </RecommendList>
@@ -215,11 +232,11 @@ function PostPage() {
           )}
           <Comment props={params.postId} />
         </PostContent>
-        <TabBar itemType="button">
-          <TabBtn name="맛집" onClick={() => settingTab(0)}>
+        <TabBar itemType='button'>
+          <TabBtn name='맛집' onClick={() => settingTab(0)}>
             맛집
           </TabBtn>
-          <TabBtn name="주변카페" onClick={() => settingTab(1)}>
+          <TabBtn name='주변카페' onClick={() => settingTab(1)}>
             주변카페
           </TabBtn>
         </TabBar>

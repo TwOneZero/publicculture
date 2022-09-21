@@ -116,19 +116,20 @@ exports.getFavPost = async (req, res) => {
 };
 
 exports.getPostDateCount = async (req, res) => {
+  const { month } = req.body;
   let today = dayjs()
     .startOf('month')
-    .set('month', 8)
+    .set('month', month)
     .set('year', 2022)
     .set('date', 1)
     .format('YYYY-MM-DD HH:mm:ss');
   let prevMonth = dayjs()
     .startOf('month')
-    .set('month', 8)
+    .set('month', month)
     .set('year', 2022)
     .set('date', 31)
     .format('YYYY-MM-DD HH:mm:ss');
-  
+
   // let test = dayjs()
   //   .startOf('date')
   //   .set('month', 8)
@@ -145,18 +146,16 @@ exports.getPostDateCount = async (req, res) => {
 
   // let test3 = dayjs()
   // .format('YYYY-MM-DD 00:00:00');
-  
+
   // let a = dayjs();
   // a.format();
   // a.get('date');
   // console.log(a.$D + 'adasd');
   // let b = a.$D + 1;
 
-
   // console.log(b + 'qwe')
   // test3.get('date');
   // console.log(test3.get('date'));
-
 
   // let q = dayjs()
   // .format('YYYY-MM-DD 00:00:00');
@@ -167,7 +166,7 @@ exports.getPostDateCount = async (req, res) => {
   // let test5 = dayjs()
   //   .format('YYYY-MM-'+b+' 00:00:00');
   // // test5.format('YYYY-MM-'+a+' 00:00:00');
-  
+
   // var test4 = dayjs()
   // .format('YYYY-MM-DD 00:00:00');
   // test4.add(1, "day").format();
@@ -185,10 +184,14 @@ exports.getPostDateCount = async (req, res) => {
     // const posts = await Post.find({ end_date: { $gte: d_t } }).exec();
 
     // const posts = await Post.find({ end_date: { $lte: w, $gte: q }, }).exec();
-    const posts = await Post.find({ end_date: { $lte: prevMonth, $gte: today }  }).select("codename end_date").exec();
+    const posts = await Post.find({
+      end_date: { $lte: prevMonth, $gte: today },
+    })
+      .select('codename end_date')
+      .exec();
 
     // return res.status(200).json({ postAll, count: postAll.length });
-    return res.status(200).json({ posts, count: posts.length});
+    return res.status(200).json({ posts, count: posts.length });
     // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
     //   return res.status(200).json({ count: post.length});
     // });
@@ -212,5 +215,38 @@ exports.searchMap = async (req, res) => {
     });
   } catch (error) {
     return res.json({ message: error });
+  }
+};
+
+exports.getPostbyDay = async (req, res) => {
+  function leftPad(value) {
+    if (value >= 10) {
+      return value;
+    }
+
+    return `0${value}`;
+  }
+
+  function toStringByFormatting(source, delimiter = '-') {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+
+    return [year, month, day].join(delimiter);
+  }
+
+  try {
+    const { month, day } = req.body;
+    today = toStringByFormatting(new Date(2022, month, day));
+    nextDay = toStringByFormatting(new Date(2022, month, Number(day) + 1));
+    const posts = await Post.find({
+      end_date: {
+        $gte: today,
+        $lt: nextDay,
+      },
+    }).exec();
+    return res.status(200).json({ success: true, posts });
+  } catch (error) {
+    return res.status(400).json({ message: error });
   }
 };
