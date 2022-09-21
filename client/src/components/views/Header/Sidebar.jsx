@@ -4,7 +4,6 @@ import { searchPost } from "../../../_actions/post_action";
 import {
   SidebarContainer,
   SidebarMain,
-  SidebarBlank,
   SidebarButtonContainer,
   LocationTitle,
   LocationList,
@@ -15,6 +14,34 @@ import {
 const Sidebar = ({ onSidebarToggleButtonClicked }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const Location = [
+    "강남구",
+    "강동구",
+    "강북구",
+    "강서구",
+    "관악구",
+    "광진구",
+    "구로구",
+    "금천구",
+    "노원구",
+    "노원구",
+    "도봉구",
+    "동대문구",
+    "동작구",
+    "마포구",
+    "서대문구",
+    "서초구",
+    "성동구",
+    "성북구",
+    "송파구",
+    "양천구",
+    "영등포구",
+    "용산구",
+    "은평구",
+    "종로구",
+    "중구",
+    "중랑구",
+  ];
 
   const onLocationClicked = (e) => {
     e.preventDefault();
@@ -46,7 +73,18 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
         <div onClick={onSidebarToggleButtonClicked}>
           <LocationList>
             <LocationDiv>
-              <LocationItem onClick={onLocationClicked} name="강남구">
+              {Location.map((item, index) => (
+                <div key={index}>
+                  <LocationItem
+                    onClick={onLocationClicked}
+                    name={Location[index]}
+                  >
+                    {item}
+                  </LocationItem>
+                </div>
+              ))}
+
+              {/* <LocationItem onClick={onLocationClicked} name="강남구">
                 강남구
               </LocationItem>
             </LocationDiv>
@@ -168,12 +206,11 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
             <LocationDiv>
               <LocationItem onClick={onLocationClicked} name="중랑구">
                 중랑구
-              </LocationItem>
+              </LocationItem> */}
             </LocationDiv>
           </LocationList>
         </div>
       </SidebarMain>
-      <SidebarBlank />
     </SidebarContainer>
   );
 };
