@@ -46,6 +46,8 @@ const Calendar = (isSelected) => {
     '12',
   ]; // 월 구성
 
+  const codenames = ["뮤지컬/오페라", "전시/미술", "연극", "콘서트", "클래식", "무용"]
+
   const today = new Date();
   const [date, setDate] = useState(today);
   const [day, setDay] = useState(date.getDate());
@@ -55,10 +57,11 @@ const Calendar = (isSelected) => {
 
 
   const [todayEvent, setTodayEvent] = useState([]);
-  const [sliced, setSliced] = useState([]);
   
-  const [b] = useState('1');
+  const [b] = useState(0);
   const [test, setTest] = useState();
+
+
 
   useEffect(() => {
     setDay(date.getDate());
@@ -71,17 +74,9 @@ const Calendar = (isSelected) => {
       
     });
     
-    // console.log(sliced.length)
-  }, [date, dispatch]);
+  }, [date, Month, dispatch]);
 
-  useEffect(() => {
-    if(todayEvent){
-      setSliced(todayEvent.map((item, index) => {
-        // console.log(item.end_date.slice(8,10))
-        return String(item.end_date.slice(8,10))
-      }))
-    }
-  })
+ 
 
   function getStartDayOfMonth(date) {
     // 한달의 시작일 받는 함수
@@ -139,6 +134,15 @@ const Calendar = (isSelected) => {
               .fill(null)
               .map((_, index) => {
                 const d = index - (startDay - 1);
+                let count;
+                const test = todayEvent.filter((event) => (
+                  d === Number(event.end_date.slice(8,10))
+                  
+                  // console.log(event.end_date.slice(8,10))
+                ))
+                console.log(test)
+                
+                // console.log(test)
                 // {
                 //   todayEvent[index]?.end_date.slice(8,10) === String(d)?
                 //   console.log(1)
@@ -162,15 +166,23 @@ const Calendar = (isSelected) => {
                         {d > 0 ? d : ''}
                       </Day>
 
-                      <AllEvent>{d > 0 ?  '건' : ''}</AllEvent>
+                      <AllEvent>{d > 0 ? test.length + '건' : ''}</AllEvent>
                     </TopContainer>
                     <BottomContainer>
-                      <Events>{d > 0 ? '뮤지컬' + b : ''}</Events>
+                      {
+                        codenames.map((item, index) => {
+                          let count = test.filter((event) =>(
+                            event.codename === item
+                          )).length
+                          return <Events>{d > 0 ? item + count : ''}</Events>
+                        })
+                      }
+                      {/* <Events>{d > 0 ? '뮤지컬' + b : ''}</Events>
                       <Events>{d > 0 ? '연극' + b : ''}</Events>
                       <Events>{d > 0 ? '전시/미술' + b : ''}</Events>
                       <Events>{d > 0 ? '무용' + b : ''}</Events>
                       <Events>{d > 0 ? '클래식' + b : ''}</Events>
-                      <Events>{d > 0 ? '콘서트' + b : ''}</Events>
+                      <Events>{d > 0 ? '콘서트' + b : ''}</Events> */}
                     </BottomContainer>
                   </SubContainer>
                 );
