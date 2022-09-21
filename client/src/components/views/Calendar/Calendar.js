@@ -53,13 +53,12 @@ const Calendar = (isSelected) => {
   const [year, setYear] = useState(date.getFullYear());
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
 
-  const [test, setTest] = useState(false);
-
-  const [a, setA] = useState(0);
-  const c = a + '건';
-  const [b] = useState('1');
 
   const [todayEvent, setTodayEvent] = useState(0);
+  const c = todayEvent + '건';
+  const [b] = useState('1');
+
+  
 
   useEffect(() => {
     setDay(date.getDate());
@@ -67,8 +66,9 @@ const Calendar = (isSelected) => {
     setYear(date.getFullYear());
     setStartDay(getStartDayOfMonth(date));
     dispatch(getPostDateCount()).then((res) => {
-      console.log(res.payload.postAll);
-      setA(res.payload.count);
+      console.log(res.payload.posts);
+      console.log(res.payload.codename);
+      setTodayEvent(res.payload.count);
     });
   }, [date]);
 
@@ -141,6 +141,7 @@ const Calendar = (isSelected) => {
                         isSelected={d === day}
                         onClick={() => setDate(new Date(year, month, d))}
                       >
+                        
                         {d > 0 ? d : ''}
                       </Day>
                       <AllEvent>{d > 0 ? c : ''}</AllEvent>

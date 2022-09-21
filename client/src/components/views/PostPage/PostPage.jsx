@@ -36,6 +36,7 @@ import {
   RcP,
 } from './PostElements';
 import Loading from '../Loading/Loading';
+import Map from '../Map/Map';
 
 function PostPage() {
   let params = useParams();
@@ -115,14 +116,12 @@ function PostPage() {
                   <Event_info_container>
                     <Photo_container
                       src={postState.post.main_img}
-                      alt='images'
+                      alt="images"
                     ></Photo_container>
                     <Event_info>
                       <Event_info_content>
                         <Event_detail_container>
-                          <Event_detail_title>
-                            장소
-                          </Event_detail_title>
+                          <Event_detail_title>장소</Event_detail_title>
                           <Event_detail_content>
                             {postState.post.place}
                           </Event_detail_content>
@@ -130,9 +129,7 @@ function PostPage() {
                       </Event_info_content>
                       <Event_info_content>
                         <Event_detail_container>
-                          <Event_detail_title>
-                            지역
-                          </Event_detail_title>
+                          <Event_detail_title>지역</Event_detail_title>
                           <Event_detail_content>
                             {postState.post.guname}
                           </Event_detail_content>
@@ -140,9 +137,7 @@ function PostPage() {
                       </Event_info_content>
                       <Event_info_content>
                         <Event_detail_container>
-                          <Event_detail_title>
-                            일시
-                          </Event_detail_title>
+                          <Event_detail_title>일시</Event_detail_title>
                           <Event_detail_content>
                             {postState.post.date}
                           </Event_detail_content>
@@ -150,21 +145,17 @@ function PostPage() {
                       </Event_info_content>
                       <Event_info_content>
                         <Event_detail_container>
-                          <Event_detail_title>
-                            요금
-                          </Event_detail_title>
+                          <Event_detail_title>요금</Event_detail_title>
                           <Event_detail_content>
-                            {
-                              postState.post.use_fee === "" ? "무료" : postState.post.use_fee
-                            }
+                            {postState.post.use_fee === ""
+                              ? "무료"
+                              : postState.post.use_fee}
                           </Event_detail_content>
                         </Event_detail_container>
                       </Event_info_content>
                       <Event_info_content>
                         <Event_detail_container>
-                          <Event_detail_title>
-                            관람연령
-                          </Event_detail_title>
+                          <Event_detail_title>관람연령</Event_detail_title>
                           <Event_detail_content>
                             {postState.post.use_trgt}
                           </Event_detail_content>
@@ -172,20 +163,20 @@ function PostPage() {
                       </Event_info_content>
                       <Event_info_content>
                         <Event_detail_container>
-                          <Event_detail_title>
-                            주최
-                          </Event_detail_title>
+                          <Event_detail_title>주최</Event_detail_title>
                           <Event_detail_content>
-                            {
-                              postState.post.org_name === "" ? "서울시" : postState.post.org_name
-                            }
+                            {postState.post.org_name === ""
+                              ? "서울시"
+                              : postState.post.org_name}
                           </Event_detail_content>
                         </Event_detail_container>
                       </Event_info_content>
                       <Event_info_last_content>
-                        <Event_Button href={postState.post.org_link}>공식홈페이지</Event_Button>
+                        <Event_Button href={postState.post.org_link}>
+                          공식홈페이지
+                        </Event_Button>
                         <Likebtn onClick={onLikebtnClicked}>
-                          {' '}
+                          {" "}
                           ❤️ {postState.post.likes.length}
                         </Likebtn>
                       </Event_info_last_content>
@@ -197,28 +188,22 @@ function PostPage() {
                     <RecommendH1>연관 추천 행사</RecommendH1>
                     <RecommendContent>
                       <RecommendList>
-                        {
-                          postState.posts
-                            ?
-                            <>
-                              <RcImage src={postState.posts[randoms].main_img} />
-                              <RcH2>{postState.posts[randoms].title}</RcH2>
-                              <RcP>{postState.posts[randoms].place}</RcP>
-                            </>
-                            : null
-                        }
+                        {postState.posts ? (
+                          <>
+                            <RcImage src={postState.posts[randoms].main_img} />
+                            <RcH2>{postState.posts[randoms].title}</RcH2>
+                            <RcP>{postState.posts[randoms].place}</RcP>
+                          </>
+                        ) : null}
                       </RecommendList>
                       <RecommendList>
-                        {
-                          postState.posts
-                            ?
-                            <>
-                              <RcImage src={postState.posts[randoms2].main_img} />
-                              <RcH2>{postState.posts[randoms2].title}</RcH2>
-                              <RcP>{postState.posts[randoms2].place}</RcP>
-                            </>
-                            : null
-                        }
+                        {postState.posts ? (
+                          <>
+                            <RcImage src={postState.posts[randoms2].main_img} />
+                            <RcH2>{postState.posts[randoms2].title}</RcH2>
+                            <RcP>{postState.posts[randoms2].place}</RcP>
+                          </>
+                        ) : null}
                       </RecommendList>
                     </RecommendContent>
                   </RecommendContainer>
@@ -230,25 +215,23 @@ function PostPage() {
           )}
           <Comment props={params.postId} />
         </PostContent>
-        <TabBar itemType='button'>
-          <TabBtn name='지도' onClick={() => settingTab(0)}>
-            지도
-          </TabBtn>
-          <TabBtn name='맛집' onClick={() => settingTab(1)}>
+        <TabBar itemType="button">
+          <TabBtn name="맛집" onClick={() => settingTab(0)}>
             맛집
           </TabBtn>
-          <TabBtn name='주변 카페' onClick={() => settingTab(2)}>
-            주변 카페
+          <TabBtn name="주변카페" onClick={() => settingTab(1)}>
+            주변카페
           </TabBtn>
         </TabBar>
-        <TabContent tab={tab} />
+        <Map
+          tab={tab}
+          //place 로 하면 이상한 극장 이름 같은건 인식 못해서 일단 guname 으로 넣음
+          //넣을 때 좀 여러 field 넣을 수 있는 거 찾아봐야함
+          place={postState.post?.guname}
+        />
       </PostContainer>
     </>
   );
-}
-
-function TabContent(props) {
-  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][props.tab];
 }
 
 export default Auth(PostPage, null);
