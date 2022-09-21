@@ -136,20 +136,21 @@ function Header() {
           ) : null}
         </MenuContainer>
       </HeaderContainer>
-      <SidebarGenreBox>
-        <SidebarButtonToggle>
-          <i
-            style={{
-              color: "black",
-              cursor: "pointer",
-              paddingLeft: "20px",
-              paddingTop: "15px",
-            }}
-            class="fa-solid fa-bars fa-2x"
-            onClick={onSidebarToggleButtonClicked}
-          ></i>
-        </SidebarButtonToggle>
-        <GenreContainer>
+
+      <GenreContainer>
+        <SidebarGenreBox>
+          <SidebarButtonToggle>
+            <i
+              style={{
+                color: "black",
+                cursor: "pointer",
+                paddingLeft: "20px",
+                paddingTop: "15px",
+              }}
+              class="fa-solid fa-bars fa-2x"
+              onClick={onSidebarToggleButtonClicked}
+            ></i>
+          </SidebarButtonToggle>
           <GenreBar>
             <GenreBtn itemType="button" onClick={onGenreClicked} name="뮤지컬">
               뮤지컬/오페라
@@ -170,8 +171,9 @@ function Header() {
               무용
             </GenreBtn>
           </GenreBar>
-        </GenreContainer>
-      </SidebarGenreBox>
+        </SidebarGenreBox>
+      </GenreContainer>
+
     </>
   );
 }

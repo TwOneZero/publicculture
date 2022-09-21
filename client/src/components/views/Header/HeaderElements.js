@@ -72,7 +72,6 @@ export const GenreBar = styled.div`
   justify-content: space-between;
   background-color: white;
   align-items: center;
-
   box-sizing: border-box;
 `;
 
