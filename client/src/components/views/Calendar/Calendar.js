@@ -54,11 +54,11 @@ const Calendar = (isSelected) => {
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
 
 
-  const [todayEvent, setTodayEvent] = useState(0);
-  const c = todayEvent + '건';
-  const [b] = useState('1');
-
+  const [todayEvent, setTodayEvent] = useState([]);
+  const [sliced, setSliced] = useState([]);
   
+  const [b] = useState('1');
+  const [test, setTest] = useState();
 
   useEffect(() => {
     setDay(date.getDate());
@@ -67,10 +67,21 @@ const Calendar = (isSelected) => {
     setStartDay(getStartDayOfMonth(date));
     dispatch(getPostDateCount()).then((res) => {
       console.log(res.payload.posts);
-      console.log(res.payload.codename);
-      setTodayEvent(res.payload.count);
+      setTodayEvent(res.payload.posts);
+      
     });
-  }, [date]);
+    
+    // console.log(sliced.length)
+  }, [date, dispatch]);
+
+  useEffect(() => {
+    if(todayEvent){
+      setSliced(todayEvent.map((item, index) => {
+        // console.log(item.end_date.slice(8,10))
+        return String(item.end_date.slice(8,10))
+      }))
+    }
+  })
 
   function getStartDayOfMonth(date) {
     // 한달의 시작일 받는 함수
@@ -83,9 +94,9 @@ const Calendar = (isSelected) => {
   }
 
   const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS; // 윤년과 아닌년의 days 설정
-  console.log(today.getFullYear());
-  console.log(today.getMonth() + 1);
-  console.log(today.getDate());
+  // console.log(today.getFullYear());
+  // console.log(today.getMonth() + 1);
+  // console.log(today.getDate());
   return (
     <>
       {/* <button onClick={testClick}>클릭</button> */}
@@ -128,6 +139,12 @@ const Calendar = (isSelected) => {
               .fill(null)
               .map((_, index) => {
                 const d = index - (startDay - 1);
+                // {
+                //   todayEvent[index]?.end_date.slice(8,10) === String(d)?
+                //   console.log(1)
+                //   :
+                //   console.log(2)
+                // }
                 return (
                   <SubContainer>
                     <TopContainer>
@@ -144,7 +161,8 @@ const Calendar = (isSelected) => {
                         
                         {d > 0 ? d : ''}
                       </Day>
-                      <AllEvent>{d > 0 ? c : ''}</AllEvent>
+
+                      <AllEvent>{d > 0 ?  '건' : ''}</AllEvent>
                     </TopContainer>
                     <BottomContainer>
                       <Events>{d > 0 ? '뮤지컬' + b : ''}</Events>
