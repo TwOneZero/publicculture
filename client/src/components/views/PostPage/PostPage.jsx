@@ -41,6 +41,7 @@ import {
 } from './PostElements';
 import Loading from '../Loading/Loading';
 import Map from '../Map/Map';
+import axios from 'axios';
 
 function PostPage() {
   let params = useParams();
@@ -52,6 +53,13 @@ function PostPage() {
   const settingTab = (index) => {
     setTab(index);
   };
+
+  const [randoms, setRandoms] = useState(0);
+  const [randoms2, setRandoms2] = useState(0);
+
+  const [address, setAddress] = useState('');
+  const [xpos, setXpos] = useState();
+  const [ypos, setYpos] = useState();
 
   useEffect(() => {
     dispatch(getPostDetails(params.postId)).then((res) => {
@@ -78,10 +86,37 @@ function PostPage() {
         console.log(err);
       });
   };
-
   const getRandomIndex = (len) => {
     return Math.floor(Math.random() * len);
   };
+
+  useEffect(() => {
+    console.log(postState);
+    if (
+      postState.post?.guname != undefined &&
+      postState.post?.place != undefined
+    ) {
+      axios
+        .get(
+          `https://dapi.kakao.com/v2/local/search/keyword.json?query=${
+            postState.post.guname
+          } ${postState.post.place.split(' ')[0]}`,
+          {
+            headers: {
+              Authorization: 'KakaoAK 1edeaebc50d51faf8d8fb0333bb65234',
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.documents.length >= 1) {
+            const pname = response.data.documents[0].address_name;
+            setAddress(pname);
+            setXpos(response.data.documents[0].x);
+            setYpos(response.data.documents[0].y);
+          }
+        });
+    }
+  }, [postState]);
 
   return (
     <>
@@ -244,7 +279,9 @@ function PostPage() {
           tab={tab}
           //place 로 하면 이상한 극장 이름 같은건 인식 못해서 일단 guname 으로 넣음
           //넣을 때 좀 여러 field 넣을 수 있는 거 찾아봐야함
-          place={postState.post?.guname}
+          place={address}
+          xpos={xpos}
+          ypos={ypos}
         />
       </PostContainer>
     </>
