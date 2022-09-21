@@ -146,11 +146,11 @@ exports.getPostDateCount = async (req, res) => {
   // let test3 = dayjs()
   // .format('YYYY-MM-DD 00:00:00');
   
-  // let a = dayjs();
-  // a.format();
-  // a.get('date');
-  // console.log(a.$D + 'adasd');
-  // let b = a.$D + 2;
+  let a = dayjs();
+  a.format();
+  a.get('date');
+  console.log(a.$D + 'adasd');
+  let b = a.$D + 1;
   // console.log(b + 'qwe')
   // test3.get('date');
   // console.log(test3.get('date'));
@@ -160,7 +160,7 @@ exports.getPostDateCount = async (req, res) => {
   .format('YYYY-MM-DD 00:00:00');
 
   let w = dayjs()
-  .format('YYYY-MM-'+24+' 00:00:00');
+  .format('YYYY-MM-'+b+' 00:00:00');
 
   // let test5 = dayjs()
   //   .format('YYYY-MM-'+b+' 00:00:00');
@@ -186,7 +186,7 @@ exports.getPostDateCount = async (req, res) => {
     // const posts = await Post.find({ end_date: { $lte: prevMonth, $gte: today }, }).exec();
 
     // return res.status(200).json({ postAll, count: postAll.length });
-    return res.status(200).json({ posts, count: posts.length });
+    return res.status(200).json({ posts, count: posts.length , codename: posts.codename});
     // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
     //   return res.status(200).json({ count: post.length});
     // });
