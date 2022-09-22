@@ -87,8 +87,9 @@ exports.logoutUser = async (req, res) => {
 exports.updateUser = async (req, res, next) => {
   try {
     //바꿀 패스워드
+    userName = req.body.name === '' ? req.user.name : req.body.name;
     const newUser = {
-      name: req.body.name,
+      name: userName,
       genre: req.body.genre,
     };
     const user = await User.findOne({ _id: req.user.id });
@@ -155,6 +156,7 @@ exports.updateUser_Password = async (req, res, next) => {
 //닉네임 중복 체크
 exports.checkName = async (req, res, next) => {
   try {
+    console.log(req.isAuth);
     const user = await User.findOne({ name: req.body.name });
     if (!user) {
       return res.json({ success: true });
