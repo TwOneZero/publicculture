@@ -249,15 +249,8 @@ export const EditMypage_container = styled.div`
   //margin: 4% 5%;
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
   margin: 30px 0px 100px 0px;
-
   font-family: "Lato", sans-serif;
-=======
-  //margin: 30px 0px 30px 0px;
-  margin-top: 30px;
-  font-family: 'Lato', sans-serif;
->>>>>>> 5d9b6a34407a10123e63fb8c7f5a718c4e4dbf2a
   font-weight: 1000;
   font-size: 24px;
 `;
@@ -514,13 +507,8 @@ export const PasswordPage = styled.div`
   margin: 0px;
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
   margin: 30px 0px 100px 0px;
   font-family: "Lato", sans-serif;
-=======
-  margin: 30px 0px 50px 0px;
-  font-family: 'Lato', sans-serif;
->>>>>>> 5d9b6a34407a10123e63fb8c7f5a718c4e4dbf2a
   font-weight: 1000;
   font-size: 24px;
 `;
