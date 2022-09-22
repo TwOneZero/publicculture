@@ -93,8 +93,8 @@ function PostPage() {
   useEffect(() => {
     console.log(postState);
     if (
-      postState.post?.guname != undefined &&
-      postState.post?.place != undefined
+      postState.post?.guname !== undefined &&
+      postState.post?.place !== undefined
     ) {
       axios
         .get(
