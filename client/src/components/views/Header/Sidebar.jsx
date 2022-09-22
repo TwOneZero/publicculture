@@ -5,6 +5,7 @@ import {
   SidebarContainer,
   SidebarMain,
   SidebarButtonContainer,
+  SidebarcloseBtn,
   LocationTitle,
   LocationList,
   LocationDiv,
@@ -23,7 +24,6 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
     "광진구",
     "구로구",
     "금천구",
-    "노원구",
     "노원구",
     "도봉구",
     "동대문구",
@@ -59,15 +59,10 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
     <SidebarContainer>
       <SidebarMain>
         <SidebarButtonContainer>
-          <i
+          <SidebarcloseBtn
             className="fas fa-times"
-            style={{
-              cursor: "pointer",
-              marginRight: "40px",
-              marginTop: "10px",
-            }}
             onClick={onSidebarToggleButtonClicked}
-          ></i>
+          ></SidebarcloseBtn>
         </SidebarButtonContainer>
         <LocationTitle>지역별</LocationTitle>
         <div onClick={onSidebarToggleButtonClicked}>

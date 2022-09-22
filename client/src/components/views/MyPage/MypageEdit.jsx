@@ -184,9 +184,7 @@ const MypageEdit = () => {
               </CheckboxContainer>
             </Checkbox>
           </Genre_container_edit>
-          <UserUpdateBtn onClick={onUpdateConfirm}>
-            User Info Update
-          </UserUpdateBtn>
+          <UserUpdateBtn onClick={onUpdateConfirm}>Update</UserUpdateBtn>
         </Page_area_edit>
       </EditMypage_container>
     </>
