@@ -109,26 +109,11 @@ export const SubContainer = styled.div`
     cursor: pointer;
     font-size: 16px;
     border: 1px solid #ccc;
-    /* ${props =>
-        props.isToday &&
-        css`
-        border: 1px solid #eee;
-        `}; */
-
-    /* ${props =>
-        props.isSelected &&
-        css`background-color: #eee;`
-    }; */
 `
 
 //캘린더 날짜, 행사수 부분
 
 export const TopContainer = styled.a`
-    /* margin: 1rem; */
-    /* margin-top: 1rem;
-    margin-bottom: 1rem;
-    display: flex;
-    text-align: center; */
     display: block;
     position: relative;
     margin-top: 10px;
@@ -137,36 +122,27 @@ export const TopContainer = styled.a`
 `
 
 export const Day = styled.span`
-   
     margin: 0 40px 0 20px;
-    
-    width: 50px;
-    height: 50px;
-    
-    
-    border-radius : ${({ isToday}) => (isToday ? '100%' : '0')};
-    background: ${({ isToday}) => (isToday ? '#000' : '#fff')};
-    color: ${({ isToday}) => (isToday ? '#fff' : '#000')}; 
-
     position: absolute;
-    left: 0;
+    left: -5px;
     top: 0;
     font-size: 30px;
     line-height: 1;
-
-    
+    color: ${({ isToday}) => (isToday ? '#fff' : '#000')};
 `
 
-
+export const TodayCircle = styled.span`
+    position: absolute;
+    left: 6px;
+    bottom: 8px;
+    width: 50px;
+    height: 50px;
+    border-radius : ${({ isToday}) => (isToday ? '100%' : '0')};
+    background: ${({ isToday}) => (isToday ? '#000' : '#fff')};
+     
+`
 
 export const AllEvent = styled.span`
-    /* margin-left: 50px;
-    width: 100px;
-    font-size: 24px;
-    text-align: center;
-    line-height: 1;
-    -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0); */
     position: absolute;
     left: 50%;
     top: 4px;
@@ -260,7 +236,7 @@ export const ShowEventHead = styled.p`
     align-items: center;
     /* position: relative; */
     width: 260px;
-    height: 48px;
+    height: 30px;
     padding-left: 25px;
     color: #000;
     font-size: 18px;
@@ -300,13 +276,13 @@ export const ShowEventContentDate = styled.p`
 `
 
 export const ShowEventContentPlace = styled.p`
-    width: 200px;
+    width: 150px;
     margin-left: 100px;
     font-size: 20px;
     line-height: 30px;
 `
 export const ShowEventCodename = styled.p`
-    width: 200px;
+    width: 150px;
     font-size: 20px;
     line-height: 30px;
 `

@@ -17,6 +17,7 @@ import {
   Day_container,
   Day_week_container,
   AllEvent,
+  TodayCircle,
   TopContainer,
   SubContainer,
   BottomContainer,
@@ -187,6 +188,13 @@ const Calendar = (isSelected) => {
                   return (
                     <SubContainer id={d} onClick={onClickDayPosts}>
                       <TopContainer id={d}>
+                        <TodayCircle 
+                          id={d}
+                          isToday={
+                            year === today.getFullYear() &&
+                            month === today.getMonth() &&
+                            d === today.getDate()
+                        }/>
                         <Day
                           id={d}
                           key={index}
