@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPostDateCount, getPostbyDay } from '../../../_actions/post_action';
 import {
   Frame,
@@ -26,14 +26,11 @@ import {
   Month_sub,
   Month_container,
   EventContainer,
-
   AllContainer,
   SelectDay,
   TotalContainer,
   Total,
   ShowEventContainer,
-  ShowEventUl,
-  ShowEventLi,
   ShowEventHeadContainer,
   ShowEventHead,
   ShowEventMain,
@@ -43,8 +40,8 @@ import {
   ShowEventContentPlace,
   ShowEventContentDate,
   ShowEventCodename,
-
 } from './CalendarElements';
+import DayPosts from './DayPosts';
 
 const Calendar = (isSelected) => {
   const dispatch = useDispatch();
@@ -79,6 +76,7 @@ const Calendar = (isSelected) => {
     '기타',
   ];
 
+  //날짜 데이터
   const today = new Date();
   const [date, setDate] = useState(today);
   const [day, setDay] = useState(date.getDate());
@@ -86,13 +84,10 @@ const Calendar = (isSelected) => {
   const [year, setYear] = useState(date.getFullYear());
   const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
 
+  //달 행사
   const [todayEvent, setTodayEvent] = useState([]);
-
-  const [selectday, setSelectDay] = useState(date.getDate());
-  const [selectmonth, setSelectMonth] = useState(date.getMonth()+1);
-  const [selectevent, setSelectEvent] = useState();
-  const [selecttitle, setSelectTitle] = useState([]);
-
+  //일 행사
+  const postState = useSelector((state) => state.post);
 
   useEffect(() => {
     setDay(date.getDate());
@@ -105,19 +100,10 @@ const Calendar = (isSelected) => {
   }, [date, dispatch, month]);
 
   useEffect(() => {
-   if(todayEvent) {
-    dispatch(getPostbyDay(month, day)).then((res) => {
-      console.log(res.payload)
-      let test = []
-      test = res.payload.posts
-      test.map((item, index) => {
-        setSelectTitle(item.title)
-      })
-      setSelectEvent(res.payload.posts.length)
-      
-    });
-   } 
-  },[])
+    if (todayEvent) {
+      dispatch(getPostbyDay(month, day));
+    }
+  }, [dispatch, todayEvent, month, day]);
 
   function getStartDayOfMonth(date) {
     // 한달의 시작일 받는 함수
@@ -134,11 +120,18 @@ const Calendar = (isSelected) => {
     const day = e.target.id;
     dispatch(getPostbyDay(month, day)).then((res) => {
       console.log(res.payload);
-      setSelectDay(day);
-      setSelectMonth(month+1);
-      setSelectEvent(res.payload.posts.length)
     });
+    setDay(day);
   };
+
+  const onClickArrow = (year, month, direct) => {
+    if (month + direct === today.getMonth()) {
+      setDate(new Date(year, month + direct, new Date().getDate()));
+    } else {
+      setDate(new Date(year, month + direct, 1));
+    }
+  };
+
   return (
     <>
       <Container>
@@ -153,7 +146,9 @@ const Calendar = (isSelected) => {
           <Header>
             <Month_container>
               <LeftArrows
-                onClick={() => setDate(new Date(year, month - 1, day))}
+                onClick={() => {
+                  onClickArrow(year, month, -1);
+                }}
               >
                 Prev
               </LeftArrows>
@@ -164,7 +159,9 @@ const Calendar = (isSelected) => {
                 <Month_sub>월</Month_sub>
               </Month>
               <RightArrows
-                onClick={() => setDate(new Date(year, month + 1, day))}
+                onClick={() => {
+                  onClickArrow(year, month, 1);
+                }}
               >
                 Next
               </RightArrows>
@@ -188,13 +185,14 @@ const Calendar = (isSelected) => {
                   return (
                     <SubContainer id={d} onClick={onClickDayPosts}>
                       <TopContainer id={d}>
-                        <TodayCircle 
+                        <TodayCircle
                           id={d}
                           isToday={
                             year === today.getFullYear() &&
                             month === today.getMonth() &&
                             d === today.getDate()
-                        }/>
+                          }
+                        />
                         <Day
                           id={d}
                           key={index}
@@ -212,7 +210,6 @@ const Calendar = (isSelected) => {
                         <AllEvent id={d}>
                           {d > 0 ? test.length + '건' : ''}
                         </AllEvent>
-
                       </TopContainer>
                       <BottomContainer id={d}>
                         {codenames.map((genre, idx) => {
@@ -223,7 +220,7 @@ const Calendar = (isSelected) => {
                             return (
                               <EventContainer>
                                 <Events id={d} key={idx}>
-                                  {genre + " "+cnt}
+                                  {genre + ' ' + cnt}
                                 </Events>
                               </EventContainer>
                             );
@@ -238,37 +235,25 @@ const Calendar = (isSelected) => {
         </Frame>
       </Container>
       <AllContainer>
-        <SelectDay>2022년 {selectmonth}월 {selectday}일</SelectDay>
+        <SelectDay>
+          2022년 {month + 1}월 {day}일
+        </SelectDay>
         <TotalContainer>
-          <Total>총 {selectevent}건</Total>
+          <Total>총 {postState.dayPosts?.posts.length}건</Total>
         </TotalContainer>
       </AllContainer>
       <ShowEventContainer>
-        <ShowEventUl>
-          <ShowEventLi>
-            <ShowEventHeadContainer>
-              <ShowEventHead>행사</ShowEventHead>
-            </ShowEventHeadContainer>
-            <ShowEventMain>
-              <ShowEventContentUl>
-                <ShowEventContentLi>
-                  <ShowEventContentTitle>
-                    {selecttitle}
-                  </ShowEventContentTitle>
-                  <ShowEventCodename>
-                    공연/전시
-                  </ShowEventCodename>
-                  <ShowEventContentDate>
-                    2022-09-20~2022-10-15
-                  </ShowEventContentDate>
-                  <ShowEventContentPlace>
-                    제주문예회관
-                  </ShowEventContentPlace>
-                </ShowEventContentLi>
-              </ShowEventContentUl>
-            </ShowEventMain>
-          </ShowEventLi>
-        </ShowEventUl>
+        <ShowEventHeadContainer>
+          <ShowEventHead>행사</ShowEventHead>
+        </ShowEventHeadContainer>
+        <ShowEventMain>
+          <ShowEventContentUl>
+            {/* ToMake */}
+            {postState.dayPosts?.posts.map((post) => {
+              return <DayPosts key={post._id} {...post} />;
+            })}
+          </ShowEventContentUl>
+        </ShowEventMain>
       </ShowEventContainer>
     </>
   );
