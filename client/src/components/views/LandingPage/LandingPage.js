@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Auth from '../../../hoc/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRandompost } from '../../../_actions/post_action';
+import sggimg from '../../../images/mainimg.png'
 
 import {
   SliderDiv,
@@ -9,6 +10,10 @@ import {
   Container,
   SliderContainer,
   IMG,
+  SgginfoDiv,
+  SgginfoImg,
+  IMGCover,
+  IMGTitle,
 } from './LandingElements';
 import InfoSection from '../InfoSection/InfoSection';
 import { homeObjOne, homeObjTwo, homeObjThree } from '../InfoSection/Data.js';
@@ -20,7 +25,7 @@ const LandingPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
 
-  const TOTAL_SLIDES = 6;
+  const TOTAL_SLIDES = 5;
   //const [images, setImage] = useState([]);
   // const [posts, setPost] = useState([]);
 
@@ -58,15 +63,19 @@ const LandingPage = () => {
 
   return (
     <>
-      <SliderDiv>
+      <SgginfoDiv>
+        <SgginfoImg src={sggimg}/>
+        <SliderDiv>
         <Button onClick={prevSlide}>&#60;</Button>
         <Container>
           <SliderContainer ref={slideRef}>
             {postState.posts ? (
               postState.posts.map((src, idx) => (
-                <a key={idx} href={`/post/${src._id}`}>
-                  <IMG src={src.main_img} />
-                </a>
+                  <IMGCover>
+                    <a key={idx} href={`/post/${src._id}`}>
+                    <IMG img src={src.main_img}></IMG>
+                    </a>
+                  </IMGCover>
               ))
             ) : (
               <Loading />
@@ -75,6 +84,8 @@ const LandingPage = () => {
         </Container>
         <Button onClick={nextSlide}>&#62;</Button>
       </SliderDiv>
+      </SgginfoDiv>
+      
       <InfoSection {...homeObjOne} />
     </>
   );
