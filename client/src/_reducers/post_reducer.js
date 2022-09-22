@@ -25,7 +25,7 @@ export default function postState(state = initialState, action) {
       if (action.payload.isAuth === false) {
         return { ...state };
       } else {
-        return { post: action.payload.updatedPost };
+        return { ...state, post: action.payload.updatedPost };
       }
     case MY_LIKED:
       return { posts: action.payload.myFavPost };

@@ -3,8 +3,11 @@ import axios from 'axios';
 
 import Loading from '../Loading/Loading';
 import {
+  CommentArea,
+  CommentBox,
   Comments_container,
   Comment_date,
+  CommentHeader,
 } from '../Comment/TestCommentElements.js';
 import { CommentWrapper } from './MypageElements';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,20 +30,25 @@ function MyComment() {
   }, [dispatch]);
 
   return (
-    <CommentWrapper>
-      {commentState ? (
-        commentState.map((comment, idx) => {
-          return (
-            <Comments_container key={idx}>
-              <a href={`/post/${comment.post}`}>{comment.body}</a>
-              <Comment_date>{comment.createdAt}</Comment_date>
-            </Comments_container>
-          );
-        })
-      ) : (
-        <Loading />
-      )}
-    </CommentWrapper>
+    <div>
+      <CommentArea>
+        <CommentHeader>내가 쓴 댓글</CommentHeader>
+        {commentState ? (
+          commentState.map((comment, idx) => {
+            return (
+              <CommentBox>
+                <Comments_container key={idx}>
+                  <a href={`/post/${comment.post}`}>{comment.body}</a>
+                  <Comment_date>{comment.createdAt}</Comment_date>
+                </Comments_container>
+              </CommentBox>
+            );
+          })
+        ) : (
+          <Loading />
+        )}
+      </CommentArea>
+    </div>
   );
 }
 
