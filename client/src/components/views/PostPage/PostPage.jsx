@@ -86,9 +86,9 @@ function PostPage() {
         console.log(err);
       });
   };
-  const getRandomIndex = (len) => {
-    return Math.floor(Math.random() * len);
-  };
+  // const getRandomIndex = (len) => {
+  //   return Math.floor(Math.random() * len);
+  // };
 
   useEffect(() => {
     console.log(postState);
@@ -116,6 +116,8 @@ function PostPage() {
           }
         });
     }
+    setRandoms(Math.floor(Math.random() * postState.posts.length));
+    setRandoms2(Math.floor(Math.random() * postState.posts.length));
   }, [postState]);
 
   return (
@@ -206,54 +208,28 @@ function PostPage() {
                       <RecommendList>
                         {postState.posts ? (
                           <>
-                            <RcImage
-                              src={
-                                postState.posts[
-                                  getRandomIndex(postState.posts.length)
-                                ].main_img
-                              }
-                            />
-                            <RcH2>
-                              {
-                                postState.posts[
-                                  getRandomIndex(postState.posts.length)
-                                ].title
-                              }
-                            </RcH2>
-                            <RcP>
-                              {
-                                postState.posts[
-                                  getRandomIndex(postState.posts.length)
-                                ].place
-                              }
-                            </RcP>
+                            <a href={`/post/${postState.posts[randoms]._id}`}>
+                              <RcImage
+                                src={postState.posts[randoms].main_img}
+                              />
+                            </a>
+
+                            <RcH2>{postState.posts[randoms].title}</RcH2>
+                            <RcP>{postState.posts[randoms].place}</RcP>
                           </>
                         ) : null}
                       </RecommendList>
                       <RecommendList>
                         {postState.posts ? (
                           <>
-                            <RcImage
-                              src={
-                                postState.posts[
-                                  getRandomIndex(postState.posts.length)
-                                ].main_img
-                              }
-                            />
-                            <RcH2>
-                              {
-                                postState.posts[
-                                  getRandomIndex(postState.posts.length)
-                                ].title
-                              }
-                            </RcH2>
-                            <RcP>
-                              {
-                                postState.posts[
-                                  getRandomIndex(postState.posts.length)
-                                ].place
-                              }
-                            </RcP>
+                            <a href={`/post/${postState.posts[randoms2]._id}`}>
+                              <RcImage
+                                src={postState.posts[randoms2].main_img}
+                              />
+                            </a>
+
+                            <RcH2>{postState.posts[randoms2].title}</RcH2>
+                            <RcP>{postState.posts[randoms2].place}</RcP>
                           </>
                         ) : null}
                       </RecommendList>

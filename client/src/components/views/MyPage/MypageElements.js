@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // LikePost 컴포넌트
 export const MyLikedPostContainer = styled.div`
@@ -35,7 +35,7 @@ export const PostingInfo = styled.div`
   padding: 50px;
   //background-color: yellow;
   align-items: center;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
 `;
 
@@ -62,7 +62,7 @@ export const MypageBox = styled.div`
   width: 100%;
   height: 100%;
   font-size: 17px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 export const UserBox = styled.div`
@@ -288,7 +288,7 @@ export const Nickname_edit = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &:focus {
     outline: none;
   }
@@ -320,7 +320,7 @@ export const Password = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &:focus {
     outline: none;
   }
@@ -333,7 +333,7 @@ export const PasswordCheck = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &:focus {
     outline: none;
   }

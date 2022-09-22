@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-import Loading from "../Loading/Loading";
+import Loading from '../Loading/Loading';
 import {
   CommentArea,
   CommentBox,
