@@ -33,22 +33,35 @@ export const SidebarButtonContainer = styled.div`
   margin-right: 20px;
 `;
 
+export const SidebarcloseBtn = styled.button`
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 25px;
+`;
+
 export const LocationTitle = styled.div`
   font-weight: bold;
-  margin-left: 30px;
+  margin: 20px 0px 0px 30px;
   font-size: 20px;
 `;
 
 export const LocationList = styled.ul`
   padding-left: 0px;
+  width: 300px;
 `;
 
 export const LocationDiv = styled.div`
-  padding-left: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
 `;
 
 export const LocationItem = styled.button`
-  margin: 5px 20px;
+  margin: 5px 15px;
   list-style: circle;
   cursor: pointer;
   background-color: transparent;
@@ -60,5 +73,6 @@ export const LocationItem = styled.button`
     background-color: white;
     color: rgb(50, 50, 50);
   }
-  width: 70%;
+  width: 85px;
+  height: 30px;
 `;

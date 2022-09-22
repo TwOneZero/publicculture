@@ -173,7 +173,6 @@ function Header() {
           </GenreBar>
         </SidebarGenreBox>
       </GenreContainer>
-
     </>
   );
 }

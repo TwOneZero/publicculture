@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import Auth from '../../../hoc/auth';
-import { mypageLiked, likePost } from '../../../_actions/post_action';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
+import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Auth from "../../../hoc/auth";
+import { mypageLiked, likePost } from "../../../_actions/post_action";
+import axios from "axios";
 
-import { PostingContainer, PostingInfo, IMG, Title } from './MypageElements';
-import Loading from '../Loading/Loading';
+import {
+  MyLikedPostContainer,
+  MyLikedPostTitle,
+  PostingContainer,
+  PostingInfo,
+  IMG,
+  Title,
+} from "./MypageElements";
+import Loading from "../Loading/Loading";
 
 function MyLikedPost() {
   const dispatch = useDispatch();
@@ -43,7 +50,8 @@ function MyLikedPost() {
   };
 
   return (
-    <div>
+    <MyLikedPostContainer>
+      <MyLikedPostTitle> 나의 관심 행사 </MyLikedPostTitle>
       <PostingContainer>
         {loading ? (
           postings.map((src, idx) => (
@@ -53,12 +61,12 @@ function MyLikedPost() {
                   <IMG key={idx} src={src.main_img} />
                 </a>
                 <Title>{src.title}</Title>
-                <div style={{ fontWeight: '500', marginBottom: '3px' }}>
+                <div style={{ fontWeight: "500", marginBottom: "3px" }}>
                   {src.codename}
                 </div>
-                <div style={{ fontSize: '14px' }}>{src.date}</div>
+                <div style={{ fontSize: "14px" }}>{src.date}</div>
                 <div>{src.place}</div>
-                <div style={{ marginTop: '10px' }}>❤️ {src.likes.length}</div>
+                <div style={{ marginTop: "10px" }}>❤️ {src.likes.length}</div>
               </PostingInfo>
             </div>
           ))
@@ -102,7 +110,7 @@ function MyLikedPost() {
           </div>
         ))} */}
       </PostingContainer>
-    </div>
+    </MyLikedPostContainer>
   );
 }
 export default MyLikedPost;
