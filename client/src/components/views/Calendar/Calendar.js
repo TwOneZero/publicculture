@@ -24,6 +24,25 @@ import {
   Month,
   Month_sub,
   Month_container,
+  EventContainer,
+
+  AllContainer,
+  SelectDay,
+  TotalContainer,
+  Total,
+  ShowEventContainer,
+  ShowEventUl,
+  ShowEventLi,
+  ShowEventHeadContainer,
+  ShowEventHead,
+  ShowEventMain,
+  ShowEventContentUl,
+  ShowEventContentLi,
+  ShowEventContentTitle,
+  ShowEventContentPlace,
+  ShowEventContentDate,
+  ShowEventCodename,
+
 } from './CalendarElements';
 
 const Calendar = (isSelected) => {
@@ -47,13 +66,13 @@ const Calendar = (isSelected) => {
   ]; // 월 구성
 
   const codenames = [
-    '뮤지컬/오페라',
+    '뮤지컬',
     '전시/미술',
     '연극',
     '콘서트',
     '클래식',
     '무용',
-    '문화교양/강좌',
+    '문화교양',
     '국악',
     '축제',
     '기타',
@@ -68,6 +87,11 @@ const Calendar = (isSelected) => {
 
   const [todayEvent, setTodayEvent] = useState([]);
 
+  const [selectday, setSelectDay] = useState(date.getDate());
+  const [selectmonth, setSelectMonth] = useState(date.getMonth()+1);
+  const [selectevent, setSelectEvent] = useState();
+  const [selecttitle, setSelectTitle] = useState([]);
+
   useEffect(() => {
     setDay(date.getDate());
     setMonth(date.getMonth());
@@ -77,6 +101,21 @@ const Calendar = (isSelected) => {
       setTodayEvent(res.payload.posts);
     });
   }, [date, dispatch, month]);
+
+  useEffect(() => {
+   if(todayEvent) {
+    dispatch(getPostbyDay(month, day)).then((res) => {
+      console.log(res.payload)
+      let test = []
+      test = res.payload.posts
+      test.map((item, index) => {
+        setSelectTitle(item.title)
+      })
+      setSelectEvent(res.payload.posts.length)
+      
+    });
+   } 
+  },[])
 
   function getStartDayOfMonth(date) {
     // 한달의 시작일 받는 함수
@@ -89,13 +128,13 @@ const Calendar = (isSelected) => {
   }
   const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS; // 윤년과 아닌년의 days 설정
 
-  /**TODO
-   *  날짜에 해당하는 포스트들 보여주기
-   */
   const onClickDayPosts = (e) => {
     const day = e.target.id;
     dispatch(getPostbyDay(month, day)).then((res) => {
       console.log(res.payload);
+      setSelectDay(day);
+      setSelectMonth(month+1);
+      setSelectEvent(res.payload.posts.length)
     });
   };
   return (
@@ -164,6 +203,7 @@ const Calendar = (isSelected) => {
                         <AllEvent id={d}>
                           {d > 0 ? test.length + '건' : ''}
                         </AllEvent>
+
                       </TopContainer>
                       <BottomContainer id={d}>
                         {codenames.map((genre, idx) => {
@@ -172,9 +212,11 @@ const Calendar = (isSelected) => {
                           ).length;
                           if (d > 0 && cnt > 0) {
                             return (
-                              <Events id={d} key={idx}>
-                                {genre + cnt}
-                              </Events>
+                              <EventContainer>
+                                <Events id={d} key={idx}>
+                                  {genre + " "+cnt}
+                                </Events>
+                              </EventContainer>
                             );
                           }
                         })}
@@ -186,6 +228,39 @@ const Calendar = (isSelected) => {
           </Body>
         </Frame>
       </Container>
+      <AllContainer>
+        <SelectDay>2022년 {selectmonth}월 {selectday}일</SelectDay>
+        <TotalContainer>
+          <Total>총 {selectevent}건</Total>
+        </TotalContainer>
+      </AllContainer>
+      <ShowEventContainer>
+        <ShowEventUl>
+          <ShowEventLi>
+            <ShowEventHeadContainer>
+              <ShowEventHead>행사</ShowEventHead>
+            </ShowEventHeadContainer>
+            <ShowEventMain>
+              <ShowEventContentUl>
+                <ShowEventContentLi>
+                  <ShowEventContentTitle>
+                    {selecttitle}
+                  </ShowEventContentTitle>
+                  <ShowEventCodename>
+                    공연/전시
+                  </ShowEventCodename>
+                  <ShowEventContentDate>
+                    2022-09-20~2022-10-15
+                  </ShowEventContentDate>
+                  <ShowEventContentPlace>
+                    제주문예회관
+                  </ShowEventContentPlace>
+                </ShowEventContentLi>
+              </ShowEventContentUl>
+            </ShowEventMain>
+          </ShowEventLi>
+        </ShowEventUl>
+      </ShowEventContainer>
     </>
   );
 };
