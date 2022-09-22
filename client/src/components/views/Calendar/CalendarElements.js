@@ -3,23 +3,22 @@ import {BsFillArrowLeftCircleFill as LeftArrow} from 'react-icons/bs';
 import {BsFillArrowRightCircleFill as RightArrow} from 'react-icons/bs';
 
 export const Container = styled.div`
-    width: 1500px;
+    width: 1300px;
     margin: 50px auto 0;
-    height: 50px;
     background: #fff;
+    box-sizing: border-box;
 `
 
 export const ContainerH1 = styled.h1`
     color: #000;
+    
 `
 
 export const Line = styled.div`
     border-bottom: 1px solid #000;
-    width: 1500px;
 `
 
 export const TextContainer = styled.div`
-    width: 1500px;
     margin: 30px auto 0;
 `
 
@@ -30,7 +29,6 @@ export const Text = styled.h3`
 //캘린더 전체
 
 export const Frame = styled.div`
-    width: 1500px;
     margin: 0 auto 100px;
 `
 
@@ -94,7 +92,7 @@ export const Day_container = styled.div`
 
 export const Day_week = styled.div`
     width: 14%;
-    height: 46px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;

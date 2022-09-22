@@ -19,7 +19,7 @@ export default function postState(state = initialState, action) {
     case SEARCH_POST:
       return { posts: action.payload.posts };
     case DETAIL_POST:
-      return { post: action.payload.post };
+      return { ...state, post: action.payload.post };
     case LIKE_POST:
       if (action.payload.isAuth === false) {
         return { ...state };

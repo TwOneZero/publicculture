@@ -6,7 +6,7 @@ import {
   GET_MY_COMMENTS,
 } from './types';
 
-//addcomment
+//addcomment  
 export function addComment(postId, body) {
   const request = axios
     .post(`/api/comment/${postId}`, body, { withCredentials: true })

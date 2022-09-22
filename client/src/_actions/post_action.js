@@ -6,6 +6,8 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
+  DETIAL_RANDOM_POST,
+  GET_POSTS_BYDAY,
 } from './types';
 
 //getAllpost
@@ -66,11 +68,24 @@ export function likePost(id) {
   };
 }
 
-export function getPostDateCount() {
-  const request = axios.post('/api/getCount').then((res) => res.data);
+export function getPostDateCount(month) {
+  const request = axios
+    .post('/api/getCount', { month })
+    .then((res) => res.data);
 
   return {
     type: GET_COUNT,
+    payload: request,
+  };
+}
+
+export function getPostbyDay(month, day) {
+  const request = axios
+    .post('/api/posts/byday', { month, day })
+    .then((res) => res.data);
+
+  return {
+    type: GET_POSTS_BYDAY,
     payload: request,
   };
 }

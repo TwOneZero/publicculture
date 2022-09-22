@@ -5,14 +5,14 @@ export const SliderDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 1400px;
-  /* margin: 100px 0; */
-  margin: 100px auto;
+  margin: 150px auto;
 `;
 
 export const IMG = styled.img`
   margin: 50px;
   width: 15vw;
   height: 36vh;
+  object-fit: cover;
 `;
 
 export const Container = styled.div`

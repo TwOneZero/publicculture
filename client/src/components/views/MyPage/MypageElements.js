@@ -17,7 +17,7 @@ export const PostingInfo = styled.div`
   padding: 50px;
   //background-color: yellow;
   align-items: center;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
 `;
 
@@ -40,9 +40,8 @@ export const MypageBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  //width: 1000px;
   padding: 0px;
-  margin: 0px;
+  margin-bottom: 0px;
   width: 100%;
   height: 100%;
   font-size: 17px;
@@ -54,6 +53,7 @@ export const UserBox = styled.div`
   flex-direction: column;
   background-color: black;
   align-items: center;
+  width: 2000px;
   height: 300px;
   color: white;
   padding-left: 100px;
@@ -65,7 +65,7 @@ export const UserBoxContainer = styled.div`
 
 export const MypageTitleBtn = styled.div`
   font-size: 35px;
-  margin: 20px 0px 0px 40px;
+  margin: 20px 50px 0px 0px;
   font-weight: 500;
 `;
 
@@ -166,6 +166,30 @@ export const LikeTitle = styled.div`
   font-weight: 400;
 `;
 
+export const PasswordBox = styled.button`
+  margin: 10px 0px 0px 0px;
+  font-weight: 400;
+  font-size: 25px;
+  width: 200px;
+  height: 200px;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    //background-color: #a9a9a9;
+    border-bottom: 4px solid white;
+  }
+`;
+
+export const PasswordIcon = styled.div`
+  margin: 0px 0px 30px 0px;
+`;
+
+export const PasswordTitle = styled.div`
+  font-weight: 400;
+`;
+
 export const CommentBox = styled.button`
   margin: 10px 0px 0px 0px;
   font-weight: 400;
@@ -199,9 +223,11 @@ export const EditMypage_container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  margin: 0px;
+  //margin: 0px;
+  //margin: 4% 5%;
   width: 100%;
   height: 100%;
+  //margin: 30px 0px 30px 0px;
   margin-top: 30px;
   font-family: 'Lato', sans-serif;
   font-weight: 1000;
@@ -247,6 +273,8 @@ export const NicknameC_btn = styled.button`
   cursor: pointer;
   font-size: 18px;
   margin: 10px;
+  width: 65px;
+  height: 35px;
 `;
 
 export const PasswordContainer = styled.div`
@@ -254,7 +282,7 @@ export const PasswordContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 50px;
   //background-color: green;
 `;
 export const Password = styled.input`
@@ -288,6 +316,19 @@ export const PasswordCheckBtn = styled.button`
   color: white;
   background-color: black;
   cursor: pointer;
+  width: 65px;
+  height: 35px;
+  font-size: 18px;
+  margin: 10px;
+`;
+
+export const PasswordUpdateBtn = styled.button`
+  border: none;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
   font-size: 18px;
   margin: 10px;
 `;
@@ -296,7 +337,18 @@ export const Genre_container_edit = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0;
+  margin-top: 30px;
+`;
+
+export const UserUpdateBtn = styled.button`
+  border: none;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+  margin: 10px;
 `;
 
 export const GENRE_BOX = styled.input`
@@ -424,4 +476,36 @@ export const Page_area_info = styled.div`
   // left: 50%
   // top: 50%
   padding: 5px;
+`;
+
+// password 컴포넌트
+export const PasswordPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 30px 0px 50px 0px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 1000;
+  font-size: 24px;
+`;
+
+export const Password_edit = styled.div`
+  display: flex;
+  font-size: 40px;
+  font-weight: 1200;
+  margin: 60px 0px 50px 0px;
+  background-color: white;
+  color: black;
+  padding: 5px;
+`;
+
+//내 댓글 컴포넌트
+export const CommentWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  min-height: 12vh;
 `;

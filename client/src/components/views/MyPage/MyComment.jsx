@@ -4,9 +4,9 @@ import axios from 'axios';
 import Loading from '../Loading/Loading';
 import {
   Comments_container,
-  Comment_username,
   Comment_date,
 } from '../Comment/TestCommentElements.js';
+import { CommentWrapper } from './MypageElements';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyComments } from '../../../_actions/comment_action';
 
@@ -27,7 +27,7 @@ function MyComment() {
   }, [dispatch]);
 
   return (
-    <div>
+    <CommentWrapper>
       {commentState ? (
         commentState.map((comment, idx) => {
           return (
@@ -40,7 +40,7 @@ function MyComment() {
       ) : (
         <Loading />
       )}
-    </div>
+    </CommentWrapper>
   );
 }
 

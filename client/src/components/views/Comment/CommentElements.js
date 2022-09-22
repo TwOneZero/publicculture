@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
+
 export const Comment_wContainer = styled.div`
   width: 50vw;
   height: 180px;
   display: flex;
+  justify-self: start;
   border-bottom: 2px solid black;
   align-items: center;
   margin: 40 0px;
