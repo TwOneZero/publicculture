@@ -25,13 +25,19 @@ export const CommentBox = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 40px 0px 40px 0px;
+  
 `;
+
+// export const Comments_content = styled.a`
+//   text-decoration: none;
+// `
 
 export const Comments_container = styled.div`
   display: flex;
   flex-direction: column;
   //align-items: center;
   justify-content: center;
+  
   font-size: 14pt;
   font-family: "Noto Sans KR", sans-serif;
   width: 50vw;

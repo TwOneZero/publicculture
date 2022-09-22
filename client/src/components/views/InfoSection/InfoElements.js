@@ -5,7 +5,7 @@ export const InfoContainer = styled.div`
     color: #fff;
     /* background: ${({ lightBg }) => (lightBg ? '#f9f9f9' : '#010606')}; */
     /* background: #010606; */
-    background: red;
+    background: #fff;
 
     * {
         box-sizing: border-box;
@@ -124,7 +124,7 @@ export const Buttons = styled.div`
     &:hover{
         transition: all 0.2s ease-in-out;
         background: ${({ primary }) => (primary ? '#fff' : '#01BF71')};
-        color: ${({ primary }) => (primary ? '#010606' : '#fff')};
+        color: ${({ primary }) => (primary ? '#fff' : '#000')};
     }
 `
 

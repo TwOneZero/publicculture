@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 export const SgginfoDiv = styled.div`
+  margin-top: 10px;
   width: 100%;
   height: 1050px;
   display: flex;
   align-items: center;
-  background-color: #E0F2F7;
+  /* background-color: #E0F2F7; */
+  background-color: #fff;
   flex-direction: column;
 `;
 
 export const SgginfoImg = styled.img`
-  margin-top: 150px;
+  margin-top: 100px;
   padding-right: 200px;
   width: 70%;
   &:hover {
