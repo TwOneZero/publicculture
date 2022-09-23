@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import Auth from "../../../hoc/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { getRandompost } from "../../../_actions/post_action";
-import sggimg from "../../../images/mainimg.png";
+import React, { useEffect, useState, useRef } from 'react';
+import Auth from '../../../hoc/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRandompost } from '../../../_actions/post_action';
+import sggimg from '../../../images/mainimg.png';
 
 import {
   SliderDiv,
@@ -15,10 +15,10 @@ import {
   IMGCover,
   ImgTitle,
   TitleBox,
-} from "./LandingElements";
-import InfoSection from "../InfoSection/InfoSection";
-import { homeObjOne, homeObjTwo, homeObjThree } from "../InfoSection/Data.js";
-import Loading from "../Loading/Loading";
+} from './LandingElements';
+import InfoSection from '../InfoSection/InfoSection';
+import { homeObjOne, homeObjTwo, homeObjThree } from '../InfoSection/Data.js';
+import Loading from '../Loading/Loading';
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -52,13 +52,13 @@ const LandingPage = () => {
         // setPost(res.payload.posts);
         console.log(res.payload);
       } else {
-        console.log("post가 없습니다. 서버 에러");
+        console.log('post가 없습니다. 서버 에러');
       }
     });
   }, [dispatch]);
 
   useEffect(() => {
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
+    slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
   }, [currentSlide]);
 
@@ -72,8 +72,8 @@ const LandingPage = () => {
             <SliderContainer ref={slideRef}>
               {postState.posts ? (
                 postState.posts.map((src, idx) => (
-                  <IMGCover>
-                    <a key={idx} href={`/post/${src._id}`}>
+                  <IMGCover key={idx}>
+                    <a href={`/post/${src._id}`}>
                       <IMG img src={src.main_img}></IMG>
                     </a>
                     <TitleBox>
