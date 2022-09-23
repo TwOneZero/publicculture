@@ -69,7 +69,9 @@ function PostPage() {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-  }, [dispatch, params.postId]);
+    setRandoms(Math.floor(Math.random() * postState.posts.length));
+    setRandoms2(Math.floor(Math.random() * postState.posts.length));
+  }, [dispatch, params.postId, postState.posts.length]);
 
   const onLikebtnClicked = () => {
     dispatch(likePost(params.postId))
@@ -116,8 +118,6 @@ function PostPage() {
           }
         });
     }
-    setRandoms(Math.floor(Math.random() * postState.posts.length));
-    setRandoms2(Math.floor(Math.random() * postState.posts.length));
   }, [postState]);
 
   return (
@@ -203,7 +203,7 @@ function PostPage() {
                 </EventLContainer>
                 <EventRContainer>
                   <RecommendContainer>
-                    <RecommendH1>연관 추천 행사</RecommendH1>
+                    <RecommendH1>이런 행사는 어때요?</RecommendH1>
                     <RecommendContent>
                       <RecommendList>
                         {postState.posts ? (

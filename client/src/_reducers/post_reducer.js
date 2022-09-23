@@ -5,6 +5,7 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
+  GET_POSTS_BYDAY
 } from '../_actions/types';
 
 const initialState = {
@@ -30,6 +31,8 @@ export default function postState(state = initialState, action) {
       return { posts: action.payload.myFavPost };
     case GET_COUNT:
       return { ...state, getCount: action.payload };
+    case GET_POSTS_BYDAY :
+      return { ...state, dayPosts : action.payload };
     default:
       return state;
   }
