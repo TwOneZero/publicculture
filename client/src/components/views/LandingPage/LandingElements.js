@@ -12,7 +12,8 @@ export const SgginfoDiv = styled.div`
 
 export const SgginfoImg = styled.img`
   margin-top: 150px;
-  width: 1300px;
+  /* margin-bottom: 150px; */
+  width: 1200px;
   &:hover {
     transition: all 0.3s ease-in-out;
     //background-color: coral;

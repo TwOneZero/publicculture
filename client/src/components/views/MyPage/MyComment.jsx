@@ -8,6 +8,7 @@ import {
   Comments_container,
   Comment_date,
   CommentHeader,
+  Comments_content,
 } from "../Comment/TestCommentElements.js";
 import { CommentWrapper } from "./MypageElements";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,12 +39,11 @@ function MyComment() {
             return (
               <CommentBox>
                 <Comments_container key={idx}>
-                  {/* <Comments_content
-                    href={`/post/${comment.post}`}>{comment.body}
-                  >
-                    
-                  </Comments_content> */}
-                  <a href={`/post/${comment.post}`}>{comment.body}</a>
+                  <Comments_content
+                    href={`/post/${comment.post}`}>
+                      {comment.body}
+                  </Comments_content>
+                  {/* <a href={`/post/${comment.post}`}>{comment.body}</a> */}
                   <Comment_date>{comment.createdAt}</Comment_date>
                 </Comments_container>
               </CommentBox>

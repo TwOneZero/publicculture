@@ -89,6 +89,7 @@ const Calendar = (isSelected) => {
   //일 행사
   const postState = useSelector((state) => state.post);
 
+
   useEffect(() => {
     setDay(date.getDate());
     setMonth(date.getMonth());
@@ -249,9 +250,12 @@ const Calendar = (isSelected) => {
         <ShowEventMain>
           <ShowEventContentUl>
             {/* ToMake */}
-            {postState.dayPosts?.posts.map((post) => {
-              return <DayPosts key={post._id} {...post} />;
-            })}
+            {
+              postState.dayPosts?.posts.map((post) => {
+                return <DayPosts key={post._id} {...post} />;
+                // return <TestPost />
+              })
+            }
           </ShowEventContentUl>
         </ShowEventMain>
       </ShowEventContainer>

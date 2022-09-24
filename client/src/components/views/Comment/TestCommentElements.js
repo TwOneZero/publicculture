@@ -28,9 +28,14 @@ export const CommentBox = styled.div`
   
 `;
 
-// export const Comments_content = styled.a`
-//   text-decoration: none;
-// `
+export const Comments_content = styled.a`
+  text-decoration: none;
+  color: #000;
+
+  &:hover{
+    font-weight: bold;
+  }
+`
 
 export const Comments_container = styled.div`
   display: flex;

@@ -252,9 +252,9 @@ export const ShowEventContentTitle = styled.a`
   font-weight: bold;
   font-family: 'NGBold', 'Malgun Gothic', Dotum, '돋움', AppleGothicNeoSD,
     'Apple SD 산돌고딕 Neo', '굴림', arial, sans-serif;
-  white-space: nowrap;
   word-wrap: break-word;
   display: block;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
@@ -263,17 +263,27 @@ export const ShowEventContentTitle = styled.a`
 
 export const ShowEventContentDate = styled.p`
   font-size: 20px;
+  margin-left: 50px;
   line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ShowEventContentPlace = styled.p`
   width: 150px;
-  margin-left: 100px;
+  margin-left: 50px;
   font-size: 20px;
   line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const ShowEventCodename = styled.p`
   width: 150px;
   font-size: 20px;
   line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
