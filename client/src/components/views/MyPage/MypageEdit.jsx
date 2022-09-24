@@ -1,10 +1,9 @@
-import { useDispatch } from "react-redux";
-import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import {
   updateUser,
-  updateUser_Password,
   checkName,
-} from "../../../_actions/user_action";
+} from '../../../_actions/user_action';
 
 import {
   EditMypage_container,
@@ -20,44 +19,54 @@ import {
   CheckboxContainer,
   GENRE_BOX,
   UserUpdateBtn,
-} from "./MypageElements";
+  NotNicknameChangeBtn,
+  NotUserUpdateBtn,
+} from './MypageElements';
+import { useEffect } from 'react';
 
 const MypageEdit = () => {
   const dispatch = useDispatch();
-  const [Name, setName] = useState("");
-  const [Password, setPassword] = useState("");
-  const [PasswordConfirm, setPasswordConfirm] = useState("");
-  const [Genre, setGenre] = useState("");
+  const userState = useSelector((state) => state.user);
+  const [Name, setName] = useState('');
+  const [Genre, setGenre] = useState([]);
+  const [Next, setIsNext] = useState(false);
+
   const onChangeName = (e) => {
     setName(e.target.value);
   };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangePasswordConfirm = (e) => {
-    setPasswordConfirm(e.target.value);
-  };
-  const onCheckPassword = (e) => {
-    Password === PasswordConfirm
-      ? alert("비밀번호가 일치합니다.")
-      : alert("비밀번호가 일치하지 않습니다.");
-  };
 
   const onCheckName = async () => {
-    dispatch(checkName({ name: Name })).then((res) => {
-      if (res.payload.success) {
-        alert("사용가능한 닉네임입니다.");
-      } else {
-        alert("이미 존재하는 닉네임입니다.");
-      }
-    });
+    if (Name) {
+      dispatch(checkName({ name: Name })).then((res) => {
+        if (res.payload.success) {
+          alert('사용가능한 닉네임입니다.');
+          setIsNext(true);
+        } else {
+          if (Name === userState.userData.name) {
+            alert('사용가능한 닉네임입니다.');
+          } else {
+            alert('이미 존재하는 닉네임입니다.');
+          }
+        }
+      });
+    } else {
+      return alert('닉네임이 없습니다.');
+    }
   };
 
   const onUpdateConfirm = () => {
+    let prevGenre;
+    if (!Genre) {
+      prevGenre = userState.userData.genre;
+    } else {
+      prevGenre = Genre;
+    }
     let body = {
       name: Name,
-      genre: Genre,
+      genre: prevGenre,
     };
+    console.log(prevGenre, Genre);
+
     dispatch(updateUser(body)).then((res) => {
       if (res.payload.success) {
         console.log(res.payload);
@@ -66,17 +75,18 @@ const MypageEdit = () => {
       }
     });
 
-    setName("");
-    setGenre("");
+    setName('');
+    setGenre('');
     window.location.reload();
   };
 
   const onCheckElement = (checked, item) => {
     if (checked) {
-      setGenre(item);
+      setGenre((prev) => [...prev, item]);
     } else if (!checked) {
-      setGenre(Genre.filter((el) => el !== item));
+      setGenre((prev) => [...prev].filter((el) => el !== item));
     }
+    setIsNext(true);
   };
 
   return (
@@ -90,7 +100,6 @@ const MypageEdit = () => {
             <Line_edit></Line_edit>
             <Nickname_edit onChange={onChangeName}></Nickname_edit>
             <NicknameC_btn onClick={onCheckName}>중복 확인</NicknameC_btn>
-            <NicknameChangeBtn>닉네임 변경</NicknameChangeBtn>
           </Nickname_container_edit>
 
           <Genre_container_edit>
@@ -99,10 +108,10 @@ const MypageEdit = () => {
             <Checkbox>
               <CheckboxContainer>
                 <GENRE_BOX
-                  type="checkbox"
-                  id="cb1"
-                  value="뮤지컬/오페라"
-                  name="뮤지컬/오페라"
+                  type='checkbox'
+                  id='cb1'
+                  value='뮤지컬/오페라'
+                  name='뮤지컬/오페라'
                   onChange={(e) => {
                     onCheckElement(e.target.checked, e.target.value);
                   }}
@@ -111,10 +120,10 @@ const MypageEdit = () => {
               </CheckboxContainer>
               <CheckboxContainer>
                 <GENRE_BOX
-                  type="checkbox"
-                  id="cb2"
-                  value="전시/미술"
-                  name="전시/미술"
+                  type='checkbox'
+                  id='cb2'
+                  value='전시/미술'
+                  name='전시/미술'
                   onChange={(e) => {
                     onCheckElement(e.target.checked, e.target.value);
                   }}
@@ -123,10 +132,10 @@ const MypageEdit = () => {
               </CheckboxContainer>
               <CheckboxContainer>
                 <GENRE_BOX
-                  type="checkbox"
-                  id="cb3"
-                  value="연극"
-                  name="연극"
+                  type='checkbox'
+                  id='cb3'
+                  value='연극'
+                  name='연극'
                   onChange={(e) => {
                     onCheckElement(e.target.checked, e.target.value);
                   }}
@@ -135,10 +144,10 @@ const MypageEdit = () => {
               </CheckboxContainer>
               <CheckboxContainer>
                 <GENRE_BOX
-                  type="checkbox"
-                  id="cb4"
-                  value="콘서트"
-                  name="콘서트"
+                  type='checkbox'
+                  id='cb4'
+                  value='콘서트'
+                  name='콘서트'
                   onChange={(e) => {
                     onCheckElement(e.target.checked, e.target.value);
                   }}
@@ -147,10 +156,10 @@ const MypageEdit = () => {
               </CheckboxContainer>
               <CheckboxContainer>
                 <GENRE_BOX
-                  type="checkbox"
-                  id="cb5"
-                  value="클래식"
-                  name="클래식"
+                  type='checkbox'
+                  id='cb5'
+                  value='클래식'
+                  name='클래식'
                   onChange={(e) => {
                     onCheckElement(e.target.checked, e.target.value);
                   }}
@@ -159,10 +168,10 @@ const MypageEdit = () => {
               </CheckboxContainer>
               <CheckboxContainer>
                 <GENRE_BOX
-                  type="checkbox"
-                  id="cb6"
-                  value="무용"
-                  name="무용"
+                  type='checkbox'
+                  id='cb6'
+                  value='무용'
+                  name='무용'
                   onChange={(e) => {
                     onCheckElement(e.target.checked, e.target.value);
                   }}
@@ -171,7 +180,11 @@ const MypageEdit = () => {
               </CheckboxContainer>
             </Checkbox>
           </Genre_container_edit>
-          <UserUpdateBtn onClick={onUpdateConfirm}>Update</UserUpdateBtn>
+          {Next ? (
+            <UserUpdateBtn onClick={onUpdateConfirm}>Update</UserUpdateBtn>
+          ) : (
+            <NotUserUpdateBtn>Update</NotUserUpdateBtn>
+          )}
         </Page_area_edit>
       </EditMypage_container>
     </>

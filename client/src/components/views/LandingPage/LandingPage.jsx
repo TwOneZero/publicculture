@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Auth from '../../../hoc/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRandompost } from '../../../_actions/post_action';
-import sggimg from '../../../images/mainimg.png';
+import sggimg from '../../../assets/image/mainimg.png';
 
 import {
   SliderDiv,
@@ -15,9 +15,11 @@ import {
   IMGCover,
   ImgTitle,
   TitleBox,
+  Main_Container,
+  Test,
 } from './LandingElements';
 import InfoSection from '../InfoSection/InfoSection';
-import { homeObjOne, homeObjTwo, homeObjThree } from '../InfoSection/Data.js';
+import { homeObjOne } from '../InfoSection/Data.js';
 import Loading from '../Loading/Loading';
 
 const LandingPage = () => {
@@ -64,8 +66,10 @@ const LandingPage = () => {
 
   return (
     <>
-      <SgginfoDiv>
-        <SgginfoImg src={sggimg} />
+      <Main_Container>
+        <SgginfoDiv>
+          <SgginfoImg src={sggimg} />
+        
         <SliderDiv>
           <Button onClick={prevSlide}>&#60;</Button>
           <Container>
@@ -88,7 +92,8 @@ const LandingPage = () => {
           </Container>
           <Button onClick={nextSlide}>&#62;</Button>
         </SliderDiv>
-      </SgginfoDiv>
+        </SgginfoDiv>
+      </Main_Container>
 
       <InfoSection {...homeObjOne} />
     </>

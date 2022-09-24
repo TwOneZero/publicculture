@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { BsFillArrowLeftCircleFill as LeftArrow } from 'react-icons/bs';
 import { BsFillArrowRightCircleFill as RightArrow } from 'react-icons/bs';
 
 export const Container = styled.div`
-  width: 1300px;
+  width: 65%;
   margin: 50px auto 0;
   background: #fff;
   box-sizing: border-box;
@@ -87,7 +87,7 @@ export const Day_container = styled.div`
 
 export const Day_week = styled.div`
   width: 14%;
-  height: 32px;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +178,7 @@ export const AllContainer = styled.div`
   border: 1px solid #ccc;
   padding: 15px;
   background-color: #efefef;
-  width: 1300px;
+  width: 65%;
   margin: 0 auto;
   box-sizing: border-box;
 `;
@@ -203,7 +203,7 @@ export const Total = styled.span`
 `;
 
 export const ShowEventContainer = styled.div`
-  width: 1300px;
+  width: 65%;
   margin: 60px auto 60px;
   box-sizing: border-box;
 `;
@@ -229,7 +229,6 @@ export const ShowEventHead = styled.p`
   color: #101522;
   font-size: 20px;
   font-weight: bold;
-  
 `;
 
 export const ShowEventMain = styled.div``;

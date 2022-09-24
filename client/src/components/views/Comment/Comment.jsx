@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Auth from '../../../hoc/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { TestComment } from './TestComment';
 import {
   addComment,
   deleteComment,
   getComments,
 } from '../../../_actions/comment_action';
-import { useParams } from 'react-router-dom';
 
 import {
   Comment_wContainer,
   Commentbox,
   Comment_submit_btn,
 } from './CommentElements';
-import { TestComment } from './TestComment';
+
 
 function Comment() {
   const commentState = useSelector((state) => state.comment);
