@@ -1,47 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState } from "react";
 import MypageEdit from "./MypageEdit";
-import MypageInfo from "./MypageInfo";
+import MypageProfile from "./MypageProfile";
 import MyLikedPost from "./MyLikedPost";
 import PasswordChange from "./PasswordChange";
 import Auth from "../../../hoc/auth";
-import { auth } from "../../../_actions/user_action";
-import axios from "axios";
-import { } from "react-icons/fa";
-
+import MyComment from "./MyComment";
 import {
-  MypageBox,
-  UserBox,
-  MypageTitleBtn,
-  UserInfoBox,
-  UserBtnBox,
-  UserIcon,
-  MyinfoBtn,
-  UserNamePreferBox,
-  UserName,
-  PreferenceBox,
-  UserInfoMenuBtns,
-  UserInfoEditBox,
   InfoBox,
-
   MypageIcon,
   MypageTitle,
-
   UserTabContainer,
   UserTab,
   UserTabUl,
   UserTabLi,
   UserTabItem,
 } from "./MypageElements";
-import MyComment from "./MyComment";
+
 
 function Mypage() {
-  const navigate = useNavigate();
   const [mode, setMode] = useState("myProfile");
-  const userState = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   const onMenuButtonClick = (e) => {
     if (e.target.id === "myProfile") {
@@ -69,7 +46,7 @@ function Mypage() {
                   <i
                     onClick={onMenuButtonClick}
                     id="editProfile"
-                    className="fa-solid fa-gear"
+                    className="fa-solid fa-user"
                   ></i>
                 </MypageIcon>
                 <MypageTitle onClick={onMenuButtonClick} id="myProfile">
@@ -137,43 +114,16 @@ function Mypage() {
           </UserTabUl>
         </UserTab>
       </UserTabContainer>
-
-      <MypageBox>
-        <UserBox>
-          {/* <MypageTitleBtn onClick={onMenuButtonClick} id="myProfile">
-            My Page
-          </MypageTitleBtn> */}
-          <UserInfoBox>
-            <UserBtnBox>
-              <UserIcon>
-                <i className="fa-solid fa-user"></i>
-              </UserIcon>
-              <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
-                My Info
-              </MyinfoBtn>
-            </UserBtnBox>
-            <UserNamePreferBox>
-              <UserName>{userState.userData.name}</UserName>
-
-              <PreferenceBox>
-                선호 장르 : {userState.userData.genre}
-              </PreferenceBox>
-            </UserNamePreferBox>
-
-
-
-          </UserInfoBox>
-        </UserBox>
-        <InfoBox>
+      <InfoBox>
           <div>
-            {mode === "myProfile" && <MypageInfo></MypageInfo>}
+            {mode === "myProfile" && <MypageProfile></MypageProfile>}
             {mode === "editProfile" && <MypageEdit></MypageEdit>}
             {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
             {mode === "passwordChange" && <PasswordChange></PasswordChange>}
             {mode === "mycomment" && <MyComment />}
           </div>
         </InfoBox>
-      </MypageBox>
+      
     </>
   );
 }

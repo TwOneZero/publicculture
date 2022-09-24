@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import {
   updateUser,
-  updateUser_Password,
   checkName,
 } from "../../../_actions/user_action";
 
@@ -30,17 +29,6 @@ const MypageEdit = () => {
   const [Genre, setGenre] = useState("");
   const onChangeName = (e) => {
     setName(e.target.value);
-  };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangePasswordConfirm = (e) => {
-    setPasswordConfirm(e.target.value);
-  };
-  const onCheckPassword = (e) => {
-    Password === PasswordConfirm
-      ? alert("비밀번호가 일치합니다.")
-      : alert("비밀번호가 일치하지 않습니다.");
   };
 
   const onCheckName = async () => {

@@ -19,6 +19,7 @@ export const MyLikedPostTitle = styled.div`
   justify-content: center;
   font-family: "Lato", sans-serif;
 `;
+
 export const PostingContainer = styled.div`
   margin: 4% 5%;
   width: 90%;
@@ -72,13 +73,12 @@ export const UserTab = styled.div`
 export const UserTabUl = styled.ul`
   list-style: none;
   display: flex;
-    flex-direction: row;
-    justify-content: start;
+  flex-direction: row;
+  justify-content: start;
   background: #fff;
   width: 100%;
   margin: 0;
   padding: 0;
-  /* border-bottom: 2px solid red; */
 `
 
 export const UserTabLi = styled.li`
@@ -98,12 +98,9 @@ export const UserTabItem = styled.button`
     background-color: #fff;
     border: none;
     cursor: pointer;
-    
 `
 
-export const MypageIcon = styled.div`
-  
-`
+export const MypageIcon = styled.div` `
 
 export const MypageTitle = styled.div`
   margin-left: 0.8rem;
@@ -114,11 +111,7 @@ export const MypageTitle = styled.div`
 
 // mypage 본문 부분
 
-export const MypageBox = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+export const MypageContainer = styled.div`
   width: 100%;
   margin-top: 5px;
   font-size: 17px;
@@ -126,15 +119,64 @@ export const MypageBox = styled.div`
   color: #000;
 `;
 
-export const UserBox = styled.div`
-  width: 68%;
-  margin: 0 auto;
-  /* display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  align-items: center; */
-  
+export const MypageContent = styled.div`
+  width: 55%;
+  margin: 5rem auto 0;
 `;
+
+export const MypageTitleContainer = styled.div``
+
+export const MypageH2 = styled.h2``
+
+export const ProfileBox = styled.div`
+  margin-top: 3rem;
+  border: 2px solid #eee;
+  border-bottom: none;
+`
+export const ProfileContent = styled.div`
+  display: flex;
+  border-bottom: 2px solid #eee;
+`
+
+export const LeftBox = styled.div`
+  width: 30%;
+  background: #f9f9f9;
+  color: #000;
+  border-right: 2px solid #eee;
+`
+
+export const TextContainer = styled.div`
+  
+`
+
+export const ProfileP = styled.div`
+  padding-left: 50px;
+  padding-top: 25px;
+`
+
+export const RightBox = styled.div`
+  width: 70%;
+  background: #fff;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+`
+
+export const UserIcon = styled.div`
+  margin-left: 3rem;
+  font-size: 100px;
+`;
+
+export const MyinfoBtn = styled.button`
+  border: 1px solid #eee;
+  color: #000;
+  margin-left: 3rem;
+  width: 12%;
+  /* width: 88px; */
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+`;
+
 
 export const UserInfoBox = styled.div`
   /* display: flex;
@@ -174,20 +216,10 @@ export const UserBtnBox = styled.div`
   flex-direction: column;
 `;
 
-export const UserIcon = styled.div`
-  font-size: 100px;
-`;
 
 
 
-export const MyinfoBtn = styled.button`
-  border: none;
-  color: #fff;
-  width: 88px;
-  background-color: #000;
-  cursor: pointer;
-  font-size: 18px;
-`;
+
 
 export const UserNamePreferBox = styled.div`
   display: flex;

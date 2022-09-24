@@ -2,9 +2,7 @@ import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { auth } from "../../../_actions/user_action";
 import {
-  updateUser,
   updateUser_Password,
-  checkName,
 } from "../../../_actions/user_action";
 
 import {
@@ -19,11 +17,8 @@ import {
 
 const PasswordChange = () => {
   const dispatch = useDispatch();
-  const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
   const [PasswordConfirm, setPasswordConfirm] = useState("");
-  const [Genre, setGenre] = useState("");
-
   const [userData, setUserData] = useState("");
 
   useEffect(() => {
@@ -60,13 +55,7 @@ const PasswordChange = () => {
     window.location.reload();
   };
 
-  const onCheckElement = (checked, item) => {
-    if (checked) {
-      setGenre(item);
-    } else if (!checked) {
-      setGenre(Genre.filter((el) => el !== item));
-    }
-  };
+
 
   return (
     <>

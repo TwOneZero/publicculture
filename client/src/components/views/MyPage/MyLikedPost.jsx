@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; //내 액션을 한 번에 모아서 처리. 이 기능이
-import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Auth from "../../../hoc/auth";
+import { useDispatch} from "react-redux"; 
 import { mypageLiked, likePost } from "../../../_actions/post_action";
-import axios from "axios";
-
+import Loading from "../Loading/Loading";
 import {
   MyLikedPostContainer,
   MyLikedPostTitle,
@@ -14,7 +10,7 @@ import {
   IMG,
   Title,
 } from "./MypageElements";
-import Loading from "../Loading/Loading";
+
 
 function MyLikedPost() {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
+import React, { useEffect} from "react";
 import Loading from "../Loading/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyComments } from "../../../_actions/comment_action";
 import {
   CommentArea,
   CommentBox,
@@ -10,9 +10,7 @@ import {
   CommentHeader,
   Comments_content,
 } from "../Comment/TestCommentElements.js";
-import { CommentWrapper } from "./MypageElements";
-import { useDispatch, useSelector } from "react-redux";
-import { getMyComments } from "../../../_actions/comment_action";
+
 
 function MyComment() {
   const dispatch = useDispatch();
@@ -41,9 +39,8 @@ function MyComment() {
                 <Comments_container key={idx}>
                   <Comments_content
                     href={`/post/${comment.post}`}>
-                      {comment.body}
+                    {comment.body}
                   </Comments_content>
-                  {/* <a href={`/post/${comment.post}`}>{comment.body}</a> */}
                   <Comment_date>{comment.createdAt}</Comment_date>
                 </Comments_container>
               </CommentBox>
