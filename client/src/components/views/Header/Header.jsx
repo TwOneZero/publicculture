@@ -5,9 +5,11 @@ import { searchPost } from '../../../_actions/post_action';
 import { logout, auth } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 import Sidebar from './Sidebar';
+import logo from "../../../images/logo.png"
 import {
   HeaderContainer,
   HeaderLogo,
+  LogoImg,
   SearchBarArea,
   SearchBar,
   Button,
@@ -103,7 +105,7 @@ function Header() {
       )}
       <HeaderContainer>
         <HeaderLogo type='button' onClick={onLogoClicked}>
-          public culture
+        <LogoImg src={logo}/>
         </HeaderLogo>
 
         <SearchBarArea onSubmit={onSearchClicked}>
