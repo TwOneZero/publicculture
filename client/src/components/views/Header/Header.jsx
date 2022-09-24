@@ -182,9 +182,6 @@ function Header() {
             >
               문화교양/강좌
             </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='기타'>
-              기타
-            </GenreBtn>
           </GenreBar>
         </SidebarGenreBox>
       </GenreContainer>

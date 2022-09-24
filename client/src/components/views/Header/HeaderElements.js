@@ -60,6 +60,7 @@ export const HeaderBtn = styled.div`
 export const GenreContainer = styled.div`
   width: 100%;
   box-shadow: 5px 5px 5px lightgray;
+  
 `;
 
 export const GenreBar = styled.div`
@@ -67,6 +68,7 @@ export const GenreBar = styled.div`
   height: 60px;
   width: 1400px;
   margin: 0 auto;
+  margin-left: 200px;
   //width: 100%;
   padding: 20px 50px;
   justify-content: space-between;
