@@ -54,63 +54,137 @@ export const Title = styled.div`
 
 // Mypage 컴포넌트
 
-export const MypageBox = styled.div`
+// mypage 탭부분
+export const UserTabContainer = styled.div`
+    margin-top: 5px;
+    border-bottom: 3px solid #eee;
+    background-color: #fff;
+    height: 40px;
+    padding-bottom: 1px;
+`
+
+export const UserTab = styled.div`
+  width: 66%;
+  margin: 0 auto;
+  font-size: 1rem;
+`
+
+export const UserTabUl = styled.ul`
+  list-style: none;
   display: flex;
+    flex-direction: row;
+    justify-content: start;
+  background: #fff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* border-bottom: 2px solid red; */
+`
+
+export const UserTabLi = styled.li`
+  margin-left: 1rem;
+  &:first-child{
+    margin-left: 0;
+  }
+`
+
+export const UserTabItem = styled.button`
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 39px;
+    height: 39px;
+    text-decoration: none;
+    display: flex;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    
+`
+
+export const MypageIcon = styled.div`
+  
+`
+
+export const MypageTitle = styled.div`
+  margin-left: 0.8rem;
+  &:hover {
+      border-bottom: 2px solid #000;
+    }
+`
+
+// mypage 본문 부분
+
+export const MypageBox = styled.div`
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   width: 100%;
-  height: 100%;
+  margin-top: 5px;
   font-size: 17px;
   font-family: "Noto Sans KR", sans-serif;
+  color: #000;
 `;
 
 export const UserBox = styled.div`
-  display: flex;
+  width: 68%;
+  margin: 0 auto;
+  /* display: flex;
   flex-direction: column;
-  background-color: black;
-  align-items: center;
-  //justify-content: center;
-  height: 350px;
-  color: white;
-  padding-left: 100px;
-  width: 100%;
+  background-color: #fff;
+  align-items: center; */
+  
 `;
 
-export const UserBoxContainer = styled.div`
-  width: 1500px;
+export const UserInfoBox = styled.div`
+  /* display: flex;
+  justify-content: center; */
+`;
+
+export const UserInfoEditBox = styled.button`
+  /* width: 200px;
+  height: 150px; */
+  font-weight: 400;
+  font-size: 25px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 4px solid #000;
+  }
+`;
+
+
+export const UserInfoMenuBtns = styled.div`
+  display: flex;
+  /* width: 1000px; */
+  justify-content: space-around;
 `;
 
 export const MypageTitleBtn = styled.div`
   font-size: 45px;
-  margin: 25px 50px 10px 0px;
   font-weight: 500;
   cursor: pointer;
 `;
 
-export const UserInfoBox = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-right: 150px;
-`;
+
 
 export const UserBtnBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px 20px 0px 80px;
 `;
 
 export const UserIcon = styled.div`
-  color: white;
   font-size: 100px;
 `;
 
+
+
 export const MyinfoBtn = styled.button`
   border: none;
-  color: black;
+  color: #fff;
   width: 88px;
-  background-color: White;
+  background-color: #000;
   cursor: pointer;
   font-size: 18px;
 `;
@@ -118,123 +192,24 @@ export const MyinfoBtn = styled.button`
 export const UserNamePreferBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px 80px 0px 20px;
 `;
 
 export const UserName = styled.div`
   font-weight: 500;
   font-size: 70px;
-  margin-top: 20px;
 `;
 
 export const PreferenceBox = styled.div`
   font-weight: 500;
   font-size: 25px;
-  margin-left: 5px;
 `;
 
-export const UserInfoMenuBtns = styled.div`
-  display: flex;
-  margin: 0px 0px 5px 100px;
-  width: 1000px;
-  justify-content: space-around;
-`;
 
-export const UserInfoEditBox = styled.button`
-  margin: 30px 0px 0px 0px;
-  width: 200px;
-  height: 150px;
-  font-weight: 400;
-  font-size: 25px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
 
-export const UserInfoEditIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
 
-export const UserInfoEditTitle = styled.div`
-  font-weight: 400;
-`;
 
-export const LikedBox = styled.button`
-  margin: 30px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 150px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
 
-export const LikeIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
 
-export const LikeTitle = styled.div`
-  font-weight: 400;
-`;
-
-export const PasswordBox = styled.button`
-  margin: 30px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 150px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-export const PasswordIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-export const PasswordTitle = styled.div`
-  font-weight: 400;
-`;
-
-export const CommentBox = styled.button`
-  margin: 30px 0px 0px 0px;
-  font-weight: 400;
-  font-size: 25px;
-  width: 200px;
-  height: 150px;
-  color: white;
-  background-color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    //background-color: #a9a9a9;
-    border-bottom: 4px solid white;
-  }
-`;
-
-export const CommentIcon = styled.div`
-  margin: 0px 0px 30px 0px;
-`;
-
-export const CommentTitle = styled.div`
-  font-weight: 400;
-`;
 
 export const InfoBox = styled.div``;
 
@@ -245,8 +220,6 @@ export const EditMypage_container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  //margin: 0px;
-  //margin: 4% 5%;
   width: 100%;
   height: 100%;
   margin: 30px 0px 100px 0px;

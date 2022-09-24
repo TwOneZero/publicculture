@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import FaBars from "react-icons/fa";
 
 
 export const MenuContainer = styled.div`
@@ -14,7 +15,7 @@ export const HeaderContainer = styled.div`
   flex-direction: low;
   justify-content: center;
   align-items: center;
-  width: 1400px;
+  width: 70%;
   margin: 0 auto;
   height: 100px;
   background-color: white;
@@ -47,23 +48,27 @@ export const HeaderBtn = styled.div`
   cursor: pointer;
 `;
 
-
+export const GenreShadowBox = styled.div`
+  width: 100%;
+  box-shadow: 5px 5px 5px lightgray;
+  /* display: flex;
+  justify-content: center; */
+`
 
 export const GenreContainer = styled.div`
-  width: 100%;
+  width: 68%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  box-shadow: 5px 5px 5px lightgray;
   background-color: #fff;
 `;
 
 export const GenreBar = styled.div`
   display: flex;
   height: 60px;
-  width: 1400px;
+  width: 100%;
   padding: 20px 50px;
   justify-content: space-between;
-
   background-color: white;
   align-items: center;
   box-sizing: border-box;
@@ -90,11 +95,18 @@ export const SidebarButtonToggle = styled.div`
 export const SidebarGenreBox = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1350px;
+  width: 100%;
+  align-items: center;
+  text-align: center;
 `;
 
 export const ToggleButton = styled.i`
-
+  color: #000;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 900;
+  padding-left: 20px;
+  padding-top: 15px; 
 `
 
 

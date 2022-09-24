@@ -9,6 +9,7 @@ import PasswordChange from "./PasswordChange";
 import Auth from "../../../hoc/auth";
 import { auth } from "../../../_actions/user_action";
 import axios from "axios";
+import { } from "react-icons/fa";
 
 import {
   MypageBox,
@@ -23,18 +24,16 @@ import {
   PreferenceBox,
   UserInfoMenuBtns,
   UserInfoEditBox,
-  UserInfoEditIcon,
-  UserInfoEditTitle,
-  LikedBox,
-  LikeIcon,
-  LikeTitle,
-  CommentBox,
-  CommentIcon,
-  CommentTitle,
-  PasswordBox,
-  PasswordIcon,
-  PasswordTitle,
   InfoBox,
+
+  MypageIcon,
+  MypageTitle,
+
+  UserTabContainer,
+  UserTab,
+  UserTabUl,
+  UserTabLi,
+  UserTabItem,
 } from "./MypageElements";
 import MyComment from "./MyComment";
 
@@ -43,24 +42,6 @@ function Mypage() {
   const [mode, setMode] = useState("myProfile");
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [resData, setResData] = useState(null);
-  const [userData, setUserData] = useState(null);
-
-  // useEffect(() => {
-  //   dispatch(auth())
-  //     .then((res) => {
-  //       setResData(res.payload);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (resData) {
-  //     setUserData(resData);
-  //   }
-  // }, [resData]);
 
   const onMenuButtonClick = (e) => {
     if (e.target.id === "myProfile") {
@@ -78,94 +59,122 @@ function Mypage() {
   };
 
   return (
-    <MypageBox>
-      <UserBox>
-        <MypageTitleBtn onClick={onMenuButtonClick} id="myProfile">
-          My Page
-        </MypageTitleBtn>
-        <UserInfoBox>
-          <UserBtnBox>
-            <UserIcon>
-              <i className="fa-solid fa-user"></i>
-            </UserIcon>
-            <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
-              My Info
-            </MyinfoBtn>
-          </UserBtnBox>
-          <UserNamePreferBox>
-            {/* {userData ? <UserName>{userData.name}</UserName> : ''} */}
-            <UserName>{userState.userData.name}</UserName>
+    <>
+      <UserTabContainer>
+        <UserTab>
+          <UserTabUl>
+            <UserTabLi>
+              <UserTabItem>
+                <MypageIcon>
+                  <i
+                    onClick={onMenuButtonClick}
+                    id="editProfile"
+                    className="fa-solid fa-gear"
+                  ></i>
+                </MypageIcon>
+                <MypageTitle onClick={onMenuButtonClick} id="myProfile">
+                  내 프로필
+                </MypageTitle>
+              </UserTabItem>
+            </UserTabLi>
+            <UserTabLi>
+              <UserTabItem>
+                <MypageIcon>
+                  <i
+                    onClick={onMenuButtonClick}
+                    id="editProfile"
+                    className="fa-solid fa-gear"
+                  ></i>
+                </MypageIcon>
+                <MypageTitle onClick={onMenuButtonClick} id="editProfile">
+                  내 정보 수정
+                </MypageTitle>
+              </UserTabItem>
+            </UserTabLi>
+            <UserTabLi>
+              <UserTabItem>
+                <MypageIcon>
+                  <i
+                    className="fa-solid fa-lock"
+                    onClick={onMenuButtonClick}
+                    id="passwordChange"
+                  ></i>
+                </MypageIcon>
+                <MypageTitle onClick={onMenuButtonClick} id="passwordChange">
+                  {" "}
+                  비밀번호 변경{" "}
+                </MypageTitle>
+              </UserTabItem>
+            </UserTabLi>
+            <UserTabLi>
+              <UserTabItem>
+                <MypageIcon>
+                  <i
+                    className="fa-solid fa-heart"
+                    onClick={onMenuButtonClick}
+                    id="myLikedPost"
+                  ></i>
+                </MypageIcon>
+                <MypageTitle onClick={onMenuButtonClick} id="myLikedPost">
+                  나의 관심 행사
+                </MypageTitle>
+              </UserTabItem>
+            </UserTabLi>
+            <UserTabLi>
+              <UserTabItem>
+                <MypageIcon>
+                  <i
+                    className="fa-solid fa-comment"
+                    onClick={onMenuButtonClick}
+                    id="myLikedPost"
+                  ></i>
+                </MypageIcon>
+                <MypageTitle onClick={onMenuButtonClick} id="mycomment">
+                  내가 쓴 댓글
+                </MypageTitle>
+              </UserTabItem>
+            </UserTabLi>
+          </UserTabUl>
+        </UserTab>
+      </UserTabContainer>
 
-            <PreferenceBox>
-              {/* 선호 장르 : {userData ? userData.genre : ''} */}
-              선호 장르 : {userState.userData.genre}
-            </PreferenceBox>
-          </UserNamePreferBox>
-          <UserInfoMenuBtns>
-            <UserInfoEditBox onClick={onMenuButtonClick} id="editProfile">
-              <UserInfoEditIcon>
-                <i
-                  onClick={onMenuButtonClick}
-                  id="editProfile"
-                  className="fa-solid fa-gear"
-                ></i>
-              </UserInfoEditIcon>
-              <UserInfoEditTitle onClick={onMenuButtonClick} id="editProfile">
-                내 정보 수정
-              </UserInfoEditTitle>
-            </UserInfoEditBox>
-            <PasswordBox onClick={onMenuButtonClick} id="passwordChange">
-              <PasswordIcon>
-                <i
-                  className="fa-solid fa-lock"
-                  onClick={onMenuButtonClick}
-                  id="passwordChange"
-                ></i>
-              </PasswordIcon>
-              <PasswordTitle onClick={onMenuButtonClick} id="passwordChange">
-                {" "}
-                비밀번호 변경{" "}
-              </PasswordTitle>
-            </PasswordBox>
+      <MypageBox>
+        <UserBox>
+          {/* <MypageTitleBtn onClick={onMenuButtonClick} id="myProfile">
+            My Page
+          </MypageTitleBtn> */}
+          <UserInfoBox>
+            <UserBtnBox>
+              <UserIcon>
+                <i className="fa-solid fa-user"></i>
+              </UserIcon>
+              <MyinfoBtn onClick={onMenuButtonClick} id="myProfile">
+                My Info
+              </MyinfoBtn>
+            </UserBtnBox>
+            <UserNamePreferBox>
+              <UserName>{userState.userData.name}</UserName>
 
-            <LikedBox onClick={onMenuButtonClick} id="myLikedPost">
-              <LikeIcon>
-                <i
-                  className="fa-solid fa-heart"
-                  onClick={onMenuButtonClick}
-                  id="myLikedPost"
-                ></i>
-              </LikeIcon>
-              <LikeTitle onClick={onMenuButtonClick} id="myLikedPost">
-                나의 관심 행사
-              </LikeTitle>
-            </LikedBox>
+              <PreferenceBox>
+                선호 장르 : {userState.userData.genre}
+              </PreferenceBox>
+            </UserNamePreferBox>
 
-            <CommentBox onClick={onMenuButtonClick} id="mycomment">
-              <CommentIcon>
-                <i
-                  className="fa-solid fa-comment"
-                  onClick={onMenuButtonClick}
-                  id="myLikedPost"
-                ></i>
-              </CommentIcon>
-              <CommentTitle onClick={onMenuButtonClick} id="mycomment">
-                내가 쓴 댓글
-              </CommentTitle>
-            </CommentBox>
-          </UserInfoMenuBtns>
-        </UserInfoBox>
-      </UserBox>
-      <InfoBox>
-        <div>
-          {mode === "myProfile" && <MypageInfo></MypageInfo>}
-          {mode === "editProfile" && <MypageEdit></MypageEdit>}
-          {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
-          {mode === "passwordChange" && <PasswordChange></PasswordChange>}
-          {mode === "mycomment" && <MyComment />}
-        </div>
-      </InfoBox>
-    </MypageBox>
+
+
+          </UserInfoBox>
+        </UserBox>
+        <InfoBox>
+          <div>
+            {mode === "myProfile" && <MypageInfo></MypageInfo>}
+            {mode === "editProfile" && <MypageEdit></MypageEdit>}
+            {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
+            {mode === "passwordChange" && <PasswordChange></PasswordChange>}
+            {mode === "mycomment" && <MyComment />}
+          </div>
+        </InfoBox>
+      </MypageBox>
+    </>
   );
 }
 
