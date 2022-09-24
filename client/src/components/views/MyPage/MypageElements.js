@@ -276,7 +276,7 @@ export const Nickname_container_edit = styled.div`
 
 export const Nickname_edit = styled.input`
   margin-top: 10px;
-  height: 15px;
+  //height: 15px;
   padding: 10px;
   font-size: 15px;
   font-weight: 800;
@@ -293,9 +293,25 @@ export const NicknameC_btn = styled.button`
   background-color: black;
   cursor: pointer;
   font-size: 18px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+`;
+export const NicknameChangeBtn = styled.button`
+  border: none;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  font-size: 18px;
   margin: 10px;
-  width: 83px;
-  height: 40px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-weight: bold;
 `;
 
 export const PasswordContainer = styled.div`
@@ -366,8 +382,8 @@ export const UserUpdateBtn = styled.button`
   color: white;
   background-color: black;
   cursor: pointer;
-  width: 83px;
-  height: 50px;
+  width: 100%;
+  //height: 100%;
   font-size: 18px;
 `;
 

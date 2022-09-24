@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 export const SidebarContainer = styled.div`
   font-family: "Noto Sans KR", sans-serif;
   display: flex;
+  flex-direction: row;
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -25,6 +26,12 @@ export const SidebarMain = styled.div`
   background: rgb(0, 0, 0);
 `;
 
+export const Sidepart = styled.div`
+  //position: fixed;
+  width: 100%;
+  height: 100%;
+`;
+
 export const SidebarButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -40,6 +47,7 @@ export const SidebarcloseBtn = styled.button`
   background-color: transparent;
   color: white;
   font-size: 25px;
+  border: none;
 `;
 
 export const LocationTitle = styled.div`
