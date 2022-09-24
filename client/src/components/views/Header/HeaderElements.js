@@ -27,19 +27,18 @@ export const HeaderContainer = styled.div`
   margin: 0 auto;
   height: 100px;
   background-color: white;
+
 `;
 
 export const HeaderLogo = styled.div`
   display: flex;
   justify-content: flex-start;
-  font-family: "NG", "Malgun Gothic", Dotum, "돋움", AppleGothicNeoSD,
-    "Apple SD 산돌고딕 Neo", "굴림", arial, sans-serif;
-  color: black;
-  font-size: 60px;
-  margin: 15px 5px;
-  margin-left: 50px;
   cursor: pointer;
-  text-shadow: 1px 1px 1px #000;
+`;
+
+export const LogoImg = styled.img`
+  margin-top: 30px;
+  width: 250px;
 `;
 
 export const HeaderBtn = styled.div`
@@ -60,6 +59,7 @@ export const HeaderBtn = styled.div`
 export const GenreContainer = styled.div`
   width: 100%;
   box-shadow: 5px 5px 5px lightgray;
+  background-color: white;
 `;
 
 export const GenreBar = styled.div`
@@ -73,11 +73,12 @@ export const GenreBar = styled.div`
   background-color: white;
   align-items: center;
   box-sizing: border-box;
+  position: absoulte;
 `;
 
 export const GenreBtn = styled.button`
   font-size: 18px;
-  background-color: transparent;
+  background-color: white;
   padding-bottom: 10px;
   border: none;
   cursor: pointer;
@@ -97,7 +98,7 @@ export const SearchBarArea = styled.form`
 
 export const SearchBar = styled.input`
   height: 40px;
-  width: 400px;
+  width: 300px;
   border: none;
   background: transparent;
   outline: none;
