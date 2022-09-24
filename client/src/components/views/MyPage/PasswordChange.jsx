@@ -1,9 +1,7 @@
-import { useDispatch } from "react-redux";
-import React, { useState, useEffect } from "react";
-import { auth } from "../../../_actions/user_action";
-import {
-  updateUser_Password,
-} from "../../../_actions/user_action";
+import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { auth } from '../../../_actions/user_action';
+import { updateUser_Password } from '../../../_actions/user_action';
 
 import {
   PasswordPage,
@@ -13,19 +11,14 @@ import {
   Password_edit,
   PasswordContainer,
   PasswordUpdateBtn,
-} from "./MypageElements";
+  NotPasswordUpdateBtn,
+} from './MypageElements';
 
 const PasswordChange = () => {
   const dispatch = useDispatch();
-  const [Password, setPassword] = useState("");
-  const [PasswordConfirm, setPasswordConfirm] = useState("");
-  const [userData, setUserData] = useState("");
-
-  useEffect(() => {
-    dispatch(auth()).then((res) => {
-      setUserData(res.payload);
-    });
-  }, [setUserData, dispatch]);
+  const [Password, setPassword] = useState('');
+  const [PasswordConfirm, setPasswordConfirm] = useState('');
+  const [Next, setNext] = useState(false);
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -34,12 +27,14 @@ const PasswordChange = () => {
     setPasswordConfirm(e.target.value);
   };
   const onCheckPassword = (e) => {
-    Password === PasswordConfirm
-      ? alert("비밀번호가 일치합니다.")
-      : alert("비밀번호가 일치하지 않습니다.");
+    if (Password && Password === PasswordConfirm) {
+      setNext(true);
+      return alert('비밀번호가 일치합니다.');
+    }
+    return alert('비밀번호가 일치하지 않습니다.');
   };
 
-  const onUpdatePasswordConfirm = () => {
+  const onUpdatePassword = () => {
     let body = {
       password: Password,
     };
@@ -51,11 +46,9 @@ const PasswordChange = () => {
       }
     });
 
-    setPassword("");
+    setPassword('');
     window.location.reload();
   };
-
-
 
   return (
     <>
@@ -64,16 +57,26 @@ const PasswordChange = () => {
         <PasswordContainer>
           비밀번호 변경
           <Line_edit></Line_edit>
-          <PasswordCheck onChange={onChangePassword}></PasswordCheck>
+          <PasswordCheck
+            type='password'
+            onChange={onChangePassword}
+          ></PasswordCheck>
         </PasswordContainer>
         <PasswordContainer>
           비밀번호 변경 확인
           <Line_edit></Line_edit>
-          <PasswordCheck onChange={onChangePasswordConfirm}></PasswordCheck>
+          <PasswordCheck
+            type='password'
+            onChange={onChangePasswordConfirm}
+          ></PasswordCheck>
           <PasswordCheckBtn onClick={onCheckPassword}>confirm</PasswordCheckBtn>
-          <PasswordUpdateBtn onClick={onUpdatePasswordConfirm}>
-            Password Change
-          </PasswordUpdateBtn>
+          {Next ? (
+            <PasswordUpdateBtn onClick={onUpdatePassword}>
+              Password Change
+            </PasswordUpdateBtn>
+          ) : (
+            <NotPasswordUpdateBtn>Password Change</NotPasswordUpdateBtn>
+          )}
         </PasswordContainer>
       </PasswordPage>
     </>

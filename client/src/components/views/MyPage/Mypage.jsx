@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import MypageEdit from "./MypageEdit";
-import MypageProfile from "./MypageProfile";
-import MyLikedPost from "./MyLikedPost";
-import PasswordChange from "./PasswordChange";
-import Auth from "../../../hoc/auth";
-import MyComment from "./MyComment";
+import React, { useState } from 'react';
+import MypageEdit from './MypageEdit';
+import MypageProfile from './MypageProfile';
+import MyLikedPost from './MyLikedPost';
+import PasswordChange from './PasswordChange';
+import Auth from '../../../hoc/auth';
+import MyComment from './MyComment';
 import {
   InfoBox,
   MypageIcon,
@@ -14,11 +14,7 @@ import {
   UserTabUl,
   UserTabLi,
   UserTabItem,
-} from "./MypageElements";
-
-
-
-
+} from './MypageElements';
 
 function Mypage() {
   const [mode, setMode] = useState('myProfile');
@@ -47,11 +43,11 @@ function Mypage() {
                 <MypageIcon>
                   <i
                     onClick={onMenuButtonClick}
-                    id="editProfile"
-                    className="fa-solid fa-user"
+                    id='editProfile'
+                    className='fa-solid fa-user'
                   ></i>
                 </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id="myProfile">
+                <MypageTitle onClick={onMenuButtonClick} id='myProfile'>
                   내 프로필
                 </MypageTitle>
               </UserTabItem>
@@ -61,11 +57,11 @@ function Mypage() {
                 <MypageIcon>
                   <i
                     onClick={onMenuButtonClick}
-                    id="editProfile"
-                    className="fa-solid fa-gear"
+                    id='editProfile'
+                    className='fa-solid fa-gear'
                   ></i>
                 </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id="editProfile">
+                <MypageTitle onClick={onMenuButtonClick} id='editProfile'>
                   내 정보 수정
                 </MypageTitle>
               </UserTabItem>
@@ -74,14 +70,14 @@ function Mypage() {
               <UserTabItem>
                 <MypageIcon>
                   <i
-                    className="fa-solid fa-lock"
+                    className='fa-solid fa-lock'
                     onClick={onMenuButtonClick}
-                    id="passwordChange"
+                    id='passwordChange'
                   ></i>
                 </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id="passwordChange">
-                  {" "}
-                  비밀번호 변경{" "}
+                <MypageTitle onClick={onMenuButtonClick} id='passwordChange'>
+                  {' '}
+                  비밀번호 변경{' '}
                 </MypageTitle>
               </UserTabItem>
             </UserTabLi>
@@ -89,12 +85,12 @@ function Mypage() {
               <UserTabItem>
                 <MypageIcon>
                   <i
-                    className="fa-solid fa-heart"
+                    className='fa-solid fa-heart'
                     onClick={onMenuButtonClick}
-                    id="myLikedPost"
+                    id='myLikedPost'
                   ></i>
                 </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id="myLikedPost">
+                <MypageTitle onClick={onMenuButtonClick} id='myLikedPost'>
                   나의 관심 행사
                 </MypageTitle>
               </UserTabItem>
@@ -103,12 +99,12 @@ function Mypage() {
               <UserTabItem>
                 <MypageIcon>
                   <i
-                    className="fa-solid fa-comment"
+                    className='fa-solid fa-comment'
                     onClick={onMenuButtonClick}
-                    id="myLikedPost"
+                    id='myLikedPost'
                   ></i>
                 </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id="mycomment">
+                <MypageTitle onClick={onMenuButtonClick} id='mycomment'>
                   내가 쓴 댓글
                 </MypageTitle>
               </UserTabItem>
@@ -117,15 +113,14 @@ function Mypage() {
         </UserTab>
       </UserTabContainer>
       <InfoBox>
-          <div>
-            {mode === "myProfile" && <MypageProfile></MypageProfile>}
-            {mode === "editProfile" && <MypageEdit></MypageEdit>}
-            {mode === "myLikedPost" && <MyLikedPost></MyLikedPost>}
-            {mode === "passwordChange" && <PasswordChange></PasswordChange>}
-            {mode === "mycomment" && <MyComment />}
-          </div>
-        </InfoBox>
-      
+        <div>
+          {mode === 'myProfile' && <MypageProfile></MypageProfile>}
+          {mode === 'editProfile' && <MypageEdit></MypageEdit>}
+          {mode === 'myLikedPost' && <MyLikedPost></MyLikedPost>}
+          {mode === 'passwordChange' && <PasswordChange></PasswordChange>}
+          {mode === 'mycomment' && <MyComment />}
+        </div>
+      </InfoBox>
     </>
   );
 }
