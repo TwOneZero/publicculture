@@ -17,21 +17,23 @@ import {
 } from "./MypageElements";
 
 
-function Mypage() {
-  const [mode, setMode] = useState("myProfile");
 
+
+
+function Mypage() {
+  const [mode, setMode] = useState('myProfile');
   const onMenuButtonClick = (e) => {
-    if (e.target.id === "myProfile") {
-      setMode("myProfile");
+    if (e.target.id === 'myProfile') {
+      setMode('myProfile');
       console.log(e.target.id);
-    } else if (e.target.id === "editProfile") {
-      setMode("editProfile");
-    } else if (e.target.id === "myLikedPost") {
-      setMode("myLikedPost");
-    } else if (e.target.id === "passwordChange") {
-      setMode("passwordChange");
-    } else if (e.target.id === "mycomment") {
-      setMode("mycomment");
+    } else if (e.target.id === 'editProfile') {
+      setMode('editProfile');
+    } else if (e.target.id === 'myLikedPost') {
+      setMode('myLikedPost');
+    } else if (e.target.id === 'passwordChange') {
+      setMode('passwordChange');
+    } else if (e.target.id === 'mycomment') {
+      setMode('mycomment');
     }
   };
 

@@ -25,7 +25,7 @@ export function getRandompost() {
 //search
 export function searchPost(search) {
   const request = axios
-    .post(`/api/posts/search?search=${search}`, null, { withCredentials: true })
+    .get(`/api/posts/search?search=${search}`, { withCredentials: true })
     .then((res) => res.data);
   return {
     type: SEARCH_POST,

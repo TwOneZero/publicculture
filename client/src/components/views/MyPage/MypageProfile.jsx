@@ -107,7 +107,8 @@ const MypageProfile = () => {
                             <RightBox>
                                 <TextContainer>
                                     <ProfileP>
-                                        {userState.userData.genre}
+                                        {userState.userData.genre[0]},&nbsp;&nbsp;{''}
+                                        {userState.userData.genre[1]}
                                     </ProfileP>
                                 </TextContainer>
                             </RightBox>

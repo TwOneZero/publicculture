@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // LikePost 컴포넌트
 export const MyLikedPostContainer = styled.div`
@@ -17,7 +17,7 @@ export const MyLikedPostTitle = styled.div`
   color: black;
   padding: 5px;
   justify-content: center;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 `;
 
 export const PostingContainer = styled.div`
@@ -36,7 +36,7 @@ export const PostingInfo = styled.div`
   padding: 50px;
   //background-color: yellow;
   align-items: center;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
 `;
 
@@ -255,7 +255,7 @@ export const EditMypage_container = styled.div`
   width: 100%;
   height: 100%;
   margin: 30px 0px 100px 0px;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 1000;
   font-size: 24px;
 `;
@@ -286,7 +286,7 @@ export const Nickname_edit = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   &:focus {
     outline: none;
   }
@@ -319,6 +319,21 @@ export const NicknameChangeBtn = styled.button`
   font-weight: bold;
 `;
 
+export const NotNicknameChangeBtn = styled.div`
+  border: none;
+  color: white;
+  text-align: center;
+  background-color: #a9a9a9;
+  font-size: 18px;
+  margin: 10px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+`;
+
 export const PasswordContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -334,7 +349,7 @@ export const Password = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   &:focus {
     outline: none;
   }
@@ -347,7 +362,7 @@ export const PasswordCheck = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   &:focus {
     outline: none;
   }
@@ -387,6 +402,16 @@ export const UserUpdateBtn = styled.button`
   color: white;
   background-color: black;
   cursor: pointer;
+  width: 100%;
+  //height: 100%;
+  font-size: 18px;
+`;
+
+export const NotUserUpdateBtn = styled.div`
+  border: none;
+  text-align: center;
+  color: white;
+  background-color: #a9a9a9;
   width: 100%;
   //height: 100%;
   font-size: 18px;
@@ -529,7 +554,7 @@ export const PasswordPage = styled.div`
   width: 100%;
   height: 100%;
   margin: 30px 0px 100px 0px;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 1000;
   font-size: 24px;
 `;
