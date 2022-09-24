@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostDateCount, getPostbyDay } from '../../../_actions/post_action';
-import { useRef, useMemo } from 'react';
+import DayPosts from './DayPosts';
 import {
   Frame,
   Header,
@@ -36,16 +36,11 @@ import {
   ShowEventHead,
   ShowEventMain,
   ShowEventContentUl,
-  ShowEventContentLi,
-  ShowEventContentTitle,
-  ShowEventContentPlace,
-  ShowEventContentDate,
-  ShowEventCodename,
   ShowEventButton,
 } from './CalendarElements';
-import DayPosts from './DayPosts';
 
-const Calendar = (isSelected) => {
+
+const Calendar = () => {
   const dispatch = useDispatch();
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평소 매달의 일수
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 윤년 매달의 일수
@@ -220,7 +215,6 @@ const Calendar = (isSelected) => {
                             month === today.getMonth() &&
                             d === today.getDate()
                           }
-                          isSelected={d === day}
                           onClick={() => setDate(new Date(year, month, d))}
                         >
                           {d > 0 ? d : ''}
@@ -267,13 +261,6 @@ const Calendar = (isSelected) => {
         </ShowEventHeadContainer>
         <ShowEventMain>
           <ShowEventContentUl>
-            {/* ToMake */}
-            {/* {
-              postState.dayPosts?.posts.map((post) => {
-                return <DayPosts key={post._id} {...post} />;
-                // return <TestPost />
-              })
-            } */}
             {
               postState.dayPosts?.posts?
                 <DayPosts posts={posting} />

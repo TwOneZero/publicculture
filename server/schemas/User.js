@@ -25,7 +25,7 @@ const userSchema = new Schema(
       minlength: [5, '비밀번호는 5자리 이상이어야 합니다.'],
     },
     genre: {
-      type: String,
+      type: [String],
     },
     role: {
       type: Number,
@@ -35,11 +35,6 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
-    tokenExp: {
-      type: Number,
-    },
-    //저장한 Post
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   },
   {
     //createdAt, updateAt

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import EventPage from "../EventPage/EventPage";
 import axios from "axios";
 import { likePost } from "../../../_actions/post_action";
 import { useDispatch } from "react-redux";

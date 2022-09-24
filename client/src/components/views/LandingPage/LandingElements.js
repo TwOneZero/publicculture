@@ -68,6 +68,9 @@ export const ImgTitle = styled.div`
   font-weight: 800;
   font-size: 19px;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Container = styled.div`

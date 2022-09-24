@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
+export const RegisterPage_Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`
+
 export const Register_page_container = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: middle;
   align-items: center;
   padding: 20px 10px;
-  width: 500px;
-  height: 1000px;
 `;
 
 export const Register_text = styled.div`
@@ -70,7 +75,7 @@ export const Input_PW = styled.input`
   outline: none;
   margin-bottom: 10px;
   padding-left: 10px;
-  &:focus{
+  &:focus {
     border: 1px solid grey;
   }
 `;
@@ -82,7 +87,7 @@ export const Input_ConfirmPW = styled.input`
   outline: none;
   margin-bottom: 10px;
   padding-left: 10px;
-  &:focus{
+  &:focus {
     border: 1px solid grey;
   }
 `;
@@ -98,6 +103,19 @@ export const Register_btn = styled.button`
   &:hover {
     cursor: pointer;
   }
+  margin-top: 20px;
+`;
+
+export const NotRegister_btn = styled.div`
+  width: 413px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #a9a9a9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  text-align: center;
   margin-top: 20px;
 `;
 

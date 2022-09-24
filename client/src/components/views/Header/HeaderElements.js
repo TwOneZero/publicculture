@@ -1,14 +1,6 @@
 import styled from "styled-components";
+import FaBars from "react-icons/fa";
 
-//jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
-export const SidebarButtonToggle = styled.div`
-  margin-right: 10px;
-`;
-
-export const SidebarGenreBox = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -23,7 +15,7 @@ export const HeaderContainer = styled.div`
   flex-direction: low;
   justify-content: center;
   align-items: center;
-  width: 1400px;
+  width: 70%;
   margin: 0 auto;
   height: 100px;
   background-color: white;
@@ -56,25 +48,30 @@ export const HeaderBtn = styled.div`
   cursor: pointer;
 `;
 
-export const GenreContainer = styled.div`
+export const GenreShadowBox = styled.div`
   width: 100%;
   box-shadow: 5px 5px 5px lightgray;
-  background-color: white;
+  /* display: flex;
+  justify-content: center; */
+`
+
+export const GenreContainer = styled.div`
+  width: 68%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
 `;
 
 export const GenreBar = styled.div`
   display: flex;
   height: 60px;
-  width: 1400px;
-  margin: 0 auto;
-  margin-left: 200px;
-  //width: 100%;
+  width: 100%;
   padding: 20px 50px;
   justify-content: space-between;
   background-color: white;
   align-items: center;
   box-sizing: border-box;
-  position: absoulte;
 `;
 
 export const GenreBtn = styled.button`
@@ -90,10 +87,32 @@ export const GenreBtn = styled.button`
   }
 `;
 
+export const SidebarButtonToggle = styled.div`
+  margin-right: 10px;
+  
+`;
+
+export const SidebarGenreBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+`;
+
+export const ToggleButton = styled.i`
+  color: #000;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 900;
+  padding-left: 20px;
+  padding-top: 15px; 
+`
+
+
 export const SearchBarArea = styled.form`
   display: flex;
   justify-content: center;
-  //position: relative;
   margin-bottom: 10px;
 `;
 

@@ -47,7 +47,6 @@ function PostPage() {
   let params = useParams();
   const postState = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [tab, setTab] = useState(0);
   const settingTab = (index) => {
@@ -80,7 +79,6 @@ function PostPage() {
           alert(res.payload.message);
         }
         if (res.payload) {
-          // setLikes(res.payload.likes);
           console.log(res.payload);
         }
       })
@@ -88,12 +86,8 @@ function PostPage() {
         console.log(err);
       });
   };
-  // const getRandomIndex = (len) => {
-  //   return Math.floor(Math.random() * len);
-  // };
 
   useEffect(() => {
-    console.log(postState);
     if (
       postState.post?.guname !== undefined &&
       postState.post?.place !== undefined

@@ -5,6 +5,7 @@ import { loginUser } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 
 import {
+  Login_Container,
   Login_page_container,
   Login_text,
   Login_form_container,
@@ -42,14 +43,15 @@ function LoginPage() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-      }}
-    >
+    // <div
+    //   style={{
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     width: '100%',
+    //   }}
+    // >
+    <Login_Container>
       <Login_page_container onSubmit={onSubmitHandler}>
         <Login_text>Login</Login_text>
         <Login_form_container>
@@ -70,7 +72,7 @@ function LoginPage() {
           <Login_btn>로그인</Login_btn>
         </Login_form_container>
       </Login_page_container>
-    </div>
+      </Login_Container>
   );
 }
 

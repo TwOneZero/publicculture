@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPost } from '../../../_actions/post_action';
-import { logout, auth } from '../../../_actions/user_action';
+import { logout } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 import Sidebar from './Sidebar';
 import logo from "../../../images/logo.png"
+import { FaBars } from "react-icons/fa";
 import {
   HeaderContainer,
   HeaderLogo,
@@ -20,6 +21,9 @@ import {
   HeaderBtn,
   SidebarButtonToggle,
   SidebarGenreBox,
+  ToggleButton,
+
+  GenreShadowBox,
 } from './HeaderElements';
 
 function Header() {
@@ -27,8 +31,18 @@ function Header() {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
   const [search, setSearch] = useState('');
-  const [Login, setLogin] = useState(true);
   const [isSidebarOpened, setIsSidebarOpened] = useState(false);
+  const codenames = [
+    '국악',
+    '뮤지컬',
+    '전시',
+    '연극',
+    '콘서트',
+    '클래식',
+    '무용',
+    '축제',
+    '문화교양',
+  ];
   const onSidebarToggleButtonClicked = () => {
     setIsSidebarOpened(!isSidebarOpened);
   };
@@ -59,15 +73,6 @@ function Header() {
     });
   };
 
-  // const CheckLogin = () => {
-  //   dispatch(auth()).then((res) => {
-  //     if (res.payload.isAuth === false) {
-  //       setLogin(false);
-  //     } else {
-  //       setLogin(true);
-  //     }
-  //   });
-  // };
 
   const onGenreClicked = (e) => {
     e.preventDefault();
@@ -96,7 +101,6 @@ function Header() {
 
   return (
     <>
-      {/* {CheckLogin()} */}
       {isSidebarOpened && (
         <Sidebar
           isSidebarOpened={isSidebarOpened}
@@ -105,7 +109,7 @@ function Header() {
       )}
       <HeaderContainer>
         <HeaderLogo type='button' onClick={onLogoClicked}>
-        <LogoImg src={logo}/>
+          <LogoImg src={logo} />
         </HeaderLogo>
 
         <SearchBarArea onSubmit={onSearchClicked}>
@@ -137,56 +141,27 @@ function Header() {
           ) : null}
         </MenuContainer>
       </HeaderContainer>
+      <GenreShadowBox>
+        <GenreContainer>
 
-      <GenreContainer>
-        <SidebarGenreBox>
-          <SidebarButtonToggle>
-            <i
-              style={{
-                color: 'black',
-                cursor: 'pointer',
-                paddingLeft: '20px',
-                paddingTop: '15px',
-              }}
-              className='fa-solid fa-bars fa-2x'
-              onClick={onSidebarToggleButtonClicked}
-            ></i>
-          </SidebarButtonToggle>
-          <GenreBar>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='국악'>
-              국악
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='뮤지컬'>
-              뮤지컬/오페라
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='전시'>
-              전시/미술
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='연극'>
-              연극
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='콘서트'>
-              콘서트
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='클래식'>
-              클래식
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='무용'>
-              무용
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='축제'>
-              축제
-            </GenreBtn>
-            <GenreBtn
-              itemType='button'
-              onClick={onGenreClicked}
-              name='문화교양'
-            >
-              문화교양/강좌
-            </GenreBtn>
-          </GenreBar>
-        </SidebarGenreBox>
-      </GenreContainer>
+          <SidebarGenreBox>
+            <SidebarButtonToggle>
+              <ToggleButton>
+                <FaBars />
+              </ToggleButton>
+            </SidebarButtonToggle>
+
+            <GenreBar>
+              {
+                codenames.map((item, index) => {
+                  return <GenreBtn key={index} itemType='button' onClick={onGenreClicked} name={item}>{item}</GenreBtn>
+                })
+              }
+            </GenreBar>
+          </SidebarGenreBox>
+
+        </GenreContainer>
+      </GenreShadowBox>
     </>
   );
 }

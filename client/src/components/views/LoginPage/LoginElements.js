@@ -1,10 +1,16 @@
-
 import styled from 'styled-components';
+
+export const Login_Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+`
 
 export const Login_page_container = styled.form`
     display: flex;
     flex-direction: column;
-    justify-content: middle;
+    justify-content: center;
     align-items: center;
     padding: 20px 10px;
     width: 500px;
@@ -47,7 +53,8 @@ export const Input_PW = styled.input`
     padding-left: 10px;
     &:focus{
       border: 1px solid grey;
-  `;
+    }
+`;
 
 export const Login_btn = styled.button`
     width: 413px;
