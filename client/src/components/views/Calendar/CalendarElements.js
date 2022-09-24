@@ -3,7 +3,7 @@ import { BsFillArrowLeftCircleFill as LeftArrow } from 'react-icons/bs';
 import { BsFillArrowRightCircleFill as RightArrow } from 'react-icons/bs';
 
 export const Container = styled.div`
-  width: 1300px;
+  width: 65%;
   margin: 50px auto 0;
   background: #fff;
   box-sizing: border-box;
@@ -87,7 +87,7 @@ export const Day_container = styled.div`
 
 export const Day_week = styled.div`
   width: 14%;
-  height: 32px;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;

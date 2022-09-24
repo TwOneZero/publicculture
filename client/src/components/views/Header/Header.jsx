@@ -146,7 +146,7 @@ function Header() {
 
           <SidebarGenreBox>
             <SidebarButtonToggle>
-              <ToggleButton>
+              <ToggleButton onClick={onSidebarToggleButtonClicked}>
                 <FaBars />
               </ToggleButton>
             </SidebarButtonToggle>
