@@ -35,11 +35,6 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
-    tokenExp: {
-      type: Number,
-    },
-    //저장한 Post
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
   },
   {
     //createdAt, updateAt

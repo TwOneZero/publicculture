@@ -19,7 +19,7 @@ router.get('/posts', getRandomPost);
 //관심행사
 router.get('/posts/liked', auth, getFavPost);
 //검색하기
-router.post('/posts/search', getPostBySearch);
+router.get('/posts/search', getPostBySearch);
 //캘린더데이행사
 router.post('/posts/byday', getPostbyDay);
 //디테일페이지
