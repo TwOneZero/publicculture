@@ -1,20 +1,18 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SgginfoDiv = styled.div`
-  margin-top: 10px;
+  margin-top: 5px;
   width: 100%;
-  height: 1050px;
+  height: 1200px;
   display: flex;
   align-items: center;
-  /* background-color: #E0F2F7; */
-  background-color: #fff;
+  background-color: #e0f2f7;
   flex-direction: column;
 `;
 
 export const SgginfoImg = styled.img`
-  margin-top: 100px;
-  padding-right: 200px;
-  width: 70%;
+  margin-top: 150px;
+  width: 1300px;
   &:hover {
     transition: all 0.3s ease-in-out;
     //background-color: coral;
@@ -26,15 +24,15 @@ export const SliderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1400px;
-  margin: 60px auto;
+  width: 1300px;
+  margin-top: 60px auto;
   overflow: hidden;
 `;
 
 export const IMGCover = styled.div`
-  width: 15vw;
-  height: 36vh;
-  background-color: black;
+  width: 30vw;
+  height: 45vh;
+  //background-color: black;
   margin: 50px;
   position: absoulte;
   font-size: 0px;
@@ -54,20 +52,27 @@ export const IMG = styled.img`
   }
 `;
 
-export const IMGTitle = styled.div`
-  font-size: 15px;
-  color: white;
-  opacity: 0;
-  &:hover {
-    opacity: 1;
-  }
+export const TitleBox = styled.div`
+  display: flex;
+  width: 300px;
+  height: 150px;
+  font-family: "NG", "Malgun Gothic", Dotum, "돋움", AppleGothicNeoSD,
+    "Apple SD 산돌고딕 Neo", "굴림", arial, sans-serif;
+`;
+
+export const ImgTitle = styled.div`
+  margin-top: 20px;
+  width: 290px;
+  color: black;
+  font-weight: 800;
+  font-size: 19px;
+  text-align: center;
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 1200px;
   overflow: hidden;
-  //display: flex;
-  //flex-direction: center;
+  //margin-right: 10px;
 `;
 export const Button = styled.button`
   //all: unset;

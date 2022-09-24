@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-import Loading from '../Loading/Loading';
+import Loading from "../Loading/Loading";
 import {
   CommentArea,
   CommentBox,
   Comments_container,
   Comment_date,
   CommentHeader,
-  // Comments_content
-} from '../Comment/TestCommentElements.js';
-import { CommentWrapper } from './MypageElements';
-import { useDispatch, useSelector } from 'react-redux';
-import { getMyComments } from '../../../_actions/comment_action';
+} from "../Comment/TestCommentElements.js";
+import { CommentWrapper } from "./MypageElements";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyComments } from "../../../_actions/comment_action";
 
 function MyComment() {
   const dispatch = useDispatch();

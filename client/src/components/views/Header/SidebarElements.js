@@ -70,7 +70,7 @@ export const LocationItem = styled.button`
   font-weight: bold;
   border: none;
   &:hover {
-    background-color: white;
+    background-color: #e0f2f7;
     color: rgb(50, 50, 50);
   }
   width: 85px;
