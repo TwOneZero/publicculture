@@ -1,4 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+
+export const PostingPiginationBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const PostingContainer = styled.div`
   /* margin: 4% 5%; */
@@ -18,7 +24,7 @@ export const PostingInfo = styled.div`
   padding: 50px;
   //background-color: yellow;
   align-items: center;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
 `;
 

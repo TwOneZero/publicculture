@@ -7,6 +7,8 @@ export const CommentArea = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 30px 0px 100px 0px;
+  width: 100%;
+  height: 100%;
 `;
 export const CommentHeader = styled.div`
   display: flex;

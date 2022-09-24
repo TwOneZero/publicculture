@@ -12,6 +12,7 @@ import {
   Page_area_edit,
   Nickname_container_edit,
   NicknameC_btn,
+  NicknameChangeBtn,
   Nickname_edit,
   Line_edit,
   Genre_container_edit,
@@ -69,21 +70,6 @@ const MypageEdit = () => {
     setGenre("");
     window.location.reload();
   };
-  const onUpdatePasswordConfirm = () => {
-    let body = {
-      password: Password,
-    };
-    dispatch(updateUser_Password(body)).then((res) => {
-      if (res.payload.success) {
-        console.log(res.payload);
-      } else {
-        console.log(res.payload);
-      }
-    });
-
-    setPassword("");
-    window.location.reload();
-  };
 
   const onCheckElement = (checked, item) => {
     if (checked) {
@@ -103,7 +89,8 @@ const MypageEdit = () => {
             닉네임 변경
             <Line_edit></Line_edit>
             <Nickname_edit onChange={onChangeName}></Nickname_edit>
-            <NicknameC_btn onClick={onCheckName}>confirm</NicknameC_btn>
+            <NicknameC_btn onClick={onCheckName}>중복 확인</NicknameC_btn>
+            <NicknameChangeBtn>닉네임 변경</NicknameChangeBtn>
           </Nickname_container_edit>
 
           <Genre_container_edit>
