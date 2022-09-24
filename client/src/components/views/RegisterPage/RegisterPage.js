@@ -9,6 +9,7 @@ import Auth from "../../../hoc/auth";
 import axios from "axios";
 
 import {
+  RegisterPage_Container,
   Register_page_container,
   Register_text,
   Register_form_container,
@@ -75,14 +76,7 @@ function RegisterPage() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-      }}
-    >
+    <RegisterPage_Container>
       <Register_page_container onSubmit={onSubmitHandler}>
         <Register_text>Register</Register_text>
         <Register_form_container>
@@ -115,7 +109,7 @@ function RegisterPage() {
           <Register_btn>회원가입</Register_btn>
         </Register_form_container>
       </Register_page_container>
-    </div>
+    </RegisterPage_Container>
   );
 }
 

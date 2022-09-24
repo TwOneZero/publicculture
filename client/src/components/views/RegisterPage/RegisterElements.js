@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
+export const RegisterPage_Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`
+
 export const Register_page_container = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: middle;
   align-items: center;
   padding: 20px 10px;
-  width: 500px;
-  height: 1000px;
 `;
 
 export const Register_text = styled.div`

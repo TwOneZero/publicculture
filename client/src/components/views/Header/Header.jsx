@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPost } from '../../../_actions/post_action';
-import { logout} from '../../../_actions/user_action';
+import { logout } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 import Sidebar from './Sidebar';
 import logo from "../../../images/logo.png"
@@ -94,7 +94,7 @@ function Header() {
       )}
       <HeaderContainer>
         <HeaderLogo type='button' onClick={onLogoClicked}>
-        <LogoImg src={logo}/>
+          <LogoImg src={logo} />
         </HeaderLogo>
 
         <SearchBarArea onSubmit={onSearchClicked}>
@@ -128,6 +128,7 @@ function Header() {
       </HeaderContainer>
 
       <GenreContainer>
+
         <SidebarGenreBox>
           <SidebarButtonToggle>
             <i
@@ -141,40 +142,43 @@ function Header() {
               onClick={onSidebarToggleButtonClicked}
             ></i>
           </SidebarButtonToggle>
-          <GenreBar>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='국악'>
-              국악
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='뮤지컬'>
-              뮤지컬/오페라
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='전시'>
-              전시/미술
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='연극'>
-              연극
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='콘서트'>
-              콘서트
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='클래식'>
-              클래식
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='무용'>
-              무용
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='축제'>
-              축제
-            </GenreBtn>
-            <GenreBtn
-              itemType='button'
-              onClick={onGenreClicked}
-              name='문화교양'
-            >
-              문화교양/강좌
-            </GenreBtn>
-          </GenreBar>
+        
+        <GenreBar>
+
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='국악'>
+            국악
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='뮤지컬'>
+            뮤지컬/오페라
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='전시'>
+            전시/미술
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='연극'>
+            연극
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='콘서트'>
+            콘서트
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='클래식'>
+            클래식
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='무용'>
+            무용
+          </GenreBtn>
+          <GenreBtn itemType='button' onClick={onGenreClicked} name='축제'>
+            축제
+          </GenreBtn>
+          <GenreBtn
+            itemType='button'
+            onClick={onGenreClicked}
+            name='문화교양'
+          >
+            문화교양/강좌
+          </GenreBtn>
+        </GenreBar>
         </SidebarGenreBox>
+
       </GenreContainer>
     </>
   );

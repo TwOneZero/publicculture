@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const SidebarButtonToggle = styled.div`
-  margin-right: 10px;
-`;
-
-export const SidebarGenreBox = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -55,25 +47,26 @@ export const HeaderBtn = styled.div`
   cursor: pointer;
 `;
 
+
+
 export const GenreContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
   box-shadow: 5px 5px 5px lightgray;
-  background-color: white;
+  background-color: #fff;
 `;
 
 export const GenreBar = styled.div`
   display: flex;
   height: 60px;
   width: 1400px;
-  margin: 0 auto;
-  margin-left: 200px;
-  //width: 100%;
   padding: 20px 50px;
   justify-content: space-between;
+
   background-color: white;
   align-items: center;
   box-sizing: border-box;
-  position: absoulte;
 `;
 
 export const GenreBtn = styled.button`
@@ -89,10 +82,25 @@ export const GenreBtn = styled.button`
   }
 `;
 
+export const SidebarButtonToggle = styled.div`
+  margin-right: 10px;
+  
+`;
+
+export const SidebarGenreBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 1350px;
+`;
+
+export const ToggleButton = styled.i`
+
+`
+
+
 export const SearchBarArea = styled.form`
   display: flex;
   justify-content: center;
-  //position: relative;
   margin-bottom: 10px;
 `;
 
