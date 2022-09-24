@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 export const SidebarContainer = styled.div`
   font-family: "Noto Sans KR", sans-serif;
   display: flex;
+  flex-direction: row;
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -25,6 +26,12 @@ export const SidebarMain = styled.div`
   background: rgb(0, 0, 0);
 `;
 
+export const Sidepart = styled.div`
+  //position: fixed;
+  width: 100%;
+  height: 100%;
+`;
+
 export const SidebarButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -33,22 +40,36 @@ export const SidebarButtonContainer = styled.div`
   margin-right: 20px;
 `;
 
+export const SidebarcloseBtn = styled.button`
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 25px;
+  border: none;
+`;
+
 export const LocationTitle = styled.div`
   font-weight: bold;
-  margin-left: 30px;
+  margin: 20px 0px 0px 30px;
   font-size: 20px;
 `;
 
 export const LocationList = styled.ul`
   padding-left: 0px;
+  width: 300px;
 `;
 
 export const LocationDiv = styled.div`
-  padding-left: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
 `;
 
 export const LocationItem = styled.button`
-  margin: 5px 20px;
+  margin: 5px 15px;
   list-style: circle;
   cursor: pointer;
   background-color: transparent;
@@ -57,8 +78,9 @@ export const LocationItem = styled.button`
   font-weight: bold;
   border: none;
   &:hover {
-    background-color: white;
+    background-color: #e0f2f7;
     color: rgb(50, 50, 50);
   }
-  width: 70%;
+  width: 85px;
+  height: 30px;
 `;

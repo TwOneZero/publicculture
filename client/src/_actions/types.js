@@ -15,3 +15,4 @@ export const ADD_COMMENT = 'add_comment';
 export const GET_MY_COMMENTS = 'get_my_comments';
 export const GET_COMMENTS = 'get_comments';
 export const DELETE_COMMENT = 'delete_comment';
+export const GET_POSTS_BYDAY = 'get_posts_byday';

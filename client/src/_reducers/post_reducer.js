@@ -5,6 +5,7 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
+  GET_POSTS_BYDAY
 } from '../_actions/types';
 
 const initialState = {
@@ -24,12 +25,14 @@ export default function postState(state = initialState, action) {
       if (action.payload.isAuth === false) {
         return { ...state };
       } else {
-        return { post: action.payload.updatedPost };
+        return { ...state, post: action.payload.updatedPost };
       }
     case MY_LIKED:
       return { posts: action.payload.myFavPost };
     case GET_COUNT:
       return { ...state, getCount: action.payload };
+    case GET_POSTS_BYDAY :
+      return { ...state, dayPosts : action.payload };
     default:
       return state;
   }

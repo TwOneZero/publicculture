@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { getCurrentTime } = require('../middlewares/time');
 
 //댓글 달기
-exports.addComment = async (req, res) => {
+exports.addComment = async (req, res, next) => {
   try {
     const { postId } = req.params;
     if (!req.user) {
@@ -39,12 +39,12 @@ exports.addComment = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    next(error);
   }
 };
 
 //댓글 가져오기
-exports.getPostComments = async (req, res) => {
+exports.getPostComments = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const comments = await Comment.find()
@@ -63,12 +63,12 @@ exports.getPostComments = async (req, res) => {
     });
     return res.status(200).json({ success: true, allComments });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    next(error);
   }
 };
 
 //나의 모든 댓글 가져오기
-exports.getMyComments = async (req, res) => {
+exports.getMyComments = async (req, res, next) => {
   try {
     const myComments = await Comment.find({ userId: req.user._id })
       .exec()
@@ -79,12 +79,12 @@ exports.getMyComments = async (req, res) => {
       });
     return res.status(200).json({ success: true, myComments });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    next(error);
   }
 };
 
 //댓글 삭제
-exports.deleteComment = async (req, res) => {
+exports.deleteComment = async (req, res, next) => {
   try {
     //해당 코멘트 정보
     const { commentId } = req.params;
@@ -93,6 +93,6 @@ exports.deleteComment = async (req, res) => {
     const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
     return res.status(200).json({ success: true, deletedComment });
   } catch (err) {
-    return res.status(500).json({ message: err });
+    next(err);
   }
 };

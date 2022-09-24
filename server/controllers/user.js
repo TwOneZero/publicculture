@@ -15,7 +15,7 @@ exports.registerUser = async (req, res) => {
 };
 
 //Login user
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res, next) => {
   //요청된 이메일이 있는지 db 에서 확인
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -52,7 +52,7 @@ exports.loginUser = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    next(error);
   }
 };
 
@@ -84,11 +84,12 @@ exports.logoutUser = async (req, res) => {
 };
 
 //유저 닉네임, 장르업데이트
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res, next) => {
   try {
     //바꿀 패스워드
+    userName = req.body.name === '' ? req.user.name : req.body.name;
     const newUser = {
-      name: req.body.name,
+      name: userName,
       genre: req.body.genre,
     };
     const user = await User.findOne({ _id: req.user.id });
@@ -115,12 +116,12 @@ exports.updateUser = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({ message: error });
+    next(error);
   }
 };
 
 //유저 비밀번호업데이트
-exports.updateUser_Password = async (req, res) => {
+exports.updateUser_Password = async (req, res, next) => {
   try {
     //바꿀 패스워드
     const newUser = {
@@ -148,13 +149,14 @@ exports.updateUser_Password = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({ message: error });
+    next(error);
   }
 };
 
 //닉네임 중복 체크
-exports.checkName = async (req, res) => {
+exports.checkName = async (req, res, next) => {
   try {
+    console.log(req.isAuth);
     const user = await User.findOne({ name: req.body.name });
     if (!user) {
       return res.json({ success: true });
@@ -162,6 +164,6 @@ exports.checkName = async (req, res) => {
       return res.json({ success: false });
     }
   } catch (error) {
-    return res.json({ message: error });
+    next(error);
   }
 };

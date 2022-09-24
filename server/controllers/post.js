@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { googleSearch } = require('../utils/googleSearch');
 
 //랜덤 post 가져오기
-exports.getRandomPost = async (req, res) => {
+exports.getRandomPost = async (req, res, next) => {
   const limitrecords = 20;
 
   //랜덤한 수
@@ -24,12 +24,12 @@ exports.getRandomPost = async (req, res) => {
       .status(200)
       .json({ success: true, len: slicedPost.length, posts: slicedPost });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    next(error);
   }
 };
 
 //검색으로 가져오기 ( title  or  codename  다 됨)
-exports.getPostBySearch = async (req, res) => {
+exports.getPostBySearch = async (req, res, next) => {
   //req.query로 해야함
   const { search } = req.query;
   //-> /.* 무용 .*/
@@ -47,12 +47,12 @@ exports.getPostBySearch = async (req, res) => {
     }).exec();
     return res.status(200).json({ success: true, posts });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    next(error);
   }
 };
 
 //디테일 페이지에서 사용 params 로  post._id 값을 id 로 넘겨주면 됨
-exports.getPostDetails = async (req, res) => {
+exports.getPostDetails = async (req, res, next) => {
   const { id } = req.params;
   try {
     //db id 로 가져옴
@@ -62,12 +62,12 @@ exports.getPostDetails = async (req, res) => {
     const post = await Post.findById(id);
     return res.status(200).json({ success: true, post });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    next(error);
   }
 };
 
 // 좋아요
-exports.likePost = async (req, res) => {
+exports.likePost = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!req.user) {
@@ -96,12 +96,12 @@ exports.likePost = async (req, res) => {
       .status(200)
       .json({ success: true, updatedPost, likes: post.likes.length });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    next(error);
   }
 };
 
 //관심행사 가져오기
-exports.getFavPost = async (req, res) => {
+exports.getFavPost = async (req, res, next) => {
   try {
     //모든 포스트 가져오기
     const posts = await Post.find({}).exec();
@@ -111,37 +111,40 @@ exports.getFavPost = async (req, res) => {
     });
     return res.json({ success: true, myFavPost: likedPost });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    next(error);
   }
 };
 
-exports.getPostDateCount = async (req, res) => {
+exports.getPostDateCount = async (req, res, next) => {
+  const { month } = req.body;
   let today = dayjs()
     .startOf('month')
-    .set('month', 9)
+    .set('month', month)
     .set('year', 2022)
+    .set('date', 1)
     .format('YYYY-MM-DD HH:mm:ss');
   let prevMonth = dayjs()
     .startOf('month')
-    .set('month', 8)
+    .set('month', month)
     .set('year', 2022)
+    .set('date', 31)
     .format('YYYY-MM-DD HH:mm:ss');
-  console.log(today);
+
+  
   try {
-    const postAll = await Post.find({
-      end_date: { $lte: today, $gte: prevMonth },
-    }).exec();
-    return res.status(200).json({ postAll, count: postAll.length });
-    // await Post.find({ end_date: {$gte: d_t }}).then((post) => {
-    //   return res.status(200).json({ count: post.length});
-    // });
+    const posts = await Post.find({
+      end_date: { $lte: prevMonth, $gte: today },
+    })
+      .select('codename end_date')
+      .exec();
+    return res.status(200).json({ posts, count: posts.length });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    next(error);
   }
 };
 
 // 구글 search
-exports.searchMap = async (req, res) => {
+exports.searchMap = async (req, res, next) => {
   try {
     const { q } = req.body;
     let parameter = {
@@ -155,5 +158,38 @@ exports.searchMap = async (req, res) => {
     });
   } catch (error) {
     return res.json({ message: error });
+  }
+};
+
+exports.getPostbyDay = async (req, res) => {
+  const leftPad = (value) => {
+    if (value >= 10) {
+      return value;
+    }
+
+    return `0${value}`;
+  };
+
+  const toStringByFormatting = (source, delimiter = '-') => {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+
+    return [year, month, day].join(delimiter);
+  };
+
+  try {
+    const { month, day } = req.body;
+    today = toStringByFormatting(new Date(2022, month, day));
+    nextDay = toStringByFormatting(new Date(2022, month, Number(day) + 1));
+    const posts = await Post.find({
+      end_date: {
+        $gte: today,
+        $lt: nextDay,
+      },
+    }).exec();
+    return res.status(200).json({ success: true, posts });
+  } catch (error) {
+    return res.status(400).json({ message: error });
   }
 };

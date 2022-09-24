@@ -71,13 +71,13 @@ export const RcH2 = styled.h2`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: start;
+  text-align: center;
 `
 
 export const RcP = styled.p`
   font-size: 1rem;
   width: 150px;
-  text-align: start;
+  text-align: center;
   margin: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -197,8 +197,9 @@ export const Likebtn = styled.button`
 export const TabBar = styled.div`
   display: flex;
   height: 55px;
-  width: 70%;
-  padding: 10px 100px;
+  width: 1300px;
+  margin-top: 30px;
+  padding: 10px 0;
   justify-content: space-between;
   background-color: white;
   align-items: center;
@@ -213,6 +214,7 @@ export const TabBtn = styled.button`
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 500;
+  margin: 0 250px;
   &:hover {
     //background-color: #a9a9a9;
     border-bottom: 4px solid #ffcb6b;

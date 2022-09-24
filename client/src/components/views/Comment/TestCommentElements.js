@@ -1,11 +1,52 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //댓글 조회
+
+export const CommentArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0px 100px 0px;
+  width: 100%;
+  height: 100%;
+`;
+export const CommentHeader = styled.div`
+  display: flex;
+  font-size: 40px;
+  font-weight: 1000;
+  margin: 60px 0px 50px 0px;
+  background-color: white;
+  color: black;
+  padding: 5px;
+  justify-content: center;
+  font-family: "Lato", sans-serif;
+`;
+
+export const CommentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0px 40px 0px;
+  
+`;
+
+export const Comments_content = styled.a`
+  text-decoration: none;
+  color: #000;
+
+  &:hover{
+    font-weight: bold;
+  }
+`
+
 export const Comments_container = styled.div`
   display: flex;
   flex-direction: column;
+  //align-items: center;
+  justify-content: center;
+  
   font-size: 14pt;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   width: 50vw;
   margin: 20px 0;
   border-bottom: 1px solid lightgrey;
