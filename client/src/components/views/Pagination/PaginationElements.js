@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const PageUlContainer = styled.div`
   width: 500px;
@@ -12,11 +12,11 @@ export const PageUl = styled.ul`
   list-style: none;
   text-align: center;
   border-radius: 3px;
-  color: white;
+  color: black;
   padding: 1px;
   border-top: 3px solid #186ead;
   border-bottom: 3px solid #186ead;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #e0f2f7;
 `;
 
 export const PageLi = styled.li`

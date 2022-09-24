@@ -5,9 +5,11 @@ import { searchPost } from '../../../_actions/post_action';
 import { logout, auth } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 import Sidebar from './Sidebar';
+import logo from "../../../images/logo.png"
 import {
   HeaderContainer,
   HeaderLogo,
+  LogoImg,
   SearchBarArea,
   SearchBar,
   Button,
@@ -103,7 +105,7 @@ function Header() {
       )}
       <HeaderContainer>
         <HeaderLogo type='button' onClick={onLogoClicked}>
-          public culture
+        <LogoImg src={logo}/>
         </HeaderLogo>
 
         <SearchBarArea onSubmit={onSearchClicked}>
@@ -181,9 +183,6 @@ function Header() {
               name='문화교양'
             >
               문화교양/강좌
-            </GenreBtn>
-            <GenreBtn itemType='button' onClick={onGenreClicked} name='기타'>
-              기타
             </GenreBtn>
           </GenreBar>
         </SidebarGenreBox>

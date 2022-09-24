@@ -49,6 +49,7 @@ export const WebsiteRights = styled.small`
 export const SocialIcons = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-left: 100px;
   align-items: center;
   width: 240px;
 `;

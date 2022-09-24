@@ -204,7 +204,7 @@ export const Total = styled.span`
 
 export const ShowEventContainer = styled.div`
   width: 1300px;
-  margin: 60px auto 0;
+  margin: 60px auto 60px;
   box-sizing: border-box;
 `;
 
@@ -223,12 +223,13 @@ export const ShowEventHeadContainer = styled.div`
 export const ShowEventHead = styled.p`
   display: flex;
   align-items: center;
-  /* position: relative; */
   width: 260px;
   height: 30px;
   padding-left: 25px;
-  color: #000;
-  font-size: 18px;
+  color: #101522;
+  font-size: 20px;
+  font-weight: bold;
+  
 `;
 
 export const ShowEventMain = styled.div``;
@@ -252,9 +253,9 @@ export const ShowEventContentTitle = styled.a`
   font-weight: bold;
   font-family: 'NGBold', 'Malgun Gothic', Dotum, '돋움', AppleGothicNeoSD,
     'Apple SD 산돌고딕 Neo', '굴림', arial, sans-serif;
-  white-space: nowrap;
   word-wrap: break-word;
   display: block;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
@@ -263,17 +264,48 @@ export const ShowEventContentTitle = styled.a`
 
 export const ShowEventContentDate = styled.p`
   font-size: 20px;
+  margin-left: 50px;
   line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ShowEventContentPlace = styled.p`
   width: 150px;
-  margin-left: 100px;
+  margin-left: 50px;
   font-size: 20px;
   line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const ShowEventCodename = styled.p`
   width: 150px;
   font-size: 20px;
   line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const ShowEventButton = styled.div`
+  width: 150px;
+  margin: 30px auto;
+  background: #101522;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+  }
 `;

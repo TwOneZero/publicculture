@@ -182,19 +182,20 @@ function displayPlaces(places) {
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
 
+    console.log(places)
+
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<div class="info">' +
-                '   <h5>' + places.place_name + '</h5>';
+                '   <h4>' + places.place_name + '</h4>';
 
     if (places.road_address_name) {
-        itemStr += '    <span>' + places.road_address_name + '</span>' +
+        itemStr += '    <h5>' + places.road_address_name + '</h5>' +
                     '   <span class="jibun gray">' +  places.address_name  + '</span>';
     } else {
-        itemStr += '    <span>' +  places.address_name  + '</span>'; 
+        itemStr += '    <h3>' +  places.address_name  + '</h3  >'; 
     }
-                 
-      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+      itemStr += '  <h class="tel">' + places.phone  + '</h>' +
                 '</div>';           
 
     el.innerHTML = itemStr;
@@ -266,7 +267,7 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+    var content = '<div style="padding:5px;z-index:1;flex-direction:cent">' + title + '</div>';
 
     infowindow.setContent(content);
     infowindow.open(map, marker);

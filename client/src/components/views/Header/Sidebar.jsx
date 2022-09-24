@@ -10,6 +10,7 @@ import {
   LocationList,
   LocationDiv,
   LocationItem,
+  Sidepart,
 } from "./SidebarElements";
 
 const Sidebar = ({ onSidebarToggleButtonClicked }) => {
@@ -82,6 +83,7 @@ const Sidebar = ({ onSidebarToggleButtonClicked }) => {
           </LocationList>
         </div>
       </SidebarMain>
+      <Sidepart onClick={onSidebarToggleButtonClicked} />
     </SidebarContainer>
   );
 };

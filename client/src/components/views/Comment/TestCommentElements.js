@@ -7,6 +7,8 @@ export const CommentArea = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 30px 0px 100px 0px;
+  width: 100%;
+  height: 100%;
 `;
 export const CommentHeader = styled.div`
   display: flex;
@@ -25,13 +27,24 @@ export const CommentBox = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 40px 0px 40px 0px;
+  
 `;
+
+export const Comments_content = styled.a`
+  text-decoration: none;
+  color: #000;
+
+  &:hover{
+    font-weight: bold;
+  }
+`
 
 export const Comments_container = styled.div`
   display: flex;
   flex-direction: column;
   //align-items: center;
   justify-content: center;
+  
   font-size: 14pt;
   font-family: "Noto Sans KR", sans-serif;
   width: 50vw;

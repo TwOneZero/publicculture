@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostDateCount, getPostbyDay } from '../../../_actions/post_action';
+import { useRef, useMemo } from 'react';
 import {
   Frame,
   Header,
@@ -40,6 +41,7 @@ import {
   ShowEventContentPlace,
   ShowEventContentDate,
   ShowEventCodename,
+  ShowEventButton,
 } from './CalendarElements';
 import DayPosts from './DayPosts';
 
@@ -88,6 +90,23 @@ const Calendar = (isSelected) => {
   const [todayEvent, setTodayEvent] = useState([]);
   //일 행사
   const postState = useSelector((state) => state.post);
+
+  const [isShowMore, setIsShowMore] = useState(false); // 더보기 열고 닫는 스위치
+  const postsLimit = useRef(6); //6
+
+  const posting = useMemo(() => {
+    // 조건에 따라 게시글을 보여주는 함수
+    const shortPost = postState.dayPosts?.posts.slice(0, postsLimit.current); // 원본에서
+
+    if (postState.dayPosts?.posts.length > postsLimit.current) {
+      // 원본이 길면 (원본 글자수 > 제한된 갯수)
+      if (isShowMore) {
+        return postState.dayPosts?.posts;
+      } // 더보기가 true 면 원본 바로 리턴
+      return shortPost; // (더보기가 false면) 짧은 버전 리턴해주자
+    }
+    return postState.dayPosts?.posts; // 그렇지않으면 (짧은 글에는) 쓴글 그대로 리턴!
+  }, [isShowMore, postsLimit, postState.dayPosts]);
 
   useEffect(() => {
     setDay(date.getDate());
@@ -244,14 +263,32 @@ const Calendar = (isSelected) => {
       </AllContainer>
       <ShowEventContainer>
         <ShowEventHeadContainer>
-          <ShowEventHead>행사</ShowEventHead>
+          <ShowEventHead>2022년 {month + 1}월 {day}일 전체 행사</ShowEventHead>
         </ShowEventHeadContainer>
         <ShowEventMain>
           <ShowEventContentUl>
             {/* ToMake */}
-            {postState.dayPosts?.posts.map((post) => {
-              return <DayPosts key={post._id} {...post} />;
-            })}
+            {/* {
+              postState.dayPosts?.posts.map((post) => {
+                return <DayPosts key={post._id} {...post} />;
+                // return <TestPost />
+              })
+            } */}
+            {
+              postState.dayPosts?.posts?
+                <DayPosts posts={posting} />
+                : null
+            }
+            {
+              postState.dayPosts?.posts.length > postsLimit.current && isShowMore
+                ? ''
+                :
+                <ShowEventButton
+                  onClick={() => {
+                    setIsShowMore((prev) => !prev);
+                  }}
+                >더보기</ShowEventButton>
+            }
           </ShowEventContentUl>
         </ShowEventMain>
       </ShowEventContainer>
