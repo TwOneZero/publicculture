@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-//jsx 컴포넌트 만들 때, PascalCase 나 SCREAMING_SNAkE_CASE 가 규칙
 export const SidebarButtonToggle = styled.div`
   margin-right: 10px;
 `;

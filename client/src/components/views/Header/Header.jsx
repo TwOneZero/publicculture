@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPost } from '../../../_actions/post_action';
-import { logout, auth } from '../../../_actions/user_action';
+import { logout} from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 import Sidebar from './Sidebar';
 import logo from "../../../images/logo.png"
@@ -27,7 +27,6 @@ function Header() {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
   const [search, setSearch] = useState('');
-  const [Login, setLogin] = useState(true);
   const [isSidebarOpened, setIsSidebarOpened] = useState(false);
   const onSidebarToggleButtonClicked = () => {
     setIsSidebarOpened(!isSidebarOpened);
@@ -59,15 +58,6 @@ function Header() {
     });
   };
 
-  // const CheckLogin = () => {
-  //   dispatch(auth()).then((res) => {
-  //     if (res.payload.isAuth === false) {
-  //       setLogin(false);
-  //     } else {
-  //       setLogin(true);
-  //     }
-  //   });
-  // };
 
   const onGenreClicked = (e) => {
     e.preventDefault();
@@ -96,7 +86,6 @@ function Header() {
 
   return (
     <>
-      {/* {CheckLogin()} */}
       {isSidebarOpened && (
         <Sidebar
           isSidebarOpened={isSidebarOpened}

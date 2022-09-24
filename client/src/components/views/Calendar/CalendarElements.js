@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { BsFillArrowLeftCircleFill as LeftArrow } from 'react-icons/bs';
 import { BsFillArrowRightCircleFill as RightArrow } from 'react-icons/bs';
 
