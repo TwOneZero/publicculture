@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { auth } from "../../../_actions/user_action";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { auth } from '../../../_actions/user_action';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Mypage_container,
   Myprofile_info,
@@ -12,7 +12,7 @@ import {
   Email,
   Genre_container_info,
   Genre,
-} from "./MypageElements";
+} from './MypageElements';
 
 const MypageInfo = () => {
   // const dispatch = useDispatch();
@@ -44,8 +44,9 @@ const MypageInfo = () => {
           <Genre_container_info>
             Prefer Genre
             <Line_info></Line_info>
-            {/* {userData ? <Genre>{userData.genre}</Genre> : ""} */}
-            <Genre>{userState.userData.genre}</Genre>
+            {userState.userData.genre.map((item, idx) => {
+              return <Genre key={idx}>{item}</Genre>;
+            })}
           </Genre_container_info>
         </Page_area_info>
       </Mypage_container>

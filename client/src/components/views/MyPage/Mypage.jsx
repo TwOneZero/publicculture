@@ -94,12 +94,16 @@ function Mypage() {
           </UserBtnBox>
           <UserNamePreferBox>
             {/* {userData ? <UserName>{userData.name}</UserName> : ''} */}
-            <UserName>{userState.userData.name}</UserName>
+            <UserName>{userState.userData?.name}</UserName>
 
             <PreferenceBox>
               {/* 선호 장르 : {userData ? userData.genre : ''} */}
-              선호 장르 : {userState.userData.genre[0]},{' '}
-              {userState.userData.genre[1]}
+              선호 장르 :{' '}
+              {userState.userData?.genre.map((el, idx) => {
+                if (idx + 1 === userState.userData.genre.length) {
+                  return `${el}`;
+                } else return `${el},`;
+              })}
             </PreferenceBox>
           </UserNamePreferBox>
           <UserInfoMenuBtns>

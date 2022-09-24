@@ -385,6 +385,17 @@ export const PasswordUpdateBtn = styled.button`
   margin-top: 70px;
 `;
 
+export const NotPasswordUpdateBtn = styled.div`
+  border: none;
+  color: white;
+  background-color: #a9a9a9;
+  text-align: center;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+  margin-top: 70px;
+`;
+
 export const Genre_container_edit = styled.div`
   display: flex;
   flex-direction: column;
