@@ -1,19 +1,24 @@
 import styled from "styled-components";
 
+
+export const Main_Container = styled.div`
+width: 100%;
+background-color: #e0f2f7;
+`
+
 export const SgginfoDiv = styled.div`
-  margin-top: 5px;
   width: 100%;
-  height: 1200px;
   display: flex;
   align-items: center;
-  background-color: #e0f2f7;
+  margin: 0 auto;
+  margin-top: 5px;
   flex-direction: column;
 `;
 
 export const SgginfoImg = styled.img`
   margin-top: 150px;
   /* margin-bottom: 150px; */
-  width: 1200px;
+  width: 65%;
   &:hover {
     transition: all 0.3s ease-in-out;
     //background-color: coral;
@@ -25,13 +30,14 @@ export const SliderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1300px;
+  width: 65%;
   margin-top: 60px auto;
   overflow: hidden;
 `;
 
 export const IMGCover = styled.div`
   width: 30vw;
+  width: 100%;
   height: 45vh;
   //background-color: black;
   margin: 50px;
@@ -44,7 +50,9 @@ export const IMGCover = styled.div`
 
 export const IMG = styled.img`
   width: 15vw;
+  width: 100%;
   height: 36vh;
+  /* height: 100%; */
   object-fit: cover;
   background-color: black;
   &:hover {
