@@ -27,8 +27,11 @@ const MapContainer = () => {
           overflowX: 'hidden',
         }}
       >
-        <div className='option'></div>
-        <ul id='placesList'></ul>
+        <div className='option'>
+          <div>
+            <ol id='placesList'></ol>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,8 @@ export const Register_page_container = styled.form`
   flex-direction: column;
   justify-content: middle;
   align-items: center;
-  padding: 20px 10px;
+  padding: 20px 10px 50px;
+  
 `;
 
 export const Register_text = styled.div`
@@ -27,7 +28,7 @@ export const Register_form_container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 500px;
+  height: 400px;
 `;
 
 export const Input_Name = styled.input`

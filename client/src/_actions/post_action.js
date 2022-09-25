@@ -6,8 +6,8 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
-  DETIAL_RANDOM_POST,
   GET_POSTS_BYDAY,
+  SORTED_POST,
 } from './types';
 
 //getAllpost
@@ -29,6 +29,19 @@ export function searchPost(search) {
     .then((res) => res.data);
   return {
     type: SEARCH_POST,
+    payload: request,
+  };
+}
+
+//정렬 기능
+export function sortedPost(search, mode) {
+  const request = axios
+    .get(`/api/posts/sorting?search=${search}&mode=${mode}`, {
+      withCredentials: true,
+    })
+    .then((res) => res.data);
+  return {
+    type: SORTED_POST,
     payload: request,
   };
 }

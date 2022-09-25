@@ -1,4 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+
+export const MypageDiv = styled.div`
+  width: 100%;
+  //height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 // LikePost 컴포넌트
 export const MyLikedPostContainer = styled.div`
@@ -17,7 +25,7 @@ export const MyLikedPostTitle = styled.div`
   color: black;
   padding: 5px;
   justify-content: center;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 `;
 
 export const PostingContainer = styled.div`
@@ -32,11 +40,9 @@ export const PostingInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 500px;
-  //height: 600px;
   padding: 50px;
-  //background-color: yellow;
   align-items: center;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
 `;
 
@@ -57,18 +63,23 @@ export const Title = styled.div`
 
 // mypage 탭부분
 export const UserTabContainer = styled.div`
-    margin-top: 5px;
-    border-bottom: 3px solid #eee;
-    background-color: #fff;
-    height: 40px;
-    padding-bottom: 1px;
-`
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 80px;
+  border-bottom: 3px solid #eee;
+  background-color: #fff;
+  height: 50px;
+  //min-width: 1000px;
+  border: none;
+`;
 
 export const UserTab = styled.div`
-  width: 66%;
+  width: 61%;
   margin: 0 auto;
   font-size: 1rem;
-`
+  min-width: 1000px;
+`;
 
 export const UserTabUl = styled.ul`
   list-style: none;
@@ -79,40 +90,43 @@ export const UserTabUl = styled.ul`
   width: 100%;
   margin: 0;
   padding: 0;
-`
+`;
 
 export const UserTabLi = styled.li`
   margin-left: 1rem;
-  &:first-child{
+  &:first-child {
     margin-left: 0;
   }
-`
+`;
 
 export const UserTabItem = styled.button`
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 39px;
-    height: 39px;
-    text-decoration: none;
-    display: flex;
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-`
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 39px;
+  height: 39px;
+  text-decoration: none;
+  display: flex;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+`;
 
-export const MypageIcon = styled.div` `
+export const MypageTabIcon = styled.div``;
 
-export const MypageTitle = styled.div`
+export const MypageTabTitle = styled.div`
   margin-left: 0.8rem;
   &:hover {
-      border-bottom: 2px solid #000;
-    }
-`
+    border-bottom: 2px solid #000;
+  }
+  font-size: 18px;
+  font-weight: ;
+`;
 
 // mypage 본문 부분
 
 export const MypageContainer = styled.div`
   width: 100%;
+  min-width: 1000px;
   margin-top: 5px;
   font-size: 17px;
   font-family: "Noto Sans KR", sans-serif;
@@ -120,46 +134,44 @@ export const MypageContainer = styled.div`
 `;
 
 export const MypageContent = styled.div`
-  width: 55%;
-  margin: 5rem auto 0;
+  width: 53%;
+  margin: 5rem auto 5rem;
 `;
 
-export const MypageTitleContainer = styled.div``
+export const MypageTitleContainer = styled.div``;
 
-export const MypageH2 = styled.h2``
+export const MypageH2 = styled.h2``;
 
 export const ProfileBox = styled.div`
   margin-top: 3rem;
   border: 2px solid #eee;
   border-bottom: none;
-`
+`;
 export const ProfileContent = styled.div`
   display: flex;
   border-bottom: 2px solid #eee;
-`
+`;
 
 export const LeftBox = styled.div`
   width: 30%;
   background: #f9f9f9;
   color: #000;
   border-right: 2px solid #eee;
-`
+  padding-bottom: 1.5rem;
+`;
 
-export const TextContainer = styled.div`
-  
-`
+export const TextContainer = styled.div``;
 
 export const ProfileP = styled.div`
   padding-left: 50px;
   padding-top: 25px;
-`
+`;
 
 export const RightBox = styled.div`
   width: 70%;
   background: #fff;
-  margin-bottom: 1.5rem;
   margin-left: 1rem;
-`
+`;
 
 export const UserIcon = styled.div`
   margin-left: 3rem;
@@ -167,25 +179,20 @@ export const UserIcon = styled.div`
 `;
 
 export const MyinfoBtn = styled.button`
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   color: #000;
-  margin-left: 3rem;
-  width: 12%;
+  margin-left: 3.3rem;
+  width: 80px;
   /* width: 88px; */
   background-color: #fff;
   cursor: pointer;
   font-size: 0.8rem;
+  margin-bottom: 10px;
 `;
 
-
-export const UserInfoBox = styled.div`
-  /* display: flex;
-  justify-content: center; */
-`;
+export const UserInfoBox = styled.div``;
 
 export const UserInfoEditBox = styled.button`
-  /* width: 200px;
-  height: 150px; */
   font-weight: 400;
   font-size: 25px;
   background-color: #fff;
@@ -196,10 +203,8 @@ export const UserInfoEditBox = styled.button`
   }
 `;
 
-
 export const UserInfoMenuBtns = styled.div`
   display: flex;
-  /* width: 1000px; */
   justify-content: space-around;
 `;
 
@@ -209,17 +214,10 @@ export const MypageTitleBtn = styled.div`
   cursor: pointer;
 `;
 
-
-
 export const UserBtnBox = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-
-
-
-
 
 export const UserNamePreferBox = styled.div`
   display: flex;
@@ -236,18 +234,15 @@ export const PreferenceBox = styled.div`
   font-size: 25px;
 `;
 
-
-
-
-
-
-
-
-export const InfoBox = styled.div``;
+export const InfoBox = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-bottom: 100px;
+`;
 
 // Mypage Edit 컴포넌트
 
-export const EditMypage_container = styled.div`
+export const EditMypageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -255,12 +250,12 @@ export const EditMypage_container = styled.div`
   width: 100%;
   height: 100%;
   margin: 30px 0px 100px 0px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 1000;
   font-size: 24px;
 `;
 
-export const Myprofile_edit = styled.div`
+export const MyprofileEdit = styled.div`
   display: flex;
   font-size: 40px;
   font-weight: 1200;
@@ -270,32 +265,30 @@ export const Myprofile_edit = styled.div`
   padding: 5px;
 `;
 
-export const Nickname_container_edit = styled.div`
+export const NicknameContainerEdit = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 50px 0px 50px 0px;
-  //background-color: green;
 `;
 
-export const Nickname_edit = styled.input`
+export const NicknameEdit = styled.input`
   margin-top: 10px;
-  //height: 15px;
   padding: 10px;
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &:focus {
     outline: none;
   }
 `;
 
-export const NicknameC_btn = styled.button`
+export const NicknameCBtn = styled.button`
   border: none;
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: #e0f2f7;
   cursor: pointer;
   font-size: 18px;
   margin-top: 30px;
@@ -304,6 +297,10 @@ export const NicknameC_btn = styled.button`
   height: 100%;
   border-radius: 5px;
   font-weight: bold;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
 `;
 export const NicknameChangeBtn = styled.button`
   border: none;
@@ -340,7 +337,6 @@ export const PasswordContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 40px;
-  //background-color: green;
 `;
 export const Password = styled.input`
   margin-top: 10px;
@@ -349,7 +345,7 @@ export const Password = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &:focus {
     outline: none;
   }
@@ -362,7 +358,7 @@ export const PasswordCheck = styled.input`
   font-size: 15px;
   font-weight: 800;
   resize: none;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &:focus {
     outline: none;
   }
@@ -372,36 +368,57 @@ export const PasswordCheckBtn = styled.button`
   border: none;
   color: white;
   background-color: black;
+  color: black;
+  background-color: #e0f2f7;
   cursor: pointer;
-  width: 83px;
-  height: 35px;
   font-size: 18px;
-  margin: 20px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
 `;
 
 export const PasswordUpdateBtn = styled.button`
   border: none;
   color: white;
   background-color: black;
+  color: black;
+  background-color: #e0f2f7;
   cursor: pointer;
-  width: 100px;
-  height: 50px;
   font-size: 18px;
-  margin-top: 70px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
 `;
 
 export const NotPasswordUpdateBtn = styled.div`
   border: none;
   color: white;
   background-color: #a9a9a9;
-  text-align: center;
-  width: 100px;
-  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 45px;
   font-size: 18px;
-  margin-top: 70px;
+  margin-top: 30px;
+  border-radius: 5px;
 `;
 
-export const Genre_container_edit = styled.div`
+export const GenreContainerEdit = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -410,25 +427,36 @@ export const Genre_container_edit = styled.div`
 
 export const UserUpdateBtn = styled.button`
   border: none;
-  color: white;
-  background-color: black;
+  background-color: #e0f2f7;
   cursor: pointer;
   width: 100%;
-  //height: 100%;
   font-size: 18px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
 `;
 
 export const NotUserUpdateBtn = styled.div`
   border: none;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   background-color: #a9a9a9;
   width: 100%;
-  //height: 100%;
+  height: 45px;
   font-size: 18px;
+  border-radius: 5px;
 `;
 
-export const GENRE_BOX = styled.input`
+export const GENREBOX = styled.input`
   padding: 10px;
   font-weight: 800;
   display: flex;
@@ -440,7 +468,6 @@ export const Checkbox = styled.div`
   flex-direction: column;
   justify-content: space-around;
   font-size: 16px;
-  //width: 40vw;
 `;
 
 export const CheckboxContainer = styled.div`
@@ -461,17 +488,16 @@ export const Modify_btn = styled.button`
   width: 120px;
 `;
 
-export const Line_edit = styled.div`
+export const LineEdit = styled.div`
   border-bottom: 1px solid grey;
   width: 12vw;
 `;
 
-export const Page_area_edit = styled.div`
+export const PageAreaEdit = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //height: 600px;
 `;
 
 // Mypage info 컴포넌트
@@ -497,7 +523,6 @@ export const Nickname_container_info = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //background-color: green;
 `;
 
 export const Nickname_info = styled.div`
@@ -511,7 +536,6 @@ export const EmailContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //background-color: green;
   margin-top: 50px;
 `;
 
@@ -519,7 +543,6 @@ export const Email = styled.div`
   padding: 12px;
   font-size: 20px;
   font-weight: 500;
-  //width: 50vw;
 `;
 
 export const Genre_container_info = styled.div`
@@ -527,7 +550,6 @@ export const Genre_container_info = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //background-color: green;
   margin-top: 50px;
 `;
 
@@ -550,8 +572,6 @@ export const Page_area_info = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 300px;
-  // left: 50%
-  // top: 50%
   padding: 5px;
 `;
 
@@ -565,12 +585,12 @@ export const PasswordPage = styled.div`
   width: 100%;
   height: 100%;
   margin: 30px 0px 100px 0px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 1000;
   font-size: 24px;
 `;
 
-export const Password_edit = styled.div`
+export const PasswordEdit = styled.div`
   display: flex;
   font-size: 40px;
   font-weight: 1200;
