@@ -145,35 +145,11 @@ function getListItem(index, places) {
         itemStr += '    <h3>' +  places.address_name  + '</h3  >'; 
     }
       itemStr += ' <br> <h class="tel">' + places.phone  +  '</h> </br>' +
-      '<a href= '+ places.place_url + '>'+ '카카오맵' + '</a>'+ '<hr width="320px" align="left" color="lightGrey" size="1px"></hr>'+
+      '<a style="text-decoration:none; color:black; font-weight:600;" href='+ places.place_url + '>'+ '카카오맵 <i class="fas fa-external-link"></i>' + '</a>'+ '<hr width="320px" align="left" color="lightGrey" size="1px"></hr>'+
                 '</div>';          
 
     el.innerHTML = itemStr;
     el.className = 'item';
-
-    return el;
-}
-
-// 검색결과 항목을 Element로 반환하는 함수입니다
-function items(index, places) {
-
-    var el = document.createElement('li'),
-    itemStr = '<span class="(index+1)"></span>' +
-                '<div class="info">' +
-                '   <h4>' + places.place_name + '</h4>';
-
-    if (places.road_address_name) {
-        itemStr += '    <h5>' + places.category_name + '</h5>' +
-                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
-    } else {
-        itemStr += '    <h3>' +  places.address_name  + '</h3  >'; 
-    }
-      itemStr += ' <br> <h class="tel">' + places.phone  +  '</h> </br>' +
-      '<a href= '+ places.place_url + '>'+ '카카오맵' + '</a>'+ '<hr width="320px" align="left" color="lightGrey" size="1px"></hr>'+
-                '</div>';          
-
-    el.innerHTML = itemStr;
-    el.className = 'items';
 
     return el;
 }
@@ -219,7 +195,7 @@ function displayInfowindow(marker, title) {
 function displayInfowindowClicked(marker, title) {
     var content = '<div style="width: 150px; z-index:1; text-align:center; font-size:20px; font-weight: 500; padding:5px;">' + 
     title.place_name + '  ' + 
-    '<a href= '+ title.place_url + '>' +
+    '<a style="text-decoration:none" href= '+ title.place_url + '>' +
     '<i class="fas fa-info-circle"></i></a>' +
     '<div style="font-size:14px; padding:2px;">' + title.category_name + '</div>'+
     '</div>';
