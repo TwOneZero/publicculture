@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getPostDetails,
-  likePost,
-} from '../../../_actions/post_action';
+import { getPostDetails, likePost } from '../../../_actions/post_action';
 import Comment from '../Comment/Comment';
 import Auth from '../../../hoc/auth';
 
@@ -63,12 +60,13 @@ function PostPage() {
     dispatch(getPostDetails(params.postId)).then((res) => {
       if (res.payload.post) {
         console.log(res.payload.post);
+        setRandoms(Math.floor(Math.random() * postState.posts.length));
+    setRandoms2(Math.floor(Math.random() * postState.posts.length));
       } else {
         console.log('error!!!!!!!!!!!!!!');
       }
     });
-    setRandoms(Math.floor(Math.random() * postState.posts.length));
-    setRandoms2(Math.floor(Math.random() * postState.posts.length));
+    
   }, [dispatch, params.postId, postState.posts.length]);
 
   const onLikebtnClicked = () => {
@@ -201,28 +199,28 @@ function PostPage() {
                       <RecommendList>
                         {postState.posts ? (
                           <>
-                            <a href={`/post/${postState.posts[randoms]._id}`}>
+                            <a href={`/post/${postState.posts[randoms]?._id}`}>
                               <RcImage
-                                src={postState.posts[randoms].main_img}
+                                src={postState.posts[randoms]?.main_img}
                               />
                             </a>
 
-                            <RcH2>{postState.posts[randoms].title}</RcH2>
-                            <RcP>{postState.posts[randoms].place}</RcP>
+                            <RcH2>{postState.posts[randoms]?.title}</RcH2>
+                            <RcP>{postState.posts[randoms]?.place}</RcP>
                           </>
                         ) : null}
                       </RecommendList>
                       <RecommendList>
                         {postState.posts ? (
                           <>
-                            <a href={`/post/${postState.posts[randoms2]._id}`}>
+                            <a href={`/post/${postState.posts[randoms2]?._id}`}>
                               <RcImage
-                                src={postState.posts[randoms2].main_img}
+                                src={postState.posts[randoms2]?.main_img}
                               />
                             </a>
 
-                            <RcH2>{postState.posts[randoms2].title}</RcH2>
-                            <RcP>{postState.posts[randoms2].place}</RcP>
+                            <RcH2>{postState.posts[randoms2]?.title}</RcH2>
+                            <RcP>{postState.posts[randoms2]?.place}</RcP>
                           </>
                         ) : null}
                       </RecommendList>

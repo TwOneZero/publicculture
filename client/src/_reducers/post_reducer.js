@@ -19,7 +19,7 @@ export default function postState(state = initialState, action) {
     case GET_POST:
       return { posts: action.payload.posts };
     case SEARCH_POST:
-      return { posts: action.payload.posts };
+      return { ...state, posts: action.payload.posts };
     case SORTED_POST:
       return { ...state, sorted: action.payload.posts };
     case DETAIL_POST:
