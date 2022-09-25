@@ -57,31 +57,27 @@ exports.getPostSorted = async (req, res, next) => {
     const { search, mode } = req.query;
     const regex = (pattern) => new RegExp(`.*${pattern}.*`);
     const searchRegex = regex(search);
-    if (mode === 'like') {
+    const getSortedPosts = async (mode) => {
+      const posts = await Post.find({
+        $or: [
+          { codename: { $regex: searchRegex } },
+          { title: { $regex: searchRegex } },
+          { guname: { $regex: searchRegex } },
+          { place: { $regex: searchRegex } },
+        ],
+      })
+        .sort({ [mode]: -1 })
+        .exec();
+      return posts;
+    };
+
+    if (mode === 'likes') {
       //좋아요 수
-      const posts = await Post.find({
-        $or: [
-          { codename: { $regex: searchRegex } },
-          { title: { $regex: searchRegex } },
-          { guname: { $regex: searchRegex } },
-          { place: { $regex: searchRegex } },
-        ],
-      })
-        .sort({ likes: -1 })
-        .exec();
+      const posts = await getSortedPosts('likes');
       return res.status(200).json({ success: true, posts });
-    } else {
+    } else if (mode === 'comments') {
       //댓글
-      const posts = await Post.find({
-        $or: [
-          { codename: { $regex: searchRegex } },
-          { title: { $regex: searchRegex } },
-          { guname: { $regex: searchRegex } },
-          { place: { $regex: searchRegex } },
-        ],
-      })
-        .sort({ comments_length: -1 })
-        .exec();
+      const posts = await getSortedPosts('comments_length');
       return res.status(200).json({ success: true, posts });
     }
   } catch (error) {

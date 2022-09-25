@@ -23,7 +23,7 @@ const postSchema = new Schema(
     themecode: String,
 
     likes: { type: [String], default: [] },
-    comments_length: 0,
+    comments_length: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
