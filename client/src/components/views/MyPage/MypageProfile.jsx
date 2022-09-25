@@ -79,7 +79,7 @@ const MypageProfile = () => {
                 <TextContainer>
                   <ProfileP>
                     {userState.userData?.genre.map((el, idx) => {
-                      if (idx + 1 === userState.userData.genre.length) {
+                      if (idx + 1 === userState.userData?.genre.length) {
                         return `${el}`;
                       } else return `${el},`;
                     })}

@@ -8,6 +8,7 @@ const {
   searchMap,
   getPostDateCount,
   getPostbyDay,
+  getPostSorted,
   getRandomCodeNamePost,
 } = require('../controllers/post');
 const { auth } = require('../middlewares/auth');
@@ -20,6 +21,8 @@ router.get('/posts', getRandomPost);
 router.get('/posts/liked', auth, getFavPost);
 //검색하기
 router.get('/posts/search', getPostBySearch);
+//정렬
+router.get('/posts/sorting', getPostSorted);
 //캘린더데이행사
 router.post('/posts/byday', getPostbyDay);
 //디테일페이지
