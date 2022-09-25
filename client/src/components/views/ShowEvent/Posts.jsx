@@ -1,30 +1,30 @@
 import React from 'react';
 import { PostingInfo, ImgContainer } from './ShowEventElements';
+import {
+  PostsContainer,
+  PostsA,
+  PostsTitle,
+  PostsCodename,
+  PostsDate,
+  PostsPlace,
+  PostsLikes,
+} from './PostsElements'
 
 const Post = ({ posts }) =>
   posts.map((info, index) => (
-    <div key={info._id}>
+    <PostsContainer key={info._id}>
       <PostingInfo>
-        <a href={`/post/${info._id}`}>
+        <PostsA href={`/post/${info._id}`}>
           <ImgContainer src={info.main_img} alt='images' />
-        </a>
-        <div
-          style={{
-            fontWeight: '700',
-            fontSize: '19px',
-            marginBottom: '5px',
-          }}
-        >
-          {info.title}
-        </div>
-        <div style={{ fontWeight: '500', marginBottom: '3px' }}>
-          {info.codename}
-        </div>
-        <div style={{ fontSize: '14px' }}>{info.date}</div>
-        <div>{info.place}</div>
-        <div style={{ marginTop: '10px' }}>❤️ {info.likes.length}</div>
+        </PostsA>
+        <PostsTitle>{info.title}</PostsTitle>
+        <PostsCodename>{info.codename}</PostsCodename>
+        <PostsDate>{info.date}</PostsDate>
+        <PostsPlace>{info.place}</PostsPlace>
+        <PostsLikes>❤️ {info.likes.length}</PostsLikes>
       </PostingInfo>
-    </div>
+    </PostsContainer>
+
   ));
 
 export default Post;
