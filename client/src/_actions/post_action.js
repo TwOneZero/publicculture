@@ -6,7 +6,6 @@ import {
   LIKE_POST,
   MY_LIKED,
   GET_COUNT,
-  DETIAL_RANDOM_POST,
   GET_POSTS_BYDAY,
   SORTED_POST,
 } from './types';
