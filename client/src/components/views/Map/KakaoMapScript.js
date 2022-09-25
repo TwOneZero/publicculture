@@ -99,7 +99,10 @@ function displayPlaces(places) {
         // mouseout 했을 때는 인포윈도우를 닫습니다
         (function(marker, title) {
             kakao.maps.event.addListener(marker, 'click', function() {
-                displayInfowindowClicked(marker, title);  
+                displayInfowindowClicked(marker, title);
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    infowindowC.close();
+                });
             });
 
             kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -195,8 +198,8 @@ function displayInfowindow(marker, title) {
 function displayInfowindowClicked(marker, title) {
     var content = '<div style="width: 150px; z-index:1; text-align:center; font-size:20px; font-weight: 500; padding:5px;">' + 
     title.place_name + '  ' + 
-    '<a style="text-decoration:none" href= '+ title.place_url + '>' +
-    '<i class="fas fa-info-circle"></i></a>' +
+    '<a style="text-decoration:none; color:black;" href='+ title.place_url + '>' +
+    '<i class="fas fa-external-link"></i></a>' +
     '<div style="font-size:14px; padding:2px;">' + title.category_name + '</div>'+
     '</div>';
     infowindowC.setContent(content);
