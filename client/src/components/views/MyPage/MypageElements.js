@@ -119,7 +119,6 @@ export const MypageTabTitle = styled.div`
     border-bottom: 2px solid #000;
   }
   font-size: 18px;
-  font-weight: ;
 `;
 
 // mypage 본문 부분

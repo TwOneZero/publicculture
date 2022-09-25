@@ -7,7 +7,9 @@ import {
   PostsCodename,
   PostsDate,
   PostsPlace,
+  PostsDiv,
   PostsLikes,
+  PostsComment,
 } from './PostsElements'
 
 const Post = ({ posts }) =>
@@ -21,7 +23,12 @@ const Post = ({ posts }) =>
         <PostsCodename>{info.codename}</PostsCodename>
         <PostsDate>{info.date}</PostsDate>
         <PostsPlace>{info.place}</PostsPlace>
-        <PostsLikes>❤️ {info.likes.length}</PostsLikes>
+        <PostsDiv>
+          <PostsLikes>❤️ {info.likes.length}</PostsLikes>
+          <PostsComment><i class="fa-solid fa-comment"></i> {info.comments_length}</PostsComment>
+        </PostsDiv>
+
+
       </PostingInfo>
     </PostsContainer>
 
