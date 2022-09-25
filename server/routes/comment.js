@@ -16,6 +16,6 @@ router.get('/comments/:postId', getPostComments);
 //comment 달기
 router.post('/comment/:postId', auth, addComment);
 //comment 삭제
-router.post('/comment/delete/:commentId', auth, deleteComment);
+router.post('/comment/delete/:commentId/:postId', auth, deleteComment);
 
 module.exports = router;

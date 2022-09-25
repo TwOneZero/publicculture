@@ -14,7 +14,6 @@ import {
   Comment_submit_btn,
 } from './CommentElements';
 
-
 function Comment() {
   const commentState = useSelector((state) => state.comment);
   const userState = useSelector((state) => state.user);
@@ -55,7 +54,7 @@ function Comment() {
     e.preventDefault();
     const commentId = e.target.parentNode.id;
     if (window.confirm('삭제할거임?')) {
-      dispatch(deleteComment(commentId)).then((res) => {
+      dispatch(deleteComment(commentId, postId)).then((res) => {
         if (!res.payload.success) {
           alert(res.payload.message);
         } else {

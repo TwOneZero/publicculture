@@ -6,7 +6,7 @@ import {
   GET_MY_COMMENTS,
 } from './types';
 
-//addcomment  
+//addcomment
 export function addComment(postId, body) {
   const request = axios
     .post(`/api/comment/${postId}`, body, { withCredentials: true })
@@ -39,9 +39,11 @@ export function getComments(postId) {
   };
 }
 
-export function deleteComment(commentId) {
+export function deleteComment(commentId, postId) {
   const request = axios
-    .post(`/api/comment/delete/${commentId}`, null, { withCredentials: true })
+    .post(`/api/comment/delete/${commentId}/${postId}`, null, {
+      withCredentials: true,
+    })
     .then((res) => res.data);
   return {
     type: DELETE_COMMENT,

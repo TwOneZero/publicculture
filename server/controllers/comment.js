@@ -17,11 +17,9 @@ exports.addComment = async (req, res, next) => {
         .status(404)
         .json({ success: false, message: 'post 가져오기 에러' });
     }
-    const commentForLen = await Post.findById(postId)
-      .select('comments_length')
-      .exec();
+
     await Post.findByIdAndUpdate(postId, {
-      $inc: { comments_length: commentForLen.comments_length + 1 },
+      $inc: { comments_length: 1 },
     });
     let createdTime = getCurrentTime();
     //comment 인스턴스
@@ -92,10 +90,13 @@ exports.getMyComments = async (req, res, next) => {
 exports.deleteComment = async (req, res, next) => {
   try {
     //해당 코멘트 정보
-    const { commentId } = req.params;
+    const { commentId, postId } = req.params;
 
     // 코멘트 삭제
     const deletedComment = await Comment.findByIdAndDelete({ _id: commentId });
+    await Post.findByIdAndUpdate(postId, {
+      $inc: { comments_length: -1 },
+    });
     return res.status(200).json({ success: true, deletedComment });
   } catch (err) {
     next(err);
