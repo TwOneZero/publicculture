@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
   MypageContainer,
@@ -20,20 +20,7 @@ const MypageProfile = () => {
   const [mode, setMode] = useState('myProfile');
   const userState = useSelector((state) => state.user);
 
-  const onMenuButtonClick = (e) => {
-    if (e.target.id === 'myProfile') {
-      setMode('myProfile');
-      console.log(e.target.id);
-    } else if (e.target.id === 'editProfile') {
-      setMode('editProfile');
-    } else if (e.target.id === 'myLikedPost') {
-      setMode('myLikedPost');
-    } else if (e.target.id === 'passwordChange') {
-      setMode('passwordChange');
-    } else if (e.target.id === 'mycomment') {
-      setMode('mycomment');
-    }
-  };
+  
   return (
     <>
       <MypageContainer>
@@ -46,16 +33,16 @@ const MypageProfile = () => {
             <ProfileContent>
               <LeftBox>
                 <TextContainer>
-                  <ProfileP>프로필 사진</ProfileP>
+                  {/* <ProfileP>프로필 사진</ProfileP> */}
                 </TextContainer>
               </LeftBox>
               <RightBox>
                 <UserIcon>
                   <i className='fa-solid fa-user'></i>
                 </UserIcon>
-                <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
+                {/* <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
                   사진변경
-                </MyinfoBtn>
+                </MyinfoBtn> */}
               </RightBox>
             </ProfileContent>
 

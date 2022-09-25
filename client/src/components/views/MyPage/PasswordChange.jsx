@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
-import React, { useState, useEffect } from 'react';
-import { auth } from '../../../_actions/user_action';
+import React, { useState} from 'react';
 import { updateUser_Password } from '../../../_actions/user_action';
 
 import {

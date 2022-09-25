@@ -150,13 +150,9 @@ export const AllEvent = styled.span`
 export const BottomContainer = styled.ul`
   margin: 0;
   padding: 0;
-  /* padding-left: 1.8rem; */
   list-style: none;
-  /* justify-content: center; */
-  /* margin: 0 10px; */
   margin-top: 20px;
   margin-left: 20px;
-  /* vertical-align: middle; */
 `;
 export const EventContainer = styled.li`
   float: left;
@@ -196,7 +192,6 @@ export const TotalContainer = styled.div`
 `;
 
 export const Total = styled.span`
-  /* position: relative; */
   margin-left: 10px;
   padding-left: 10px;
   font-size: 20px;

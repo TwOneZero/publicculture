@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import axios from "axios";
-import { likePost } from "../../../_actions/post_action";
-import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Pagination from "../Pagination/Pagination";
-import { Loading } from "../Loading/Loading";
 import Posts from "./Posts";
 
 import { PostingContainer, PostingPiginationBox } from "./ShowEventElements";

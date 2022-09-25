@@ -32,9 +32,7 @@ export const PostingInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 500px;
-  //height: 600px;
   padding: 50px;
-  //background-color: yellow;
   align-items: center;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
@@ -181,14 +179,9 @@ export const MyinfoBtn = styled.button`
 `;
 
 
-export const UserInfoBox = styled.div`
-  /* display: flex;
-  justify-content: center; */
-`;
+export const UserInfoBox = styled.div``;
 
 export const UserInfoEditBox = styled.button`
-  /* width: 200px;
-  height: 150px; */
   font-weight: 400;
   font-size: 25px;
   background-color: #fff;
@@ -202,7 +195,6 @@ export const UserInfoEditBox = styled.button`
 
 export const UserInfoMenuBtns = styled.div`
   display: flex;
-  /* width: 1000px; */
   justify-content: space-around;
 `;
 
@@ -219,11 +211,6 @@ export const UserBtnBox = styled.div`
   flex-direction: column;
 `;
 
-
-
-
-
-
 export const UserNamePreferBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -238,13 +225,6 @@ export const PreferenceBox = styled.div`
   font-weight: 500;
   font-size: 25px;
 `;
-
-
-
-
-
-
-
 
 export const InfoBox = styled.div``;
 
@@ -279,12 +259,10 @@ export const Nickname_container_edit = styled.div`
   justify-content: center;
   align-items: center;
   margin: 50px 0px 50px 0px;
-  //background-color: green;
 `;
 
 export const Nickname_edit = styled.input`
   margin-top: 10px;
-  //height: 15px;
   padding: 10px;
   font-size: 15px;
   font-weight: 800;
@@ -343,7 +321,6 @@ export const PasswordContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 40px;
-  //background-color: green;
 `;
 export const Password = styled.input`
   margin-top: 10px;
@@ -417,7 +394,6 @@ export const UserUpdateBtn = styled.button`
   background-color: black;
   cursor: pointer;
   width: 100%;
-  //height: 100%;
   font-size: 18px;
 `;
 
@@ -427,7 +403,6 @@ export const NotUserUpdateBtn = styled.div`
   color: white;
   background-color: #a9a9a9;
   width: 100%;
-  //height: 100%;
   font-size: 18px;
 `;
 
@@ -443,7 +418,6 @@ export const Checkbox = styled.div`
   flex-direction: column;
   justify-content: space-around;
   font-size: 16px;
-  //width: 40vw;
 `;
 
 export const CheckboxContainer = styled.div`
@@ -474,7 +448,6 @@ export const Page_area_edit = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //height: 600px;
 `;
 
 // Mypage info 컴포넌트
@@ -500,7 +473,6 @@ export const Nickname_container_info = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //background-color: green;
 `;
 
 export const Nickname_info = styled.div`
@@ -514,7 +486,6 @@ export const EmailContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //background-color: green;
   margin-top: 50px;
 `;
 
@@ -522,7 +493,6 @@ export const Email = styled.div`
   padding: 12px;
   font-size: 20px;
   font-weight: 500;
-  //width: 50vw;
 `;
 
 export const Genre_container_info = styled.div`
@@ -530,7 +500,6 @@ export const Genre_container_info = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //background-color: green;
   margin-top: 50px;
 `;
 
@@ -553,8 +522,6 @@ export const Page_area_info = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 300px;
-  // left: 50%
-  // top: 50%
   padding: 5px;
 `;
 

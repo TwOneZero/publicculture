@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import FaBars from "react-icons/fa";
-
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -45,8 +43,6 @@ export const GenreShadowBox = styled.div`
   width: 100%;
   min-width: 1000px;
   box-shadow: 5px 5px 5px lightgray;
-  /* display: flex;
-  justify-content: center; */
 `
 
 export const GenreContainer = styled.div`

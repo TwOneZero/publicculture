@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostDateCount, getPostbyDay } from '../../../_actions/post_action';
 import DayPosts from './DayPosts';
-import TopButton from '../TopButton/TopButton';
 import {
   Frame,
   Header,

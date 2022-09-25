@@ -103,7 +103,6 @@ export const Event_title = styled.div`
   font-weight: normal;
   margin-top: 20px;
   margin-bottom : 10px;
-  //background-color: yellow;
 `;
 
 export const Event_info_container = styled.div`
@@ -112,7 +111,6 @@ export const Event_info_container = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 30px;
   font-weight: 400;
-  //background-color: green;
   width: 50vw;
 `;
 
@@ -204,7 +202,6 @@ export const TabBar = styled.div`
   background-color: white;
   align-items: center;
   border-bottom: solid 1px black;
-  // border: 1px solid black;
 `;
 
 export const TabBtn = styled.button`
@@ -216,7 +213,6 @@ export const TabBtn = styled.button`
   font-weight: 500;
   margin: 0 250px;
   &:hover {
-    //background-color: #a9a9a9;
     border-bottom: 4px solid #ffcb6b;
   }
 `;

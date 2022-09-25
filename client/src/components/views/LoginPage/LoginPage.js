@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux'; //내 액션을 한 번에 모아서 처리. 이 기능이
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';

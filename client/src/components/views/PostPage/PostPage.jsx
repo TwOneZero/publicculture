@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getPostDetails,
   likePost,
-  getRandomCodeNamePost,
 } from '../../../_actions/post_action';
 import Comment from '../Comment/Comment';
 import Auth from '../../../hoc/auth';

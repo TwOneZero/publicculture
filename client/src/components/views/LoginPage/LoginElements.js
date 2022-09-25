@@ -14,7 +14,7 @@ export const Login_page_container = styled.form`
     align-items: center;
     padding: 20px 10px;
     width: 500px;
-    height: 700px;
+    height: 500px;
   `;
 
 export const Login_text = styled.div`

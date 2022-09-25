@@ -17,12 +17,9 @@ export const SgginfoDiv = styled.div`
 
 export const SgginfoImg = styled.img`
   margin-top: 150px;
-  /* margin-bottom: 150px; */
   width: 60%;
   &:hover {
     transition: all 0.3s ease-in-out;
-    //background-color: coral;
-    //color: #fff;
   }
 `;
 
