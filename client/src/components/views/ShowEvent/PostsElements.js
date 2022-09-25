@@ -36,5 +36,12 @@ export const PostsPlace = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
 `
+export const PostsDiv = styled.div`
+    display: flex;
+`
 
-export const PostsLikes = styled.div``
+export const PostsLikes = styled.div`
+    margin-right: 10px;
+`
+
+export const PostsComment = styled.div``
