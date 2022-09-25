@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Auth from '../../../hoc/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRandompost } from '../../../_actions/post_action';
-import sggimg from '../../../images/mainimg.png';
+import sggimg from '../../../assets/image/mainimg.png';import InfoSection from '../InfoSection/InfoSection';
+import { homeObjOne } from '../InfoSection/Data.js';
+import Loading from '../Loading/Loading';
 
 import {
   SliderDiv,
@@ -15,10 +16,9 @@ import {
   IMGCover,
   ImgTitle,
   TitleBox,
+  MainContainer,
 } from './LandingElements';
-import InfoSection from '../InfoSection/InfoSection';
-import { homeObjOne, homeObjTwo, homeObjThree } from '../InfoSection/Data.js';
-import Loading from '../Loading/Loading';
+
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -27,8 +27,6 @@ const LandingPage = () => {
   const slideRef = useRef(null);
 
   const TOTAL_SLIDES = 5;
-  //const [images, setImage] = useState([]);
-  // const [posts, setPost] = useState([]);
 
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
@@ -49,7 +47,6 @@ const LandingPage = () => {
   useEffect(() => {
     dispatch(getRandompost()).then((res) => {
       if (res.payload.success) {
-        // setPost(res.payload.posts);
         console.log(res.payload);
       } else {
         console.log('post가 없습니다. 서버 에러');
@@ -64,8 +61,10 @@ const LandingPage = () => {
 
   return (
     <>
-      <SgginfoDiv>
-        <SgginfoImg src={sggimg} />
+      <MainContainer>
+        <SgginfoDiv>
+          <SgginfoImg src={sggimg} />
+        
         <SliderDiv>
           <Button onClick={prevSlide}>&#60;</Button>
           <Container>
@@ -88,7 +87,8 @@ const LandingPage = () => {
           </Container>
           <Button onClick={nextSlide}>&#62;</Button>
         </SliderDiv>
-      </SgginfoDiv>
+        </SgginfoDiv>
+      </MainContainer>
 
       <InfoSection {...homeObjOne} />
     </>

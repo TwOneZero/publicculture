@@ -3,7 +3,7 @@ import { BsFillArrowLeftCircleFill as LeftArrow } from 'react-icons/bs';
 import { BsFillArrowRightCircleFill as RightArrow } from 'react-icons/bs';
 
 export const Container = styled.div`
-  width: 1300px;
+  width: 65%;
   margin: 50px auto 0;
   background: #fff;
   box-sizing: border-box;
@@ -38,7 +38,7 @@ export const Header = styled.div`
   background-color: #fff;
 `;
 
-export const Month_container = styled.div`
+export const MonthContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
@@ -48,7 +48,7 @@ export const Month = styled.div`
   font-size: 60px;
 `;
 
-export const Month_sub = styled.span`
+export const MonthSub = styled.span`
   font-size: 30px;
 `;
 
@@ -75,19 +75,19 @@ export const Body = styled.div`
   box-sizing: border-box;
 `;
 
-export const Day_week_container = styled.div`
+export const DayWeekContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const Day_container = styled.div`
+export const DayContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const Day_week = styled.div`
+export const DayWeek = styled.div`
   width: 14%;
-  height: 32px;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,13 +150,9 @@ export const AllEvent = styled.span`
 export const BottomContainer = styled.ul`
   margin: 0;
   padding: 0;
-  /* padding-left: 1.8rem; */
   list-style: none;
-  /* justify-content: center; */
-  /* margin: 0 10px; */
   margin-top: 20px;
   margin-left: 20px;
-  /* vertical-align: middle; */
 `;
 export const EventContainer = styled.li`
   float: left;
@@ -178,7 +174,7 @@ export const AllContainer = styled.div`
   border: 1px solid #ccc;
   padding: 15px;
   background-color: #efefef;
-  width: 1300px;
+  width: 65%;
   margin: 0 auto;
   box-sizing: border-box;
 `;
@@ -196,14 +192,13 @@ export const TotalContainer = styled.div`
 `;
 
 export const Total = styled.span`
-  /* position: relative; */
   margin-left: 10px;
   padding-left: 10px;
   font-size: 20px;
 `;
 
 export const ShowEventContainer = styled.div`
-  width: 1300px;
+  width: 65%;
   margin: 60px auto 60px;
   box-sizing: border-box;
 `;
@@ -229,7 +224,6 @@ export const ShowEventHead = styled.p`
   color: #101522;
   font-size: 20px;
   font-weight: bold;
-  
 `;
 
 export const ShowEventMain = styled.div``;

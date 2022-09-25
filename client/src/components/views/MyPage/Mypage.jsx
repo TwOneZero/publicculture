@@ -7,8 +7,8 @@ import Auth from '../../../hoc/auth';
 import MyComment from './MyComment';
 import {
   InfoBox,
-  MypageIcon,
-  MypageTitle,
+  MypageTabIcon,
+  MypageTabTitle,
   UserTabContainer,
   UserTab,
   UserTabUl,
@@ -40,73 +40,73 @@ function Mypage() {
           <UserTabUl>
             <UserTabLi>
               <UserTabItem>
-                <MypageIcon>
+                <MypageTabIcon>
                   <i
                     onClick={onMenuButtonClick}
                     id='editProfile'
                     className='fa-solid fa-user'
                   ></i>
-                </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id='myProfile'>
+                </MypageTabIcon>
+                <MypageTabTitle onClick={onMenuButtonClick} id='myProfile'>
                   내 프로필
-                </MypageTitle>
+                </MypageTabTitle>
               </UserTabItem>
             </UserTabLi>
             <UserTabLi>
               <UserTabItem>
-                <MypageIcon>
+                <MypageTabIcon>
                   <i
                     onClick={onMenuButtonClick}
                     id='editProfile'
                     className='fa-solid fa-gear'
                   ></i>
-                </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id='editProfile'>
+                </MypageTabIcon>
+                <MypageTabTitle onClick={onMenuButtonClick} id='editProfile'>
                   내 정보 수정
-                </MypageTitle>
+                </MypageTabTitle>
               </UserTabItem>
             </UserTabLi>
             <UserTabLi>
               <UserTabItem>
-                <MypageIcon>
+                <MypageTabIcon>
                   <i
                     className='fa-solid fa-lock'
                     onClick={onMenuButtonClick}
                     id='passwordChange'
                   ></i>
-                </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id='passwordChange'>
+                </MypageTabIcon>
+                <MypageTabTitle onClick={onMenuButtonClick} id='passwordChange'>
                   {' '}
                   비밀번호 변경{' '}
-                </MypageTitle>
+                </MypageTabTitle>
               </UserTabItem>
             </UserTabLi>
             <UserTabLi>
               <UserTabItem>
-                <MypageIcon>
+                <MypageTabIcon>
                   <i
                     className='fa-solid fa-heart'
                     onClick={onMenuButtonClick}
                     id='myLikedPost'
                   ></i>
-                </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id='myLikedPost'>
+                </MypageTabIcon>
+                <MypageTabTitle onClick={onMenuButtonClick} id='myLikedPost'>
                   나의 관심 행사
-                </MypageTitle>
+                </MypageTabTitle>
               </UserTabItem>
             </UserTabLi>
             <UserTabLi>
               <UserTabItem>
-                <MypageIcon>
+                <MypageTabIcon>
                   <i
                     className='fa-solid fa-comment'
                     onClick={onMenuButtonClick}
                     id='myLikedPost'
                   ></i>
-                </MypageIcon>
-                <MypageTitle onClick={onMenuButtonClick} id='mycomment'>
+                </MypageTabIcon>
+                <MypageTabTitle onClick={onMenuButtonClick} id='mycomment'>
                   내가 쓴 댓글
-                </MypageTitle>
+                </MypageTabTitle>
               </UserTabItem>
             </UserTabLi>
           </UserTabUl>

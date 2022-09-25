@@ -5,7 +5,7 @@ import { searchPost } from '../../../_actions/post_action';
 import { logout } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 import Sidebar from './Sidebar';
-import logo from "../../../images/logo.png"
+import logo from "../../../assets/image/logo.png";
 import { FaBars } from "react-icons/fa";
 import {
   HeaderContainer,
@@ -146,7 +146,7 @@ function Header() {
 
           <SidebarGenreBox>
             <SidebarButtonToggle>
-              <ToggleButton>
+              <ToggleButton onClick={onSidebarToggleButtonClicked}>
                 <FaBars />
               </ToggleButton>
             </SidebarButtonToggle>

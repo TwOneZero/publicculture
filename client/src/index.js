@@ -15,6 +15,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import Header from './components/views/Header/Header';
 import Footer from './components/views/Footer/Footer';
 import Loading from './components/views/Loading/Loading';
+import TopButton from './components/views/TopButton/TopButton';
 
 //redux-persist
 import { persistStore } from 'redux-persist';
@@ -34,6 +35,7 @@ ReactDOM.render(
     <PersistGate loading={<Loading />} persistor={persistor}>
       <BrowserRouter>
         <Header />
+        <TopButton />
         <App />
         <Footer />
       </BrowserRouter>

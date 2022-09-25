@@ -28,9 +28,6 @@ const InfoSection = ({
   description,
   buttonLabel,
   alt,
-  primary,
-  dark,
-  dark2,
 }) => {
   const navigate = useNavigate();
   const onButtonClicked = (e) => {
@@ -50,14 +47,6 @@ const InfoSection = ({
                 <BtnWrap>
                   <Buttons
                     to="/calendar"
-                    // smooth={true}
-                    // duration={500}
-                    // spy={true}
-                    // exact="true"
-                    // offset={-80}
-                    // primary={primary ? 1 : 0}
-                    // dark={dark ? 1 : 0}
-                    // dark2={dark2 ? 1 : 0}
                     onClick={onButtonClicked}
                   >
                     {buttonLabel}

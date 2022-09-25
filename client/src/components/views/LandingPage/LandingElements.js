@@ -1,23 +1,25 @@
 import styled from "styled-components";
 
-export const SgginfoDiv = styled.div`
-  margin-top: 5px;
+
+export const MainContainer = styled.div`
   width: 100%;
-  height: 1200px;
+  background-color: #e0f2f7;
+`
+
+export const SgginfoDiv = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  background-color: #e0f2f7;
+  margin: 0 auto;
+  margin-top: 5px;
   flex-direction: column;
 `;
 
 export const SgginfoImg = styled.img`
   margin-top: 150px;
-  /* margin-bottom: 150px; */
-  width: 1200px;
+  width: 60%;
   &:hover {
     transition: all 0.3s ease-in-out;
-    //background-color: coral;
-    //color: #fff;
   }
 `;
 
@@ -25,16 +27,15 @@ export const SliderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1300px;
+  width: 65%;
   margin-top: 60px auto;
   overflow: hidden;
 `;
 
 export const IMGCover = styled.div`
-  width: 30vw;
+  width: 24%;
   height: 45vh;
-  //background-color: black;
-  margin: 50px;
+  margin: 50px 80px 50px 25px;
   position: absoulte;
   font-size: 0px;
   &:hover {
@@ -43,7 +44,7 @@ export const IMGCover = styled.div`
 `;
 
 export const IMG = styled.img`
-  width: 15vw;
+  width: 100%;
   height: 36vh;
   object-fit: cover;
   background-color: black;
@@ -55,10 +56,10 @@ export const IMG = styled.img`
 
 export const TitleBox = styled.div`
   display: flex;
-  width: 300px;
   height: 150px;
   font-family: "NG", "Malgun Gothic", Dotum, "돋움", AppleGothicNeoSD,
     "Apple SD 산돌고딕 Neo", "굴림", arial, sans-serif;
+    font-size: 0.8rem;
 `;
 
 export const ImgTitle = styled.div`
@@ -76,14 +77,11 @@ export const ImgTitle = styled.div`
 export const Container = styled.div`
   width: 1200px;
   overflow: hidden;
-  //margin-right: 10px;
 `;
 export const Button = styled.button`
-  //all: unset;
   border: none;
   padding: 1%;
   background-color: transparent;
-  //border-radius: 10px;
   font-size: 30px;
   cursor: pointer;
 `;
