@@ -52,7 +52,7 @@ export default function KakaoMapScript(keyword, xpos, ypos, category) {
 
   // 마커를 호버하면 장소명을 표출할 인포윈도우 입니다
   var infowindow = new kakao.maps.InfoWindow({zIndex:0});
-  var infowindowC = new kakao.maps.InfoWindow({zIndex:1});
+  var infowindowC = new kakao.maps.InfoWindow({zIndex:1 ,removable : true});
 
   // 장소 검색 객체를 생성합니다
   var ps = new kakao.maps.services.Places(map); 
@@ -100,9 +100,6 @@ function displayPlaces(places) {
         (function(marker, title) {
             kakao.maps.event.addListener(marker, 'click', function() {
                 displayInfowindowClicked(marker, title);
-                kakao.maps.event.addListener(marker, 'click', function() {
-                    infowindowC.close();
-                });
             });
 
             kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -196,7 +193,7 @@ function displayInfowindow(marker, title) {
 }
 
 function displayInfowindowClicked(marker, title) {
-    var content = '<div style="width: 150px; z-index:1; text-align:center; font-size:20px; font-weight: 500; padding:5px;">' + 
+    var content = '<div style="width: 150px; z-index:1; text-align:center; font-size:20px; font-weight: 500; padding:10px;">' + 
     title.place_name + '  ' + 
     '<a style="text-decoration:none; color:black;" href='+ title.place_url + '>' +
     '<i class="fas fa-external-link"></i></a>' +

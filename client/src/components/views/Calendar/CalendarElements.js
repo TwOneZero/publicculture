@@ -98,7 +98,7 @@ export const DayWeek = styled.div`
 
 export const SubContainer = styled.div`
   width: 14%;
-  height: 177px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -116,21 +116,20 @@ export const TopContainer = styled.a`
 `;
 
 export const Day = styled.span`
-  margin: 0 40px 0 20px;
-  position: absolute;
-  left: -5px;
+  margin: 0 40px 0 12px;
+  position: absolute; 
   top: 0;
-  font-size: 30px;
+  font-size: 1.4rem;
   line-height: 1;
   color: ${({ isToday }) => (isToday ? '#fff' : '#000')};
 `;
 
 export const TodayCircle = styled.span`
   position: absolute;
-  left: 6px;
-  bottom: 8px;
-  width: 50px;
-  height: 50px;
+  left: 5px;
+  bottom: 16px;
+  width: 40px;
+  height: 40px;
   border-radius: ${({ isToday }) => (isToday ? '100%' : '0')};
   background: ${({ isToday }) => (isToday ? '#000' : '#fff')};
 `;
@@ -138,8 +137,8 @@ export const TodayCircle = styled.span`
 export const AllEvent = styled.span`
   position: absolute;
   left: 50%;
-  top: 4px;
-  font-size: 20px;
+  top: 2px;
+  font-size: 1.2rem;
   font-weight: bold;
   line-height: 1;
   -webkit-transform: translate(-50%, 0);
@@ -151,8 +150,9 @@ export const BottomContainer = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-top: 20px;
-  margin-left: 20px;
+  /* margin-top: 20px;
+  margin-left: 20px; */
+  margin-left: 10px;
 `;
 export const EventContainer = styled.li`
   float: left;
@@ -160,7 +160,7 @@ export const EventContainer = styled.li`
   color: #666;
   font-weight: bold;
   line-height: 1.6;
-  font-size: 14px;
+  font-size: 0.7rem;
   &:nth-child(2n + 1) {
     clear: left;
   }
