@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import {
-  updateUser,
-  checkName,
-} from '../../../_actions/user_action';
+import { updateUser, checkName } from '../../../_actions/user_action';
 
 import {
   EditMypage_container,
@@ -44,6 +41,7 @@ const MypageEdit = () => {
         } else {
           if (Name === userState.userData.name) {
             alert('사용가능한 닉네임입니다.');
+            setIsNext(true);
           } else {
             alert('이미 존재하는 닉네임입니다.');
           }
@@ -55,17 +53,10 @@ const MypageEdit = () => {
   };
 
   const onUpdateConfirm = () => {
-    let prevGenre;
-    if (!Genre) {
-      prevGenre = userState.userData.genre;
-    } else {
-      prevGenre = Genre;
-    }
     let body = {
       name: Name,
-      genre: prevGenre,
+      genre: Genre,
     };
-    console.log(prevGenre, Genre);
 
     dispatch(updateUser(body)).then((res) => {
       if (res.payload.success) {
