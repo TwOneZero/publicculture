@@ -101,9 +101,9 @@ export const UserTabItem = styled.button`
     cursor: pointer;
 `
 
-export const MypageIcon = styled.div` `
+export const MypageTabIcon = styled.div` `
 
-export const MypageTitle = styled.div`
+export const MypageTabTitle = styled.div`
   margin-left: 0.8rem;
   &:hover {
       border-bottom: 2px solid #000;
@@ -122,7 +122,7 @@ export const MypageContainer = styled.div`
 `;
 
 export const MypageContent = styled.div`
-  width: 50%;
+  width: 53%;
   margin: 5rem auto 5rem;
 `;
 
@@ -160,7 +160,6 @@ export const ProfileP = styled.div`
 export const RightBox = styled.div`
   width: 70%;
   background: #fff;
-  
   margin-left: 1rem;
 `
 
