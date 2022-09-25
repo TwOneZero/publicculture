@@ -18,8 +18,10 @@ function App() {
         <Route exact path="/post/:postId" element={<PostPage />} />
         <Route exact path="/showevent/" element={<ShowEvent />} />
         <Route exact path="/showevent/:name" element={<ShowEvent />} />
+        <Route exact path="/showevent/:name/:mode" element={<ShowEvent />} />
         <Route exact path="/mypage" element={<MyPage />} />
         <Route exact path="/calendar" element={<Calendar />} />
+        
       </Routes>
     </div>
   );
