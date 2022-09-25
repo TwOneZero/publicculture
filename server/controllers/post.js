@@ -1,4 +1,5 @@
 const { Post } = require('../schemas/Post');
+const { Comment } = require('../schemas/Comment');
 const dayjs = require('dayjs');
 const mongoose = require('mongoose');
 const { googleSearch } = require('../utils/googleSearch');
@@ -46,6 +47,39 @@ exports.getPostBySearch = async (req, res, next) => {
       ],
     }).exec();
     return res.status(200).json({ success: true, posts });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getPostSorted = async (req, res, next) => {
+  try {
+    const { search, mode } = req.query;
+    const regex = (pattern) => new RegExp(`.*${pattern}.*`);
+    const searchRegex = regex(search);
+    const getSortedPosts = async (mode) => {
+      const posts = await Post.find({
+        $or: [
+          { codename: { $regex: searchRegex } },
+          { title: { $regex: searchRegex } },
+          { guname: { $regex: searchRegex } },
+          { place: { $regex: searchRegex } },
+        ],
+      })
+        .sort({ [mode]: -1 })
+        .exec();
+      return posts;
+    };
+
+    if (mode === 'likes') {
+      //좋아요 수
+      const posts = await getSortedPosts('likes');
+      return res.status(200).json({ success: true, posts });
+    } else if (mode === 'comments') {
+      //댓글
+      const posts = await getSortedPosts('comments_length');
+      return res.status(200).json({ success: true, posts });
+    }
   } catch (error) {
     next(error);
   }
@@ -130,7 +164,6 @@ exports.getPostDateCount = async (req, res, next) => {
     .set('date', 31)
     .format('YYYY-MM-DD HH:mm:ss');
 
-  
   try {
     const posts = await Post.find({
       end_date: { $lte: prevMonth, $gte: today },

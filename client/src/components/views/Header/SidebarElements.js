@@ -27,7 +27,6 @@ export const SidebarMain = styled.div`
 `;
 
 export const Sidepart = styled.div`
-  //position: fixed;
   width: 100%;
   height: 100%;
 `;

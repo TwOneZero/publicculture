@@ -86,17 +86,19 @@ exports.logoutUser = async (req, res) => {
 exports.updateUser = async (req, res, next) => {
   try {
     //바꿀 패스워드
-    userName = req.body.name === '' ? req.user.name : req.body.name;
-    const newUser = {
-      name: userName,
-      genre: req.body.genre,
-    };
     const user = await User.findOne({ _id: req.user.id });
     if (!user) {
       res
         .status(500)
         .json({ success: false, message: 'user 정보가 없습니다.' });
     }
+    let userName = req.body.name === '' ? user.name : req.body.name;
+    let userGenre = req.body.genre.length === 0 ? user.genre : req.body.genre;
+    let newUser = {
+      name: userName,
+      genre: userGenre,
+    };
+
     //user 정보 테스트
     console.log(user);
     user.name = newUser.name;

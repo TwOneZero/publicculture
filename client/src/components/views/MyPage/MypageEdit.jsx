@@ -3,23 +3,20 @@ import React, { useState } from "react";
 import { updateUser, checkName } from "../../../_actions/user_action";
 
 import {
-  EditMypage_container,
-  Myprofile_edit,
-  Page_area_edit,
-  Nickname_container_edit,
-  NicknameC_btn,
-  NicknameChangeBtn,
-  Nickname_edit,
-  Line_edit,
-  Genre_container_edit,
+  EditMypageContainer,
+  MyprofileEdit,
+  PageAreaEdit,
+  NicknameContainerEdit,
+  NicknameCBtn,
+  NicknameEdit,
+  LineEdit,
+  GenreContainerEdit,
   Checkbox,
   CheckboxContainer,
-  GENRE_BOX,
+  GENREBOX,
   UserUpdateBtn,
-  NotNicknameChangeBtn,
   NotUserUpdateBtn,
 } from "./MypageElements";
-import { useEffect } from "react";
 
 const MypageEdit = () => {
   const dispatch = useDispatch();
@@ -41,6 +38,7 @@ const MypageEdit = () => {
         } else {
           if (Name === userState.userData.name) {
             alert("사용가능한 닉네임입니다.");
+            setIsNext(true);
           } else {
             alert("이미 존재하는 닉네임입니다.");
           }
@@ -52,17 +50,10 @@ const MypageEdit = () => {
   };
 
   const onUpdateConfirm = () => {
-    let prevGenre;
-    if (!Genre) {
-      prevGenre = userState.userData.genre;
-    } else {
-      prevGenre = Genre;
-    }
     let body = {
       name: Name,
-      genre: prevGenre,
+      genre: Genre,
     };
-    console.log(prevGenre, Genre);
 
     dispatch(updateUser(body)).then((res) => {
       if (res.payload.success) {
@@ -88,23 +79,23 @@ const MypageEdit = () => {
 
   return (
     <>
-      <EditMypage_container>
-        <Myprofile_edit>내 정보 수정</Myprofile_edit>
+      <EditMypageContainer>
+        <MyprofileEdit>내 정보 수정</MyprofileEdit>
 
-        <Page_area_edit>
-          <Nickname_container_edit>
+        <PageAreaEdit>
+          <NicknameContainerEdit>
             닉네임 변경
-            <Line_edit></Line_edit>
-            <Nickname_edit onChange={onChangeName}></Nickname_edit>
-            <NicknameC_btn onClick={onCheckName}>중복 확인</NicknameC_btn>
-          </Nickname_container_edit>
+            <LineEdit></LineEdit>
+            <NicknameEdit onChange={onChangeName}></NicknameEdit>
+            <NicknameCBtn onClick={onCheckName}>중복 확인</NicknameCBtn>
+          </NicknameContainerEdit>
 
-          <Genre_container_edit>
-            선호 장르
-            <Line_edit></Line_edit>
+          <GenreContainerEdit>
+            선호 장르 변경
+            <LineEdit></LineEdit>
             <Checkbox>
               <CheckboxContainer>
-                <GENRE_BOX
+                <GENREBOX
                   type="checkbox"
                   id="cb1"
                   value="뮤지컬/오페라"
@@ -116,7 +107,7 @@ const MypageEdit = () => {
                 뮤지컬/오페라
               </CheckboxContainer>
               <CheckboxContainer>
-                <GENRE_BOX
+                <GENREBOX
                   type="checkbox"
                   id="cb2"
                   value="전시/미술"
@@ -128,7 +119,7 @@ const MypageEdit = () => {
                 전시/미술
               </CheckboxContainer>
               <CheckboxContainer>
-                <GENRE_BOX
+                <GENREBOX
                   type="checkbox"
                   id="cb3"
                   value="연극"
@@ -140,7 +131,7 @@ const MypageEdit = () => {
                 연극
               </CheckboxContainer>
               <CheckboxContainer>
-                <GENRE_BOX
+                <GENREBOX
                   type="checkbox"
                   id="cb4"
                   value="콘서트"
@@ -152,7 +143,7 @@ const MypageEdit = () => {
                 콘서트
               </CheckboxContainer>
               <CheckboxContainer>
-                <GENRE_BOX
+                <GENREBOX
                   type="checkbox"
                   id="cb5"
                   value="클래식"
@@ -164,7 +155,7 @@ const MypageEdit = () => {
                 클래식
               </CheckboxContainer>
               <CheckboxContainer>
-                <GENRE_BOX
+                <GENREBOX
                   type="checkbox"
                   id="cb6"
                   value="무용"
@@ -176,14 +167,14 @@ const MypageEdit = () => {
                 무용
               </CheckboxContainer>
             </Checkbox>
-          </Genre_container_edit>
+          </GenreContainerEdit>
           {Next ? (
             <UserUpdateBtn onClick={onUpdateConfirm}>Update</UserUpdateBtn>
           ) : (
             <NotUserUpdateBtn>내 정보 수정</NotUserUpdateBtn>
           )}
-        </Page_area_edit>
-      </EditMypage_container>
+        </PageAreaEdit>
+      </EditMypageContainer>
     </>
   );
 };

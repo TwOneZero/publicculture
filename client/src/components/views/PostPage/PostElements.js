@@ -97,33 +97,31 @@ export const Line = styled.div`
 
 
 //행사 정보
-export const Event_title = styled.div`
+export const EventTitle = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 26px;
   font-weight: normal;
   margin-top: 20px;
   margin-bottom : 10px;
-  //background-color: yellow;
 `;
 
-export const Event_info_container = styled.div`
+export const EventInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 30px;
   font-weight: 400;
-  //background-color: green;
   width: 50vw;
 `;
 
-export const Photo_container = styled.img`
+export const PhotoContainer = styled.img`
   width: 300px;
   height: 400px;
   margin: 25px 20px 20px 0;
   object-fit: cover;
 `;
 
-export const Event_info = styled.div`
+export const EventInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: -10px;
@@ -131,13 +129,13 @@ export const Event_info = styled.div`
   margin: -10px 20px 20px;
 `;
 
-export const Event_info_content = styled.div`
+export const EventInfoContent = styled.div`
   margin: 15px 0;
   font-size: 22px;
   font-weight: 400;
 `;
 
-export const Event_info_last_content = styled.div`
+export const EventInfoLastContent = styled.div`
   margin: 50px 0 15px;
   font-size: 22px;
   font-weight: 400;
@@ -145,23 +143,23 @@ export const Event_info_last_content = styled.div`
   flex-direction: row;
 `;
 
-export const Event_detail_container = styled.div`
+export const EventDetailContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 24px;
 `
 
-export const Event_detail_title = styled.p`
+export const EventDetailTitle = styled.p`
   width: 100px;
   font-size: 20px;
 `
 
-export const Event_detail_content = styled.p`
+export const EventDetailContent = styled.p`
   width: 400px;
   font-size: 20px;
 `
 
-export const Event_Button = styled.a`
+export const EventButton = styled.a`
   display: flex;
   width: 150px;
   height: 40px;
@@ -204,7 +202,6 @@ export const TabBar = styled.div`
   background-color: white;
   align-items: center;
   border-bottom: solid 1px black;
-  // border: 1px solid black;
 `;
 
 export const TabBtn = styled.button`
@@ -216,7 +213,6 @@ export const TabBtn = styled.button`
   font-weight: 500;
   margin: 0 250px;
   &:hover {
-    //background-color: #a9a9a9;
     border-bottom: 4px solid #ffcb6b;
   }
 `;

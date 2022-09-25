@@ -17,6 +17,12 @@ exports.addComment = async (req, res, next) => {
         .status(404)
         .json({ success: false, message: 'post 가져오기 에러' });
     }
+    const commentForLen = await Post.findById(postId)
+      .select('comments_length')
+      .exec();
+    await Post.findByIdAndUpdate(postId, {
+      $inc: { comments_length: commentForLen.comments_length + 1 },
+    });
     let createdTime = getCurrentTime();
     //comment 인스턴스
     const comment = new Comment({
@@ -53,7 +59,6 @@ exports.getPostComments = async (req, res, next) => {
         return data.filter((d) => String(d.post) === postId);
       });
     const allComments = comments.map((comment) => {
-      console.log(getCurrentTime());
       return {
         commentId: comment._id,
         name: comment.userId.name,

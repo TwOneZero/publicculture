@@ -1,14 +1,13 @@
 import { useDispatch } from "react-redux";
-import React, { useState, useEffect } from "react";
-import { auth } from "../../../_actions/user_action";
+import React, { useState } from "react";
 import { updateUser_Password } from "../../../_actions/user_action";
 
 import {
   PasswordPage,
   PasswordCheck,
   PasswordCheckBtn,
-  Line_edit,
-  Password_edit,
+  LineEdit,
+  PasswordEdit,
   PasswordContainer,
   PasswordUpdateBtn,
   NotPasswordUpdateBtn,
@@ -53,10 +52,10 @@ const PasswordChange = () => {
   return (
     <>
       <PasswordPage>
-        <Password_edit>비밀번호 변경</Password_edit>
+        <PasswordEdit>비밀번호 변경</PasswordEdit>
         <PasswordContainer>
           비밀번호 변경
-          <Line_edit></Line_edit>
+          <LineEdit></LineEdit>
           <PasswordCheck
             type="password"
             onChange={onChangePassword}
@@ -64,7 +63,7 @@ const PasswordChange = () => {
         </PasswordContainer>
         <PasswordContainer>
           비밀번호 변경 확인
-          <Line_edit></Line_edit>
+          <LineEdit></LineEdit>
           <PasswordCheck
             type="password"
             onChange={onChangePasswordConfirm}
