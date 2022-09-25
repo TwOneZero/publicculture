@@ -62,10 +62,11 @@ export const UserTabContainer = styled.div`
     background-color: #fff;
     height: 40px;
     padding-bottom: 1px;
+    min-width: 1000px;
 `
 
 export const UserTab = styled.div`
-  width: 66%;
+  width: 61%;
   margin: 0 auto;
   font-size: 1rem;
 `
@@ -89,7 +90,7 @@ export const UserTabLi = styled.li`
 `
 
 export const UserTabItem = styled.button`
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 700;
     line-height: 39px;
     height: 39px;
@@ -113,6 +114,7 @@ export const MypageTitle = styled.div`
 
 export const MypageContainer = styled.div`
   width: 100%;
+  min-width: 1000px;
   margin-top: 5px;
   font-size: 17px;
   font-family: "Noto Sans KR", sans-serif;
@@ -120,8 +122,8 @@ export const MypageContainer = styled.div`
 `;
 
 export const MypageContent = styled.div`
-  width: 55%;
-  margin: 5rem auto 0;
+  width: 50%;
+  margin: 5rem auto 5rem;
 `;
 
 export const MypageTitleContainer = styled.div``
@@ -167,10 +169,10 @@ export const UserIcon = styled.div`
 `;
 
 export const MyinfoBtn = styled.button`
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   color: #000;
-  margin-left: 3rem;
-  width: 12%;
+  margin-left: 3.3rem;
+  width: 80px;
   /* width: 88px; */
   background-color: #fff;
   cursor: pointer;

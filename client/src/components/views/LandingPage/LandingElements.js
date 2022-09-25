@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 
 export const Main_Container = styled.div`
-width: 100%;
-background-color: #e0f2f7;
+  width: 100%;
+  background-color: #e0f2f7;
 `
 
 export const SgginfoDiv = styled.div`
@@ -18,7 +18,7 @@ export const SgginfoDiv = styled.div`
 export const SgginfoImg = styled.img`
   margin-top: 150px;
   /* margin-bottom: 150px; */
-  width: 65%;
+  width: 60%;
   &:hover {
     transition: all 0.3s ease-in-out;
     //background-color: coral;
@@ -36,12 +36,12 @@ export const SliderDiv = styled.div`
 `;
 
 export const IMGCover = styled.div`
-  width: 30vw;
-  width: 100%;
+  width: 22%;
+  /* width: 300px; */
   height: 45vh;
   //background-color: black;
   margin: 50px;
-  position: absoulte;
+  /* position: absoulte; */
   font-size: 0px;
   &:hover {
     font-size: 15px;
@@ -49,21 +49,19 @@ export const IMGCover = styled.div`
 `;
 
 export const IMG = styled.img`
-  width: 15vw;
-  width: 100%;
+  
   height: 36vh;
   /* height: 100%; */
   object-fit: cover;
   background-color: black;
   &:hover {
-    position: relative;
+    /* position: relative; */
     opacity: 0.5;
   }
 `;
 
 export const TitleBox = styled.div`
   display: flex;
-  width: 300px;
   height: 150px;
   font-family: "NG", "Malgun Gothic", Dotum, "돋움", AppleGothicNeoSD,
     "Apple SD 산돌고딕 Neo", "굴림", arial, sans-serif;

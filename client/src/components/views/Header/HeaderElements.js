@@ -2,20 +2,12 @@ import styled from "styled-components";
 import FaBars from "react-icons/fa";
 
 
-export const MenuContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  margin-left: auto;
-  margin-right: 50px;
-  margin-top: 10px;
-`;
-
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: low;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 65%;
   margin: 0 auto;
   height: 100px;
   background-color: white;
@@ -26,11 +18,12 @@ export const HeaderLogo = styled.div`
   display: flex;
   justify-content: flex-start;
   cursor: pointer;
+  width: 200px;
 `;
 
 export const LogoImg = styled.img`
   margin-top: 30px;
-  width: 250px;
+  width: 100%;
 `;
 
 export const HeaderBtn = styled.div`
@@ -40,7 +33,7 @@ export const HeaderBtn = styled.div`
   color: black;
   width: 80px;
   height: 50px;
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: 700;
   font-family: "NG", "Malgun Gothic", Dotum, "돋움", AppleGothicNeoSD,
     "Apple SD 산돌고딕 Neo", "굴림", arial, sans-serif;
@@ -50,13 +43,14 @@ export const HeaderBtn = styled.div`
 
 export const GenreShadowBox = styled.div`
   width: 100%;
+  min-width: 1000px;
   box-shadow: 5px 5px 5px lightgray;
   /* display: flex;
   justify-content: center; */
 `
 
 export const GenreContainer = styled.div`
-  width: 68%;
+  width: 63%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -75,7 +69,7 @@ export const GenreBar = styled.div`
 `;
 
 export const GenreBtn = styled.button`
-  font-size: 18px;
+  font-size: 1rem;
   background-color: white;
   padding-bottom: 10px;
   border: none;
@@ -127,6 +121,14 @@ export const SearchBar = styled.input`
   border-bottom: 2px solid black;
   font-size: 15px;
   margin: 24px 0 0 20px;
+`;
+
+export const MenuContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-left: auto;
+  margin-right: 50px;
+  margin-top: 10px;
 `;
 
 export const Button = styled.button`
