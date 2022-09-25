@@ -29,11 +29,16 @@ const ShowEvent = () => {
     return currentPosts;
   };
   const { name } = useParams();
+
   useEffect(() => {
-    dispatch(searchPost(name)).then((res) => {
-      console.log(res.payload);
-      setSorted(false);
-    });
+    if (name) {
+      dispatch(searchPost(name)).then((res) => {
+        if (res.payload.success) {
+          setSorted(false);
+          return console.log(res.payload);
+        }
+      });
+    }
   }, [dispatch, name]);
 
   const postState = useSelector((state) => state.post);

@@ -57,26 +57,28 @@ function PostPage() {
   const [ypos, setYpos] = useState();
 
   useEffect(() => {
-    dispatch(getPostDetails(params.postId)).then((res) => {
-      if (res.payload.post) {
-        console.log(res.payload.post);
-        setRandoms(Math.floor(Math.random() * postState.posts.length));
-    setRandoms2(Math.floor(Math.random() * postState.posts.length));
-      } else {
-        console.log('error!!!!!!!!!!!!!!');
-      }
-    });
-    
+    if (params.postId) {
+      dispatch(getPostDetails(params.postId))
+        .then((res) => {
+          if (res.payload.success) {
+            setRandoms(Math.floor(Math.random() * postState.posts.length));
+            setRandoms2(Math.floor(Math.random() * postState.posts.length));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [dispatch, params.postId, postState.posts.length]);
 
   const onLikebtnClicked = () => {
     dispatch(likePost(params.postId))
       .then((res) => {
         if (res.payload.isAuth === false) {
-          alert(res.payload.message);
+          return alert(res.payload.message);
         }
         if (res.payload) {
-          console.log(res.payload);
+          return console.log(res.payload);
         }
       })
       .catch((err) => {
