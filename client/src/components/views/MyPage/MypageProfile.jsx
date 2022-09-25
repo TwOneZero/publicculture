@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import {
   MypageContainer,
@@ -14,12 +14,11 @@ import {
   RightBox,
   ProfileP,
   TextContainer,
-} from './MypageElements';
+} from "./MypageElements";
 
 const MypageProfile = () => {
   const userState = useSelector((state) => state.user);
 
-  
   return (
     <>
       <MypageContainer>
@@ -37,7 +36,7 @@ const MypageProfile = () => {
               </LeftBox>
               <RightBox>
                 <UserIcon>
-                  <i className='fa-solid fa-user'></i>
+                  <i className="fa-solid fa-user"></i>
                 </UserIcon>
                 {/* <MyinfoBtn onClick={onMenuButtonClick} id='myProfile'>
                   사진변경
