@@ -6,15 +6,14 @@ import { sortedPost, searchPost } from '../../../_actions/post_action';
 import Pagination from '../Pagination/Pagination';
 import Posts from './Posts';
 
-import { 
-  PostingContainer, 
+import {
+  PostingContainer,
   PostingPiginationBox,
   SortContainer,
   SortSelect,
   SortOption,
 } from './ShowEventElements';
 import { useEffect } from 'react';
-
 
 const ShowEvent = () => {
   //navigate 로 넘긴 데이터를 useLocation 으로 받는다.
@@ -24,7 +23,6 @@ const ShowEvent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 15;
 
-
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = (posts) => {
@@ -33,24 +31,26 @@ const ShowEvent = () => {
     return currentPosts;
   };
   const { name } = useParams();
+
   useEffect(() => {
-    dispatch(searchPost(name)).then((res) => {
-      console.log(res.payload);
-      setSorted(false);
-      
-    });
+    if (name) {
+      dispatch(searchPost(name)).then((res) => {
+        if (res.payload.success) {
+          setSorted(false);
+        }
+      });
+    }
   }, [dispatch, name]);
-  
-  
+
   const postState = useSelector((state) => state.post);
 
   const handleChange = (e) => {
     e.preventDefault();
     let name = e.target.name;
     let mode = e.target.value;
-    if(mode === '기본'){
+    if (mode === '기본') {
       setSorted(false);
-      navigate(`/showevent/${name}`)
+      navigate(`/showevent/${name}`);
     }
     dispatch(sortedPost(name, mode)).then((res) => {
       if (res.payload.success) {
@@ -58,34 +58,31 @@ const ShowEvent = () => {
         setSorted(true);
       }
     });
-  }
+  };
 
   return (
     <>
-    
-    <PostingPiginationBox>
-      
-      
-      <PostingContainer>
-      <SortContainer>
-        <SortSelect name={name} onChange={handleChange}>
-          <SortOption value='기본'>기본</SortOption>
-          <SortOption value='likes'>좋아요순</SortOption>
-          <SortOption value='comments'>댓글순</SortOption>
-        </SortSelect>
-      </SortContainer>
-        {Sorted === false && postState ? (
-          <Posts posts={currentPosts(postState.posts)}></Posts>
-        ) : (
-          <Posts posts={currentPosts(postState.sorted)}></Posts>
-        )}
-      </PostingContainer>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={postState.posts.length}
-        paginate={setCurrentPage}
-      ></Pagination>
-    </PostingPiginationBox>
+      <PostingPiginationBox>
+        <PostingContainer>
+          <SortContainer>
+            <SortSelect name={name} onChange={handleChange}>
+              <SortOption value='기본'>기본</SortOption>
+              <SortOption value='likes'>좋아요순</SortOption>
+              <SortOption value='comments'>댓글순</SortOption>
+            </SortSelect>
+          </SortContainer>
+          {Sorted === false && postState ? (
+            <Posts posts={currentPosts(postState.posts)}></Posts>
+          ) : (
+            <Posts posts={currentPosts(postState.sorted)}></Posts>
+          )}
+        </PostingContainer>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={postState.posts.length}
+          paginate={setCurrentPage}
+        ></Pagination>
+      </PostingPiginationBox>
     </>
   );
 };
