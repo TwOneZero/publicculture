@@ -30,3 +30,21 @@ export const ImgContainer = styled.img`
   height: 300px;
   object-fit: cover;
 `;
+
+export const SortContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: 190px;
+  right: 350px;
+  right: 22%;
+  width: 80%;
+  justify-content: flex-end;
+`
+
+export const SortSelect = styled.select`
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+`
+
+export const SortOption = styled.option``
