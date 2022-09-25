@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const Login_Container = styled.div`
+export const LoginContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 `
 
-export const Login_page_container = styled.form`
+export const LoginPageContainer = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,13 +17,13 @@ export const Login_page_container = styled.form`
     height: 500px;
   `;
 
-export const Login_text = styled.div`
+export const LoginText = styled.div`
     margin: 70px 0;
     font-size: 24px;
     font-weight: 1000;
   `;
 
-export const Login_form_container = styled.div`
+export const LoginFormContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +32,7 @@ export const Login_form_container = styled.div`
     height: 260px;
   `;
 
-export const Input_Email = styled.input`
+export const InputEmail = styled.input`
     width: 400px;
     height: 50px;
     border: 1px solid lightgrey;
@@ -44,7 +44,7 @@ export const Input_Email = styled.input`
     }
   `;
 
-export const Input_PW = styled.input`
+export const InputPW = styled.input`
     width: 400px;
     height: 50px;
     border: 1px solid lightgrey;
@@ -56,7 +56,7 @@ export const Input_PW = styled.input`
     }
 `;
 
-export const Login_btn = styled.button`
+export const LoginBtn = styled.button`
     width: 413px;
     height: 50px;
     background-color: black;

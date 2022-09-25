@@ -230,7 +230,7 @@ export const InfoBox = styled.div``;
 
 // Mypage Edit 컴포넌트
 
-export const EditMypage_container = styled.div`
+export const EditMypageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,7 +243,7 @@ export const EditMypage_container = styled.div`
   font-size: 24px;
 `;
 
-export const Myprofile_edit = styled.div`
+export const MyprofileEdit = styled.div`
   display: flex;
   font-size: 40px;
   font-weight: 1200;
@@ -253,7 +253,7 @@ export const Myprofile_edit = styled.div`
   padding: 5px;
 `;
 
-export const Nickname_container_edit = styled.div`
+export const NicknameContainerEdit = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -261,7 +261,7 @@ export const Nickname_container_edit = styled.div`
   margin: 50px 0px 50px 0px;
 `;
 
-export const Nickname_edit = styled.input`
+export const NicknameEdit = styled.input`
   margin-top: 10px;
   padding: 10px;
   font-size: 15px;
@@ -273,7 +273,7 @@ export const Nickname_edit = styled.input`
   }
 `;
 
-export const NicknameC_btn = styled.button`
+export const NicknameCBtn = styled.button`
   border: none;
   color: white;
   background-color: black;
@@ -381,7 +381,7 @@ export const NotPasswordUpdateBtn = styled.div`
   margin-top: 70px;
 `;
 
-export const Genre_container_edit = styled.div`
+export const GenreContainerEdit = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -406,7 +406,7 @@ export const NotUserUpdateBtn = styled.div`
   font-size: 18px;
 `;
 
-export const GENRE_BOX = styled.input`
+export const GENREBOX = styled.input`
   padding: 10px;
   font-weight: 800;
   display: flex;
@@ -438,12 +438,12 @@ export const Modify_btn = styled.button`
   width: 120px;
 `;
 
-export const Line_edit = styled.div`
+export const LineEdit = styled.div`
   border-bottom: 1px solid grey;
   width: 12vw;
 `;
 
-export const Page_area_edit = styled.div`
+export const PageAreaEdit = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -540,7 +540,7 @@ export const PasswordPage = styled.div`
   font-size: 24px;
 `;
 
-export const Password_edit = styled.div`
+export const PasswordEdit = styled.div`
   display: flex;
   font-size: 40px;
   font-weight: 1200;

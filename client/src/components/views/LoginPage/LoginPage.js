@@ -5,13 +5,13 @@ import { loginUser } from '../../../_actions/user_action';
 import Auth from '../../../hoc/auth';
 
 import {
-  Login_Container,
-  Login_page_container,
-  Login_text,
-  Login_form_container,
-  Input_Email,
-  Input_PW,
-  Login_btn,
+  LoginContainer,
+  LoginPageContainer,
+  LoginText,
+  LoginFormContainer,
+  InputEmail,
+  InputPW,
+  LoginBtn,
 } from './LoginElements';
 
 function LoginPage() {
@@ -51,28 +51,28 @@ function LoginPage() {
     //     width: '100%',
     //   }}
     // >
-    <Login_Container>
-      <Login_page_container onSubmit={onSubmitHandler}>
-        <Login_text>Login</Login_text>
-        <Login_form_container>
-          <Input_Email
+    <LoginContainer>
+      <LoginPageContainer onSubmit={onSubmitHandler}>
+        <LoginText>Login</LoginText>
+        <LoginFormContainer>
+          <InputEmail
             onChange={onChangeEmail}
             type='text'
             id='id'
             value={Email}
             placeholder='이메일 입력'
           />
-          <Input_PW
+          <InputPW
             onChange={onChangePassword}
             type='password'
             id='password'
             value={Password}
             placeholder='패스워드 입력'
           />
-          <Login_btn>로그인</Login_btn>
-        </Login_form_container>
-      </Login_page_container>
-      </Login_Container>
+          <LoginBtn>로그인</LoginBtn>
+        </LoginFormContainer>
+      </LoginPageContainer>
+      </LoginContainer>
   );
 }
 

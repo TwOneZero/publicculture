@@ -38,7 +38,7 @@ export const Header = styled.div`
   background-color: #fff;
 `;
 
-export const Month_container = styled.div`
+export const MonthContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
@@ -48,7 +48,7 @@ export const Month = styled.div`
   font-size: 60px;
 `;
 
-export const Month_sub = styled.span`
+export const MonthSub = styled.span`
   font-size: 30px;
 `;
 
@@ -75,17 +75,17 @@ export const Body = styled.div`
   box-sizing: border-box;
 `;
 
-export const Day_week_container = styled.div`
+export const DayWeekContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const Day_container = styled.div`
+export const DayContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const Day_week = styled.div`
+export const DayWeek = styled.div`
   width: 14%;
   height: 2rem;
   display: flex;

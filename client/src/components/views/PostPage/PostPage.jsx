@@ -14,16 +14,16 @@ import {
   PostContent,
   ContainerH1,
   Line,
-  Event_title,
-  Event_info_container,
-  Photo_container,
-  Event_info,
-  Event_info_content,
-  Event_info_last_content,
-  Event_Button,
-  Event_detail_container,
-  Event_detail_title,
-  Event_detail_content,
+  EventTitle,
+  EventInfoContainer,
+  PhotoContainer,
+  EventInfo,
+  EventInfoContent,
+  EventInfoLastContent,
+  EventButton,
+  EventDetailContainer,
+  EventDetailTitle,
+  EventDetailContent,
   Likebtn,
   TabBar,
   TabBtn,
@@ -123,76 +123,76 @@ function PostPage() {
               <Line></Line>
               <WrapContainer>
                 <EventLContainer>
-                  <Event_title>{postState.post.title}</Event_title>
-                  <Event_info_container>
-                    <Photo_container
+                  <EventTitle>{postState.post.title}</EventTitle>
+                  <EventInfoContainer>
+                    <PhotoContainer
                       src={postState.post.main_img}
                       alt='images'
-                    ></Photo_container>
-                    <Event_info>
-                      <Event_info_content>
-                        <Event_detail_container>
-                          <Event_detail_title>장소</Event_detail_title>
-                          <Event_detail_content>
+                    ></PhotoContainer>
+                    <EventInfo>
+                      <EventInfoContent>
+                        <EventDetailContainer>
+                          <EventDetailTitle>장소</EventDetailTitle>
+                          <EventDetailContent>
                             {postState.post.place}
-                          </Event_detail_content>
-                        </Event_detail_container>
-                      </Event_info_content>
-                      <Event_info_content>
-                        <Event_detail_container>
-                          <Event_detail_title>지역</Event_detail_title>
-                          <Event_detail_content>
+                          </EventDetailContent>
+                        </EventDetailContainer>
+                      </EventInfoContent>
+                      <EventInfoContent>
+                        <EventDetailContainer>
+                          <EventDetailTitle>지역</EventDetailTitle>
+                          <EventDetailContent>
                             {postState.post.guname}
-                          </Event_detail_content>
-                        </Event_detail_container>
-                      </Event_info_content>
-                      <Event_info_content>
-                        <Event_detail_container>
-                          <Event_detail_title>일시</Event_detail_title>
-                          <Event_detail_content>
+                          </EventDetailContent>
+                        </EventDetailContainer>
+                      </EventInfoContent>
+                      <EventInfoContent>
+                        <EventDetailContainer>
+                          <EventDetailTitle>일시</EventDetailTitle>
+                          <EventDetailContent>
                             {postState.post.date}
-                          </Event_detail_content>
-                        </Event_detail_container>
-                      </Event_info_content>
-                      <Event_info_content>
-                        <Event_detail_container>
-                          <Event_detail_title>요금</Event_detail_title>
-                          <Event_detail_content>
+                          </EventDetailContent>
+                        </EventDetailContainer>
+                      </EventInfoContent>
+                      <EventInfoContent>
+                        <EventDetailContainer>
+                          <EventDetailTitle>요금</EventDetailTitle>
+                          <EventDetailContent>
                             {postState.post.use_fee === ''
                               ? '무료'
                               : postState.post.use_fee}
-                          </Event_detail_content>
-                        </Event_detail_container>
-                      </Event_info_content>
-                      <Event_info_content>
-                        <Event_detail_container>
-                          <Event_detail_title>관람연령</Event_detail_title>
-                          <Event_detail_content>
+                          </EventDetailContent>
+                        </EventDetailContainer>
+                      </EventInfoContent>
+                      <EventInfoContent>
+                        <EventDetailContainer>
+                          <EventDetailTitle>관람연령</EventDetailTitle>
+                          <EventDetailContent>
                             {postState.post.use_trgt}
-                          </Event_detail_content>
-                        </Event_detail_container>
-                      </Event_info_content>
-                      <Event_info_content>
-                        <Event_detail_container>
-                          <Event_detail_title>주최</Event_detail_title>
-                          <Event_detail_content>
+                          </EventDetailContent>
+                        </EventDetailContainer>
+                      </EventInfoContent>
+                      <EventInfoContent>
+                        <EventDetailContainer>
+                          <EventDetailTitle>주최</EventDetailTitle>
+                          <EventDetailContent>
                             {postState.post.org_name === ''
                               ? '서울시'
                               : postState.post.org_name}
-                          </Event_detail_content>
-                        </Event_detail_container>
-                      </Event_info_content>
-                      <Event_info_last_content>
-                        <Event_Button href={postState.post.org_link}>
+                          </EventDetailContent>
+                        </EventDetailContainer>
+                      </EventInfoContent>
+                      <EventInfoLastContent>
+                        <EventButton href={postState.post.org_link}>
                           공식홈페이지
-                        </Event_Button>
+                        </EventButton>
                         <Likebtn onClick={onLikebtnClicked}>
                           {' '}
                           ❤️ {postState.post.likes.length}
                         </Likebtn>
-                      </Event_info_last_content>
-                    </Event_info>
-                  </Event_info_container>
+                      </EventInfoLastContent>
+                    </EventInfo>
+                  </EventInfoContainer>
                 </EventLContainer>
                 <EventRContainer>
                   <RecommendContainer>

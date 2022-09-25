@@ -97,7 +97,7 @@ export const Line = styled.div`
 
 
 //행사 정보
-export const Event_title = styled.div`
+export const EventTitle = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 26px;
   font-weight: normal;
@@ -105,7 +105,7 @@ export const Event_title = styled.div`
   margin-bottom : 10px;
 `;
 
-export const Event_info_container = styled.div`
+export const EventInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
   font-family: 'Noto Sans KR', sans-serif;
@@ -114,14 +114,14 @@ export const Event_info_container = styled.div`
   width: 50vw;
 `;
 
-export const Photo_container = styled.img`
+export const PhotoContainer = styled.img`
   width: 300px;
   height: 400px;
   margin: 25px 20px 20px 0;
   object-fit: cover;
 `;
 
-export const Event_info = styled.div`
+export const EventInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: -10px;
@@ -129,13 +129,13 @@ export const Event_info = styled.div`
   margin: -10px 20px 20px;
 `;
 
-export const Event_info_content = styled.div`
+export const EventInfoContent = styled.div`
   margin: 15px 0;
   font-size: 22px;
   font-weight: 400;
 `;
 
-export const Event_info_last_content = styled.div`
+export const EventInfoLastContent = styled.div`
   margin: 50px 0 15px;
   font-size: 22px;
   font-weight: 400;
@@ -143,23 +143,23 @@ export const Event_info_last_content = styled.div`
   flex-direction: row;
 `;
 
-export const Event_detail_container = styled.div`
+export const EventDetailContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 24px;
 `
 
-export const Event_detail_title = styled.p`
+export const EventDetailTitle = styled.p`
   width: 100px;
   font-size: 20px;
 `
 
-export const Event_detail_content = styled.p`
+export const EventDetailContent = styled.p`
   width: 400px;
   font-size: 20px;
 `
 
-export const Event_Button = styled.a`
+export const EventButton = styled.a`
   display: flex;
   width: 150px;
   height: 40px;

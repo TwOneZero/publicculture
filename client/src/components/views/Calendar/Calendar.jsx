@@ -14,9 +14,9 @@ import {
   Line,
   TextContainer,
   Text,
-  Day_week,
-  Day_container,
-  Day_week_container,
+  DayWeek,
+  DayContainer,
+  DayWeekContainer,
   AllEvent,
   TodayCircle,
   TopContainer,
@@ -24,8 +24,8 @@ import {
   BottomContainer,
   Events,
   Month,
-  Month_sub,
-  Month_container,
+  MonthSub,
+  MonthContainer,
   EventContainer,
   AllContainer,
   SelectDay,
@@ -158,7 +158,7 @@ const Calendar = () => {
 
         <Frame>
           <Header>
-            <Month_container>
+            <MonthContainer>
               <LeftArrows
                 onClick={() => {
                   onClickArrow(year, month, -1);
@@ -170,7 +170,7 @@ const Calendar = () => {
                 {' '}
                 {/* Aug 2022 표현 부분 */}
                 {MONTHS[month]}
-                <Month_sub>월</Month_sub>
+                <MonthSub>월</MonthSub>
               </Month>
               <RightArrows
                 onClick={() => {
@@ -179,15 +179,15 @@ const Calendar = () => {
               >
                 Next
               </RightArrows>
-            </Month_container>
+            </MonthContainer>
           </Header>
           <Body>
-            <Day_week_container>
+            <DayWeekContainer>
               {DAYS_OF_THE_WEEK.map((d) => (
-                <Day_week key={d}>{<strong>{d}</strong>}</Day_week>
+                <DayWeek key={d}>{<strong>{d}</strong>}</DayWeek>
               ))}
-            </Day_week_container>
-            <Day_container>
+            </DayWeekContainer>
+            <DayContainer>
               {Array(days[month] + startDay)
                 .fill(null)
                 .map((_, index) => {
@@ -243,7 +243,7 @@ const Calendar = () => {
                     </SubContainer>
                   );
                 })}
-            </Day_container>
+            </DayContainer>
           </Body>
         </Frame>
       </Container>

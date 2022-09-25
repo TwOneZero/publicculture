@@ -16,7 +16,7 @@ import {
   IMGCover,
   ImgTitle,
   TitleBox,
-  Main_Container,
+  MainContainer,
 } from './LandingElements';
 
 
@@ -61,7 +61,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <Main_Container>
+      <MainContainer>
         <SgginfoDiv>
           <SgginfoImg src={sggimg} />
         
@@ -88,7 +88,7 @@ const LandingPage = () => {
           <Button onClick={nextSlide}>&#62;</Button>
         </SliderDiv>
         </SgginfoDiv>
-      </Main_Container>
+      </MainContainer>
 
       <InfoSection {...homeObjOne} />
     </>

@@ -17,7 +17,6 @@ import {
 } from './MypageElements';
 
 const MypageProfile = () => {
-  const [mode, setMode] = useState('myProfile');
   const userState = useSelector((state) => state.user);
 
   
