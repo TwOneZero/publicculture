@@ -145,10 +145,11 @@ export const LeftBox = styled.div`
   background: #f9f9f9;
   color: #000;
   border-right: 2px solid #eee;
+  padding-bottom: 1.5rem;
 `
 
 export const TextContainer = styled.div`
-  
+
 `
 
 export const ProfileP = styled.div`
@@ -159,7 +160,7 @@ export const ProfileP = styled.div`
 export const RightBox = styled.div`
   width: 70%;
   background: #fff;
-  margin-bottom: 1.5rem;
+  
   margin-left: 1rem;
 `
 
@@ -177,6 +178,7 @@ export const MyinfoBtn = styled.button`
   background-color: #fff;
   cursor: pointer;
   font-size: 0.8rem;
+  margin-bottom: 10px;
 `;
 
 
