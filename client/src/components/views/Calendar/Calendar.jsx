@@ -39,7 +39,6 @@ import {
   ShowEventButton,
 } from './CalendarElements';
 
-
 const Calendar = () => {
   const dispatch = useDispatch();
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평소 매달의 일수
@@ -197,7 +196,7 @@ const Calendar = () => {
                   );
 
                   return (
-                    <SubContainer id={d} onClick={onClickDayPosts}>
+                    <SubContainer key={index} id={d} onClick={onClickDayPosts}>
                       <TopContainer id={d}>
                         <TodayCircle
                           id={d}
@@ -231,7 +230,7 @@ const Calendar = () => {
                           ).length;
                           if (d > 0 && cnt > 0) {
                             return (
-                              <EventContainer>
+                              <EventContainer key={idx}>
                                 <Events id={d} key={idx}>
                                   {genre + ' ' + cnt}
                                 </Events>
@@ -257,30 +256,28 @@ const Calendar = () => {
       </AllContainer>
       <ShowEventContainer>
         <ShowEventHeadContainer>
-          <ShowEventHead>2022년 {month + 1}월 {day}일 전체 행사</ShowEventHead>
+          <ShowEventHead>
+            2022년 {month + 1}월 {day}일 전체 행사
+          </ShowEventHead>
         </ShowEventHeadContainer>
         <ShowEventMain>
           <ShowEventContentUl>
-            {
-              postState.dayPosts?.posts?
-                <DayPosts posts={posting} />
-                : null
-            }
-            {
-              postState.dayPosts?.posts.length > postsLimit.current && isShowMore
-                ? ''
-                :
-                <ShowEventButton
-                  onClick={() => {
-                    setIsShowMore((prev) => !prev);
-                  }}
-                >더보기</ShowEventButton>
-            }
+            {postState.dayPosts?.posts ? <DayPosts posts={posting} /> : null}
+            {postState.dayPosts?.posts.length > postsLimit.current &&
+            isShowMore ? (
+              ''
+            ) : (
+              <ShowEventButton
+                onClick={() => {
+                  setIsShowMore((prev) => !prev);
+                }}
+              >
+                더보기
+              </ShowEventButton>
+            )}
           </ShowEventContentUl>
         </ShowEventMain>
-        
       </ShowEventContainer>
-      
     </>
   );
 };

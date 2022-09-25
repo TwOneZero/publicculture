@@ -7,11 +7,10 @@ import {
   ShowEventCodename,
 } from './CalendarElements';
 
-
 const DayPosts = ({ posts }) => {
   return posts.map((post) => {
     return (
-      <ShowEventContentLi>
+      <ShowEventContentLi key={post._id}>
         <ShowEventContentTitle href={`/post/${post._id}`}>
           {post.title}
         </ShowEventContentTitle>
