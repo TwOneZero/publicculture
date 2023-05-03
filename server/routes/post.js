@@ -29,8 +29,6 @@ router.post('/posts/byday', getPostbyDay);
 router.get('/posts/:id', getPostDetails);
 //좋아요 누르기
 router.patch('/posts/like/:id', auth, likePost);
-//검색 결과 (테스트)
-router.post('/googleSearch', searchMap);
 
 router.post('/getCount', getPostDateCount);
 

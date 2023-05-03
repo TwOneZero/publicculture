@@ -2,7 +2,6 @@ const { Post } = require('../schemas/Post');
 const { Comment } = require('../schemas/Comment');
 const dayjs = require('dayjs');
 const mongoose = require('mongoose');
-const { googleSearch } = require('../utils/googleSearch');
 
 //랜덤 post 가져오기
 exports.getRandomPost = async (req, res, next) => {
@@ -173,24 +172,6 @@ exports.getPostDateCount = async (req, res, next) => {
     return res.status(200).json({ posts, count: posts.length });
   } catch (error) {
     next(error);
-  }
-};
-
-// 구글 search
-exports.searchMap = async (req, res, next) => {
-  try {
-    const { q } = req.body;
-    let parameter = {
-      q,
-    };
-    googleSearch(parameter, (err, data) => {
-      if (err) {
-        res.json({ err });
-      }
-      return res.json({ success: true, data });
-    });
-  } catch (error) {
-    return res.json({ message: error });
   }
 };
 
