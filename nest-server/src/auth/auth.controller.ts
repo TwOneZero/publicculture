@@ -1,18 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UnprocessableEntityException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-auth.dto';
 import { UserService } from 'src/user/user.service';
-import * as bcrypt from 'bcryptjs';
+import { RegisterUserDto } from './dto/register-auth.dto';
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -22,13 +12,11 @@ export class AuthController {
 
   @Post('/login')
   async login(@Body() loginUserDto: LoginUserDto) {
-    const { email, password } = loginUserDto;
-    const user = await this.userService.findOneByEmail(email);
-    if (!user) throw new UnprocessableEntityException('이메일이 없습니다.');
+    return await this.authService.loginUser(loginUserDto);
+  }
 
-    const isAuth = await bcrypt.compare(password, user.password);
-    if (!isAuth) throw new UnprocessableEntityException('암호가 틀렸습니다.');
-
-    return this.authService.getAccessToken({ user });
+  @Post('/register')
+  async register(@Body() registerUserDto: RegisterUserDto) {
+    return await this.authService.registerUser(registerUserDto);
   }
 }
