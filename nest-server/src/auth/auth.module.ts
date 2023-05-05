@@ -7,7 +7,9 @@ import { UserService } from 'src/user/user.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from 'src/database/schemas/user.schema';
 import { PassportModule } from '@nestjs/passport';
-import { JwtAccessStrategy } from 'src/auth/jwt-access.strategy';
+import { JwtAccessStrategy } from 'src/common/auth/jwt-access.strategy';
+import { JwtRestoreAccessStrategy } from 'src/common/auth/jwt-restoreAccess.strategy';
+import { JwtKakaoStrategy } from 'src/common/auth/jwt-social-kakao.strategy';
 @Module({
   imports: [
     JwtModule.registerAsync({
@@ -23,7 +25,13 @@ import { JwtAccessStrategy } from 'src/auth/jwt-access.strategy';
     MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserService, JwtAccessStrategy],
+  providers: [
+    AuthService,
+    UserService,
+    JwtAccessStrategy,
+    JwtRestoreAccessStrategy,
+    JwtKakaoStrategy,
+  ],
   exports: [AuthService, JwtModule, JwtAccessStrategy, PassportModule],
 })
 export class AuthModule {}
