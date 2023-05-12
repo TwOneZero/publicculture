@@ -1,31 +1,83 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import {
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/database/schemas/user.schema';
 import mongoose, { Model } from 'mongoose';
-import * as bcrypt from 'bcryptjs';
+import { Like, LikeDocument } from 'src/database/schemas/like.schema';
+import {
+  CulturalEvent,
+  CulturalEventDocument,
+} from 'src/database/schemas/culturalevent.schema';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(CulturalEvent.name)
+    private eventModel: Model<CulturalEventDocument>,
+    @InjectModel(User.name)
+    private userModel: Model<UserDocument>,
+    @InjectModel(Like.name)
+    private likeModel: Model<LikeDocument>,
+  ) {}
 
-  findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
+  async findAll(): Promise<User[]> {
+    return await this.userModel.find().exec();
   }
-  //
-  findOneById(id: string): Promise<User> {
+
+  async findOneById(id: string): Promise<User> {
     const objId = new mongoose.Types.ObjectId(id);
-    return this.userModel.findById(objId);
+    return await this.userModel.findById(objId).exec();
   }
 
-  findOneByEmail(email: string): Promise<User> {
-    return this.userModel.findOne({ email });
+  async findOneByEmail(email: string): Promise<User> {
+    console.log('dd');
+
+    return await this.userModel.findOne({ email });
   }
 
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
+  async userlikesEvent(eventId: string, user: User) {
+    let isLiked = true;
+    //get event
+    const event = await this.eventModel.findById(eventId).exec();
+    if (!event) {
+      throw new NotFoundException('ID에 해당하는 event 가 없음');
+    }
+    const index = event.likes.findIndex(
+      (id) => String(id) === String(user._id),
+    );
+    //-1 이면 안 누른 것
+    if (index === -1) {
+      isLiked = false;
+      const objUserId = new mongoose.Types.ObjectId(user._id);
+      event.likes.push(objUserId);
+    } else {
+      //dislike ( 내 아이디를 찾아서 삭제)
+      event.likes = event.likes.filter((id) => String(id) !== String(user._id));
+      await this.likeModel.findOneAndDelete({ user });
+    }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
+    //새로 업데이트
+    await this.eventModel
+      .findByIdAndUpdate(eventId, event, {
+        new: true,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        throw new UnprocessableEntityException(err);
+      });
+
+    if (!isLiked) {
+      const liked = new this.likeModel({
+        user,
+        event,
+      });
+      return await liked.save();
+    }
+  }
 }

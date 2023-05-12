@@ -5,36 +5,17 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from 'src/database/schemas/user.schema';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthModule } from 'src/auth/auth.module';
-import * as bcrypt from 'bcryptjs';
+import { Like, likeSchema } from 'src/database/schemas/like.schema';
+import {
+  CulturalEvent,
+  culturalEventSchema,
+} from 'src/database/schemas/culturalevent.schema';
+import { CulturaleventModule } from 'src/culturalevent/culturalevent.module';
+import { Model } from 'mongoose';
 
 @Module({
-  imports: [
-    AuthModule,
-    MongooseModule.forFeatureAsync([
-      {
-        name: User.name,
-        useFactory: () => {
-          const schema = userSchema;
-          schema.pre('save', async function (next) {
-            if (this.isModified('password')) {
-              bcrypt.genSalt(10, function (err, salt) {
-                if (err) return next(err);
-                bcrypt.hash(this.password, salt, function (err, hash) {
-                  if (err) return next(err);
-                  this.password = hash;
-                  next();
-                });
-              });
-            } else {
-              next();
-            }
-          });
-          return schema;
-        },
-      },
-    ]),
-  ],
+  imports: [CulturaleventModule, AuthModule],
   controllers: [UserController],
-  providers: [UserService, AuthService],
+  providers: [UserService, AuthService, MongooseModule],
 })
 export class UserModule {}

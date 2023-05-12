@@ -1,8 +1,4 @@
-import {
-  ArgumentsHost,
-  ExecutionContext,
-  createParamDecorator,
-} from '@nestjs/common';
+import { ArgumentsHost, createParamDecorator } from '@nestjs/common';
 import { Request, Response } from 'express';
 
 export const GetContext = createParamDecorator(

@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserService } from 'src/user/user.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, userSchema } from 'src/database/schemas/user.schema';
 import { PassportModule } from '@nestjs/passport';
 import { JwtAccessStrategy } from 'src/common/auth/jwt-access.strategy';
 import { JwtRestoreAccessStrategy } from 'src/common/auth/jwt-restoreAccess.strategy';
 import { JwtKakaoStrategy } from 'src/common/auth/jwt-social-kakao.strategy';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, userSchema } from 'src/database/schemas/user.schema';
 @Module({
   imports: [
     JwtModule.registerAsync({
@@ -27,11 +26,16 @@ import { JwtKakaoStrategy } from 'src/common/auth/jwt-social-kakao.strategy';
   controllers: [AuthController],
   providers: [
     AuthService,
-    UserService,
     JwtAccessStrategy,
     JwtRestoreAccessStrategy,
     JwtKakaoStrategy,
   ],
-  exports: [AuthService, JwtModule, JwtAccessStrategy, PassportModule],
+  exports: [
+    AuthService,
+    JwtModule,
+    JwtAccessStrategy,
+    PassportModule,
+    MongooseModule,
+  ],
 })
 export class AuthModule {}

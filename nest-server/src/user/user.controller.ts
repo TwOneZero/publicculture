@@ -1,36 +1,32 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
-import { AuthService } from 'src/auth/auth.service';
 import { CurUser } from 'src/common/decorators/user.decorator';
-import {
-  ApiCreatedResponse,
-  ApiOperation,
-  ApiQuery,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from 'src/database/schemas/user.schema';
+import { CulturalEvent } from 'src/database/schemas/culturalevent.schema';
 
 @Controller('user')
 @ApiTags('유저 API')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard('jwt'))
 export class UserController {
-  constructor(
-    private userService: UserService,
-    private authService: AuthService,
-    private jwtService: JwtService,
-    private configService: ConfigService,
-  ) {}
+  constructor(private userService: UserService) {}
 
   @Get()
   @ApiOperation({ summary: '모든 유저 조회 API' })
   @ApiCreatedResponse({ description: '모든 유저 정보 가져오기', type: [User] })
-  async findAll(@CurUser() curUser: any) {
+  findAll(@CurUser() curUser: any) {
     console.log('유저 정보', curUser);
 
-    return await this.userService.findAll();
+    return this.userService.findAll();
   }
 
   @Get('/ones')
@@ -39,8 +35,18 @@ export class UserController {
     description: '이메일로 유저 정보 가져오기',
     type: User,
   })
-  async findOneByEmail(@Query('email') email: string) {
-    return await this.userService.findOneByEmail(email);
+  findOneByEmail(@Query('email') email: string) {
+    return this.userService.findOneByEmail(email);
+  }
+
+  @Post('/like/:eventId')
+  @ApiOperation({ summary: 'event 좋아요 누르기' })
+  @ApiCreatedResponse({
+    description: 'ID로 유저 정보 가져오기',
+    type: CulturalEvent,
+  })
+  userlikesEvent(@Param('eventId') eventId: string, @CurUser() user: User) {
+    return this.userService.userlikesEvent(eventId, user);
   }
 
   @Get(':id')
@@ -49,7 +55,7 @@ export class UserController {
     description: 'ID로 유저 정보 가져오기',
     type: User,
   })
-  async findOneById(@Param('id') id: string) {
-    return await this.userService.findOneById(id);
+  findOneById(@Param('id') id: string) {
+    return this.userService.findOneById(id);
   }
 }

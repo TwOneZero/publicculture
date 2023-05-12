@@ -9,14 +9,12 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-auth.dto';
-import { UserService } from 'src/user/user.service';
-import { RegisterUserDto } from './dto/register-auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { CurUser } from 'src/common/decorators/user.decorator';
 import { User } from 'src/database/schemas/user.schema';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response, Request } from 'express';
-import { GetContext } from 'src/common/decorators/getContext.decorator';
+import { RegisterUserDto } from './dto/register-auth.dto';
 
 export interface IOAuthUser {
   user: Pick<User, 'email' | 'password' | 'name'>;
@@ -25,23 +23,39 @@ export interface IOAuthUser {
 @Controller('auth')
 @ApiTags('인증 API')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
   @ApiOperation({ summary: '로그인 API' })
   @ApiCreatedResponse({
-    description: '로그인 한 유저 정보',
-    type: User,
+    description: '로그인 엑세스 토큰',
+    type: String,
   })
-  async login(@Body() loginUserDto: LoginUserDto, @GetContext() context: any) {
-    return await this.authService.loginUser(loginUserDto, context);
+  async login(
+    @Body() loginUserDto: LoginUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return await this.authService.loginUser(loginUserDto, res);
   }
 
-  @UseGuards(AuthGuard('kakao'))
+  @Get('/logout')
+  @ApiOperation({ summary: '로그아웃' })
+  @ApiCreatedResponse({
+    description: '로그아웃 후 권한 유무',
+    type: String,
+  })
+  @UseGuards(AuthGuard('jwt'))
+  logout(@Res({ passthrough: true }) res: Response, @CurUser() user: User) {
+    return this.authService.logout(res, user);
+  }
+
   @Get('/login/kakao')
+  @ApiOperation({ summary: '카카오 로그인' })
+  @ApiCreatedResponse({
+    description: '카카오 로그인 엑세스 토큰',
+    type: String,
+  })
+  @UseGuards(AuthGuard('kakao'))
   loginKakao(@Req() req: Request & IOAuthUser, @Res() res: Response) {
     return this.authService.oAuthLogin(req, res);
   }
@@ -60,10 +74,20 @@ export class AuthController {
   @ApiOperation({ summary: '쿠키 재발급' })
   @ApiCreatedResponse({
     description: 'Token string',
-    type: 'string',
+    type: String,
   })
   @UseGuards(AuthGuard('refresh'))
   restoreAccessToken(@CurUser() user: User) {
-    return this.authService.getAccessToken({ user });
+    return this.authService.getAccessToken(user);
+  }
+
+  @Get('/check')
+  @ApiOperation({ summary: '권한 체크' })
+  @ApiCreatedResponse({
+    description: 'User Info, isAuth(True or False)',
+  })
+  @UseGuards(AuthGuard('jwt'))
+  checkAuth(@CurUser() user: User) {
+    return { user, isAuth: true };
   }
 }
