@@ -11,8 +11,8 @@ import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CurUser } from 'src/common/decorators/user.decorator';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { User } from 'src/database/schemas/user.schema';
-import { CulturalEvent } from 'src/database/schemas/culturalevent.schema';
+import { User } from 'src/user/schema/user.schema';
+import { CulturalEvent } from 'src/culturalevent/schema/culturalevent.schema';
 
 @Controller('user')
 @ApiTags('유저 API')

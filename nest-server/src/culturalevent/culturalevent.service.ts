@@ -3,27 +3,18 @@ import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { AxiosError } from 'axios';
-import {
-  CulturalEvent,
-  CulturalEventDocument,
-} from 'src/database/schemas/culturalevent.schema';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Like, LikeDocument } from 'src/database/schemas/like.schema';
-import { User } from 'src/database/schemas/user.schema';
+import { User } from 'src/user/schema/user.schema';
 import { getFormatedTime } from 'src/common/utils/getCurrentTime';
-import { Cipher } from 'crypto';
-import { searchEventsFunc } from './func/searchEventsFunc';
+import { CulturalEventRepository } from './repository/culturalevent.repository';
+import { LikeRepository } from 'src/like/repository/like.repository';
 
 @Injectable()
 export class CulturaleventService {
   constructor(
     private httpService: HttpService,
     private configService: ConfigService,
-    @InjectModel(CulturalEvent.name)
-    private eventModel: Model<CulturalEventDocument>,
-    @InjectModel(Like.name)
-    private likeModel: Model<LikeDocument>,
+    private readonly eventRepository: CulturalEventRepository,
+    private readonly likeReposiotory: LikeRepository,
   ) {}
 
   //문화행사 API 요청
@@ -53,33 +44,7 @@ export class CulturaleventService {
   async storeAllEvents() {
     const data = await this.fetchEvent();
 
-    try {
-      data.culturalEventInfo.row.forEach(async (event) => {
-        const ev = new this.eventModel({
-          codename: event.CODENAME,
-          guname: event.GUNAME,
-          title: event.TITLE,
-          date: event.DATE,
-          place: event.PLACE,
-          org_name: event.ORG_NAME,
-          use_trgt: event.USE_TRGT,
-          use_fee: event.USE_FEE,
-          player: event.PLAYER,
-          program: event.PROGRAM,
-          etc_desc: event.ETC_DESC,
-          org_link: event.ORG_LINK,
-          main_img: event.MAIN_IMG,
-          rgstdate: event.RGSTDATE,
-          ticket: event.TICKET,
-          strtdate: event.STRTDATE,
-          end_date: event.END_DATE,
-          themecode: event.THEMECODE,
-        });
-        await ev.save();
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
+    await this.eventRepository.create(data);
     return 'Success with Storing All Events!';
   }
 
@@ -102,15 +67,15 @@ export class CulturaleventService {
     //날짜 포맷 설정
     const d_t = getFormatedTime();
     //현재 날짜에서 종료일이 더 후인 행사 return
-    const events = await this.eventModel.find({ end_date: { $gte: d_t } });
+    const events = await this.eventRepository.find({ end_date: { $gte: d_t } });
     const randPick = getRandomArbitrary(1, events.length - limitrecords);
     //slicedPost 길이 => 랜덤수 ~ 랜덤수 + 20 (최대 : posts.length)
     return events.slice(randPick, randPick + limitrecords);
   }
 
   //좋아요 한 post
-  async getFavPost(user: User) {
-    const events = await this.likeModel.find().populate('event');
+  async getFavEvents(user: User) {
+    const events = await this.likeReposiotory.findAll().populate('event');
     const myEvents = events.filter((e) => String(e.user) === user._id);
 
     return myEvents;
@@ -118,17 +83,17 @@ export class CulturaleventService {
 
   //검색 찾기
   async getEventsBySearch(search: string) {
-    const events = await searchEventsFunc(search, this.eventModel);
+    const events = await this.eventRepository.searchEvents(search);
     return events;
   }
 
   //행사 정렬
   async getEventsSorted(search: string, mode: string) {
-    const events = searchEventsFunc(search, this.eventModel);
+    const events = this.eventRepository.searchEvents(search);
     return await events.sort({ [mode]: -1 }).exec();
   }
 
   async getEventsDetails(id: string) {
-    return await this.eventModel.findById(id).exec();
+    return await this.eventRepository.findOneById(id);
   }
 }

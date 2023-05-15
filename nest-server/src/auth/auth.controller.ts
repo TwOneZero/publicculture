@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { CurUser } from 'src/common/decorators/user.decorator';
-import { User } from 'src/database/schemas/user.schema';
+import { User } from 'src/user/schema/user.schema';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response, Request } from 'express';
 import { RegisterUserDto } from './dto/register-auth.dto';

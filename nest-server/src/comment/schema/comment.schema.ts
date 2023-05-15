@@ -3,8 +3,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import mongoose, { Document } from 'mongoose';
-import { User } from './user.schema';
-import { CulturalEvent } from './culturalevent.schema';
+import { User } from '../../user/schema/user.schema';
+import { CulturalEvent } from '../../culturalevent/schema/culturalevent.schema';
 
 export type CommentDocument = Comment & Document;
 

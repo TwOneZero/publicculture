@@ -7,20 +7,26 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   CulturalEvent,
   culturalEventSchema,
-} from 'src/database/schemas/culturalevent.schema';
-import { UserModule } from 'src/user/user.module';
-import { Like, likeSchema } from 'src/database/schemas/like.schema';
+} from 'src/culturalevent/schema/culturalevent.schema';
+import { LikeModule } from 'src/like/like.module';
+import { CulturalEventRepository } from './repository/culturalevent.repository';
+import { LikeRepository } from 'src/like/repository/like.repository';
 
 @Module({
   imports: [
     HttpModule,
+    LikeModule,
     MongooseModule.forFeature([
       { name: CulturalEvent.name, schema: culturalEventSchema },
-      { name: Like.name, schema: likeSchema },
     ]),
   ],
   controllers: [CulturaleventController],
-  providers: [CulturaleventService, ConfigService],
+  providers: [
+    CulturaleventService,
+    ConfigService,
+    CulturalEventRepository,
+    LikeRepository,
+  ],
   exports: [MongooseModule],
 })
 export class CulturaleventModule {}

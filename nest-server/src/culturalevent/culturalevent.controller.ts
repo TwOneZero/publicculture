@@ -2,14 +2,14 @@ import { Controller, Get, UseGuards, Query, Param } from '@nestjs/common';
 import { CulturaleventService } from './culturalevent.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CurUser } from 'src/common/decorators/user.decorator';
-import { User } from 'src/database/schemas/user.schema';
+import { User } from 'src/user/schema/user.schema';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { CulturalEvent } from 'src/database/schemas/culturalevent.schema';
+import { CulturalEvent } from 'src/culturalevent/schema/culturalevent.schema';
 
 @Controller('culture/events')
 @ApiTags('행사 API')
@@ -75,8 +75,8 @@ export class CulturaleventController {
     isArray: true,
   })
   @UseGuards(AuthGuard('jwt'))
-  getFavPost(@CurUser() user: User) {
-    return this.culturaleventService.getFavPost(user);
+  getFavEvents(@CurUser() user: User) {
+    return this.culturaleventService.getFavEvents(user);
   }
 
   @Get(':id')

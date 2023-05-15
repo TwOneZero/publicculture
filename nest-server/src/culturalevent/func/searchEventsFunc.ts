@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { CulturalEventDocument } from 'src/database/schemas/culturalevent.schema';
+import { CulturalEventDocument } from 'src/culturalevent/schema/culturalevent.schema';
 
 //검색어 함수
 export function searchEventsFunc<T extends CulturalEventDocument>(

@@ -8,7 +8,8 @@ import { JwtAccessStrategy } from 'src/common/auth/jwt-access.strategy';
 import { JwtRestoreAccessStrategy } from 'src/common/auth/jwt-restoreAccess.strategy';
 import { JwtKakaoStrategy } from 'src/common/auth/jwt-social-kakao.strategy';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, userSchema } from 'src/database/schemas/user.schema';
+import { User, userSchema } from 'src/user/schema/user.schema';
+import { UserRepository } from 'src/user/repository/user.repository';
 @Module({
   imports: [
     JwtModule.registerAsync({
@@ -28,6 +29,7 @@ import { User, userSchema } from 'src/database/schemas/user.schema';
     AuthService,
     JwtAccessStrategy,
     JwtRestoreAccessStrategy,
+    UserRepository,
     JwtKakaoStrategy,
   ],
   exports: [

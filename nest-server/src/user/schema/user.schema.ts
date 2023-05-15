@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Matches, MinLength } from 'class-validator';
-import { Exclude } from 'class-transformer';
 import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;

@@ -9,11 +9,12 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { RegisterUserDto } from './dto/register-auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from 'src/database/schemas/user.schema';
+import { User, UserDocument } from 'src/user/schema/user.schema';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import { IOAuthUser } from './auth.controller';
+import { UserRepository } from 'src/user/repository/user.repository';
 
 interface SetRefreshArgsType {
   user: User;
@@ -25,7 +26,7 @@ export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
-    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private readonly userRepository: UserRepository,
   ) {}
 
   setRefreshToken({ user, res }: SetRefreshArgsType) {
@@ -53,7 +54,7 @@ export class AuthService {
 
   async loginUser(loginUserDto: LoginUserDto, res: Response) {
     const { email, password } = loginUserDto;
-    const user = await this.userModel.findOne({ email }).exec();
+    const user = await this.userRepository.findOneByEmail(email);
     if (!user) throw new UnprocessableEntityException('이메일이 없습니다.');
 
     const isAuth = await bcrypt.compare(password, user.password);
@@ -62,21 +63,14 @@ export class AuthService {
     return this.getAccessToken(user);
   }
 
-  async registerUser(registerUserDto: RegisterUserDto) {
-    const { email, password, name } = registerUserDto;
-    const user = await this.userModel.findOne({ email }).exec();
-    if (user) {
-      throw new ConflictException('이미 등록된 유저입니다.');
-    }
-    const hashedPwd = await bcrypt.hash(password, 10);
-    const newUser = new this.userModel({ password: hashedPwd, email, name });
-    return newUser.save();
+  async registerUser(registerUserDto: RegisterUserDto): Promise<UserDocument> {
+    return this.userRepository.create(registerUserDto);
   }
 
   //소셜 로그인
   async oAuthLogin(req: Request & IOAuthUser, res: Response) {
     // 1. 가입 확인
-    let user = await this.userModel.findOne({ email: req.user.email }).exec();
+    let user = await this.userRepository.findOneByEmail(req.user.email);
     //2. 가입 안돼있다 -> 회원가입
     if (!user) {
       user = await this.registerUser({
@@ -95,7 +89,7 @@ export class AuthService {
 
   async logout(res: Response, user: User) {
     //있는 회원인지 확인
-    const isUser = await this.userModel.findById(user._id);
+    const isUser = await this.userRepository.findOneById(user._id);
     //맞다면 로그아웃
     if (isUser) {
       res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');

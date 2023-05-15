@@ -2,9 +2,9 @@ import { UseGuards, Controller, Post, Get, Param, Body } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CurUser } from 'src/common/decorators/user.decorator';
-import { User } from 'src/database/schemas/user.schema';
+import { User } from 'src/user/schema/user.schema';
 import { AuthGuard } from '@nestjs/passport';
-import { Comment } from 'src/database/schemas/comment.schema';
+import { Comment } from 'src/comment/schema/comment.schema';
 
 @Controller('comment')
 @ApiTags('댓글 API')

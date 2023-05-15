@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { User } from './user.schema';
+import { User } from '../../user/schema/user.schema';
 import { Type } from 'class-transformer';
-import { CulturalEvent } from './culturalevent.schema';
+import { CulturalEvent } from '../../culturalevent/schema/culturalevent.schema';
 import { ApiProperty } from '@nestjs/swagger';
 
 export type LikeDocument = Like & Document;
