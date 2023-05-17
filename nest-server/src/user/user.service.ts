@@ -3,9 +3,9 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { User, UserDocument } from 'src/user/schema/user.schema';
+import { User } from 'src/user/schema/user.schema';
 import mongoose from 'mongoose';
-import { CulturalEventDocument } from 'src/culturalevent/schema/culturalevent.schema';
+import { CulturalEvent } from 'src/culturalevent/schema/culturalevent.schema';
 import { UserRepository } from './repository/user.repository';
 import { CulturalEventRepository } from 'src/culturalevent/repository/culturalevent.repository';
 import { LikeRepository } from 'src/like/repository/like.repository';
@@ -22,18 +22,15 @@ export class UserService {
     return await this.userRepository.findAll();
   }
 
-  async findOneById(id: string): Promise<UserDocument> {
+  async findOneById(id: string): Promise<User> {
     return await this.userRepository.findOneById(id);
   }
 
-  async findOneByEmail(email: string): Promise<UserDocument> {
+  async findOneByEmail(email: string): Promise<User> {
     return await this.userRepository.findOneByEmail(email);
   }
 
-  async userlikesEvent(
-    eventId: string,
-    user: User,
-  ): Promise<CulturalEventDocument> {
+  async userlikesEvent(eventId: string, user: User): Promise<CulturalEvent> {
     let isLiked = false;
     //get event
     const event = await this.eventRepository.findOneById(eventId);

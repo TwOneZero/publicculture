@@ -19,7 +19,7 @@ export class LikeRepository {
   }: {
     user: User;
     event: CulturalEvent;
-  }): Promise<LikeDocument> {
+  }): Promise<Like> {
     return this.likeModel
       .create({
         user,

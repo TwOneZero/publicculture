@@ -10,7 +10,7 @@ export class UserRepository {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   //유저 생성
-  async create(registerUserDto: RegisterUserDto): Promise<UserDocument> {
+  async create(registerUserDto: RegisterUserDto): Promise<User> {
     const { password, name, email } = registerUserDto;
     const user = await this.userModel.findOne({ email }).exec();
     if (user) {
@@ -21,17 +21,17 @@ export class UserRepository {
   }
 
   //모든 유저 반환
-  findAll(): Promise<UserDocument[]> {
+  findAll(): Promise<User[]> {
     return this.userModel.find();
   }
 
   //ID 로 User 찾기
-  findOneById(id: string): Promise<UserDocument> {
+  findOneById(id: string): Promise<User> {
     return this.userModel.findById(id);
   }
 
   //Email로 User 찾기
-  findOneByEmail(email: string): Promise<UserDocument> {
+  findOneByEmail(email: string): Promise<User> {
     return this.userModel.findOne({ email });
   }
 }

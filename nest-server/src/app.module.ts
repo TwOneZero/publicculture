@@ -7,7 +7,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CulturaleventModule } from './culturalevent/culturalevent.module';
 import { CommentModule } from './comment/comment.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
 
 @Module({
   imports: [

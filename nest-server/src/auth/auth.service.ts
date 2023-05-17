@@ -1,5 +1,4 @@
 import {
-  ConflictException,
   Injectable,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -8,9 +7,7 @@ import { LoginUserDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { RegisterUserDto } from './dto/register-auth.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from 'src/user/schema/user.schema';
-import { Model } from 'mongoose';
+import { User } from 'src/user/schema/user.schema';
 import * as bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import { IOAuthUser } from './auth.controller';
@@ -63,7 +60,7 @@ export class AuthService {
     return this.getAccessToken(user);
   }
 
-  async registerUser(registerUserDto: RegisterUserDto): Promise<UserDocument> {
+  async registerUser(registerUserDto: RegisterUserDto): Promise<User> {
     return this.userRepository.create(registerUserDto);
   }
 

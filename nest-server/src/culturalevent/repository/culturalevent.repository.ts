@@ -46,25 +46,25 @@ export class CulturalEventRepository {
 
   //서비스 -> DB 로 접근하는 로직 옮기기
   //모든 행사 반환
-  findAll(): Promise<CulturalEventDocument[]> {
+  findAll(): Promise<CulturalEvent[]> {
     return this.eventModel.find();
   }
 
   //ID 로 행사 찾기
-  findOneById(id: string): Promise<CulturalEventDocument> {
+  findOneById(id: string): Promise<CulturalEvent> {
     return this.eventModel.findById(id);
   }
 
   //행사 정보 업데이트
   findByIdAndUpdate(
     id: string,
-    query: mongoose.UpdateQuery<CulturalEventDocument>,
-    option: mongoose.QueryOptions<CulturalEventDocument>,
-  ): Promise<CulturalEventDocument> {
+    query: mongoose.UpdateQuery<CulturalEvent>,
+    option: mongoose.QueryOptions<CulturalEvent>,
+  ): Promise<CulturalEvent> {
     return this.eventModel.findByIdAndUpdate(id, query, option);
   }
 
-  find(query: mongoose.FilterQuery<CulturalEventDocument>) {
+  find(query: mongoose.FilterQuery<CulturalEvent>) {
     return this.eventModel.find(query);
   }
 
