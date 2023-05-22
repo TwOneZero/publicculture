@@ -1,7 +1,26 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Matches, MinLength } from 'class-validator';
+import { IsArray, IsIn, IsString, Matches, MinLength } from 'class-validator';
 import { Document } from 'mongoose';
+
+export const Genre = [
+  '문화교양',
+  '강좌',
+  '전시',
+  '미술',
+  '뮤지컬',
+  '오페라',
+  '기타',
+  '연극',
+  '무용',
+  '영화',
+  '국악',
+  '콘서트',
+  '축제',
+  '클래식',
+  '독주',
+  '독창회',
+];
 
 export type UserDocument = User & Document;
 
@@ -36,11 +55,15 @@ export class User extends Document {
   })
   password: string;
 
-  @Prop([String])
+  @Prop({ default: [], type: [String] })
   @ApiProperty({
-    example: '뮤지컬, 연극, 국악',
+    example: Genre,
+    isArray: true,
     description: '선호 장르 (genre)',
+    default: [],
   })
+  @IsArray()
+  @IsIn(Genre, { each: true })
   genre: string[];
 }
 

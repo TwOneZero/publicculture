@@ -5,7 +5,6 @@ WORKDIR /var/app
 COPY . .
 RUN yarn install
 RUN yarn run build
-EXPOSE 5000
 CMD [ "yarn", "start:dev" ]
 # # Use the official Node.js 14 image as the base image
 # FROM node:14

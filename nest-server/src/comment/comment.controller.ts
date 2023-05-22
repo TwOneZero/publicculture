@@ -13,7 +13,7 @@ export class CommentController {
 
   @Get(':eventId')
   @ApiOperation({ summary: '행사 모든 댓글 가져오기' })
-  @ApiCreatedResponse({ description: '행사 모든 댓글', type: Comment })
+  @ApiCreatedResponse({ description: '행사 모든 댓글', type: [Comment] })
   async getPostsComments(@Param('eventId') eventId: string) {
     return await this.commentService.getPostsComments(eventId);
   }

@@ -90,4 +90,15 @@ export class AuthController {
   checkAuth(@CurUser() user: User) {
     return { user, isAuth: true };
   }
+
+  //회원 가입 or 유저 업데이트 시 기존 회원 이름 체크
+  @Post('/checkName')
+  @ApiOperation({ summary: '유저 이름 존재하는 지 확인' })
+  @ApiCreatedResponse({
+    type: Boolean,
+    description: '유저 이름이 존재하는 지 확인',
+  })
+  checkName(@Body('name') name: string): Promise<boolean> {
+    return this.authService.checkName(name);
+  }
 }

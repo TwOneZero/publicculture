@@ -99,4 +99,12 @@ export class AuthService {
       throw new UnauthorizedException('존재하지 않는 회원입니다.');
     }
   }
+
+  async checkName(name: string) {
+    const isUser = await this.userRepository.findOneByField({ name: name });
+    if (isUser) {
+      return true;
+    }
+    return false;
+  }
 }

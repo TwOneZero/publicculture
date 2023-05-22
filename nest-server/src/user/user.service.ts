@@ -9,6 +9,7 @@ import { CulturalEvent } from 'src/culturalevent/schema/culturalevent.schema';
 import { UserRepository } from './repository/user.repository';
 import { CulturalEventRepository } from 'src/culturalevent/repository/culturalevent.repository';
 import { LikeRepository } from 'src/like/repository/like.repository';
+import { UpdateUserProfileDto } from './dto/update-userProfile.dto';
 
 @Injectable()
 export class UserService {
@@ -48,7 +49,7 @@ export class UserService {
     } else {
       //dislike ( 내 아이디를 찾아서 삭제)
       event.likes = event.likes.filter((id) => String(id) !== String(user._id));
-      await this.likeRepository.findOneAndDelete({ user });
+      await this.likeRepository.findOneAndDelete({ user }).exec();
     }
 
     //새로 업데이트
@@ -65,5 +66,31 @@ export class UserService {
       });
     }
     return result;
+  }
+
+  //유저 선호 장르 변경
+  async updateUserProfile(updateUsersDto: UpdateUserProfileDto, user: User) {
+    const { name, genre } = updateUsersDto;
+    console.log(name, genre);
+
+    const userInfo = await this.userRepository.findOneById(user._id);
+    //기존 이름과 다를 때 변경
+    if (userInfo.name !== name) {
+      userInfo.name = name;
+    }
+    userInfo.genre = genre;
+
+    userInfo.markModified('genre');
+    userInfo.markModified('name');
+    return await this.userRepository.updateUser(userInfo);
+  }
+
+  //비밀번호 변경
+  async updateUsersPassword(pwd: string, user: User): Promise<User> {
+    const userInfo = await this.userRepository.findOneById(user._id);
+
+    userInfo.password = await this.userRepository.hashUserPassword(pwd);
+    userInfo.markModified('password');
+    return await this.userRepository.updateUser(userInfo);
   }
 }
