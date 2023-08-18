@@ -23,6 +23,7 @@ app.use(morgan('dev'));
 // );
 
 //router imports
+const eventRouter = require('./routes/saveEvents');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const commentRouter = require('./routes/comment');
@@ -31,11 +32,12 @@ const commentRouter = require('./routes/comment');
 const uri = process.env.MONGO_URI;
 mongoose
   .set('debug', true)
-  .connect(uri)
+  .connect(uri, { dbName: process.env.MONGO_DB_NAME })
   .then(() => console.log('mongoDB Connected!'))
   .catch((error) => console.log(error));
 
 //라우팅 url
+app.use('/api', eventRouter);
 app.use('/api', userRouter);
 app.use('/api', postRouter);
 app.use('/api', commentRouter);

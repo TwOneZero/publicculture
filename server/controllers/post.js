@@ -163,7 +163,8 @@ exports.getPostDateCount = async (req, res, next) => {
     .set('year', 2022)
     .set('date', 31)
     .format('YYYY-MM-DD HH:mm:ss');
-
+  console.log(today);
+  console.log(prevMonth);
   try {
     const posts = await Post.find({
       end_date: { $lte: prevMonth, $gte: today },

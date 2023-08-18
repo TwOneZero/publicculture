@@ -6,5 +6,5 @@ exports.getCurrentTime = () => {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
-  return `${year}-${month+1}-${today} ${hours}:${minutes}:${seconds}`;
+  return `${year}-${month + 1}-${today} ${hours}:${minutes}:${seconds}`;
 };

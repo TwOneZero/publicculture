@@ -75,8 +75,7 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
 //synchronous 해야됨
 userSchema.methods.generateToken = function (cb) {
   let user = this;
-  //토큰 생성 ( myToken )
-  const token = jwt.sign({ _id: user._id }, 'myToken');
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
   user.token = token;
   user.save(function (err, user) {
     if (err) return cb(err);
@@ -88,7 +87,7 @@ userSchema.methods.generateToken = function (cb) {
 userSchema.statics.findByToken = function (token, cb) {
   let user = this;
   //토큰을 복호화
-  jwt.verify(token, 'myToken', function (err, decoded) {
+  jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
     errMessage = err;
     user.findOne(
       {

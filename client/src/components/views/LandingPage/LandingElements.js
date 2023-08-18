@@ -1,10 +1,9 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   width: 100%;
   background-color: #e0f2f7;
-`
+`;
 
 export const SgginfoDiv = styled.div`
   width: 100%;
@@ -57,9 +56,9 @@ export const IMG = styled.img`
 export const TitleBox = styled.div`
   display: flex;
   height: 150px;
-  font-family: "NG", "Malgun Gothic", Dotum, "돋움", AppleGothicNeoSD,
-    "Apple SD 산돌고딕 Neo", "굴림", arial, sans-serif;
-    font-size: 0.8rem;
+  font-family: 'NG', 'Malgun Gothic', Dotum, '돋움', AppleGothicNeoSD,
+    'Apple SD 산돌고딕 Neo', '굴림', arial, sans-serif;
+  font-size: 0.8rem;
 `;
 
 export const ImgTitle = styled.div`

@@ -63,14 +63,14 @@ const ShowEvent = () => {
   return (
     <>
       <PostingPiginationBox>
+        <SortContainer>
+          <SortSelect name={name} onChange={handleChange}>
+            <SortOption value='기본'>기본</SortOption>
+            <SortOption value='likes'>좋아요순</SortOption>
+            <SortOption value='comments'>댓글순</SortOption>
+          </SortSelect>
+        </SortContainer>
         <PostingContainer>
-          <SortContainer>
-            <SortSelect name={name} onChange={handleChange}>
-              <SortOption value='기본'>기본</SortOption>
-              <SortOption value='likes'>좋아요순</SortOption>
-              <SortOption value='comments'>댓글순</SortOption>
-            </SortSelect>
-          </SortContainer>
           {Sorted === false && postState ? (
             <Posts posts={currentPosts(postState.posts)}></Posts>
           ) : (

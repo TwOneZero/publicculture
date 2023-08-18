@@ -1,7 +1,7 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 export const SidebarContainer = styled.div`
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   display: flex;
   flex-direction: row;
   z-index: 2;
@@ -68,7 +68,7 @@ export const LocationDiv = styled.div`
 `;
 
 export const LocationItem = styled.button`
-  margin: 5px 15px;
+  margin: 5px 5px; /* Adjust margin for spacing */
   list-style: circle;
   cursor: pointer;
   background-color: transparent;
@@ -80,6 +80,12 @@ export const LocationItem = styled.button`
     background-color: #e0f2f7;
     color: rgb(50, 50, 50);
   }
-  width: 85px;
-  height: 30px;
+  width: 100px; /* Adjust width as needed */
+  white-space: normal;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: auto;
 `;

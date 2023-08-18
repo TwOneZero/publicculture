@@ -98,7 +98,7 @@ function PostPage() {
           } ${postState.post.place.split(' ')[0]}`,
           {
             headers: {
-              Authorization: 'KakaoAK 1edeaebc50d51faf8d8fb0333bb65234',
+              Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_REST_KEY}`,
             },
           }
         )

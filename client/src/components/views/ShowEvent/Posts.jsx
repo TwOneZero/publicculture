@@ -10,7 +10,7 @@ import {
   PostsDiv,
   PostsLikes,
   PostsComment,
-} from './PostsElements'
+} from './PostsElements';
 
 const Post = ({ posts }) =>
   posts.map((info, index) => (
@@ -25,13 +25,12 @@ const Post = ({ posts }) =>
         <PostsPlace>{info.place}</PostsPlace>
         <PostsDiv>
           <PostsLikes>❤️ {info.likes.length}</PostsLikes>
-          <PostsComment><i class="fa-solid fa-comment"></i> {info.comments_length}</PostsComment>
+          <PostsComment>
+            <i className='fa-solid fa-comment'></i> {info.comments_length}
+          </PostsComment>
         </PostsDiv>
-
-
       </PostingInfo>
     </PostsContainer>
-
   ));
 
 export default Post;

@@ -1,7 +1,7 @@
 const { Comment } = require('../schemas/Comment');
 const { Post } = require('../schemas/Post');
 const mongoose = require('mongoose');
-const { getCurrentTime } = require('../middlewares/time');
+const { getCurrentTime } = require('../utils/time');
 
 //댓글 달기
 exports.addComment = async (req, res, next) => {
