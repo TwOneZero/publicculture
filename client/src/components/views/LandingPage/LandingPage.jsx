@@ -47,9 +47,10 @@ const LandingPage = () => {
   useEffect(() => {
     dispatch(getRandompost()).then((res) => {
       if (res.payload.success) {
-        console.log(res.payload);
+        // console.log(res.payload);
       } else {
-        console.log('post가 없습니다. 서버 에러');
+        alert('post가 없습니다. 서버 에러');
+        return;
       }
     });
   }, [dispatch]);
