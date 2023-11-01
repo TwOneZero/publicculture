@@ -1,7 +1,6 @@
-publicculture
-=============
-### 사용
-* node v14 이상으로 설치
-> 1. publicculture 폴더에서 터미널 열고 npm i 
-> 2. publicculture/client 폴더로 이동해서 터미널 열고 npm i
-> 3. publicculture 폴더에서 npm run dev
+서울 공공 데이터 API 를 사용하여 서울의 각종 문화행사를 큐레이션하는 서비스
+
+### 기능
+> 1. 문화행사 이름, 장소 검색
+> 2. 장르별 검색
+> 3. 좋아요, 저장
