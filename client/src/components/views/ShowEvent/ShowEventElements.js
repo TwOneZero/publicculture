@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PostingPiginationBox = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const PostingInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
   padding: 30px;
 `;
@@ -33,18 +33,16 @@ export const ImgContainer = styled.img`
 
 export const SortContainer = styled.div`
   display: flex;
-  position: absolute;
-  top: 190px;
-  right: 350px;
-  right: 22%;
-  width: 80%;
+  display-direction: column;
+  position: relative;
   justify-content: flex-end;
-`
+  width: 40%;
+`;
 
 export const SortSelect = styled.select`
   cursor: pointer;
   width: 80px;
   height: 30px;
-`
+`;
 
-export const SortOption = styled.option``
+export const SortOption = styled.option``;

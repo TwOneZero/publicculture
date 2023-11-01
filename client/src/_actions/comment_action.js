@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { BASE_URL } from './axios';
 import {
   ADD_COMMENT,
   DELETE_COMMENT,
@@ -8,9 +8,9 @@ import {
 
 //addcomment
 export function addComment(postId, body) {
-  const request = axios
-    .post(`/api/comment/${postId}`, body, { withCredentials: true })
-    .then((res) => res.data);
+  const request = BASE_URL.post(`/api/comment/${postId}`, body, {
+    withCredentials: true,
+  }).then((res) => res.data);
   return {
     type: ADD_COMMENT,
     payload: request,
@@ -18,9 +18,9 @@ export function addComment(postId, body) {
 }
 
 export function getMyComments() {
-  const request = axios
-    .get('api/comments', { withCredentials: true })
-    .then((res) => res.data);
+  const request = BASE_URL.get('api/comments', { withCredentials: true }).then(
+    (res) => res.data
+  );
   return {
     type: GET_MY_COMMENTS,
     payload: request,
@@ -29,9 +29,9 @@ export function getMyComments() {
 
 // getcomment
 export function getComments(postId) {
-  const request = axios
-    .get(`/api/comments/${postId}`, { withCredentials: true })
-    .then((res) => res.data);
+  const request = BASE_URL.get(`/api/comments/${postId}`, {
+    withCredentials: true,
+  }).then((res) => res.data);
 
   return {
     type: GET_COMMENTS,
@@ -40,11 +40,13 @@ export function getComments(postId) {
 }
 
 export function deleteComment(commentId, postId) {
-  const request = axios
-    .post(`/api/comment/delete/${commentId}/${postId}`, null, {
+  const request = BASE_URL.post(
+    `/api/comment/delete/${commentId}/${postId}`,
+    null,
+    {
       withCredentials: true,
-    })
-    .then((res) => res.data);
+    }
+  ).then((res) => res.data);
   return {
     type: DELETE_COMMENT,
     payload: request,
